@@ -16,11 +16,11 @@ import com.android.volley.Response.ErrorListener;
 public abstract class AbstractVolleyRequest<T> extends Request<T> {
 
   public AbstractVolleyRequest(ErrorListener listener) {
-    super(Request.Method.GET, null, listener);
+    super(Method.GET, null, listener);
     setRetryPolicy(this);
   }
 
-  private final String generateUrl() {
+  private String generateUrl() {
     String url = getBaseUrl();
     if (TextUtils.isEmpty(url)) {
       return null;
@@ -37,7 +37,7 @@ public abstract class AbstractVolleyRequest<T> extends Request<T> {
     return url;
   }
 
-  private final void setRetryPolicy(AbstractVolleyRequest<T> request) {
+  private void setRetryPolicy(AbstractVolleyRequest<T> request) {
     request.setRetryPolicy(new DefaultRetryPolicy(getTimeout(),
         getRetries(), DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
   }
@@ -50,7 +50,6 @@ public abstract class AbstractVolleyRequest<T> extends Request<T> {
   public final String getUrl() {
     return generateUrl();
   }
-
 
   /**
    * Get the base url of ultimate url, build with params by generateUrl().

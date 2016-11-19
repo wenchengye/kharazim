@@ -24,8 +24,9 @@ public abstract class GsonVolleyRequest<T> extends AbstractVolleyRequest<T> {
   /**
    * Make request and return a parsed object from JSON.
    *
-   * @param url URL of the request to make
    * @param clazz Relevant class object, for Gson's reflection
+   * @param listener Listener to receive the String response
+   * @param errorListener Error listener, or null to ignore errors
    */
   public GsonVolleyRequest(Class<T> clazz, Listener<T> listener,
       ErrorListener errorListener) {
