@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.heqi.kharazim.ui.fragment.tab.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        style="@style/tab_strip"/>
+
+    <com.heqi.kharazim.ui.fragment.tab.CommonViewPager
+        android:layout_centerHorizontal="true"
+        android:id="@+id/common_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs"/>
+
+    <View
+        style="@style/top_shadow"
+        android:layout_below="@id/tabs"/>
+
+</RelativeLayout>
