@@ -2,4 +2,9 @@
     <string name="app_name">kharazim</string>
     <string name="hello_world">Hello World !</string>
     <string name="action_settings">Settings</string>
+
+    <!-- explore -->
+    <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
+    <string name="explore_plan_lite_intro_2">天 / 每天</string>
+    <string name="explore_plan_lite_intro_3">分钟</string>
 </resources>

@@ -1,10 +1,10 @@
-package com.heqi.kharazim.explore.http;
+package com.heqi.kharazim.explore.http.request;
 
 import android.text.TextUtils;
 
 import com.android.volley.Response;
 import com.heqi.kharazim.explore.model.AcupointQueryResult;
-import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
+import com.heqi.kharazim.http.request.AbstractKharazimHttpRequest;
 
 import java.util.Map;
 

@@ -16,7 +16,7 @@ import com.android.volley.Response.ErrorListener;
 public abstract class AbstractVolleyRequest<T> extends Request<T> {
 
   public AbstractVolleyRequest(ErrorListener listener) {
-    super(Method.GET, null, listener);
+    super(Method.POST, null, listener);
     setRetryPolicy(this);
   }
 

@@ -4,7 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- common -->
     <color name="transparent">#00000000</color>
     <color name="text_color_white">#ffffff</color>
     <color name="bg_list_content">#f4f4f4</color>
+
+    <!-- kharazim -->
+    <color name="kharazim_desgin_color">#0bdbd1</color>
+
+    <!-- explore -->
+    <color name="explore_plan_lite_shadow_bg">#33000000</color>
+
 </resources>

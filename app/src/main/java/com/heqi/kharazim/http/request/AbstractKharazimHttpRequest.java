@@ -1,4 +1,4 @@
-package com.heqi.kharazim.http;
+package com.heqi.kharazim.http.request;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,7 +15,7 @@ import com.heqi.rpc.GsonVolleyRequest;
 public abstract class AbstractKharazimHttpRequest<T> extends GsonVolleyRequest<T> {
 
   private static final int KHARAZIM_HTTP_METHOD = Method.POST;
-  private static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
+  public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
   private static final String KHARAZIM_SERVICE_ROOT = "heal/api/heal/";
   private static final String KHARAZIM_URL_ROOT = KHARAZIM_SERVER + KHARAZIM_SERVICE_ROOT;
 
@@ -44,14 +44,14 @@ public abstract class AbstractKharazimHttpRequest<T> extends GsonVolleyRequest<T
     return getBaseUrlRoot() + getBaseUrlDirectory();
   }
 
-  /**
-   * Override getMethod of {@code Request}, using POST in kharazim project.
-   * @return kharazim's http request method.
-   */
-  @Override
-  public int getMethod() {
-    return KHARAZIM_HTTP_METHOD;
-  }
+//  /**
+//   * Override getMethod of {@code Request}, using POST in kharazim project.
+//   * @return kharazim's http request method.
+//   */
+//  @Override
+//  public int getMethod() {
+//    return KHARAZIM_HTTP_METHOD;
+//  }
 
   /**
    * @return the directory in kharazim baseUrlRoot.

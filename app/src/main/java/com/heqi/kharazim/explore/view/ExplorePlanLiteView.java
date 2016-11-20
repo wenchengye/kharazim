@@ -1,0 +1,88 @@
+package com.heqi.kharazim.explore.view;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.heqi.image.view.AsyncImageView;
+import com.heqi.kharazim.R;
+import com.heqi.kharazim.explore.model.PlanLiteInfo;
+import com.heqi.kharazim.utils.ViewUtils;
+
+/**
+ * Created by overspark on 2016/11/20.
+ */
+
+public class ExplorePlanLiteView extends RelativeLayout {
+
+  private AsyncImageView planSummaryIv;
+  private TextView planTitleTv;
+  private TextView planAcupointCountTv;
+  private TextView planSpanTv;
+  private TextView planSpanDaliyTv;
+  private ImageView planAddBtn;
+  private PlanLiteInfo data;
+
+  public ExplorePlanLiteView(Context context) {
+    super(context);
+  }
+
+  public ExplorePlanLiteView(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
+
+  public ExplorePlanLiteView(Context context, AttributeSet attrs, int defStyle) {
+    super(context, attrs, defStyle);
+  }
+
+  public static ExplorePlanLiteView newInstance(ViewGroup parent) {
+    return (ExplorePlanLiteView) ViewUtils.newInstance(parent, R.layout.explore_plan_lite_card);
+  }
+
+  @Override
+  protected void onFinishInflate() {
+    super.onFinishInflate();
+
+    planSummaryIv = (AsyncImageView) findViewById(R.id.plan_lite_summary_bg);
+    planTitleTv = (TextView) findViewById(R.id.plan_lite_title_tv);
+    planAcupointCountTv = (TextView) findViewById(R.id.plan_lite_acupoint_count_tv);
+    planSpanTv = (TextView) findViewById(R.id.plan_lite_span_tv);
+    planSpanDaliyTv = (TextView) findViewById(R.id.plan_lite_span_daily_tv);
+    planAddBtn = (ImageView) findViewById(R.id.plan_lite_add_btn);
+
+    planAddBtn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+      }
+    });
+  }
+
+  public void setData(@NonNull PlanLiteInfo data) {
+
+    if (this.data == data) return;
+
+    this.data = data;
+    if (!TextUtils.isEmpty(this.data.getPlanimg()) && planSummaryIv != null) {
+      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), 0);
+    }
+    if (!TextUtils.isEmpty(this.data.getPlanname()) && planTitleTv != null) {
+      planTitleTv.setText(this.data.getPlanname());
+    }
+    if (planAcupointCountTv != null) {
+      planAcupointCountTv.setText(String.valueOf(this.data.getAcupointcnt()));
+    }
+    if (planSpanTv != null) {
+      planSpanTv.setText(String.valueOf(this.data.getCpdays()));
+    }
+    if (planSpanDaliyTv != null) {
+      planSpanDaliyTv.setText(String.valueOf(this.data.getDaytime()));
+    }
+  }
+}

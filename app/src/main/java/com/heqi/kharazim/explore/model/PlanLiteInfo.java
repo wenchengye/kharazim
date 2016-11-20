@@ -1,5 +1,7 @@
 package com.heqi.kharazim.explore.model;
 
+import com.heqi.kharazim.http.request.AbstractKharazimHttpRequest;
+
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,7 @@ public class PlanLiteInfo implements Serializable {
   private int actcnt;
   private int acupointcnt;
   private int plantype;
-  private int nounit;
+  private String nounit;
   private int cpdays;
   private int cptime;
   private int daytime;
@@ -49,7 +51,7 @@ public class PlanLiteInfo implements Serializable {
   }
 
   public String getPlanimg() {
-    return planimg;
+    return AbstractKharazimHttpRequest.KHARAZIM_SERVER + planimg;
   }
 
   public void setPlanimg(String planimg) {
@@ -88,11 +90,11 @@ public class PlanLiteInfo implements Serializable {
     this.plantype = plantype;
   }
 
-  public int getNounit() {
+  public String getNounit() {
     return nounit;
   }
 
-  public void setNounit(int nounit) {
+  public void setNounit(String nounit) {
     this.nounit = nounit;
   }
 

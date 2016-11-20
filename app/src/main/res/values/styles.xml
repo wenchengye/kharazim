@@ -36,4 +36,16 @@
         <item name="android:background">@drawable/bg_explore_bar_shadow</item>
     </style>
 
+    <style name="simple_tv">
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- explore -->
+    <style name="explore_plan_lite_intro_tv" parent="@style/simple_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:textSize">@dimen/text_size_xtiny</item>
+    </style>
+
 </resources>

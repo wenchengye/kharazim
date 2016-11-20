@@ -162,12 +162,16 @@ public abstract class NetworkListAsyncloadFragment<M>
       if (start == 0) { // First page
         onNoFetchResult();
       } else { // Non-first page
-        headerViewAdapter.addFooter(footerView);
-        footerView.showNoMore();
+        if (hasFooterView()) {
+          headerViewAdapter.addFooter(footerView);
+          footerView.showNoMore();
+        }
       }
     } else {
-      headerViewAdapter.addFooter(footerView);
-      footerView.showLoading();
+      if (hasFooterView()) {
+        headerViewAdapter.addFooter(footerView);
+        footerView.showLoading();
+      }
       newData = CollectionUtils.replaceFromPosition(contentAdapter.getData(), result.data, start);
       contentAdapter.setData(newData);
       newData = null;
@@ -235,6 +239,10 @@ public abstract class NetworkListAsyncloadFragment<M>
 
   public AbstractFetchMoreFooterView getFooterView() {
     return footerView;
+  }
+
+  private boolean hasFooterView() {
+    return footerView != null;
   }
 
   protected void reload() {
