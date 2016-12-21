@@ -12,5 +12,13 @@ public class Const {
     private TabId() {}
   }
 
-  private Const() {}
+  // http
+  public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
+
+  public static String getKharazimResource(final String resourceUrl) {
+    return KHARAZIM_SERVER + resourceUrl;
+  }
+
+  private Const() {
+  }
 }

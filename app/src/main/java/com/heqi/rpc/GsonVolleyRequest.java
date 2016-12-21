@@ -50,8 +50,10 @@ public abstract class GsonVolleyRequest<T> extends AbstractVolleyRequest<T> {
       return Response.success(gson.fromJson(json, clazz),
           HttpHeaderParser.parseCacheHeaders(response));
     } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
       return Response.error(new ParseError(e));
     } catch (JsonSyntaxException e) {
+      e.printStackTrace();
       return Response.error(new ParseError(e));
     }
   }

@@ -1,9 +1,11 @@
 package com.heqi.kharazim.explore.fragment;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.heqi.fetcher.BaseFetcher;
+import com.heqi.kharazim.explore.activity.PlanDetailActivity;
 import com.heqi.kharazim.explore.http.fetcher.PlanListFether;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
@@ -26,7 +28,7 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
 
   @Override
   protected DataAdapter<PlanLiteInfo> newContentAdapter() {
-    return new PlanListAdapter();
+    return new PlanListAdapter(getContext());
   }
 
   @Override
@@ -56,8 +58,15 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   }
 
   private static class PlanListAdapter extends DataAdapter<PlanLiteInfo> {
+
+    private Context context;
+
+    PlanListAdapter(Context context) {
+      this.context = context;
+    }
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
       ExplorePlanLiteView view;
       if (convertView instanceof ExplorePlanLiteView) {
         view = (ExplorePlanLiteView) convertView;
@@ -66,6 +75,13 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
       }
 
       view.setData(getItem(position));
+      view.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          PlanDetailActivity.lauchActivity(
+              PlanListAdapter.this.context, getItem(position));
+        }
+      });
       return view;
     }
   }

@@ -1,7 +1,8 @@
-package com.heqi.kharazim.http.request;
+package com.heqi.kharazim.http;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.heqi.kharazim.config.Const;
 import com.heqi.rpc.GsonFactory;
 import com.heqi.rpc.GsonVolleyRequest;
 
@@ -15,9 +16,8 @@ import com.heqi.rpc.GsonVolleyRequest;
 public abstract class AbstractKharazimHttpRequest<T> extends GsonVolleyRequest<T> {
 
   private static final int KHARAZIM_HTTP_METHOD = Method.POST;
-  public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
   private static final String KHARAZIM_SERVICE_ROOT = "heal/api/heal/";
-  private static final String KHARAZIM_URL_ROOT = KHARAZIM_SERVER + KHARAZIM_SERVICE_ROOT;
+  private static final String KHARAZIM_URL_ROOT = Const.KHARAZIM_SERVER + KHARAZIM_SERVICE_ROOT;
 
   /**
    * @return kharazim http baseUrlRoot, compostied by server addr and service root.

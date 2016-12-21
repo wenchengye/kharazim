@@ -1,4 +1,4 @@
-package com.heqi.kharazim.activity;
+package com.heqi.kharazim.explore.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

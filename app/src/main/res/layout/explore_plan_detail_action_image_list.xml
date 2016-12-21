@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.explore.view.ExploreActionImageList
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/horizontal_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/explore_action_image_list_bg"
+    style="@style/list_view">
+
+</com.heqi.kharazim.explore.view.ExploreActionImageList>

@@ -7,4 +7,10 @@
     <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
     <string name="explore_plan_lite_intro_2">天 / 每天</string>
     <string name="explore_plan_lite_intro_3">分钟</string>
+    <string name="courses_preview_title">计划预览</string>
+    <string name="courses_explan_title">计划说明</string>
+    <string name="course_day_index_text_format">第 %1$s 天</string>
+    <string name="course_content_size_text_format">%1$s个穴位 ／ 完成%2$s分钟</string>
+    <string name="course_finish_date_text_format">%1$s / %2$s / %3$s  %4$s</string>
+    <string name="explore_detail_join_text">选择参加此计划</string>
 </resources>

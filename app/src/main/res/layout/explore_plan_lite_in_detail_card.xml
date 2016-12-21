@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.heqi.kharazim.explore.view.ExplorePlanLiteView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="142dp">
+<com.heqi.kharazim.explore.view.ExplorePlanLiteView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="172dp">
+
     <com.heqi.image.view.AsyncImageView
         android:id="@+id/plan_lite_summary_bg"
         android:layout_width="match_parent"
@@ -29,15 +31,15 @@
             />
 
         <FrameLayout android:id="@+id/plan_lite_difficulty_place_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/plan_lite_title_tv"
-            android:layout_toEndOf="@id/plan_lite_title_tv"
-            android:layout_marginLeft="6dp"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_toRightOf="@id/plan_lite_title_tv"
+                     android:layout_toEndOf="@id/plan_lite_title_tv"
+                     android:layout_marginLeft="6dp"
                      android:layout_marginStart="6dp"
                      android:layout_alignParentTop="true"
-            android:layout_marginTop="9dip"/>
-        
+                     android:layout_marginTop="9dip"/>
+
         <TextView
             android:id="@+id/plan_lite_acupoint_count_tv"
             android:layout_width="wrap_content"
@@ -110,14 +112,12 @@
             android:text="@string/explore_plan_lite_intro_3"
             style="@style/explore_plan_lite_intro_tv"/>
 
-        <ImageView
-            android:id="@+id/plan_lite_add_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/btn_explore_plan_lite_add"/>
+        <TextView android:id="@+id/plan_detail_join_btn"
+                  android:text="@string/explore_detail_join_text"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  style="@style/explore_large_btn"/>
+
     </RelativeLayout>
 
 </com.heqi.kharazim.explore.view.ExplorePlanLiteView>

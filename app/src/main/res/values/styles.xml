@@ -37,15 +37,41 @@
     </style>
 
     <style name="simple_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <!-- explore -->
     <style name="explore_plan_lite_intro_tv" parent="@style/simple_tv">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color_white</item>
         <item name="android:textSize">@dimen/text_size_xtiny</item>
+    </style>
+
+    <style name="explore_difficulty_level_item">
+        <item name="android:layout_height">@dimen/explore_difficulty_level_view_height</item>
+        <item name="android:layout_width">@dimen/explore_difficulty_level_view_item_width</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/explore_difficulty_level_view_item_disable</item>
+    </style>
+
+    <style name="explore_course_card_tv" parent="@style/simple_tv">
+        <item name="android:textColor">@color/text_color_black</item>
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+    <style name="explore_large_btn">
+        <item name="android:layout_height">37dp</item>
+        <item name="android:layout_width">178dp</item>
+        <item name="android:paddingLeft">28dp</item>
+        <item name="android:paddingRight">28dp</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:paddingBottom">11dp</item>
+        <item name="android:background">@drawable/bg_explore_large_button</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

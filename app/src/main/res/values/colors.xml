@@ -7,12 +7,19 @@
     <!-- common -->
     <color name="transparent">#00000000</color>
     <color name="text_color_white">#ffffff</color>
+    <color name="text_color_black">#6a6a6a</color>
+    <color name="text_color_gray_light">#d1d1d1</color>
     <color name="bg_list_content">#f4f4f4</color>
+    <color name="bg_color_white">#fafafa</color>
+    <color name="bg_color_gray">#efefef</color>
 
     <!-- kharazim -->
     <color name="kharazim_desgin_color">#0bdbd1</color>
 
     <!-- explore -->
     <color name="explore_plan_lite_shadow_bg">#33000000</color>
+    <color name="explore_difficulty_level_view_item_disable">#bababa</color>
+    <color name="explore_action_image_list_bg">#f2f1f1</color>
+    <color name="explore_plan_detail_shadow_bg">#66000000</color>
 
 </resources>
