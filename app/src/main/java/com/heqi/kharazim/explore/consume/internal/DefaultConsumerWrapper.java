@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.core;
+package com.heqi.kharazim.explore.consume.internal;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,6 +10,7 @@ import com.heqi.kharazim.explore.consume.api.ConsumerObserver;
 import com.heqi.kharazim.explore.consume.api.ConsumerWrapper;
 import com.heqi.kharazim.explore.consume.api.Reason;
 import com.heqi.kharazim.explore.consume.api.State;
+import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 
@@ -31,8 +32,8 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
   private Context context;
   private final List<ConsumerObserver> observers = new ArrayList<ConsumerObserver>();
-  private State state;
-  private State targetState;
+  private volatile State state;
+  private volatile State targetState;
   private ConsumerFactory consumerFactory;
   private Consumer consumer;
 
@@ -103,6 +104,18 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
         @Override
         public void notify(ConsumerObserver observer) {
           observer.onProgress(millisecond2Second(milliseconds), millisecond2Second(duration));
+        }
+      });
+    }
+
+    @Override
+    public void onActionRepeat(final int repeatIndex, final int sum) {
+      checkOnConsumerThread();
+
+      notifyObserver(new NotifyObserverRunnable() {
+        @Override
+        public void notify(ConsumerObserver observer) {
+          observer.onActionRepeat(repeatIndex, sum);
         }
       });
     }
@@ -313,6 +326,16 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   @Override
   public int getDuration() {
     return getState() != State.OFF ? consumer.getDuration() : 0;
+  }
+
+  @Override
+  public int getActionRepeatIndex() {
+    return getState() != State.OFF ? consumer.getActionRepeatIndex() : 0;
+  }
+
+  @Override
+  public int getActionRepeatSum() {
+    return getState() != State.OFF ? consumer.getActionRepeatSum() : 0;
   }
 
   @Override

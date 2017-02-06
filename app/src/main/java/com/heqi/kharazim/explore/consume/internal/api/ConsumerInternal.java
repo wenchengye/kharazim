@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.core;
+package com.heqi.kharazim.explore.consume.internal.api;
 
 import android.net.Uri;
 
@@ -6,7 +6,7 @@ import android.net.Uri;
  * Created by overspark on 2016/12/28.
  */
 
-interface ConsumerInternal {
+public interface ConsumerInternal {
 
   void release();
 
@@ -25,6 +25,10 @@ interface ConsumerInternal {
   int getDuration();
 
   void setSource(Uri uri);
+
+  void setCallback(ConsumerInternalCallback callback);
+
+  InternalState getInternalState();
 
   public interface ConsumerInternalCallback {
 

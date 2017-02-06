@@ -37,6 +37,10 @@ public interface Consumer {
 
   int getDuration();
 
+  int getActionRepeatIndex();
+
+  int getActionRepeatSum();
+
   boolean canForward();
 
   boolean canBackward();
@@ -60,6 +64,8 @@ public interface Consumer {
     void onError(String msg);
 
     void onProgress(int milliseconds, int duration);
+
+    void onActionRepeat(int repeatIndex, int sum);
 
   }
 

@@ -1,4 +1,6 @@
-package com.heqi.kharazim.explore.consume.core;
+package com.heqi.kharazim.explore.consume.internal;
+
+import com.heqi.kharazim.explore.consume.internal.api.Timeline;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -37,7 +39,7 @@ class DefaultTimeline implements Timeline {
   @Override
   public int getEndTime() {
     return getLastItem() != null
-        ? baseTime + getLastItem().getOffset() + getLastItem().getDuration()
+        ? baseTime + getLastItem().getOffset() + getLastItem().getTotalDuration()
         : baseTime;
   }
 
@@ -48,7 +50,7 @@ class DefaultTimeline implements Timeline {
 
   @Override
   public int getItemEndTime(TimelineItem item) {
-    return item != null ? baseTime + item.getOffset() + item.getDuration() : baseTime;
+    return item != null ? baseTime + item.getOffset() + item.getTotalDuration() : baseTime;
   }
 
   @Override
@@ -92,6 +94,19 @@ class DefaultTimeline implements Timeline {
       }
     }
     return ret;
+  }
+
+  @Override
+  public TimelineItem getHitOrUpcomingItem(int time) {
+    TimelineItem ret = getHitItem(time);
+    return ret == null ? getUpcomingItem(time) : ret;
+  }
+
+  @Override
+  public boolean isItemHit(TimelineItem item, int time) {
+    int startTime = getItemStartTime(item);
+    int endTime = getItemEndTime(item);
+    return time >= startTime && time < endTime;
   }
 
   @Override

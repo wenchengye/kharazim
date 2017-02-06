@@ -128,6 +128,10 @@ public class CourseDetailInfo implements Serializable {
     this.actlist = actlist;
   }
 
+  public List<CourseMusicInfo> getMusiclist() {
+    return musiclist;
+  }
+
   public static class CourseMusicInfo implements Serializable {
     private int num;
     private int starttime;

@@ -25,9 +25,10 @@ public interface ConsumerObserver {
 
   void onProgress(int second, int duration);
 
+  void onActionRepeat(int repeatIndex, int sum);
+
   void onCourceChanged(CourseDetailInfo course);
 
   String getKey();
-
 
 }

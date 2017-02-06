@@ -16,7 +16,7 @@ public class Const {
   public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
 
   public static String getKharazimResource(final String resourceUrl) {
-    return KHARAZIM_SERVER + resourceUrl;
+    return resourceUrl.startsWith("http://") ? resourceUrl : KHARAZIM_SERVER + resourceUrl;
   }
 
   private Const() {

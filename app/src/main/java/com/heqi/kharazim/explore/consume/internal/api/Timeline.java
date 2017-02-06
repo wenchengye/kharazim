@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.core;
+package com.heqi.kharazim.explore.consume.internal.api;
 
 import android.net.Uri;
 
@@ -8,7 +8,7 @@ import java.util.Collection;
  * Created by overspark on 2016/12/30.
  */
 
-interface Timeline {
+public interface Timeline {
 
   void addItem(TimelineItem item);
 
@@ -30,6 +30,10 @@ interface Timeline {
 
   TimelineItem getUpcomingItem(int time);
 
+  TimelineItem getHitOrUpcomingItem(int time);
+
+  boolean isItemHit(TimelineItem item, int time);
+
   TimelineItem getFirstItem();
 
   TimelineItem getLastItem();
@@ -42,10 +46,16 @@ interface Timeline {
 
     private int duration;
 
-    public TimelineItem(Uri source, int offset, int duration) {
+    private int repeat;
+
+    private int margin;
+
+    public TimelineItem(Uri source, int offset, int duration, int repeat, int margin) {
       this.source = source;
       this.offset = offset;
       this.duration = duration;
+      this.repeat = repeat;
+      this.margin = margin;
     }
 
     public Uri getSource() {
@@ -58,6 +68,18 @@ interface Timeline {
 
     public int getDuration() {
       return duration;
+    }
+
+    public int getRepeat() {
+      return repeat;
+    }
+
+    public int getTotalDuration() {
+      return duration * repeat + margin;
+    }
+
+    public int getMargin() {
+      return margin;
     }
   }
 }
