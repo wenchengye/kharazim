@@ -2,48 +2,46 @@ package com.heqi.kharazim.explore.consume.internal;
 
 import android.net.Uri;
 
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalState;
+import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalStateRepeat;
 import com.heqi.kharazim.explore.consume.internal.api.InternalState;
 
 /**
  * Created by overspark on 2017/2/3.
  */
 
-public class ConsumerInternalRepeatWrapper implements ConsumerInternal {
+public class ConsumerInternalStateRepeatWrapper implements ConsumerInternalStateRepeat {
 
-  private ConsumerInternal internal;
-  private InternalState state = InternalState.IDLE;
+  private ConsumerInternalState internal;
   private int repeatIndex = 0;
   private int repeatSum = 0;
   private int margin = 0;
 
-  private ConsumerInternalRepeatWrapperCallback callback;
+  private ConsumerInternalRepeatCallback repeatCallback;
+  private ConsumerInternalCallback callback;
   private ConsumerInternalCallback internalCallback = new ConsumerInternalCallback() {
     @Override
     public void onPrepared() {
-      state = InternalState.Prepared;
       if (callback != null) {
         callback.onPrepared();
       }
     }
 
     @Override
-    public void onError() {
-      state = InternalState.IDLE;
+    public void onError(String msg) {
       if (callback != null) {
-        callback.onError();
+        callback.onError(msg);
       }
     }
 
     @Override
     public void onPlayerOver() {
       ++repeatIndex;
-      if (callback != null) {
-        callback.onRepeat(repeatIndex, repeatSum);
+      if (repeatCallback != null) {
+        repeatCallback.onRepeat(repeatIndex, repeatSum);
       }
 
       if (repeatIndex >= repeatSum) {
-        state = InternalState.PlayOver;
         if (callback != null) {
           callback.onPlayerOver();
         }
@@ -54,28 +52,9 @@ public class ConsumerInternalRepeatWrapper implements ConsumerInternal {
     }
   };
 
-  public ConsumerInternalRepeatWrapper(ConsumerInternal internal) {
+  public ConsumerInternalStateRepeatWrapper(ConsumerInternalState internal) {
     this.internal = internal;
     this.internal.setCallback(internalCallback);
-  }
-
-  public void setSource(Uri uri, int repeatSum, int margin) {
-    internal.setSource(uri);
-    this.repeatSum = repeatSum;
-    this.margin = margin;
-    this.state = InternalState.IDLE;
-  }
-
-  public int getRepeatIndex() {
-    return repeatIndex;
-  }
-
-  public int getRepeatSum() {
-    return repeatSum;
-  }
-
-  public int getMargin() {
-    return margin;
   }
 
   @Override
@@ -86,30 +65,27 @@ public class ConsumerInternalRepeatWrapper implements ConsumerInternal {
   @Override
   public void prepare() {
     repeatIndex = 0;
-    this.state = InternalState.Preparing;
     this.internal.prepare();
   }
 
   @Override
   public void start() {
-    this.state = InternalState.Playing;
     this.internal.start();
   }
 
   @Override
   public void pause() {
-    this.state = InternalState.Paused;
     this.internal.pause();
   }
 
   @Override
   public void stop() {
-    this.state = InternalState.IDLE;
     this.internal.stop();
   }
 
   @Override
   public void seek(int milliseconds) {
+    throw new RuntimeException("repeat wrapper don't support seek() method");
   }
 
   @Override
@@ -129,20 +105,38 @@ public class ConsumerInternalRepeatWrapper implements ConsumerInternal {
 
   @Override
   public void setCallback(ConsumerInternalCallback callback) {
-    /** unused method, do nothing */
+    this.callback = callback;
   }
 
   @Override
   public InternalState getInternalState() {
-    return this.state;
+    return internal.getInternalState();
   }
 
-  public void setRepeatWrapperCallback(ConsumerInternalRepeatWrapperCallback callback) {
-    this.callback = callback;
+  @Override
+  public void setSource(Uri uri, int repeatSum, int margin) {
+    internal.setSource(uri);
+    this.repeatSum = repeatSum;
+    this.margin = margin;
   }
 
-  public interface ConsumerInternalRepeatWrapperCallback
-      extends ConsumerInternal.ConsumerInternalCallback {
-    void onRepeat(int repeatIndex, int repeatSum);
+  @Override
+  public void setRepeatCallback(ConsumerInternalRepeatCallback callback) {
+    this.repeatCallback = callback;
+  }
+
+  @Override
+  public int getRepeatIndex() {
+    return repeatIndex;
+  }
+
+  @Override
+  public int getRepeatSum() {
+    return repeatSum;
+  }
+
+  @Override
+  public int getMargin() {
+    return margin;
   }
 }

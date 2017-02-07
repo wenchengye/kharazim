@@ -1,5 +1,8 @@
 package com.heqi.kharazim.config;
 
+import android.net.Uri;
+import android.text.TextUtils;
+
 /**
  * Created by overspark on 2016/11/19.
  */
@@ -10,6 +13,14 @@ public class Const {
     public static final String NONE = "";
 
     private TabId() {}
+  }
+
+  // media
+
+  public static final String HTTP_URI_SCHEME = "http";
+
+  public static boolean validateSourceUri(Uri uri) {
+    return uri != null && !TextUtils.isEmpty(uri.toString());
   }
 
   // http

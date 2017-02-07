@@ -28,15 +28,12 @@ public interface ConsumerInternal {
 
   void setCallback(ConsumerInternalCallback callback);
 
-  InternalState getInternalState();
-
-  public interface ConsumerInternalCallback {
+  interface ConsumerInternalCallback {
 
     void onPrepared();
 
-    void onError();
+    void onError(String msg);
 
     void onPlayerOver();
   }
-
 }

@@ -7,6 +7,8 @@ import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.api.Consumer;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalState;
+import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalStateRepeat;
 import com.heqi.kharazim.explore.consume.internal.api.InternalState;
 import com.heqi.kharazim.explore.consume.internal.api.Timeline;
 import com.heqi.kharazim.explore.consume.internal.api.Timer;
@@ -24,9 +26,9 @@ public class DefaultConsumer implements Consumer {
   private ConsumerFactory factory;
   private CourseManager courseManager;
   private Timer timer;
-  private ConsumerInternalRepeatWrapper actionConsumer;
-  private ConsumerInternal soundConsumer;
-  private ConsumerInternalRepeatWrapper musicConsumer;
+  private ConsumerInternalStateRepeat actionConsumer;
+  private ConsumerInternalState soundConsumer;
+  private ConsumerInternalStateRepeat musicConsumer;
   private ConsumerCallback callback;
 
   private int actionIndex;
@@ -45,59 +47,72 @@ public class DefaultConsumer implements Consumer {
     }
   };
 
+  private ConsumerInternalStateRepeat.ConsumerInternalRepeatCallback actionRepeatCallback =
+      new ConsumerInternalStateRepeat.ConsumerInternalRepeatCallback() {
+    @Override
+    public void onRepeat(int repeatIndex, int repeatSum) {
+      if (callback != null) {
+        callback.onActionRepeat(repeatIndex, repeatSum);
+      }
+    }
+  };
+
+  private ConsumerInternal.ConsumerInternalCallback actionCallback =
+      new ConsumerInternal.ConsumerInternalCallback() {
+    @Override
+    public void onPrepared() {
+      actionConsumer.start();
+      if (callback != null) {
+        callback.onPlayStart();
+      }
+    }
+
+    @Override
+    public void onError(String msg) {
+      stop();
+      if (callback != null) {
+        callback.onError(msg);
+      }
+    }
+
+    @Override
+    public void onPlayerOver() {
+      onActionOver();
+    }
+  };
+
 
   public DefaultConsumer(ConsumerFactory factory) {
     this.factory = factory;
     this.courseManager = new CourseManager();
     this.timer = new DefaultTimer(Looper.myLooper());
     this.actionConsumer =
-        new ConsumerInternalRepeatWrapper(this.factory.buildActionConsumerInternal());
-    this.soundConsumer = this.factory.buildSoundConsumerInternal();
+        new ConsumerInternalStateRepeatWrapper(
+            new ConsumerInternalStateWrapper(this.factory.buildActionConsumerInternal()));
+    this.soundConsumer =
+        new ConsumerInternalStateWrapper(this.factory.buildSoundConsumerInternal());
     this.musicConsumer =
-        new ConsumerInternalRepeatWrapper(this.factory.buildMusicConsumerInternal());
+        new ConsumerInternalStateRepeatWrapper(
+            new ConsumerInternalStateWrapper(this.factory.buildMusicConsumerInternal()));
     callback = null;
     actionIndex = progress = repeatIndex = time = 0;
 
     this.timer.addRunner(this.progressSync);
-    actionConsumer.setRepeatWrapperCallback(
-        new ConsumerInternalRepeatWrapper.ConsumerInternalRepeatWrapperCallback() {
-      @Override
-      public void onRepeat(int repeatIndex, int repeatSum) {
-        if (callback != null) {
-          callback.onActionRepeat(repeatIndex, repeatSum);
-        }
-      }
-
-      @Override
-      public void onPrepared() {
-        actionConsumer.start();
-        if (callback != null) {
-          callback.onPlayStart();
-        }
-      }
-
-      @Override
-      public void onError() {
-        stop();
-        if (callback != null) {
-          callback.onError(null);
-        }
-      }
-
-      @Override
-      public void onPlayerOver() {
-        onActionOver();
-      }
-    });
+    actionConsumer.setRepeatCallback(actionRepeatCallback);
+    actionConsumer.setCallback(actionCallback);
   }
 
   @Override
   public void release() {
     stop();
 
+    actionConsumer.setCallback(null);
     actionConsumer.release();
     soundConsumer.release();
     musicConsumer.release();
+    actionConsumer = null;
+    soundConsumer = null;
+    musicConsumer= null;
   }
 
   @Override
@@ -353,9 +368,6 @@ public class DefaultConsumer implements Consumer {
       switch (soundConsumer.getInternalState()) {
         case IDLE:
           soundConsumer.prepare();
-          if (callback != null) {
-            callback.onPreparing();
-          }
           break;
         case Prepared:
           if (courseManager.getSoundTimeline(actionIndex).isItemHit(currentSound, time)) {
@@ -372,6 +384,9 @@ public class DefaultConsumer implements Consumer {
       switch (actionConsumer.getInternalState()) {
         case IDLE:
           actionConsumer.prepare();
+          if (callback != null) {
+            callback.onPreparing();
+          }
           break;
         case Paused:
           actionConsumer.start();
