@@ -24,14 +24,15 @@ import java.util.List;
 public class DefaultConsumerWrapper implements ConsumerWrapper {
 
   private static HandlerThread consumerThread;
+
   static {
     consumerThread = new HandlerThread("kharazim_consumer_thread");
     consumerThread.start();
   }
-  private final Handler consumerHandler = new Handler(consumerThread.getLooper());
 
-  private Context context;
+  private final Handler consumerHandler = new Handler(consumerThread.getLooper());
   private final List<ConsumerObserver> observers = new ArrayList<ConsumerObserver>();
+  private Context context;
   private volatile State state;
   private volatile State targetState;
   private ConsumerFactory consumerFactory;
@@ -121,10 +122,6 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     }
   };
 
-  private static int millisecond2Second(int milliseconds) {
-    return milliseconds / 1000;
-  }
-
   public DefaultConsumerWrapper(Context context, ConsumerFactory consumerFactory) {
     this.context = context;
     this.consumerFactory = consumerFactory;
@@ -138,8 +135,8 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     });
   }
 
-  private void setState(State state) {
-    this.state = state;
+  private static int millisecond2Second(int milliseconds) {
+    return milliseconds / 1000;
   }
 
   private void init() {
@@ -167,6 +164,10 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   @Override
   public State getState() {
     return this.state;
+  }
+
+  private void setState(State state) {
+    this.state = state;
   }
 
   @Override
@@ -294,6 +295,11 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   }
 
   @Override
+  public CourseDetailInfo getCourse() {
+    return getState() != State.OFF ? consumer.getCourse() : null;
+  }
+
+  @Override
   public void setCourse(final CourseDetailInfo course) {
     consumerHandler.post(new Runnable() {
       @Override
@@ -301,11 +307,6 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
         setCourseInternal(course);
       }
     });
-  }
-
-  @Override
-  public CourseDetailInfo getCourse() {
-    return getState() != State.OFF ? consumer.getCourse() : null;
   }
 
   @Override
@@ -357,7 +358,6 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   public boolean canJump2Action(int index) {
     return getState() != State.OFF && consumer.canJump2Action(index);
   }
-
 
 
   @Override

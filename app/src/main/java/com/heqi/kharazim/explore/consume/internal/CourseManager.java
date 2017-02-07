@@ -23,6 +23,10 @@ public class CourseManager {
   private List<Timeline.TimelineItem> actionTimelineItems = new ArrayList<Timeline.TimelineItem>();
   private List<Timeline> soundTimelines = new ArrayList<Timeline>();
 
+  public CourseDetailInfo getCourse() {
+    return this.course;
+  }
+
   public void setCourse(CourseDetailInfo course) {
     if (course == null || this.course == course) return;
 
@@ -58,10 +62,6 @@ public class CourseManager {
 
       offset += actionItem.getDuration();
     }
-  }
-
-  public CourseDetailInfo getCourse() {
-    return this.course;
   }
 
   public int getActionCount() {

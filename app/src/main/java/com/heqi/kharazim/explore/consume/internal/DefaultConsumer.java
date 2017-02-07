@@ -49,37 +49,37 @@ public class DefaultConsumer implements Consumer {
 
   private ConsumerInternalStateRepeat.ConsumerInternalRepeatCallback actionRepeatCallback =
       new ConsumerInternalStateRepeat.ConsumerInternalRepeatCallback() {
-    @Override
-    public void onRepeat(int repeatIndex, int repeatSum) {
-      if (callback != null) {
-        callback.onActionRepeat(repeatIndex, repeatSum);
-      }
-    }
-  };
+        @Override
+        public void onRepeat(int repeatIndex, int repeatSum) {
+          if (callback != null) {
+            callback.onActionRepeat(repeatIndex, repeatSum);
+          }
+        }
+      };
 
   private ConsumerInternal.ConsumerInternalCallback actionCallback =
       new ConsumerInternal.ConsumerInternalCallback() {
-    @Override
-    public void onPrepared() {
-      actionConsumer.start();
-      if (callback != null) {
-        callback.onPlayStart();
-      }
-    }
+        @Override
+        public void onPrepared() {
+          actionConsumer.start();
+          if (callback != null) {
+            callback.onPlayStart();
+          }
+        }
 
-    @Override
-    public void onError(String msg) {
-      stop();
-      if (callback != null) {
-        callback.onError(msg);
-      }
-    }
+        @Override
+        public void onError(String msg) {
+          stop();
+          if (callback != null) {
+            callback.onError(msg);
+          }
+        }
 
-    @Override
-    public void onPlayerOver() {
-      onActionOver();
-    }
-  };
+        @Override
+        public void onPlayerOver() {
+          onActionOver();
+        }
+      };
 
 
   public DefaultConsumer(ConsumerFactory factory) {
@@ -112,7 +112,7 @@ public class DefaultConsumer implements Consumer {
     musicConsumer.release();
     actionConsumer = null;
     soundConsumer = null;
-    musicConsumer= null;
+    musicConsumer = null;
   }
 
   @Override
@@ -180,6 +180,15 @@ public class DefaultConsumer implements Consumer {
   }
 
   @Override
+  public void setCourse(CourseDetailInfo course) {
+    if (course == null) return;
+    courseManager.setCourse(course);
+
+    resetMusic();
+    gotoActionIndex(0);
+  }
+
+  @Override
   public ActionDetailInfo getAction() {
     return courseManager.getAction(actionIndex);
   }
@@ -231,15 +240,6 @@ public class DefaultConsumer implements Consumer {
   @Override
   public boolean canJump2Action(int index) {
     return courseManager.getActionTimelineItem(index) != null;
-  }
-
-  @Override
-  public void setCourse(CourseDetailInfo course) {
-    if (course == null) return;
-    courseManager.setCourse(course);
-
-    resetMusic();
-    gotoActionIndex(0);
   }
 
   @Override

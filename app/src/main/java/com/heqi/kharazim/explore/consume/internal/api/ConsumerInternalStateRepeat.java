@@ -2,8 +2,6 @@ package com.heqi.kharazim.explore.consume.internal.api;
 
 import android.net.Uri;
 
-import com.heqi.kharazim.explore.consume.internal.ConsumerInternalStateRepeatWrapper;
-
 /**
  * Created by overspark on 2017/2/7.
  */

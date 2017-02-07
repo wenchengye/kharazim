@@ -29,6 +29,8 @@ public interface Consumer {
 
   CourseDetailInfo getCourse();
 
+  void setCourse(CourseDetailInfo course);
+
   ActionDetailInfo getAction();
 
   int getActionIndex();
@@ -48,8 +50,6 @@ public interface Consumer {
   boolean canPlay();
 
   boolean canJump2Action(int index);
-
-  void setCourse(CourseDetailInfo course);
 
   void setConsumerCallback(ConsumerCallback callback);
 

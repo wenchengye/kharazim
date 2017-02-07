@@ -2,9 +2,9 @@ package com.heqi.kharazim.explore.consume.internal;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
-import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnErrorListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 
 import com.heqi.kharazim.config.Const;
@@ -97,12 +97,12 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
 
   @Override
   public void start() {
-      player.start();
+    player.start();
   }
 
   @Override
   public void pause() {
-      player.pause();
+    player.pause();
   }
 
   @Override
