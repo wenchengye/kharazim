@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.utils.ViewUtils;
 
@@ -23,15 +22,22 @@ import com.heqi.kharazim.utils.ViewUtils;
 
 public class ExplorePlanLiteView extends RelativeLayout {
 
+  public interface ExplorePlanLiteViewListener {
+    void onAddPlan();
+  }
+
   private AsyncImageView planSummaryIv;
   private TextView planTitleTv;
   private FrameLayout planDifficultyPlaceHolder;
   private ExploreDifficultyLevelView planDifficultyView;
   private TextView planAcupointCountTv;
   private TextView planSpanTv;
-  private TextView planSpanDaliyTv;
+  private TextView planSpanDailyTv;
   private ImageView planAddBtn;
+
   private PlanLiteInfo data;
+
+  private ExplorePlanLiteViewListener listener;
 
   public ExplorePlanLiteView(Context context) {
     super(context);
@@ -63,7 +69,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
     planTitleTv = (TextView) findViewById(R.id.plan_lite_title_tv);
     planAcupointCountTv = (TextView) findViewById(R.id.plan_lite_acupoint_count_tv);
     planSpanTv = (TextView) findViewById(R.id.plan_lite_span_tv);
-    planSpanDaliyTv = (TextView) findViewById(R.id.plan_lite_span_daily_tv);
+    planSpanDailyTv = (TextView) findViewById(R.id.plan_lite_span_daily_tv);
     planAddBtn = (ImageView) findViewById(R.id.plan_lite_add_btn);
 
     if (planDifficultyPlaceHolder != null) {
@@ -75,7 +81,9 @@ public class ExplorePlanLiteView extends RelativeLayout {
       planAddBtn.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View view) {
-
+          if (listener != null) {
+            listener.onAddPlan();
+          }
         }
       });
     }
@@ -87,7 +95,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
 
     this.data = data;
     if (!TextUtils.isEmpty(this.data.getPlanimg()) && planSummaryIv != null) {
-      planSummaryIv.loadNetworkImage(Const.getKharazimResource(this.data.getPlanimg()), 0);
+      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), 0);
     }
     if (planDifficultyView != null) {
       planDifficultyView.setDifficultyLevel(this.data.getPlanlev());
@@ -101,8 +109,12 @@ public class ExplorePlanLiteView extends RelativeLayout {
     if (planSpanTv != null) {
       planSpanTv.setText(String.valueOf(this.data.getCpdays()));
     }
-    if (planSpanDaliyTv != null) {
-      planSpanDaliyTv.setText(this.data.getDaytime());
+    if (planSpanDailyTv != null) {
+      planSpanDailyTv.setText(this.data.getDaytime());
     }
+  }
+
+  public void setListener(ExplorePlanLiteViewListener listener) {
+    this.listener = listener;
   }
 }

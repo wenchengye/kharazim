@@ -28,7 +28,7 @@ public class PlanDetailActivity extends FragmentActivity {
         .commit();
   }
 
-  public static void lauchActivity(Context context, PlanLiteInfo planLiteInfo) {
+  public static void launchActivity(Context context, PlanLiteInfo planLiteInfo) {
     Intent intent = new Intent(context, PlanDetailActivity.class);
     intent.putExtra(Intents.EXTRA_PLAN_LITE_INFO, planLiteInfo);
     context.startActivity(intent);

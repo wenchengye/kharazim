@@ -153,6 +153,13 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     consumer = consumerFactory.buildConsumer();
     consumer.setConsumerCallback(consumerCallback);
     setState(State.IDLE);
+
+    notifyObserver(new NotifyObserverRunnable() {
+      @Override
+      public void notify(ConsumerObserver observer) {
+        observer.onInit();
+      }
+    });
   }
 
   private void checkOnConsumerThread() {

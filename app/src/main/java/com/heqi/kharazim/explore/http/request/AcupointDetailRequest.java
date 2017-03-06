@@ -2,7 +2,9 @@ package com.heqi.kharazim.explore.http.request;
 
 import android.text.TextUtils;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.model.AcupointQueryResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 
@@ -36,5 +38,14 @@ public class AcupointDetailRequest extends AbstractKharazimHttpRequest<AcupointQ
     if (!TextUtils.isEmpty(id)) {
       params.put(GET_PARAMS_KEY_ID, id);
     }
+  }
+
+  @Override
+  protected Response<AcupointQueryResult> parseNetworkResponse(NetworkResponse response) {
+    Response<AcupointQueryResult> ret = super.parseNetworkResponse(response);
+    if (ret != null && ret.result != null) {
+      Const.redirectKharazimModel(ret.result);
+    }
+    return ret;
   }
 }

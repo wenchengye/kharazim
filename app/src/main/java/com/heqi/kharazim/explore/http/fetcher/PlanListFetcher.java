@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
  * Created by overspark on 2016/11/20.
  */
 
-public class PlanListFether extends BaseFetcher<PlanLiteInfo> {
+public class PlanListFetcher extends BaseFetcher<PlanLiteInfo> {
 
   private static final String PLAN_LIST_CACHE_KEY = "plan_list";
 

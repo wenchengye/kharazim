@@ -22,6 +22,9 @@
         <activity android:name=".explore.activity.PlanDetailActivity"
                   android:theme="@android:style/Theme.Light.NoTitleBar"/>
 
+        <activity android:name=".explore.activity.ConsumeActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"/>
+
     </application>
 
 </manifest>

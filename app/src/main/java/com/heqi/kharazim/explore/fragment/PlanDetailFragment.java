@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.action.JoinPlanAction;
+import com.heqi.kharazim.explore.activity.ConsumeActivity;
 import com.heqi.kharazim.explore.view.ExplorePlanDetailCourseListView;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.fragment.async.NetworkAsyncLoadFragment;
@@ -64,7 +65,13 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
         planDetailJoinBtn.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            new JoinPlanAction(planLiteInfo.getId()).run();
+            //new JoinPlanAction(planLiteInfo.getId()).run();
+
+            // TODO: temp code
+            ConsumeActivity.launchActivity(getContext(),
+                planDetailInfo.getData_info().get(0).getId());
+            // temp code end
+
           }
         });
       }
@@ -80,6 +87,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     return R.layout.explore_plan_detail_fragment;
   }
 
+  @Override
   protected void applyData(PlanDetailInfo data) {
     if (data == null) return;
 

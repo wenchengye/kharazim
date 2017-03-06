@@ -9,6 +9,8 @@ import com.heqi.kharazim.explore.model.CourseDetailInfo;
 
 public interface ConsumerObserver {
 
+  void onInit();
+
   void onRelease();
 
   void onPreparing(ActionDetailInfo action, int actionIndex, Reason reason);
@@ -27,7 +29,7 @@ public interface ConsumerObserver {
 
   void onActionRepeat(int repeatIndex, int sum);
 
-  void onCourceChanged(CourseDetailInfo course);
+  void onCourseChanged(CourseDetailInfo course);
 
   String getKey();
 

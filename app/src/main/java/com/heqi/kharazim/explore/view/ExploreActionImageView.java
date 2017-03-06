@@ -55,7 +55,7 @@ public class ExploreActionImageView extends RelativeLayout {
     this.data = data;
 
     if (actionImageIv != null) {
-      actionImageIv.loadNetworkImage(Const.getKharazimResource(data.getActimg()), 0);
+      actionImageIv.loadNetworkImage(data.getActimg(), 0);
     }
 
     if (actionNameTv != null) {

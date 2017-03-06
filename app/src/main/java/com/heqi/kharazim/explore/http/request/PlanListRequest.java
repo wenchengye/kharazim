@@ -1,7 +1,10 @@
 package com.heqi.kharazim.explore.http.request;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.model.PlanListInfo;
+import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 
 import java.util.Map;
@@ -56,6 +59,14 @@ public class PlanListRequest extends AbstractKharazimHttpRequest<PlanListInfo> {
     if (pageSize != null) {
       params.put(GET_PARAMS_KEY_PAGE_SIZE, String.valueOf(pageSize));
     }
+  }
 
+  @Override
+  protected Response<PlanListInfo> parseNetworkResponse(NetworkResponse response) {
+    Response<PlanListInfo> ret = super.parseNetworkResponse(response);
+    if (ret != null && ret.result != null) {
+      Const.redirectKharazimModel(ret.result);
+    }
+    return ret;
   }
 }

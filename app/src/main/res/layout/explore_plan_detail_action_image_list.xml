@@ -4,7 +4,7 @@
     android:id="@+id/horizontal_list_view"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="@color/explore_action_image_list_bg"
+    android:background="@color/explore_layout_bg_dark_gray"
     style="@style/list_view">
 
 </com.heqi.kharazim.explore.view.ExploreActionImageList>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include android:id="@+id/explore_consumer_activity_header"
+        layout="@layout/explore_header_bg_view"/>
+
+    <com.heqi.kharazim.explore.view.ExploreConsumerViewImpl android:id="@+id/explore_portrait_consumer_view"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_alignParentBottom="true">
+        <FrameLayout android:id="@+id/consumer_view_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="307dp"
+            android:background="@color/explore_layout_bg_dark_gray">
+
+            <com.heqi.kharazim.explore.view.ExploreCircleProgressView android:id="@+id/consumer_repeat_progress"
+                                                                      android:layout_height="@dimen/consumer_portrait_progress_view_size"
+                                                                      android:layout_width="@dimen/consumer_portrait_progress_view_size"
+                                                                      android:layout_gravity="start|top"
+                                                                      android:layout_marginTop="@dimen/consumer_portrait_info_layout_margin_top"
+                                                                      android:layout_marginLeft="@dimen/consumer_portrait_info_layout_margin_horizontal"
+                                                                      android:layout_marginStart="@dimen/consumer_portrait_info_layout_margin_horizontal"
+                                                                      />
+
+            <com.heqi.kharazim.explore.view.ExploreCircleProgressView android:id="@+id/consumer_duration_progress"
+                                                                      android:layout_height="@dimen/consumer_portrait_progress_view_size"
+                                                                      android:layout_width="@dimen/consumer_portrait_progress_view_size"
+                                                                      android:layout_gravity="end|top"
+                                                                      android:layout_marginTop="@dimen/consumer_portrait_info_layout_margin_top"
+                                                                      android:layout_marginRight="@dimen/consumer_portrait_info_layout_margin_horizontal"
+                                                                      android:layout_marginEnd="@dimen/consumer_portrait_info_layout_margin_horizontal"
+                />
+
+            <TextView android:id="@+id/consumer_interpretation_button"
+                      android:layout_gravity="center|bottom"
+                      android:layout_marginBottom="@dimen/consumer_portrait_info_layout_margin_button"
+                      android:text="@string/consumer_interpretation_text"
+                style="@style/explore_large_btn"/>
+
+        </FrameLayout>
+        
+        <FrameLayout android:id="@+id/consumer_view_control_layout"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_below="@id/consumer_view_info_layout"
+            android:background="@color/explore_layout_bg_light_gray">
+
+            <ImageView android:id="@+id/consumer_backward_button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical|start"
+                       android:layout_marginStart="@dimen/consumer_portrait_control_layout_margin_horizontal"
+                       android:layout_marginLeft="@dimen/consumer_portrait_control_layout_margin_horizontal"
+                       android:src="@drawable/icon_consumer_portrait_backward"/>
+
+            <ImageView android:id="@+id/consumer_play_button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:src="@drawable/icon_consumer_portrait_pause"/>
+
+            <ImageView android:id="@+id/consumer_forward_button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical|end"
+                       android:layout_marginEnd="@dimen/consumer_portrait_control_layout_margin_horizontal"
+                       android:layout_marginRight="@dimen/consumer_portrait_control_layout_margin_horizontal"
+                       android:src="@drawable/icon_consumer_portrait_forward"/>
+        </FrameLayout>
+
+
+    </com.heqi.kharazim.explore.view.ExploreConsumerViewImpl>
+
+    <VideoView android:id="@+id/explore_consumer_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/explore_consumer_activity_header"
+        android:layout_above="@id/explore_portrait_consumer_view"/>
+
+
+
+
+</RelativeLayout>

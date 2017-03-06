@@ -38,7 +38,7 @@ public class CourseManager {
     int offset = DEFAULT_BASE_TIME;
     for (ActionDetailInfo action : this.course.getActlist()) {
       Timeline.TimelineItem actionItem = new Timeline.TimelineItem(
-          Uri.parse(Const.getKharazimResource(action.getActvediofile())),
+          Uri.parse(action.getActvediofile()),
           offset,
           action.getCptime(),
           action.getCpcnt(),
@@ -51,7 +51,7 @@ public class CourseManager {
       timeline.setBaseTime(offset);
       for (ActionDetailInfo.ActionSoundInfo sound : action.getActSoundDtoList()) {
         timeline.addItem(new Timeline.TimelineItem(
-            Uri.parse(Const.getKharazimResource(sound.getSoundfile())),
+            Uri.parse(sound.getSoundfile()),
             sound.getStarttime(),
             sound.getLen(),
             1,

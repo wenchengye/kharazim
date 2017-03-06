@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/courses_explan_title"
+            android:text="@string/courses_explain_title"
             android:textColor="@color/text_color_black"
             android:gravity="center"/>
     </LinearLayout>

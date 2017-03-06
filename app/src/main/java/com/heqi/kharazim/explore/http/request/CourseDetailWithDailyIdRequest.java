@@ -2,7 +2,9 @@ package com.heqi.kharazim.explore.http.request;
 
 import android.text.TextUtils;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.model.CourseQueryResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 
@@ -44,5 +46,14 @@ public class CourseDetailWithDailyIdRequest extends AbstractKharazimHttpRequest<
     if (!TextUtils.isEmpty(dailyId)) {
       params.put(GET_PARAMS_KEY_DAILY_ID, dailyId);
     }
+  }
+
+  @Override
+  protected Response<CourseQueryResult> parseNetworkResponse(NetworkResponse response) {
+    Response<CourseQueryResult> ret = super.parseNetworkResponse(response);
+    if (ret != null && ret.result != null) {
+      Const.redirectKharazimModel(ret.result);
+    }
+    return ret;
   }
 }

@@ -280,7 +280,7 @@ public class DefaultConsumer implements Consumer {
   private void resetMusic() {
     if (courseManager.getMusic() != null) {
       musicConsumer.setSource(
-          Uri.parse(Const.getKharazimResource(courseManager.getMusic().getMusicfile())),
+          Uri.parse(courseManager.getMusic().getMusicfile()),
           MUSIC_REPEAT_FOREVER, 0);
     } else {
       musicConsumer.setSource(null);

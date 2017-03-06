@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.explore.activity.PlanDetailActivity;
-import com.heqi.kharazim.explore.http.fetcher.PlanListFether;
+import com.heqi.kharazim.explore.http.fetcher.PlanListFetcher;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.adapter.DataAdapter;
@@ -23,7 +23,7 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
 
   @Override
   protected BaseFetcher<PlanLiteInfo> newFetcher() {
-    return new PlanListFether();
+    return new PlanListFetcher();
   }
 
   @Override
@@ -78,7 +78,7 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
       view.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          PlanDetailActivity.lauchActivity(
+          PlanDetailActivity.launchActivity(
               PlanListAdapter.this.context, getItem(position));
         }
       });

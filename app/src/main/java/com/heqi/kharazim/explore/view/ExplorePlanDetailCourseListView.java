@@ -23,7 +23,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
   private static int COURSE_VIEW_INDEX_NONE = -1;
 
   private TextView previewTitleTv;
-  private TextView explanTitleTv;
+  private TextView explainTitleTv;
   private LinearLayout coursesListLayout;
   private TextView coursesExplainTv;
   private ExploreActionImageList actionImageList;
@@ -54,7 +54,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
     super.onFinishInflate();
 
     previewTitleTv = (TextView) findViewById(R.id.courses_preview_title_tv);
-    explanTitleTv = (TextView) findViewById(R.id.courses_explain_title_tv);
+    explainTitleTv = (TextView) findViewById(R.id.courses_explain_title_tv);
     coursesListLayout = (LinearLayout) findViewById(R.id.courses_list_layout);
     coursesExplainTv = (TextView) findViewById(R.id.courses_explain_tv);
 
@@ -65,7 +65,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
       }
     });
 
-    explanTitleTv.setOnClickListener(new OnClickListener() {
+    explainTitleTv.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         enableExplain();
@@ -162,8 +162,8 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
       setTitleViewEnable(previewTitleTv);
     }
 
-    if (explanTitleTv != null) {
-      setTitleViewDisable(explanTitleTv);
+    if (explainTitleTv != null) {
+      setTitleViewDisable(explainTitleTv);
     }
   }
 
@@ -180,8 +180,8 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
       setTitleViewDisable(previewTitleTv);
     }
 
-    if (explanTitleTv != null) {
-      setTitleViewEnable(explanTitleTv);
+    if (explainTitleTv != null) {
+      setTitleViewEnable(explainTitleTv);
     }
   }
 

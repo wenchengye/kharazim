@@ -22,4 +22,16 @@
         <attr name="android:requiresFadingEdge" />
         <attr name="android:fadingEdgeLength" />
     </declare-styleable>
+
+    <declare-styleable name="ExploreCircleProgressView">
+        <attr name="progressText" format="string"/>
+        <attr name="maxText" format="string" />
+        <attr name="upperMinorText" format="string" />
+        <attr name="lowerMinorText" format="string" />
+        <attr name="min" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="progress" format="float" />
+        
+
+    </declare-styleable>
 </resources>

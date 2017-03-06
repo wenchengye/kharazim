@@ -37,4 +37,12 @@
     <dimen name="explore_difficulty_level_view_item_width">4dip</dimen>
     <dimen name="explore_difficulty_level_view_divider_width">2dip</dimen>
 
+    <!-- consumer -->
+    <dimen name="consumer_portrait_info_layout_margin_top">47dp</dimen>
+    <dimen name="consumer_portrait_info_layout_margin_horizontal">61dp</dimen>
+    <dimen name="consumer_portrait_progress_view_size">115dp</dimen>
+    <dimen name="consumer_portrait_info_layout_margin_button">44dp</dimen>
+    <dimen name="consumer_portrait_control_layout_margin_horizontal">73dp</dimen>
+
+
 </resources>
