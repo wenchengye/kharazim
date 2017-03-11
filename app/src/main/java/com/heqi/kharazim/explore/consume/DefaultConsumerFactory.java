@@ -38,7 +38,7 @@ public class DefaultConsumerFactory implements ConsumerFactory {
 
   @Override
   public ConsumerInternal buildActionConsumerInternal() {
-    return new MediaPlayerAudioConsumer(this.context);
+    return new VideoViewConsumer(this.context, this.videoView);
   }
 
   @Override
@@ -48,6 +48,6 @@ public class DefaultConsumerFactory implements ConsumerFactory {
 
   @Override
   public ConsumerInternal buildMusicConsumerInternal() {
-    return new VideoViewConsumer(this.context, this.videoView);
+    return new MediaPlayerAudioConsumer(this.context);
   }
 }

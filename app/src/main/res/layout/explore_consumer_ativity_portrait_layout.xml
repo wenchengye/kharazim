@@ -12,7 +12,7 @@
                                                             android:layout_alignParentBottom="true">
         <FrameLayout android:id="@+id/consumer_view_info_layout"
             android:layout_width="match_parent"
-            android:layout_height="307dp"
+            android:layout_height="204dp"
             android:background="@color/explore_layout_bg_dark_gray">
 
             <com.heqi.kharazim.explore.view.ExploreCircleProgressView android:id="@+id/consumer_repeat_progress"
@@ -35,7 +35,7 @@
 
             <TextView android:id="@+id/consumer_interpretation_button"
                       android:layout_gravity="center|bottom"
-                      android:layout_marginBottom="@dimen/consumer_portrait_info_layout_margin_button"
+                      android:layout_marginBottom="@dimen/consumer_portrait_info_layout_margin_bottom"
                       android:text="@string/consumer_interpretation_text"
                 style="@style/explore_large_btn"/>
 
@@ -43,7 +43,7 @@
         
         <FrameLayout android:id="@+id/consumer_view_control_layout"
             android:layout_width="match_parent"
-            android:layout_height="125dp"
+            android:layout_height="82dp"
             android:layout_below="@id/consumer_view_info_layout"
             android:background="@color/explore_layout_bg_light_gray">
 

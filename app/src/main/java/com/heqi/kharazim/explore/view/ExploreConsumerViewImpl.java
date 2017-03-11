@@ -32,16 +32,20 @@ public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreCo
 
   public ExploreConsumerViewImpl(Context context) {
     super(context);
-    init();
   }
 
   public ExploreConsumerViewImpl(Context context, AttributeSet attrs) {
     super(context, attrs);
-    init();
+
   }
 
   public ExploreConsumerViewImpl(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
+  }
+
+  @Override
+  protected void onFinishInflate() {
+    super.onFinishInflate();
     init();
   }
 
@@ -141,17 +145,17 @@ public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreCo
       this.durationProgress.setProgress(progress);
       this.durationProgress.setMax(duration);
       this.durationProgress.setProgressText(String.valueOf(progress));
-      this.durationProgress.setProgressText(String.valueOf(duration));
+      this.durationProgress.setMaxText(String.valueOf(duration));
     }
   }
 
   @Override
   public void setRepeat(int repeatIndex, int repeatSum) {
-    if (this.durationProgress != null) {
-      this.durationProgress.setProgress(repeatIndex);
-      this.durationProgress.setMax(repeatSum);
-      this.durationProgress.setProgressText(String.valueOf(repeatIndex));
-      this.durationProgress.setProgressText(String.valueOf(repeatSum));
+    if (this.repeatProgress != null) {
+      this.repeatProgress.setProgress(repeatIndex);
+      this.repeatProgress.setMax(repeatSum);
+      this.repeatProgress.setProgressText(String.valueOf(repeatIndex));
+      this.repeatProgress.setMaxText(String.valueOf(repeatSum));
     }
   }
 

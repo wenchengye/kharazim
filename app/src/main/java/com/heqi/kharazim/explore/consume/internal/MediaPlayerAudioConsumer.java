@@ -6,7 +6,9 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
+import android.util.Log;
 
+import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
 
@@ -76,7 +78,7 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
   public void prepare() {
     try {
       if (Const.validateSourceUri(source)) {
-        if (source.getScheme().startsWith(Const.HTTP_URI_SCHEME)) {
+        if (HttpUtil.isHttpScheme(source.getScheme())) {
           player.setDataSource(source.toString());
         } else {
           player.setDataSource(context, source);

@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompatBase;
 import android.text.TextUtils;
 
+import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.ActionQueryResult;
 import com.heqi.kharazim.explore.model.AcupointDetailInfo;
@@ -13,6 +14,9 @@ import com.heqi.kharazim.explore.model.CourseQueryResult;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.explore.model.PlanListInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by overspark on 2016/11/19.
@@ -28,8 +32,6 @@ public class Const {
 
   // media
 
-  public static final String HTTP_URI_SCHEME = "http";
-
   public static boolean validateSourceUri(Uri uri) {
     return uri != null && !TextUtils.isEmpty(uri.toString());
   }
@@ -39,7 +41,17 @@ public class Const {
   public static final String KHARAZIM_SERVER = "https://manager.heal361.com/";
 
   public static String getKharazimResource(final String resourceUrl) {
-    return resourceUrl.startsWith("http://") ? resourceUrl : KHARAZIM_SERVER + resourceUrl;
+    String ret = resourceUrl;
+
+    if (!HttpUtil.isHttpScheme(Uri.parse(resourceUrl).getScheme())) {
+      try {
+        ret = HttpUtil.encodeUri(KHARAZIM_SERVER + resourceUrl, "UTF-8", true);
+      } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return ret;
   }
 
   public static void redirectKharazimModel(ActionDetailInfo actionDetailInfo) {
@@ -126,6 +138,5 @@ public class Const {
   }
 
 
-  private Const() {
-  }
+  private Const() {}
 }

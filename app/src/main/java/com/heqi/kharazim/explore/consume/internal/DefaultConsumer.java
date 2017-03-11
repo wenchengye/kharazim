@@ -186,6 +186,8 @@ public class DefaultConsumer implements Consumer {
 
     resetMusic();
     gotoActionIndex(0);
+
+    play();
   }
 
   @Override

@@ -3,6 +3,8 @@ package com.heqi.kharazim.explore.consume.internal;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.VideoView;
 
 import com.heqi.kharazim.config.Const;
@@ -20,12 +22,20 @@ public class VideoViewConsumer implements ConsumerInternal {
   private ConsumerInternalCallback callback;
   private Uri source;
 
+  private Handler uiHandler = new Handler(Looper.getMainLooper());
+  private Handler consumerHandler;
+
   private MediaPlayer.OnPreparedListener preparedListener = new MediaPlayer.OnPreparedListener() {
     @Override
     public void onPrepared(MediaPlayer mp) {
-      if (callback != null) {
-        callback.onPrepared();
-      }
+      consumerHandler.post(new Runnable() {
+        @Override
+        public void run() {
+          if (callback != null) {
+            callback.onPrepared();
+          }
+        }
+      });
     }
   };
 
@@ -33,18 +43,29 @@ public class VideoViewConsumer implements ConsumerInternal {
       new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
-          if (callback != null) {
-            callback.onPlayerOver();
-          }
+          consumerHandler.post(new Runnable() {
+            @Override
+            public void run() {
+              if (callback != null) {
+                callback.onPlayerOver();
+              }
+            }
+          });
         }
       };
 
   private MediaPlayer.OnErrorListener errorListener = new MediaPlayer.OnErrorListener() {
     @Override
-    public boolean onError(MediaPlayer mp, int what, int extra) {
-      if (callback != null) {
-        callback.onError("video view error : " + what);
-      }
+    public boolean onError(MediaPlayer mp, final int what, int extra) {
+      consumerHandler.post(new Runnable() {
+        @Override
+        public void run() {
+          if (callback != null) {
+            callback.onError("video view error : " + what);
+          }
+
+        }
+      });
       return true;
     }
   };
@@ -55,6 +76,7 @@ public class VideoViewConsumer implements ConsumerInternal {
     this.videoView.setOnPreparedListener(preparedListener);
     this.videoView.setOnErrorListener(errorListener);
     this.videoView.setOnCompletionListener(completionListener);
+    consumerHandler = new Handler(Looper.myLooper());
   }
 
   @Override
@@ -68,33 +90,61 @@ public class VideoViewConsumer implements ConsumerInternal {
 
   @Override
   public void prepare() {
-    if (Const.validateSourceUri(source)) {
-      videoView.setVideoURI(source);
-    } else {
-      if (callback != null) {
-        callback.onError("illegal data source : " + (source == null ? "null" : source.toString()));
+    uiHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        if (Const.validateSourceUri(source)) {
+          videoView.setVideoURI(source);
+        } else {
+          if (callback != null) {
+            callback.onError("illegal data source : " + (source == null ? "null" : source.toString()));
+          }
+        }
       }
-    }
+    });
   }
 
   @Override
   public void start() {
-    videoView.start();
+    uiHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        videoView.start();
+      }
+    });
+
   }
 
   @Override
   public void pause() {
-    videoView.pause();
+    uiHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        videoView.pause();
+      }
+    });
+
   }
 
   @Override
   public void stop() {
-    videoView.stopPlayback();
+    uiHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        videoView.stopPlayback();
+      }
+    });
   }
 
   @Override
-  public void seek(int milliseconds) {
-    videoView.seekTo(milliseconds);
+  public void seek(final int milliseconds) {
+    uiHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        videoView.seekTo(milliseconds);
+      }
+    });
+
   }
 
   @Override
