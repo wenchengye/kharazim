@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.action.JoinPlanAction;
 import com.heqi.kharazim.explore.activity.ConsumeActivity;
 import com.heqi.kharazim.explore.view.ExplorePlanDetailCourseListView;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;

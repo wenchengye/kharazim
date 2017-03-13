@@ -1,8 +1,4 @@
-package com.heqi.kharazim.action;
-
-import android.content.Context;
-
-import com.heqi.kharazim.explore.activity.ConsumeActivity;
+package com.heqi.kharazim.explore.action;
 
 /**
  * Created by overspark on 2016/12/21.

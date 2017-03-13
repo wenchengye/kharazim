@@ -1,10 +1,12 @@
 package com.heqi.kharazim.config;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompatBase;
 import android.text.TextUtils;
 
 import com.heqi.base.utils.HttpUtil;
+import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.ActionQueryResult;
 import com.heqi.kharazim.explore.model.AcupointDetailInfo;
@@ -54,7 +56,7 @@ public class Const {
     return ret;
   }
 
-  public static void redirectKharazimModel(ActionDetailInfo actionDetailInfo) {
+  public static void redirectKharazimModel(@NonNull ActionDetailInfo actionDetailInfo) {
     actionDetailInfo.setActimg(getKharazimResource(actionDetailInfo.getActimg()));
     actionDetailInfo.setActvediofile(getKharazimResource(actionDetailInfo.getActvediofile()));
 
@@ -66,23 +68,23 @@ public class Const {
     }
   }
 
-  public static void redirectKharazimModel(ActionDetailInfo.ActionSoundInfo actionSoundInfo) {
+  public static void redirectKharazimModel(@NonNull ActionDetailInfo.ActionSoundInfo actionSoundInfo) {
     actionSoundInfo.setSoundfile(getKharazimResource(actionSoundInfo.getSoundfile()));
   }
 
-  public static void redirectKharazimModel(ActionQueryResult actionQueryResult) {
+  public static void redirectKharazimModel(@NonNull ActionQueryResult actionQueryResult) {
     redirectKharazimModel(actionQueryResult.getData_info());
   }
 
-  public static void redirectKharazimModel(AcupointDetailInfo acupointDetailInfo) {
+  public static void redirectKharazimModel(@NonNull AcupointDetailInfo acupointDetailInfo) {
     acupointDetailInfo.setPositionimg(getKharazimResource(acupointDetailInfo.getPositionimg()));
   }
 
-  public static void redirectKharazimModel(AcupointQueryResult acupointQueryResult) {
+  public static void redirectKharazimModel(@NonNull AcupointQueryResult acupointQueryResult) {
     redirectKharazimModel(acupointQueryResult.getData_info());
   }
 
-  public static void redirectKharazimModel(CourseDetailInfo courseDetailInfo) {
+  public static void redirectKharazimModel(@NonNull CourseDetailInfo courseDetailInfo) {
     courseDetailInfo.setCourseimg(getKharazimResource(courseDetailInfo.getCourseimg()));
 
     if (courseDetailInfo.getActlist() != null) {
@@ -98,15 +100,15 @@ public class Const {
     }
   }
 
-  public static void redirectKharazimModel(CourseDetailInfo.CourseMusicInfo musicInfo) {
+  public static void redirectKharazimModel(@NonNull CourseDetailInfo.CourseMusicInfo musicInfo) {
     musicInfo.setMusicfile(getKharazimResource(musicInfo.getMusicfile()));
   }
 
-  public static void redirectKharazimModel(CourseQueryResult courseQueryResult) {
+  public static void redirectKharazimModel(@NonNull CourseQueryResult courseQueryResult) {
     redirectKharazimModel(courseQueryResult.getData_info());
   }
 
-  public static void redirectKharazimModel(PlanDetailInfo planDetailInfo) {
+  public static void redirectKharazimModel(@NonNull PlanDetailInfo planDetailInfo) {
     if (planDetailInfo.getData_info() != null) {
       for (PlanDetailInfo.PlanCourseInfo courseInfo : planDetailInfo.getData_info()) {
         redirectKharazimModel(courseInfo);
@@ -114,7 +116,7 @@ public class Const {
     }
   }
 
-  public static void redirectKharazimModel(PlanDetailInfo.PlanCourseInfo planCourseInfo) {
+  public static void redirectKharazimModel(@NonNull PlanDetailInfo.PlanCourseInfo planCourseInfo) {
     if (planCourseInfo.getPlanDailyActDtoList() != null) {
       for (PlanDetailInfo.PlanActionInfo actionInfo : planCourseInfo.getPlanDailyActDtoList()) {
         redirectKharazimModel(actionInfo);
@@ -122,19 +124,23 @@ public class Const {
     }
   }
 
-  public static void redirectKharazimModel(PlanDetailInfo.PlanActionInfo planActionInfo) {
+  public static void redirectKharazimModel(@NonNull PlanDetailInfo.PlanActionInfo planActionInfo) {
     planActionInfo.setActimg(getKharazimResource(planActionInfo.getActimg()));
     planActionInfo.setActvediofile(getKharazimResource(planActionInfo.getActvediofile()));
   }
 
-  public static void redirectKharazimModel(PlanListInfo planListInfo) {
+  public static void redirectKharazimModel(@NonNull PlanListInfo planListInfo) {
     for (PlanLiteInfo planLiteInfo : planListInfo.getPage_data()) {
       redirectKharazimModel(planLiteInfo);
     }
   }
 
-  public static void redirectKharazimModel(PlanLiteInfo planLiteInfo) {
+  public static void redirectKharazimModel(@NonNull PlanLiteInfo planLiteInfo) {
     planLiteInfo.setPlanimg(getKharazimResource(planLiteInfo.getPlanimg()));
+  }
+
+  public static void redirectKharazimModel(@NonNull UserProfile userProfile) {
+    userProfile.setHeadimg(getKharazimResource(userProfile.getHeadimg()));
   }
 
 

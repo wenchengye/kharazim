@@ -2,6 +2,9 @@ package com.heqi.base.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 
 /**
  * Created by overspark on 2017/3/11.
@@ -83,6 +86,26 @@ public class HttpUtil {
     }
 
     return buffer.toString();
+  }
+
+  public static String MD5(String key) {
+    MessageDigest md5 = null;
+    try {
+      md5 = MessageDigest.getInstance("MD5");
+    } catch (NoSuchAlgorithmException e) {
+      throw new IllegalStateException(e);
+    }
+    return convertToHex(md5.digest(key.getBytes()));
+  }
+
+  private static String convertToHex(byte[] byteData) {
+    Formatter formatter = new Formatter();
+    for (byte b : byteData) {
+      formatter.format("%02x", b);
+    }
+    String ret = formatter.out().toString();
+    formatter.close();
+    return ret;
   }
 
   private HttpUtil() {}
