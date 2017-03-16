@@ -39,6 +39,10 @@ public class Const {
   }
 
   // http
+  public static final boolean isRetCodeOK(int retCode) {
+    return retCode == 0;
+  }
+
   //public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
   public static final String KHARAZIM_SERVER = "https://manager.heal361.com/";
 

@@ -10,6 +10,8 @@ import com.android.volley.toolbox.ByteArrayPool;
 import com.heqi.base.utils.SystemUtil;
 import com.heqi.image.ImageManager;
 import com.heqi.image.view.AsyncImageView;
+import com.heqi.kharazim.archives.Archives;
+import com.heqi.kharazim.archives.ArchivesImpl;
 
 import java.io.File;
 
@@ -31,6 +33,7 @@ public class KharazimApplication extends Application {
   private static Context appContext;
   private static ByteArrayPool byteArrayPool;
   private static ImageManager imageManager;
+  private static Archives archives;
 
   public static Context getAppContext() {
     return appContext;
@@ -38,6 +41,10 @@ public class KharazimApplication extends Application {
 
   private static void setAppContext(Context context) {
     appContext = context;
+  }
+
+  public static Archives getArchives() {
+    return archives;
   }
 
   @Override
@@ -60,13 +67,14 @@ public class KharazimApplication extends Application {
 
     initByteArrayPool();
     initImageView();
+    initArchives();
   }
 
   private static void initByteArrayPool() {
     byteArrayPool = new ByteArrayPool(BYTE_ARRAY_MAX_SIZE);
   }
 
-  private void initImageView() {
+  private static void initImageView() {
     AsyncImageView.setImageManagerHolder(new AsyncImageView.ImageManagerHolder() {
       @Override
       public ImageManager getImageManager() {
@@ -129,6 +137,10 @@ public class KharazimApplication extends Application {
       imageManager = new ImageManager(appContext, config, byteArrayPool);
     }
     return imageManager;
+  }
+
+  private static void initArchives() {
+    archives = new ArchivesImpl(appContext);
   }
 
 }

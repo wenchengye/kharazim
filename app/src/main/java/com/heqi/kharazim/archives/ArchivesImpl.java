@@ -98,7 +98,7 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<ReloginResult>() {
       @Override
       public void onResponse(ReloginResult response) {
-        if (response.getRet_code() == 0) {
+        if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())) {
 
           handleLogin(userId, response.getAccesstoken());
 
@@ -171,7 +171,7 @@ public class ArchivesImpl implements Archives {
     final Response.Listener<LoginResult> successListener = new Response.Listener<LoginResult>() {
       @Override
       public void onResponse(final LoginResult response) {
-        if (response.getRet_code() == 0) {
+        if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())) {
 
           handleLogin(response.getRelogintoken(), response.getAccesstoken());
 
@@ -253,7 +253,8 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<UserProfileResult>() {
           @Override
           public void onResponse(final UserProfileResult response) {
-            if (response.getRet_code() == 0 && userIdRef != null
+            if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())
+                && userIdRef != null
                 && userIdRef.equals(currentUserId)) {
               currentUserBundle.putSerializable(ArchivesImpl.Const.BUNDLE_KEY_USER_PROFILE_OBJECT,
                   response.getData_src());
@@ -305,7 +306,8 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<HealthConditionResult>() {
           @Override
           public void onResponse(final HealthConditionResult response) {
-            if (response.getRet_code() == 0 && userIdRef != null
+            if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())
+                && userIdRef != null
                 && userIdRef.equals(currentUserId)) {
               currentUserBundle.putSerializable(
                   ArchivesImpl.Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT,
