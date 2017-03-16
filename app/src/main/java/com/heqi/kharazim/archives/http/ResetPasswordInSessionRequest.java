@@ -1,5 +1,7 @@
 package com.heqi.kharazim.archives.http;
 
+import android.widget.LinearLayout;
+
 import com.android.volley.Response;
 import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;

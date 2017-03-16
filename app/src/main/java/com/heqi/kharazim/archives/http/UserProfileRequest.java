@@ -13,7 +13,7 @@ public class UserProfileRequest extends AbstractKharazimArchivesHttpRequest<User
 
   private static final String USER_PROFILE_DIRECTORY = "usr/info";
 
-  public UserProfileRequest(Response.Listener listener,
+  public UserProfileRequest(Response.Listener<UserProfileResult> listener,
                             Response.ErrorListener errorListener,
                             String accessToken) {
     super(UserProfileResult.class, listener, errorListener, accessToken);

@@ -1,10 +1,15 @@
 package com.heqi.kharazim.archives.model;
 
+import java.io.Serializable;
+
 /**
  * Created by overspark on 2017/3/13.
  */
 
-public class UserProfile {
+public class UserProfile implements Serializable {
+
+  private static final long serialVersionUID = 3434760418974483654L;
+
   private String id;
   private int userclass;
   private String loginname;

@@ -1,10 +1,15 @@
 package com.heqi.kharazim.archives.model;
 
+import java.io.Serializable;
+
 /**
  * Created by overspark on 2017/3/13.
  */
 
-public class HealthCondition {
+public class HealthCondition implements Serializable {
+
+  private static final long serialVersionUID = 8441412737045554290L;
+
   private int stature;
   private int weight;
   private int heartrate;
