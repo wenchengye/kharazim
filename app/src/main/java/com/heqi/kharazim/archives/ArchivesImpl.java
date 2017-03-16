@@ -234,6 +234,7 @@ public class ArchivesImpl implements Archives {
 
     String bundleKey = getUserBundleKey(this.currentUserId);
     this.currentUserBundle = this.archivesPreferences.getBundle(bundleKey, new Bundle());
+    this.currentUserBundle.putString(Const.BUNDLE_KEY_USER_ID_STRING, this.currentUserId);
 
     SharePrefSubmitor.submit(this.archivesPreferences.edit()
         .putBundle(bundleKey, this.currentUserBundle)
