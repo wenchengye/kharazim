@@ -2,7 +2,6 @@ package com.heqi.kharazim.archives.http;
 
 import android.text.TextUtils;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 

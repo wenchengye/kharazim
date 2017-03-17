@@ -20,4 +20,15 @@
     <string name="consumer_progress_upper_text">完成</string>
     <string name="consumer_progress_repeat_lower_text">次数</string>
     <string name="consumer_progress_duration_lower_text">时间</string>
+
+    <!-- archives -->
+    <string name="archives_in_login_progress_hint_text">正在登录中</string>
+    <string name="archives_login_failed_hint_text">登录失败</string>
+    <string name="archives_lack_id_hint_text">请输入用户名</string>t
+    <string name="archives_lack_password_hint_text">请输入密码</string>
+    <string name="archives_lack_nickname_hint_text">请输入昵称</string>
+    <string name="archives_lack_password_confirm_hint_text">请确认密码</string>
+    <string name="archives_register_password_confirm_failed_hint_text">两次输入的密码不一致</string>
+    <string name="archives_register_success_hint_text">注册成功</string>
+    <string name="archives_register_failed_hint_text">注册失败</string>
 </resources>

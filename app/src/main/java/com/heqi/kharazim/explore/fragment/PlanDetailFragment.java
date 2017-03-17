@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.activity.ConsumeActivity;
+import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
+import com.heqi.kharazim.explore.model.PlanDetailInfo;
+import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.explore.view.ExplorePlanDetailCourseListView;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.fragment.async.NetworkAsyncLoadFragment;
-import com.heqi.kharazim.explore.model.PlanDetailInfo;
-import com.heqi.kharazim.explore.model.PlanLiteInfo;
-import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
-import com.heqi.kharazim.config.Intents;
 
 import java.util.concurrent.ExecutionException;
 

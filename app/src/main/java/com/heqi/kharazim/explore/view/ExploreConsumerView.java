@@ -1,6 +1,5 @@
 package com.heqi.kharazim.explore.view;
 
-import com.heqi.kharazim.explore.consume.api.ConsumerWrapper;
 import com.heqi.kharazim.explore.consume.api.State;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 

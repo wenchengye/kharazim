@@ -1,12 +1,12 @@
 package com.heqi.kharazim;
 
+import android.content.Context;
+
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
-
-import android.content.Context;
 
 /**
  * Created by wenchengye on 16/8/28.

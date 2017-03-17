@@ -4,7 +4,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.heqi.base.utils.Base64;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
-import com.heqi.kharazim.config.Const;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class UploadHeadImageRequest extends
   protected Response<ArchivesCommonResult> parseNetworkResponse(NetworkResponse response) {
     Response<ArchivesCommonResult> ret = super.parseNetworkResponse(response);
     if (ret != null && ret.result != null && ret.result.getRet_msg() != null) {
-      ret.result.setRet_msg(Const.getKharazimResource(ret.result.getRet_msg()));
+      ret.result.setRet_msg(KharazimUtils.getKharazimResource(ret.result.getRet_msg()));
     }
     return ret;
   }

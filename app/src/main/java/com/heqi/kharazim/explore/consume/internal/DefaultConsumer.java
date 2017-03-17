@@ -3,7 +3,6 @@ package com.heqi.kharazim.explore.consume.internal;
 import android.net.Uri;
 import android.os.Looper;
 
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.api.Consumer;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;

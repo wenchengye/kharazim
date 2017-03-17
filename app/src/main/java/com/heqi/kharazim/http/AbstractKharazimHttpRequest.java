@@ -1,9 +1,7 @@
 package com.heqi.kharazim.http;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.heqi.kharazim.config.Const;
-import com.heqi.rpc.GsonFactory;
 import com.heqi.rpc.GsonVolleyRequest;
 
 /**

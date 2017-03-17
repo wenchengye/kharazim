@@ -10,7 +10,6 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;

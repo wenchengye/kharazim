@@ -1,5 +1,11 @@
 package com.heqi.fetcher;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.SparseArray;
+
+import com.heqi.base.concurrent.ThreadPool;
+
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -10,12 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.util.SparseArray;
-
-import com.heqi.base.concurrent.ThreadPool;
 
 /**
  * A helper class to make getting content from network more convenient.

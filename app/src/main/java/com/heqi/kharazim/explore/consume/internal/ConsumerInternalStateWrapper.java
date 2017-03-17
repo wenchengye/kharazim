@@ -2,10 +2,10 @@ package com.heqi.kharazim.explore.consume.internal;
 
 import android.net.Uri;
 
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalState;
 import com.heqi.kharazim.explore.consume.internal.api.InternalState;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 /**
  * Created by overspark on 2017/2/7.
@@ -59,7 +59,8 @@ public class ConsumerInternalStateWrapper implements ConsumerInternalState {
   @Override
   public void prepare() {
     if (state != InternalState.IDLE) return;
-    if (Const.validateSourceUri(source)) {
+
+    if (KharazimUtils.validateSourceUri(source)) {
       state = InternalState.Preparing;
       consumer.setSource(source);
       consumer.prepare();

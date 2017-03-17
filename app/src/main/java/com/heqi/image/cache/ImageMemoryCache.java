@@ -1,13 +1,13 @@
 package com.heqi.image.cache;
 
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
 import com.android.volley.toolbox.ImageLoader;
+
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Memory cache for displaying recent bitmap.

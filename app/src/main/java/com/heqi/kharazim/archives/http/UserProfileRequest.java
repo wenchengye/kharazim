@@ -3,7 +3,7 @@ package com.heqi.kharazim.archives.http;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.heqi.kharazim.archives.model.UserProfileResult;
-import com.heqi.kharazim.config.Const;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 /**
  * Created by overspark on 2017/3/13.
@@ -28,7 +28,7 @@ public class UserProfileRequest extends AbstractKharazimArchivesHttpRequest<User
   protected Response<UserProfileResult> parseNetworkResponse(NetworkResponse response) {
     Response<UserProfileResult> ret = super.parseNetworkResponse(response);
     if (ret != null && ret.result != null && ret.result.getData_src() != null) {
-      Const.redirectKharazimModel(ret.result.getData_src());
+      KharazimUtils.redirectKharazimModel(ret.result.getData_src());
     }
     return ret;
   }

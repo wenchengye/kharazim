@@ -4,9 +4,9 @@ import android.text.TextUtils;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.model.CourseQueryResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class CourseDetailWithDailyIdRequest extends AbstractKharazimHttpRequest<
   protected Response<CourseQueryResult> parseNetworkResponse(NetworkResponse response) {
     Response<CourseQueryResult> ret = super.parseNetworkResponse(response);
     if (ret != null && ret.result != null) {
-      Const.redirectKharazimModel(ret.result);
+      KharazimUtils.redirectKharazimModel(ret.result);
     }
     return ret;
   }

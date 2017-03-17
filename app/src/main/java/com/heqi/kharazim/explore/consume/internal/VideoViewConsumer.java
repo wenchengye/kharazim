@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.VideoView;
 
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 /**
  * Created by overspark on 2017/2/7.
@@ -93,7 +93,7 @@ public class VideoViewConsumer implements ConsumerInternal {
     uiHandler.post(new Runnable() {
       @Override
       public void run() {
-        if (Const.validateSourceUri(source)) {
+        if (KharazimUtils.validateSourceUri(source)) {
           videoView.setVideoURI(source);
         } else {
           if (callback != null) {

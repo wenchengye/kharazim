@@ -1,7 +1,6 @@
 package com.heqi.kharazim.explore.http.fetcher;
 
 import com.android.volley.toolbox.RequestFuture;
-import com.heqi.base.utils.CollectionUtils;
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.explore.http.request.PlanListRequest;

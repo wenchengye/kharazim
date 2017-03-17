@@ -1,8 +1,8 @@
 package com.heqi.base.utils;
 
-import java.io.UnsupportedEncodingException;
-
 import android.util.Base64OutputStream;
+
+import java.io.UnsupportedEncodingException;
 
 
 /**

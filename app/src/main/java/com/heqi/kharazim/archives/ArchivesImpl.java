@@ -1,9 +1,8 @@
 package com.heqi.kharazim.archives;
 
-import android.app.Notification;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,10 +19,8 @@ import com.heqi.kharazim.archives.model.ReloginResult;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.archives.model.UserProfileResult;
 import com.heqi.kharazim.config.Const;
+import com.heqi.kharazim.utils.KharazimUtils;
 import com.heqi.rpc.RpcHelper;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by overspark on 2017/3/13.
@@ -53,7 +50,6 @@ public class ArchivesImpl implements Archives {
   private final Preferences archivesPreferences;
   private int state;
   private int originState;
-  private final Set<ArchivesObserver> observers = new HashSet<ArchivesObserver>();
   private String lastUserId = null;
   private String currentUserId = null;
   private Bundle currentUserBundle = null;
@@ -73,24 +69,6 @@ public class ArchivesImpl implements Archives {
   }
 
   @Override
-  public void addObserver(ArchivesObserver observer) {
-    synchronized (this.observers) {
-      if (!observers.contains(observer)) {
-        observers.add(observer);
-      }
-    }
-  }
-
-  @Override
-  public void removeObserver(ArchivesObserver observer) {
-    synchronized (this.observers) {
-      if (observers.contains(observer)) {
-        observers.remove(observer);
-      }
-    }
-  }
-
-  @Override
   public boolean relogin(final String userId, final ArchivesTaskCallback callback) {
     if (!switchState2Logining()) return false;
 
@@ -98,16 +76,10 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<ReloginResult>() {
       @Override
       public void onResponse(ReloginResult response) {
-        if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())) {
+        if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
 
           handleLogin(userId, response.getAccesstoken());
 
-          notifyObservers(new NotifyRunnable() {
-            @Override
-            public void notify(ArchivesObserver observer) {
-              observer.onLogin(userId);
-            }
-          });
         } else {
           synchronized (ArchivesImpl.this) {
             ArchivesImpl.this.state = ArchivesImpl.this.originState;
@@ -141,46 +113,17 @@ public class ArchivesImpl implements Archives {
   }
 
   @Override
-  public boolean login(final String phoneNumber, final String zoneNumber, final String password,
+  public boolean login(@NonNull final String id, @NonNull final String password,
                        final ArchivesTaskCallback callback) {
-    return login(new LoginRequestBuilder() {
-      @Override
-      public void build(LoginRequest request) {
-        request.setPhoneNumber(phoneNumber);
-        request.setZoneNumber(zoneNumber);
-        request.setLoginPassword(password);
-      }
-    }, callback);
-  }
-
-  @Override
-  public boolean login(final String email, final String password,
-                       final ArchivesTaskCallback callback) {
-    return login(new LoginRequestBuilder() {
-      @Override
-      public void build(LoginRequest request) {
-        request.setEmail(email);
-        request.setLoginPassword(password);
-      }
-    }, callback);
-  }
-
-  private boolean login(LoginRequestBuilder requestBuilder, final ArchivesTaskCallback callback) {
     if (!switchState2Logining()) return false;
 
     final Response.Listener<LoginResult> successListener = new Response.Listener<LoginResult>() {
       @Override
       public void onResponse(final LoginResult response) {
-        if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())) {
+        if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
 
           handleLogin(response.getRelogintoken(), response.getAccesstoken());
 
-          notifyObservers(new NotifyRunnable() {
-            @Override
-            public void notify(ArchivesObserver observer) {
-              observer.onLogin(response.getRelogintoken());
-            }
-          });
         } else {
           synchronized (ArchivesImpl.this) {
             ArchivesImpl.this.state = ArchivesImpl.this.originState;
@@ -200,6 +143,7 @@ public class ArchivesImpl implements Archives {
           ArchivesImpl.this.state = ArchivesImpl.this.originState;
         }
 
+
         if (callback != null) {
           callback.onTaskFailed();
         }
@@ -207,9 +151,14 @@ public class ArchivesImpl implements Archives {
     };
 
     LoginRequest request = new LoginRequest(successListener, errorListener);
-    if (requestBuilder != null) {
-      requestBuilder.build(request);
+
+    if (id.contains(com.heqi.kharazim.config.Const.EMAIL_KEY_WORD)) {
+      request.setEmail(id);
+    } else {
+      request.setPhoneNumber(id);
     }
+    request.setLoginPassword(password);
+
     RpcHelper.getInstance(this.context).executeRequestAsync(request);
     return true;
   }
@@ -253,7 +202,7 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<UserProfileResult>() {
           @Override
           public void onResponse(final UserProfileResult response) {
-            if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())
                 && userIdRef != null
                 && userIdRef.equals(currentUserId)) {
               currentUserBundle.putSerializable(ArchivesImpl.Const.BUNDLE_KEY_USER_PROFILE_OBJECT,
@@ -263,13 +212,6 @@ public class ArchivesImpl implements Archives {
 
               SharePrefSubmitor.submit(archivesPreferences.edit()
                   .putBundle(bundleKey, currentUserBundle));
-
-              notifyObservers(new NotifyRunnable() {
-                @Override
-                public void notify(ArchivesObserver observer) {
-                  observer.onUserProfileUpdated(userIdRef, response.getData_src());
-                }
-              });
             }
 
             if (callback != null) {
@@ -306,7 +248,7 @@ public class ArchivesImpl implements Archives {
         new Response.Listener<HealthConditionResult>() {
           @Override
           public void onResponse(final HealthConditionResult response) {
-            if (com.heqi.kharazim.config.Const.isRetCodeOK(response.getRet_code())
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())
                 && userIdRef != null
                 && userIdRef.equals(currentUserId)) {
               currentUserBundle.putSerializable(
@@ -317,13 +259,6 @@ public class ArchivesImpl implements Archives {
 
               SharePrefSubmitor.submit(archivesPreferences.edit()
                   .putBundle(bundleKey, currentUserBundle));
-
-              notifyObservers(new NotifyRunnable() {
-                @Override
-                public void notify(ArchivesObserver observer) {
-                  observer.onHealthConditionUpdated(userIdRef, response.getData_src());
-                }
-              });
             }
 
             if (callback != null) {
@@ -394,24 +329,8 @@ public class ArchivesImpl implements Archives {
         : null;
   }
 
-  private void notifyObservers(NotifyRunnable runnable) {
-    if (runnable == null) return;
-
-    synchronized (this.observers) {
-      for (ArchivesObserver observer: observers) {
-        if (observer != null) {
-          runnable.notify(observer);
-        }
-      }
-    }
-  }
-
   private static String getUserBundleKey(String userId) {
     return Const.PREFERENCE_KEY_USER_ARCHIVE_BUNDLE_PREFIX + userId;
-  }
-
-  private interface NotifyRunnable {
-    void notify(ArchivesObserver observer);
   }
 
   private interface LoginRequestBuilder {

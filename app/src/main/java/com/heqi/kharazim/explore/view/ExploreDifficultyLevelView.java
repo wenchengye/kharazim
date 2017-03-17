@@ -2,13 +2,9 @@ package com.heqi.kharazim.explore.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.utils.ViewUtils;
 

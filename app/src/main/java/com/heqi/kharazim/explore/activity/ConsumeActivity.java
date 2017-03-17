@@ -209,7 +209,7 @@ public class ConsumeActivity extends FragmentActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.explore_consumer_ativity_portrait_layout);
+    setContentView(R.layout.explore_consumer_activity_portrait_layout);
 
     initViews();
     initConsumer();

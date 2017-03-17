@@ -1,9 +1,8 @@
 package com.heqi.kharazim.ui.fragment.async;
 
 import com.android.volley.Request;
-import com.android.volley.Response.Listener;
 import com.android.volley.Response.ErrorListener;
-
+import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.rpc.RpcHelper;

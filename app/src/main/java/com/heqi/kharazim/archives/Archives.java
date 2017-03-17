@@ -27,27 +27,12 @@ public interface Archives {
     void onTaskFailed();
   }
 
-  interface ArchivesObserver {
-
-    void onLogin(String userId);
-
-    void onUserProfileUpdated(String userId, UserProfile userProfile);
-
-    void onHealthConditionUpdated(String userId, HealthCondition healthCondition);
-  }
-
   int getState();
-
-  void addObserver(ArchivesObserver observer);
-
-  void removeObserver(ArchivesObserver observer);
 
   boolean relogin(String userId, ArchivesTaskCallback callback);
 
-  boolean login(String phoneNumber, String zoneNumber, String password,
+  boolean login(String id, String password,
                 ArchivesTaskCallback callback);
-
-  boolean login(String email, String password, ArchivesTaskCallback callback);
 
   boolean updateCurrentUserProfile(ArchivesTaskCallback callback);
 

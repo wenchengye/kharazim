@@ -4,7 +4,7 @@ package com.heqi.kharazim.archives.model;
  * Created by overspark on 2017/3/13.
  */
 
-public class RegiterResult {
+public class RegisterResult {
   private String ret_msg;
   private int ret_code;
 

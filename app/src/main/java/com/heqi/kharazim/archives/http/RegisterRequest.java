@@ -2,7 +2,7 @@ package com.heqi.kharazim.archives.http;
 
 import com.android.volley.Response;
 import com.heqi.base.utils.HttpUtil;
-import com.heqi.kharazim.archives.model.RegiterResult;
+import com.heqi.kharazim.archives.model.RegisterResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by overspark on 2017/3/13.
  */
 
-public class RegisterRequest extends AbstractKharazimHttpRequest<RegiterResult> {
+public class RegisterRequest extends AbstractKharazimHttpRequest<RegisterResult> {
 
   private static final String REGISTER_DIRECTORY = "usr/register";
   private static final String GET_PARAMS_KEY_NICKNAME = "nickname";
@@ -26,9 +26,9 @@ public class RegisterRequest extends AbstractKharazimHttpRequest<RegiterResult> 
   private String email;
   private String password;
 
-  public RegisterRequest(Response.Listener<RegiterResult> listener,
+  public RegisterRequest(Response.Listener<RegisterResult> listener,
                          Response.ErrorListener errorListener) {
-    super(RegiterResult.class, listener, errorListener);
+    super(RegisterResult.class, listener, errorListener);
   }
 
   @Override

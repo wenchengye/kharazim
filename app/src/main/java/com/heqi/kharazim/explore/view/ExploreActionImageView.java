@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.config.Const;
-import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.utils.ViewUtils;
 

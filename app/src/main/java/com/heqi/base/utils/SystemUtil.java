@@ -1,14 +1,5 @@
 package com.heqi.base.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Locale;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -27,6 +18,15 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Locale;
 
 /**
  * Created by wenchengye on 16/8/28.

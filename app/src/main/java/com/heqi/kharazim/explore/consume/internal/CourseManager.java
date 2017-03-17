@@ -2,7 +2,6 @@ package com.heqi.kharazim.explore.consume.internal;
 
 import android.net.Uri;
 
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.consume.internal.api.Timeline;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;

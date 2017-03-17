@@ -7,8 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.DynamicDrawableSpan;
@@ -18,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.widget.AbsListView;
-
 
 import com.heqi.base.utils.SystemUtil;
 import com.heqi.image.view.AsyncImageView;

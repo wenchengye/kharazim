@@ -1,7 +1,6 @@
 package com.heqi.kharazim.archives.http;
 
 import com.android.volley.Response;
-import com.heqi.kharazim.archives.model.HealthCondition;
 import com.heqi.kharazim.archives.model.HealthConditionResult;
 
 /**
