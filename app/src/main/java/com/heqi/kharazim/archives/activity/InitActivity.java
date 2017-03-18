@@ -4,34 +4,31 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.activity.NavigationManager;
+import com.heqi.kharazim.activity.PendingNavigateActivity;
 import com.heqi.kharazim.archives.Archives;
-import com.heqi.kharazim.explore.activity.ExploreActivity;
 import com.heqi.kharazim.utils.KharazimUtils;
 
 /**
  * Created by overspark on 2017/3/16.
  */
 
-public class InitActivity extends FragmentActivity {
+public class InitActivity extends PendingNavigateActivity {
 
   private static final long MIN_STAY_DURATION = 2000L;
   private static Handler uiHandler = new Handler(Looper.getMainLooper());
 
-  private Runnable pendingRunnable;
-  private boolean paused = false;
+  //TODO: create listener as Activity's inner class is bad idea,
+  //activity maybe not be freed for long time
 
   private Runnable goExploreRunnable = new Runnable() {
     @Override
     public void run() {
-      //TODO: create listener as Activity's inner class is bad idea,
-      //activity maybe not be freed for long time
-      pendingRunnable = null;
-      ExploreActivity.launchActivity(KharazimApplication.getAppContext());
+      NavigationManager.navigateToExplore(KharazimApplication.getAppContext());
       finish();
     }
   };
@@ -39,20 +36,21 @@ public class InitActivity extends FragmentActivity {
   private Runnable goLoginRunnable = new Runnable() {
     @Override
     public void run() {
-      pendingRunnable = null;
+      NavigationManager.navigateToLogin(KharazimApplication.getAppContext());
+      finish();
     }
   };
 
   private Archives.ArchivesTaskCallback loginCallback = new Archives.ArchivesTaskCallback() {
     @Override
     public void onTaskSuccess(int code, String msg) {
-      if (KharazimUtils.isRetCodeOK(code)) stayAndRun(goExploreRunnable);
-      else stayAndRun(goLoginRunnable);
+      if (KharazimUtils.isRetCodeOK(code)) stayAndNavigate(goExploreRunnable);
+      else stayAndNavigate(goLoginRunnable);
     }
 
     @Override
     public void onTaskFailed() {
-      stayAndRun(goLoginRunnable);
+      stayAndNavigate(goLoginRunnable);
     }
   };
 
@@ -64,47 +62,25 @@ public class InitActivity extends FragmentActivity {
     init();
   }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
-    this.paused = true;
-
-    if (this.pendingRunnable != null) {
-      uiHandler.removeCallbacks(this.pendingRunnable);
-    }
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    this.paused = false;
-
-    if (this.pendingRunnable != null) {
-      stayAndRun(this.pendingRunnable);
-    }
-  }
-
   private void init() {
-    this.pendingRunnable = null;
     Archives archives = KharazimApplication.getArchives();
 
     if (archives.getState() == Archives.State.ONLINE) {
-      stayAndRun(goExploreRunnable);
+      stayAndNavigate(goExploreRunnable);
     } else if (TextUtils.isEmpty(archives.getLastUserId())) {
-      stayAndRun(goLoginRunnable);
+      stayAndNavigate(goLoginRunnable);
     } else if (!archives.relogin(archives.getLastUserId(), loginCallback)) {
-      stayAndRun(goLoginRunnable);
+      stayAndNavigate(goLoginRunnable);
     }
   }
 
-  private void stayAndRun(Runnable runnable) {
-    if (this.pendingRunnable != null) {
-      uiHandler.removeCallbacks(this.pendingRunnable);
-    }
-    this.pendingRunnable = runnable;
-    if (!this.paused) {
-      uiHandler.postDelayed(runnable, MIN_STAY_DURATION);
-    }
+  private void stayAndNavigate(final Runnable runnable) {
+    uiHandler.postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        navigate(runnable);
+      }
+    }, MIN_STAY_DURATION);
   }
 
 }

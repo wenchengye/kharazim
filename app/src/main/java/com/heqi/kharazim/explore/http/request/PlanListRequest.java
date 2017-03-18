@@ -17,9 +17,11 @@ public class PlanListRequest extends AbstractKharazimHttpRequest<PlanListInfo> {
   private static final String PLAN_LIST_DIRECTORY = "plan/list";
   private static final String GET_PARAMS_KEY_PAGE_NUMBER = "pageNo";
   private static final String GET_PARAMS_KEY_PAGE_SIZE = "pageSize";
+  private static final String GET_PARAMS_KEY_ACCESS_TOKEN = "accesstoken";
 
   private Integer pageNumber;
   private Integer pageSize;
+  private String accessToken;
 
   public PlanListRequest(Response.Listener<PlanListInfo> listener,
                          Response.ErrorListener errorListener) {
@@ -42,6 +44,14 @@ public class PlanListRequest extends AbstractKharazimHttpRequest<PlanListInfo> {
     this.pageSize = pageSize;
   }
 
+  public String getAccessToken() {
+    return accessToken;
+  }
+
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
+  }
+
   @Override
   protected String getBaseUrlDirectory() {
     return PLAN_LIST_DIRECTORY;
@@ -57,6 +67,10 @@ public class PlanListRequest extends AbstractKharazimHttpRequest<PlanListInfo> {
 
     if (pageSize != null) {
       params.put(GET_PARAMS_KEY_PAGE_SIZE, String.valueOf(pageSize));
+    }
+
+    if (accessToken != null) {
+      params.put(GET_PARAMS_KEY_ACCESS_TOKEN, accessToken);
     }
   }
 

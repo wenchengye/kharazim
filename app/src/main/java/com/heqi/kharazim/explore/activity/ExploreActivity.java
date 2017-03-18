@@ -1,7 +1,5 @@
 package com.heqi.kharazim.explore.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -19,9 +17,5 @@ public class ExploreActivity extends FragmentActivity {
     getSupportFragmentManager().beginTransaction()
         .replace(R.id.fragments_container, planListFragment)
         .commit();
-  }
-
-  public static void launchActivity(Context context) {
-    context.startActivity(new Intent(context, ExploreActivity.class));
   }
 }

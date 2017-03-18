@@ -39,9 +39,12 @@ public class PlanDetailInfo implements Serializable {
 
   public static class PlanCourseInfo implements Serializable {
 
+    private static final long serialVersionUID = -5250420789650253984L;
+
     private String id;
     private String title;
     private String cpdatetime;
+    private String dailydec;
     private List<PlanActionInfo> planDailyActDtoList;
 
     public String getId() {
@@ -68,6 +71,14 @@ public class PlanDetailInfo implements Serializable {
       this.cpdatetime = cpdatetime;
     }
 
+    public String getDailydec() {
+      return dailydec;
+    }
+
+    public void setDailydec(String dailydec) {
+      this.dailydec = dailydec;
+    }
+
     public List<PlanActionInfo> getPlanDailyActDtoList() {
       return planDailyActDtoList;
     }
@@ -78,6 +89,8 @@ public class PlanDetailInfo implements Serializable {
   }
 
   public static class PlanActionInfo implements Serializable {
+
+    private static final long serialVersionUID = 2967595006698418363L;
 
     private int num;
     private String actid;

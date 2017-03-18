@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.Archives;
-import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
 import com.heqi.kharazim.utils.KharazimUtils;
 
@@ -129,12 +128,7 @@ public class LoginFragment extends AsyncLoadFragment {
       }
     };
 
-    boolean ret;
-    if (userId.contains(Const.EMAIL_KEY_WORD)) {
-      ret = KharazimApplication.getArchives().login(userId, password, loginListener);
-    } else {
-      ret = KharazimApplication.getArchives().login(userId, null, password, loginListener);
-    }
+    boolean ret = KharazimApplication.getArchives().login(userId, password, loginListener);
 
     if (!ret) {
       KharazimUtils.showToast(KharazimApplication.getAppContext().getString(

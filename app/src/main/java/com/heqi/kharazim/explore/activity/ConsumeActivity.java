@@ -1,6 +1,5 @@
 package com.heqi.kharazim.explore.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -329,14 +328,5 @@ public class ConsumeActivity extends FragmentActivity {
     }
     this.consumerFactory = null;
     finish();
-  }
-
-  public static void launchActivity(Context context, String dailyId) {
-    Intent intent = new Intent(context, ConsumeActivity.class);
-    intent.setAction(Intents.ACTION_CONSUMER_PLAY);
-    intent.putExtra(Intents.EXTRA_COURSE_DETAIL_TYPE,
-        Intents.EXTRA_VALUE_COURSE_DETAIL_TYPE_DAILY_ID);
-    intent.putExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID, dailyId);
-    context.startActivity(intent);
   }
 }

@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class PlanLiteInfo implements Serializable {
 
+  private static final long serialVersionUID = 1347763957635128890L;
+
   private String id;
   private String planname;
   private String plandec;
@@ -23,6 +25,9 @@ public class PlanLiteInfo implements Serializable {
   private int planlev;
   private String senddatetime;
   private String version;
+  private boolean myplan;
+  private String userplanid;
+  private int mycpdays;
 
   public String getId() {
     return id;
@@ -142,5 +147,29 @@ public class PlanLiteInfo implements Serializable {
 
   public void setVersion(String version) {
     this.version = version;
+  }
+
+  public boolean isMyplan() {
+    return myplan;
+  }
+
+  public void setMyplan(boolean myplan) {
+    this.myplan = myplan;
+  }
+
+  public String getUserplanid() {
+    return userplanid;
+  }
+
+  public void setUserplanid(String userplanid) {
+    this.userplanid = userplanid;
+  }
+
+  public int getMycpdays() {
+    return mycpdays;
+  }
+
+  public void setMycpdays(int mycpdays) {
+    this.mycpdays = mycpdays;
   }
 }

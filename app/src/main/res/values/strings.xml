@@ -13,7 +13,9 @@
     <string name="course_content_size_text_format">%1$s个穴位 ／ 完成%2$s分钟</string>
     <string name="course_finish_date_text_format">%1$s / %2$s / %3$s  %4$s</string>
     <string name="explore_detail_join_text">选择参加此计划</string>
+    <string name="explore_detail_consume_text">开启今日的健康之旅</string>
     <string name="explore_circle_progress_text_format">%1$s / %2$s</string>
+    <string name="explore_detail_current_course_text_format">今日计划 : %1$s</string>
 
     <!-- consumer -->
     <string name="consumer_interpretation_text">穴位与动作说明</string>

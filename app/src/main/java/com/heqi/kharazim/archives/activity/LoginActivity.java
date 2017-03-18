@@ -3,33 +3,34 @@ package com.heqi.kharazim.archives.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.activity.NavigationManager;
+import com.heqi.kharazim.activity.PendingNavigateActivity;
 import com.heqi.kharazim.archives.fragment.LoginFragment;
 import com.heqi.kharazim.archives.fragment.RegisterFragment;
-import com.heqi.kharazim.explore.activity.ExploreActivity;
 
 /**
  * Created by overspark on 2017/3/16.
  */
 
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends PendingNavigateActivity {
 
   private LoginFragment loginFragment = new LoginFragment();
   private RegisterFragment registerFragment = new RegisterFragment();
   private Fragment current;
-  private boolean pendingLoginFinished = false;
-  private boolean paused = false;
 
   private LoginFragment.LoginFragmentListener loginFragmentListener =
       new LoginFragment.LoginFragmentListener() {
     @Override
     public void onLoginFinished() {
-      if (paused) pendingLoginFinished = true;
-      else handleLoginFinished();
-
+      navigate(new Runnable() {
+        @Override
+        public void run() {
+          handleLoginFinished();
+        }
+      });
     }
 
     @Override
@@ -65,25 +66,9 @@ public class LoginActivity extends FragmentActivity {
     this.current = fragment;
   }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
-    this.paused = true;
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    this.paused = false;
-
-    if (this.pendingLoginFinished) {
-      handleLoginFinished();
-    }
-  }
 
   private void handleLoginFinished() {
-    this.pendingLoginFinished = false;
-
-    ExploreActivity.launchActivity(KharazimApplication.getAppContext());
+    NavigationManager.navigateToExplore(KharazimApplication.getAppContext());
+    finish();
   }
 }

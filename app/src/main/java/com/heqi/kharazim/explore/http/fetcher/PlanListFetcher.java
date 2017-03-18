@@ -19,6 +19,8 @@ public class PlanListFetcher extends BaseFetcher<PlanLiteInfo> {
 
   private static final String PLAN_LIST_CACHE_KEY = "plan_list";
 
+  private boolean usingToken = false;
+
   @Override
   protected List<PlanLiteInfo> fetchHttpData(int start, int size) throws ExecutionException {
 
@@ -27,6 +29,9 @@ public class PlanListFetcher extends BaseFetcher<PlanLiteInfo> {
 
     RequestFuture<PlanListInfo> future = RequestFuture.newFuture();
     PlanListRequest request = new PlanListRequest(future, future);
+    if (usingToken) {
+      request.setAccessToken(KharazimApplication.getArchives().getCurrentAccessToken());
+    }
     PlanListInfo planListInfo =
         RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequest(request, future);
 
@@ -35,6 +40,14 @@ public class PlanListFetcher extends BaseFetcher<PlanLiteInfo> {
 
   @Override
   protected String getCacheKey() {
-    return PLAN_LIST_CACHE_KEY;
+    return null;
+  }
+
+  public boolean isUsingToken() {
+    return usingToken;
+  }
+
+  public void setUsingToken(boolean usingToken) {
+    this.usingToken = usingToken;
   }
 }

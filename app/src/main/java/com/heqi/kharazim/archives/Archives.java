@@ -27,7 +27,24 @@ public interface Archives {
     void onTaskFailed();
   }
 
+  interface ArchivesObserver {
+
+    void onLogin(String userId);
+
+    void onUserProfileUpdated(String userId, UserProfile userProfile);
+
+    void onHealthConditionUpdated(String userId, HealthCondition healthCondition);
+
+    void onAddPlan(String userId, String planId);
+
+    void onRemovePlan(String userId, String planId);
+  }
+
   int getState();
+
+  void addObserver(ArchivesObserver observer);
+
+  void removeObserver(ArchivesObserver observer);
 
   boolean relogin(String userId, ArchivesTaskCallback callback);
 
@@ -42,6 +59,10 @@ public interface Archives {
 
   boolean uploadCurrentHealthCondition(HealthCondition healthCondition,
                                        ArchivesTaskCallback callback);
+
+  boolean addPlan(String planId, ArchivesTaskCallback callback);
+
+  boolean removePlan(String planId, ArchivesTaskCallback callback);
 
   void logout();
 
