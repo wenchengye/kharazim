@@ -11,7 +11,7 @@ import com.android.volley.Response;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.Archives;
-import com.heqi.kharazim.archives.http.PlanDetailInArchivesReqeust;
+import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesReqeust;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;

@@ -10,7 +10,7 @@ import android.widget.ListAdapter;
 import com.heqi.kharazim.ui.view.sticky.StickyListHeadersAdapter;
 
 /**
- * Created by liudiao on 13-7-12.
+ * Created by wenchengye on 13-7-12.
  */
 public class StickyHeaderViewAdapter extends HeaderViewAdapter
     implements StickyListHeadersAdapter {

@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.archives.http.RegisterRequest;
+import com.heqi.kharazim.archives.http.request.RegisterRequest;
 import com.heqi.kharazim.archives.model.RegisterResult;
 import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;

@@ -1,4 +1,4 @@
-package com.heqi.kharazim.archives.http;
+package com.heqi.kharazim.archives.http.request;
 
 import android.text.TextUtils;
 
