@@ -30,7 +30,7 @@ import java.io.InputStream;
 
 /**
  * Local image client to get local image on device.
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class LocalImageClient {
@@ -41,6 +41,21 @@ public class LocalImageClient {
   public LocalImageClient(Context context, ByteArrayPool byteArrayPool) {
     this.context = context;
     this.byteArrayPool = byteArrayPool;
+  }
+
+  /**
+   * Reads input stream to buffer and updates progress.
+   */
+  private static byte[] readInputStream(InputStream is, ByteArrayPool byteArrayPool,
+                                        int totalLength)
+      throws IOException, InterruptedException {
+    try {
+      return VolleyUtil.getByteArrayFromInputStream(byteArrayPool, is, totalLength, null, true);
+    } catch (ServerError e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+    }
   }
 
   /**
@@ -97,8 +112,8 @@ public class LocalImageClient {
   /**
    * Gets image identified by file path, locally.
    *
-   * @param filePath file path
-   * @param maxWidth the max-width of the loaded bitmap, 0 means no limit, should not be negative
+   * @param filePath  file path
+   * @param maxWidth  the max-width of the loaded bitmap, 0 means no limit, should not be negative
    * @param maxHeight The max-height of the loaded bitmap, 0 means no limit, should not be negative
    * @return bitmap
    */
@@ -135,7 +150,7 @@ public class LocalImageClient {
     String escapedPath = filePath.replace("'", "''");
     Cursor cursor = context.getContentResolver().query(
         MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-        new String[] {MediaStore.Video.Media._ID},
+        new String[]{MediaStore.Video.Media._ID},
         MediaStore.MediaColumns.DATA + "='" + escapedPath + "'", null,
         null);
     if (cursor != null && cursor.moveToFirst()) {
@@ -165,19 +180,5 @@ public class LocalImageClient {
       }
     }
     return thumbnail;
-  }
-
-  /**
-   * Reads input stream to buffer and updates progress.
-   */
-  private static byte[] readInputStream(InputStream is, ByteArrayPool byteArrayPool,
-                                        int totalLength)
-      throws IOException, InterruptedException {
-    try {
-      return VolleyUtil.getByteArrayFromInputStream(byteArrayPool, is, totalLength, null, true);
-    } catch (ServerError e) {
-      e.printStackTrace();
-      return null;
-    } finally {}
   }
 }

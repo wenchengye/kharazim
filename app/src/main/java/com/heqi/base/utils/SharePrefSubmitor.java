@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 /**
  * submit SharedPreferences async.
- *
+ * <p>
  * Created by wenchengye on 16/8/28.
  */
 public class SharePrefSubmitor {

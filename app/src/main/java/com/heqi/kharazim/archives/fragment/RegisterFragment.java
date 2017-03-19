@@ -23,16 +23,11 @@ import com.heqi.rpc.RpcHelper;
 
 public class RegisterFragment extends AsyncLoadFragment {
 
-  public interface RegisterFragmentListener {
-    void onRegisterFinished();
-  }
-
   private EditText userIdEditText;
   private EditText nicknameEditText;
   private EditText passwordEditText;
   private EditText passwordConfirmEditText;
   private TextView registerBtn;
-
   private RegisterFragmentListener listener;
 
   public void setListener(RegisterFragmentListener listener) {
@@ -157,5 +152,9 @@ public class RegisterFragment extends AsyncLoadFragment {
   @Override
   protected void onStartLoading() {
     // is not used
+  }
+
+  public interface RegisterFragmentListener {
+    void onRegisterFinished();
   }
 }

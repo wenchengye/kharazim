@@ -34,10 +34,9 @@ import java.io.InputStream;
  * Created by wenchengye on 16/10/11.
  */
 public class ImageUtil {
-  public static class ImageSize {
-    public int width;
-    public int height;
-  }
+  private static final String TAG = "db.Util";
+  private static final String MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
+  private static final String MAPS_CLASS_NAME = "com.google.android.maps.MapsActivity";
 
   /**
    * Converts drawable to bitmap. if drawable is {@link BitmapDrawable}
@@ -45,10 +44,10 @@ public class ImageUtil {
    * if you want to avoid this, use
    * {@link #decodeBitmapFromDrawble(Drawable, Bitmap.Config...)}
    * instead
-   * 
+   *
    * @param drawable drawable
-   * @param config optional field, if provided, convert bitmap according to it; otherwise, using
-   *          Config.RGB_565 by default
+   * @param config   optional field, if provided, convert bitmap according to it; otherwise, using
+   *                 Config.RGB_565 by default
    * @return bitmap
    */
   public static Bitmap drawableToBitmap(Drawable drawable, Bitmap.Config... config) {
@@ -69,7 +68,7 @@ public class ImageUtil {
    * decode bitmap from drawable, <b>if drawble maybe a {@link BitmapDrawable} , and can get from
    * {@link BitmapDrawable#getBitmap()} , use
    * {@link #drawableToBitmap(Drawable, Bitmap.Config...)} instead</b>
-   * 
+   *
    * @param drawable
    * @param config
    * @return
@@ -139,10 +138,6 @@ public class ImageUtil {
     }
   }
 
-  private static final String TAG = "db.Util";
-  private static final String MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
-  private static final String MAPS_CLASS_NAME = "com.google.android.maps.MapsActivity";
-
   // Rotates the bitmap by the specified degree.
   // If a new bitmap is created, the original bitmap is recycled.
   public static Bitmap rotate(Bitmap b, int degrees) {
@@ -162,7 +157,7 @@ public class ImageUtil {
   }
 
   public static Bitmap transform(Matrix scaler, Bitmap source, int targetWidth, int targetHeight,
-      boolean scaleUp) {
+                                 boolean scaleUp) {
     int deltaX = source.getWidth() - targetWidth;
     int deltaY = source.getHeight() - targetHeight;
     if (!scaleUp && (deltaX < 0 || deltaY < 0)) {
@@ -229,7 +224,7 @@ public class ImageUtil {
 
   /**
    * Creates a centered bitmap of the desired size. Recycles the input.
-   * 
+   *
    * @param source
    */
   public static Bitmap scaleUp(Bitmap source, int width, int height) {
@@ -255,7 +250,7 @@ public class ImageUtil {
 
   /**
    * Creates a centered bitmap of the desired size. Recycles the input.
-   * 
+   *
    * @param source
    */
   public static Bitmap scaleDown(Bitmap source, int width, int height) {
@@ -280,7 +275,7 @@ public class ImageUtil {
   }
 
   public static Bitmap createFromUri(Context context, Uri contentUri, int maxResolutionX,
-      int maxResolutionY) {
+                                     int maxResolutionY) {
     if (contentUri == null) {
       return null;
     }
@@ -316,7 +311,7 @@ public class ImageUtil {
   }
 
   private static int computeSampleSize(BitmapFactory.Options options, int minSideLength,
-      int maxNumOfPixels) {
+                                       int maxNumOfPixels) {
     int initialSize = computeInitialSampleSize(options, minSideLength, maxNumOfPixels);
     int roundedSize;
     if (initialSize <= 8) {
@@ -331,7 +326,7 @@ public class ImageUtil {
   }
 
   private static int computeInitialSampleSize(BitmapFactory.Options options, int minSideLength,
-      int maxNumOfPixels) {
+                                              int maxNumOfPixels) {
     double w = options.outWidth;
     double h = options.outHeight;
 
@@ -357,16 +352,16 @@ public class ImageUtil {
   /**
    * Generate bitmap.
    *
-   * @param context app context
-   * @param data byte array data
-   * @param maxWidth max width
+   * @param context   app context
+   * @param data      byte array data
+   * @param maxWidth  max width
    * @param maxHeight max height
-   * @param config optional field, if provided, convert bitmap according to it; otherwise, using
-   *          Config.RGB_565 by default
+   * @param config    optional field, if provided, convert bitmap according to it; otherwise, using
+   *                  Config.RGB_565 by default
    * @return bitmap
    */
   public static Bitmap decodeBitmap(Context context, byte[] data, final int maxWidth, final int maxHeight,
-      Bitmap.Config... config) {
+                                    Bitmap.Config... config) {
     if (data == null) {
       return null;
     }
@@ -402,16 +397,16 @@ public class ImageUtil {
   /**
    * Generate bitmap.
    *
-   * @param context app context
-   * @param filePath source image file path
-   * @param maxWidth max width
+   * @param context   app context
+   * @param filePath  source image file path
+   * @param maxWidth  max width
    * @param maxHeight max height
-   * @param config optional field, if provided, convert bitmap according to it; otherwise, using
-   *          Config.RGB_565 by default
+   * @param config    optional field, if provided, convert bitmap according to it; otherwise, using
+   *                  Config.RGB_565 by default
    * @return bitmap
    */
   public static Bitmap decodeBitmap(Context context, String filePath, final int maxWidth, final int maxHeight,
-      Bitmap.Config... config) {
+                                    Bitmap.Config... config) {
 
     BitmapFactory.Options decodeOptions = ImageUtil.getDefaultBitmapOptions(context);
     if (config != null && config.length > 0) {
@@ -444,17 +439,17 @@ public class ImageUtil {
 
   /**
    * Scales one side of a rectangle to fit aspect ratio.
-   * 
-   * @param maxPrimary Maximum size of the primary dimension (i.e. width for
-   *          max width), or zero to maintain aspect ratio with secondary
-   *          dimension
-   * @param maxSecondary Maximum size of the secondary dimension, or zero to
-   *          maintain aspect ratio with primary dimension
-   * @param actualPrimary Actual size of the primary dimension
+   *
+   * @param maxPrimary      Maximum size of the primary dimension (i.e. width for
+   *                        max width), or zero to maintain aspect ratio with secondary
+   *                        dimension
+   * @param maxSecondary    Maximum size of the secondary dimension, or zero to
+   *                        maintain aspect ratio with primary dimension
+   * @param actualPrimary   Actual size of the primary dimension
    * @param actualSecondary Actual size of the secondary dimension
    */
   private static int getResizedDimension(int maxPrimary, int maxSecondary, int actualPrimary,
-      int actualSecondary) {
+                                         int actualSecondary) {
     // If no dominant value at all, just return the actual.
     if (maxPrimary == 0 && maxSecondary == 0) {
       return actualPrimary;
@@ -481,10 +476,10 @@ public class ImageUtil {
   /**
    * Returns the largest power-of-two divisor for use in downscaling a bitmap
    * that will not result in the scaling past the desired dimensions.
-   * 
-   * @param actualWidth Actual width of the bitmap
-   * @param actualHeight Actual height of the bitmap
-   * @param desiredWidth Desired width of the bitmap
+   *
+   * @param actualWidth   Actual width of the bitmap
+   * @param actualHeight  Actual height of the bitmap
+   * @param desiredWidth  Desired width of the bitmap
    * @param desiredHeight Desired height of the bitmap
    */
   // Visible for testing.
@@ -641,7 +636,7 @@ public class ImageUtil {
    * is one of {@link Bitmap.Config#ARGB_4444} or
    * {@link Bitmap.Config#ARGB_8888} and OutOfMemoery is caught, we will change
    * config to {@link Bitmap.Config#RGB_565}
-   * 
+   *
    * @param width
    * @param height
    * @param config
@@ -657,5 +652,10 @@ public class ImageUtil {
       }
     }
     return output;
+  }
+
+  public static class ImageSize {
+    public int width;
+    public int height;
   }
 }

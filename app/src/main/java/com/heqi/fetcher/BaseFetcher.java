@@ -28,15 +28,33 @@ import java.util.concurrent.ExecutionException;
 public abstract class BaseFetcher<T> {
 
   private static final int DEFAULT_RETRY = 3;
-
-  private Handler handler;
   private final Set<String> runningSet;
   private final Set<Runnable> runnables;
+  private Handler handler;
 
   protected BaseFetcher() {
     runningSet = new HashSet<String>();
     runnables = new HashSet<Runnable>();
     handler = new Handler(Looper.getMainLooper());
+  }
+
+  // generate an id which can represent the request
+  private static String genRequestId(int start, int size, Object obj) {
+    return start + "." + size + "." + String.valueOf(obj);
+  }
+
+  private static void clearCache(String cacheKey, Class<? extends BaseFetcher> fetchClass) {
+    String cacheId = getCacheId(cacheKey, fetchClass);
+    if (cacheId != null) {
+      Cache<?> cache = CacheManager.getCache(cacheId);
+      if (cache != null) {
+        cache.clear();
+      }
+    }
+  }
+
+  private static String getCacheId(String cacheKey, Class<? extends BaseFetcher> clazz) {
+    return cacheKey == null ? null : clazz.getName() + '*' + cacheKey;
   }
 
   public synchronized void fetch(final int start, final int size, final Callback<T> callback) {
@@ -156,11 +174,6 @@ public abstract class BaseFetcher<T> {
     }
   }
 
-  // generate an id which can represent the request
-  private static String genRequestId(int start, int size, Object obj) {
-    return start + "." + size + "." + String.valueOf(obj);
-  }
-
   /**
    * Synchronize to keep "first in, first out".
    */
@@ -181,18 +194,18 @@ public abstract class BaseFetcher<T> {
    * Fetches data from network.
    *
    * @param start the request start index
-   * @param size if size < 0 means fetch all
+   * @param size  if size < 0 means fetch all
    * @return return result list, can be null
    */
   protected abstract List<T> fetchHttpData(int start, int size) throws ExecutionException;
 
   /**
    * Fetches data from cache.
-   *
+   * <p>
    * <p>Sub-class can override it to implement its own logic</p>
    *
    * @param start the request start index
-   * @param size if size < 0 means fetch all
+   * @param size  if size < 0 means fetch all
    * @return return result list, can be null
    */
   protected ResultList<T> fetchCacheData(int start, int size) {
@@ -238,26 +251,12 @@ public abstract class BaseFetcher<T> {
     clearCache(getCacheKey(), getClass());
   }
 
-  private static void clearCache(String cacheKey, Class<? extends BaseFetcher> fetchClass) {
-    String cacheId = getCacheId(cacheKey, fetchClass);
-    if (cacheId != null) {
-      Cache<?> cache = CacheManager.getCache(cacheId);
-      if (cache != null) {
-        cache.clear();
-      }
-    }
-  }
-
-  private static String getCacheId(String cacheKey, Class<? extends BaseFetcher> clazz) {
-    return cacheKey == null ? null : clazz.getName() + '*' + cacheKey;
-  }
-
   /**
    * <p>
    * if you don't want to share one cache between difference instances, you can override this method
    * to create difference cache. the same key wills shares same cache.
    * </p>
-   *
+   * <p>
    * <p>
    * examples:
    * </p>
@@ -326,8 +325,8 @@ public abstract class BaseFetcher<T> {
     /**
      * Gets called when result is fetched.
      *
-     * @param start start
-     * @param size request size
+     * @param start  start
+     * @param size   request size
      * @param result result list, at lease an empty list, never null
      */
     void onFetched(int start, int size, ResultList<T> result);
@@ -339,7 +338,8 @@ public abstract class BaseFetcher<T> {
 
     private static Map<String, Cache> caches = new HashMap<String, Cache>();
 
-    private CacheManager() {}
+    private CacheManager() {
+    }
 
     private static synchronized <T> Cache<T> getCache(String cacheId) {
       Cache cache = caches.get(cacheId);

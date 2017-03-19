@@ -6,7 +6,8 @@ import android.text.TextUtils;
  * Created by wenchengye on 16/10/11.
  */
 public class TextUtil {
-  private TextUtil() {}
+  private TextUtil() {
+  }
 
   public static boolean isPackageName(String packageName) {
     if (TextUtils.isEmpty(packageName)) {

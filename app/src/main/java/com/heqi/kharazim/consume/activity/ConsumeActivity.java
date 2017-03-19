@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.activity;
+package com.heqi.kharazim.consume.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,17 +13,17 @@ import com.android.volley.Response;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.config.Intents;
-import com.heqi.kharazim.explore.consume.DefaultConsumerFactory;
-import com.heqi.kharazim.explore.consume.api.ConsumerObserver;
-import com.heqi.kharazim.explore.consume.api.ConsumerWrapper;
-import com.heqi.kharazim.explore.consume.api.Reason;
-import com.heqi.kharazim.explore.consume.api.State;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
+import com.heqi.kharazim.consume.DefaultConsumerFactory;
+import com.heqi.kharazim.consume.core.api.ConsumerFactory;
+import com.heqi.kharazim.consume.core.api.ConsumerObserver;
+import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
+import com.heqi.kharazim.consume.core.api.Reason;
+import com.heqi.kharazim.consume.core.api.State;
+import com.heqi.kharazim.consume.view.ConsumerView;
 import com.heqi.kharazim.explore.http.request.CourseDetailWithDailyIdRequest;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 import com.heqi.kharazim.explore.model.CourseQueryResult;
-import com.heqi.kharazim.explore.view.ExploreConsumerView;
 import com.heqi.rpc.RpcHelper;
 
 /**
@@ -37,7 +37,7 @@ public class ConsumeActivity extends FragmentActivity {
   private Handler uiHandler = new Handler(Looper.getMainLooper());
 
   private VideoView videoView;
-  private ExploreConsumerView consumerView;
+  private ConsumerView consumerView;
 
   private int requestCourseTag = 0;
 
@@ -169,8 +169,8 @@ public class ConsumeActivity extends FragmentActivity {
     }
   };
 
-  private ExploreConsumerView.ExploreConsumerViewListener consumerViewListener =
-      new ExploreConsumerView.ExploreConsumerViewListener() {
+  private ConsumerView.ExploreConsumerViewListener consumerViewListener =
+      new ConsumerView.ExploreConsumerViewListener() {
         @Override
         public void onPreviousPressed() {
           if (consumer != null) {
@@ -231,7 +231,7 @@ public class ConsumeActivity extends FragmentActivity {
 
   private void initViews() {
     videoView = (VideoView) findViewById(R.id.explore_consumer_video_view);
-    consumerView = (ExploreConsumerView) findViewById(R.id.explore_portrait_consumer_view);
+    consumerView = (ConsumerView) findViewById(R.id.explore_portrait_consumer_view);
     consumerView.setExploreConsumerViewListener(this.consumerViewListener);
   }
 
@@ -276,13 +276,13 @@ public class ConsumeActivity extends FragmentActivity {
     final int tagRef = ++requestCourseTag;
     Response.Listener<CourseQueryResult> resultListener =
         new Response.Listener<CourseQueryResult>() {
-      @Override
-      public void onResponse(CourseQueryResult response) {
-        if (!validateRequestTag(tagRef)) return;
+          @Override
+          public void onResponse(CourseQueryResult response) {
+            if (!validateRequestTag(tagRef)) return;
 
-        if (response != null) startCourse(response.getData_info());
-      }
-    };
+            if (response != null) startCourse(response.getData_info());
+          }
+        };
 
     CourseDetailWithDailyIdRequest request =
         new CourseDetailWithDailyIdRequest(resultListener, null);
@@ -311,7 +311,7 @@ public class ConsumeActivity extends FragmentActivity {
     }
   }
 
-  private ExploreConsumerView newConsumerView(int orientation) {
+  private ConsumerView newConsumerView(int orientation) {
     return null;
   }
 

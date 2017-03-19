@@ -8,7 +8,8 @@ import com.heqi.kharazim.BuildConfig;
  * Created by wenchengye on 16/10/11.
  */
 public class AsyncImageViewUtil {
-  private AsyncImageViewUtil() {}
+  private AsyncImageViewUtil() {
+  }
 
   private static void loadImage(AsyncImageView imageView, String uri, int defaultImageResId) {
     if (TextUtil.isNetUrl(uri)) {
@@ -37,10 +38,10 @@ public class AsyncImageViewUtil {
   /**
    * load images
    *
-   * @param imageView ImageView that need to load image
-   * @param imageUri key and key type to load image content,key can be http url, or image resource
-   *          id,or package name, or local video path,or local apk path. Each type of url
-   *          corresponds to a ImageUrlType.
+   * @param imageView         ImageView that need to load image
+   * @param imageUri          key and key type to load image content,key can be http url, or image resource
+   *                          id,or package name, or local video path,or local apk path. Each type of url
+   *                          corresponds to a ImageUrlType.
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public static void loadImage(AsyncImageView imageView, ImageUri imageUri, int defaultImageResId) {

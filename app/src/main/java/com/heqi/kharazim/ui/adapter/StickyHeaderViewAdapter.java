@@ -1,13 +1,13 @@
 package com.heqi.kharazim.ui.adapter;
 
-import java.util.List;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.heqi.kharazim.ui.view.sticky.StickyListHeadersAdapter;
+
+import java.util.List;
 
 /**
  * Created by wenchengye on 13-7-12.
@@ -16,7 +16,7 @@ public class StickyHeaderViewAdapter extends HeaderViewAdapter
     implements StickyListHeadersAdapter {
 
   public StickyHeaderViewAdapter(List<View> headerViews, List<View> footerViews,
-      ListAdapter adapter) {
+                                 ListAdapter adapter) {
     super(headerViews, footerViews, adapter);
     if (adapter != null && !(adapter instanceof StickyListHeadersAdapter)) {
       throw new IllegalArgumentException(

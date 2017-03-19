@@ -34,35 +34,16 @@ import java.util.List;
 
 public class ArchivesImpl implements Archives {
 
-  private static class Const {
-
-    public static final String ARCHIVES_PREFERENCE_NAME = "kharazim_archives";
-
-    public static final String PREFERENCE_KEY_USER_ARCHIVE_BUNDLE_PREFIX = "kharazim_user_archive_";
-
-    public static final String PREFERENCE_KEY_LAST_USER_ID_STRING = "kharazim_last_user_id";
-
-    public static final String BUNDLE_KEY_USER_ID_STRING = "kharazim_user_id";
-
-    public static final String BUNDLE_KEY_USER_PROFILE_OBJECT = "kharazim_user_profile";
-
-    public static final String BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT =
-        "kharazim_user_health_condition";
-
-    private Const() {}
-  }
-
   private final Context context;
   private final Preferences archivesPreferences;
+  private final List<WeakReference<ArchivesObserver>> observers =
+      new ArrayList<WeakReference<ArchivesObserver>>();
   private int state;
   private int originState;
   private String lastUserId = null;
   private String currentUserId = null;
   private Bundle currentUserBundle = null;
   private String accessToken = null;
-
-  private final List<WeakReference<ArchivesObserver>> observers =
-      new ArrayList<WeakReference<ArchivesObserver>>();
 
   public ArchivesImpl(Context context) {
     this.context = context;
@@ -72,9 +53,17 @@ public class ArchivesImpl implements Archives {
     this.lastUserId = archivesPreferences.getString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, null);
   }
 
+  private static String getUserBundleKey(String userId) {
+    return Const.PREFERENCE_KEY_USER_ARCHIVE_BUNDLE_PREFIX + userId;
+  }
+
   @Override
   public synchronized int getState() {
     return state;
+  }
+
+  private synchronized void setState(int state) {
+    this.state = state;
   }
 
   @Override
@@ -111,21 +100,21 @@ public class ArchivesImpl implements Archives {
 
     final Response.Listener<ReloginResult> successListener =
         new Response.Listener<ReloginResult>() {
-      @Override
-      public void onResponse(ReloginResult response) {
-        if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+          @Override
+          public void onResponse(ReloginResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
 
-          handleLogin(userId, response.getAccesstoken());
+              handleLogin(userId, response.getAccesstoken());
 
-        } else {
-          resetState2Origin();
-        }
+            } else {
+              resetState2Origin();
+            }
 
-        if (callback != null) {
-          callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
-        }
-      }
-    };
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
 
     final Response.ErrorListener errorListener = new Response.ErrorListener() {
       @Override
@@ -138,7 +127,7 @@ public class ArchivesImpl implements Archives {
       }
     };
 
-    ReloginRequest request =  new ReloginRequest(successListener, errorListener);
+    ReloginRequest request = new ReloginRequest(successListener, errorListener);
     request.setToken(userId);
     RpcHelper.getInstance(this.context).executeRequestAsync(request);
 
@@ -218,7 +207,7 @@ public class ArchivesImpl implements Archives {
 
   @Override
   public boolean updateCurrentUserProfile(final ArchivesTaskCallback callback) {
-     if (getState() != State.ONLINE) return false;
+    if (getState() != State.ONLINE) return false;
 
     final String userIdRef;
     final String accessTokenRef;
@@ -283,7 +272,7 @@ public class ArchivesImpl implements Archives {
 
   @Override
   public boolean updateCurrentHealthCondition(final ArchivesTaskCallback callback) {
-      if (getState() != State.ONLINE) return false;
+    if (getState() != State.ONLINE) return false;
 
     final String userIdRef;
     final String accessTokenRef;
@@ -369,32 +358,32 @@ public class ArchivesImpl implements Archives {
 
     final Response.Listener<ArchivesCommonResult> successListener =
         new Response.Listener<ArchivesCommonResult>() {
-      @Override
-      public void onResponse(final ArchivesCommonResult response) {
-        if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
-          boolean notify = false;
-          synchronized (ArchivesImpl.this) {
-            if (userIdRef != null
-                && userIdRef.equals(currentUserId)) {
-              notify = true;
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onAddPlan(userIdRef, planId);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
             }
           }
-
-          if (notify) {
-            notifyObservers(new NotifyRunnable() {
-              @Override
-              public void notify(ArchivesObserver observer) {
-                observer.onAddPlan(userIdRef, planId);
-              }
-            });
-          }
-        }
-
-        if (callback != null) {
-          callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
-        }
-      }
-    };
+        };
 
     final Response.ErrorListener errorListener = new Response.ErrorListener() {
       @Override
@@ -448,23 +437,19 @@ public class ArchivesImpl implements Archives {
   public HealthCondition getCurrentHealthCondition() {
     return this.state == State.ONLINE
         ? (HealthCondition) this.currentUserBundle.getSerializable(
-            Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT)
+        Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT)
         : null;
   }
 
   private void notifyObservers(NotifyRunnable runnable) {
     synchronized (this.observers) {
-      for (WeakReference<ArchivesObserver> observer: observers) {
+      for (WeakReference<ArchivesObserver> observer : observers) {
         ArchivesObserver ref = observer.get();
         if (ref != null) {
           runnable.notify(ref);
         }
       }
     }
-  }
-
-  private synchronized void setState(int state) {
-    this.state = state;
   }
 
   private synchronized void resetState2Origin() {
@@ -480,11 +465,26 @@ public class ArchivesImpl implements Archives {
     return true;
   }
 
-  private static String getUserBundleKey(String userId) {
-    return Const.PREFERENCE_KEY_USER_ARCHIVE_BUNDLE_PREFIX + userId;
-  }
-
   private interface NotifyRunnable {
     void notify(ArchivesObserver observer);
+  }
+
+  private static class Const {
+
+    public static final String ARCHIVES_PREFERENCE_NAME = "kharazim_archives";
+
+    public static final String PREFERENCE_KEY_USER_ARCHIVE_BUNDLE_PREFIX = "kharazim_user_archive_";
+
+    public static final String PREFERENCE_KEY_LAST_USER_ID_STRING = "kharazim_last_user_id";
+
+    public static final String BUNDLE_KEY_USER_ID_STRING = "kharazim_user_id";
+
+    public static final String BUNDLE_KEY_USER_PROFILE_OBJECT = "kharazim_user_profile";
+
+    public static final String BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT =
+        "kharazim_user_health_condition";
+
+    private Const() {
+    }
   }
 }

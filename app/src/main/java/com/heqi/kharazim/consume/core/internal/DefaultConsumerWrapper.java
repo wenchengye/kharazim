@@ -1,16 +1,16 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-import com.heqi.kharazim.explore.consume.api.Consumer;
-import com.heqi.kharazim.explore.consume.api.ConsumerObserver;
-import com.heqi.kharazim.explore.consume.api.ConsumerWrapper;
-import com.heqi.kharazim.explore.consume.api.Reason;
-import com.heqi.kharazim.explore.consume.api.State;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
+import com.heqi.kharazim.consume.core.api.Consumer;
+import com.heqi.kharazim.consume.core.api.ConsumerFactory;
+import com.heqi.kharazim.consume.core.api.ConsumerObserver;
+import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
+import com.heqi.kharazim.consume.core.api.Reason;
+import com.heqi.kharazim.consume.core.api.State;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 

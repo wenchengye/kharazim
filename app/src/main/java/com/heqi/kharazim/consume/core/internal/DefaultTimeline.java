@@ -1,6 +1,6 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
-import com.heqi.kharazim.explore.consume.internal.api.Timeline;
+import com.heqi.kharazim.consume.core.internal.api.Timeline;
 
 import java.util.Collection;
 import java.util.Comparator;

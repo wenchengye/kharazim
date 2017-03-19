@@ -11,59 +11,59 @@ import java.util.concurrent.ExecutionException;
 
 
 public abstract class NetworkAsyncLoadFragment<T> extends AsyncLoadFragment {
-  
+
   private T data;
 
   private Listener<T> listener = new Listener<T>() {
 
-  	@Override
-  	public void onResponse(T result) {
-  		NetworkAsyncLoadFragment.this.onFetched(result);
-  	}
+    @Override
+    public void onResponse(T result) {
+      NetworkAsyncLoadFragment.this.onFetched(result);
+    }
 
   };
   private ErrorListener errorListener = new ErrorListener() {
 
-  	@Override
-  	public void onErrorResponse(VolleyError error) {
-  		NetworkAsyncLoadFragment.this.onFailed(null);
-  	}
+    @Override
+    public void onErrorResponse(VolleyError error) {
+      NetworkAsyncLoadFragment.this.onFailed(null);
+    }
 
   };
 
   @Override
   protected void onPrepareLoading() {
-  	showLoadingTipsView();
-  } 
+    showLoadingTipsView();
+  }
 
   @Override
   protected void onStartLoading() {
-  	Request<T> request = newRequest(listener, errorListener);
+    Request<T> request = newRequest(listener, errorListener);
 
-  	if (request != null) {
-  	  RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
-  	} else {
-  	  hideLoadingTipsView();
-  	  hideFetchFailedTipsView();
-  	}
+    if (request != null) {
+      RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
+    } else {
+      hideLoadingTipsView();
+      hideFetchFailedTipsView();
+    }
   }
 
   private void onFetched(T result) {
-  	hideLoadingTipsView();
-  	hideFetchFailedTipsView();
+    hideLoadingTipsView();
+    hideFetchFailedTipsView();
 
-  	if (result == null) {
-  	  onNoFetchResult();
-  	} else {
-  	  this.data = result;
-  	  applyData(this.data);
-  	}
+    if (result == null) {
+      onNoFetchResult();
+    } else {
+      this.data = result;
+      applyData(this.data);
+    }
   }
 
   private void onFailed(ExecutionException e) {
-  	hideLoadingTipsView();
-  	hideFetchFailedTipsView();
-  	showFetchFailedTipsView(e);
+    hideLoadingTipsView();
+    hideFetchFailedTipsView();
+    showFetchFailedTipsView(e);
   }
 
   protected abstract void applyData(T data);

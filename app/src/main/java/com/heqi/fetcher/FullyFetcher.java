@@ -9,8 +9,8 @@ import java.util.concurrent.ExecutionException;
  */
 public abstract class FullyFetcher<T> extends BaseFetcher<T> {
 
-  private List<T> cacheList;
   private final byte[] lock = new byte[0];
+  private List<T> cacheList;
 
   @Override
   protected List<T> fetchHttpData(int start, int size) throws ExecutionException {

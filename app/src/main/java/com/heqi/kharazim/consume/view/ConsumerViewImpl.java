@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.view;
+package com.heqi.kharazim.consume.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,14 +8,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.explore.consume.api.State;
+import com.heqi.kharazim.consume.core.api.State;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
+import com.heqi.kharazim.explore.view.ExploreCircleProgressView;
 
 /**
  * Created by overspark on 2017/3/3.
  */
 
-public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreConsumerView {
+public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
 
   private ImageView playBtn;
   private ImageView previousBtn;
@@ -30,16 +31,16 @@ public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreCo
   private ActionDetailInfo action;
   private State state;
 
-  public ExploreConsumerViewImpl(Context context) {
+  public ConsumerViewImpl(Context context) {
     super(context);
   }
 
-  public ExploreConsumerViewImpl(Context context, AttributeSet attrs) {
+  public ConsumerViewImpl(Context context, AttributeSet attrs) {
     super(context, attrs);
 
   }
 
-  public ExploreConsumerViewImpl(Context context, AttributeSet attrs, int defStyle) {
+  public ConsumerViewImpl(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
   }
 
@@ -50,7 +51,7 @@ public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreCo
   }
 
   private void init() {
-    playBtn =  (ImageView) findViewById(R.id.consumer_play_button);
+    playBtn = (ImageView) findViewById(R.id.consumer_play_button);
     previousBtn = (ImageView) findViewById(R.id.consumer_backward_button);
     nextBtn = (ImageView) findViewById(R.id.consumer_forward_button);
     interpretationBtn = (TextView) findViewById(R.id.consumer_interpretation_button);
@@ -125,7 +126,7 @@ public class ExploreConsumerViewImpl extends RelativeLayout implements ExploreCo
 
   @Override
   public void initContent(ActionDetailInfo action, int progress, int duration, int repeatIndex,
-      int repeatSum, State state) {
+                          int repeatSum, State state) {
     setAction(action);
     setProgress(progress, duration);
     setRepeat(repeatIndex, repeatSum);

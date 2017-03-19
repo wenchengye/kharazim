@@ -9,37 +9,6 @@ import com.heqi.kharazim.archives.model.UserProfile;
 
 public interface Archives {
 
-  class State {
-
-    public static final int OFFLINE = 0;
-
-    public static final int LOGINING = 1;
-
-    public static final int ONLINE = 2;
-
-    private State() {}
-  }
-
-  interface ArchivesTaskCallback {
-
-    void onTaskSuccess(int code, String msg);
-
-    void onTaskFailed();
-  }
-
-  interface ArchivesObserver {
-
-    void onLogin(String userId);
-
-    void onUserProfileUpdated(String userId, UserProfile userProfile);
-
-    void onHealthConditionUpdated(String userId, HealthCondition healthCondition);
-
-    void onAddPlan(String userId, String planId);
-
-    void onRemovePlan(String userId, String planId);
-  }
-
   int getState();
 
   void addObserver(ArchivesObserver observer);
@@ -75,6 +44,38 @@ public interface Archives {
   UserProfile getCurrentUserProfile();
 
   HealthCondition getCurrentHealthCondition();
+
+  interface ArchivesTaskCallback {
+
+    void onTaskSuccess(int code, String msg);
+
+    void onTaskFailed();
+  }
+
+  interface ArchivesObserver {
+
+    void onLogin(String userId);
+
+    void onUserProfileUpdated(String userId, UserProfile userProfile);
+
+    void onHealthConditionUpdated(String userId, HealthCondition healthCondition);
+
+    void onAddPlan(String userId, String planId);
+
+    void onRemovePlan(String userId, String planId);
+  }
+
+  class State {
+
+    public static final int OFFLINE = 0;
+
+    public static final int LOGINING = 1;
+
+    public static final int ONLINE = 2;
+
+    private State() {
+    }
+  }
 
 
 }

@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A canned request for retrieving the response body at a given URL as a Json Object.
- *
+ * <p>
  * Created by wenchengye on 16/8/28.
  */
 public abstract class GsonVolleyRequest<T> extends AbstractVolleyRequest<T> {
@@ -24,12 +24,12 @@ public abstract class GsonVolleyRequest<T> extends AbstractVolleyRequest<T> {
   /**
    * Make request and return a parsed object from JSON.
    *
-   * @param clazz Relevant class object, for Gson's reflection
-   * @param listener Listener to receive the String response
+   * @param clazz         Relevant class object, for Gson's reflection
+   * @param listener      Listener to receive the String response
    * @param errorListener Error listener, or null to ignore errors
    */
   public GsonVolleyRequest(Class<T> clazz, Listener<T> listener,
-      ErrorListener errorListener) {
+                           ErrorListener errorListener) {
     super(errorListener);
     this.clazz = clazz;
     this.listener = listener;

@@ -7,7 +7,7 @@ import android.content.Intent;
 import com.heqi.kharazim.archives.activity.InitActivity;
 import com.heqi.kharazim.archives.activity.LoginActivity;
 import com.heqi.kharazim.config.Intents;
-import com.heqi.kharazim.explore.activity.ConsumeActivity;
+import com.heqi.kharazim.consume.activity.ConsumeActivity;
 import com.heqi.kharazim.explore.activity.ExploreActivity;
 import com.heqi.kharazim.explore.activity.PlanDetailActivity;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
@@ -18,7 +18,8 @@ import com.heqi.kharazim.explore.model.PlanLiteInfo;
 
 public class NavigationManager {
 
-  private NavigationManager() {}
+  private NavigationManager() {
+  }
 
   public static void navigateToInit(Context context) {
     Intent intent = new Intent(context, InitActivity.class);

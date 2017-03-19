@@ -28,6 +28,8 @@ public abstract class TabHostFragment extends Fragment implements ReferenceAccep
   private CommonViewPager viewPager;
   private TabFragmentPagerAdapter pagerAdapter;
   private int currentFragmentIndex;
+  private Set cachedReferenceSet = new HashSet();
+  private ViewPager.OnPageChangeListener delegateOnPageChangeListener;
   private ViewPager.OnPageChangeListener onPageChangeListener =
       new ViewPager.OnPageChangeListener() {
         @Override
@@ -56,8 +58,6 @@ public abstract class TabHostFragment extends Fragment implements ReferenceAccep
           }
         }
       };
-  private Set cachedReferenceSet = new HashSet();
-  private ViewPager.OnPageChangeListener delegateOnPageChangeListener;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

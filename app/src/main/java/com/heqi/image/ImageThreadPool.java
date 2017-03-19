@@ -12,8 +12,8 @@ import java.util.concurrent.Future;
  */
 public class ImageThreadPool {
 
-  private final CachedThreadPoolExecutorWithCapacity executor;
   private static final long CACHE_TIME_MS = 60 * 1000L;
+  private final CachedThreadPoolExecutorWithCapacity executor;
 
   public ImageThreadPool(int maxThreadNum) {
     executor = new CachedThreadPoolExecutorWithCapacity(maxThreadNum, CACHE_TIME_MS);

@@ -22,7 +22,7 @@ import java.util.Formatter;
 
 /**
  * Image file cache.
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class ImageFileCache implements ImageCache {
@@ -34,10 +34,10 @@ public class ImageFileCache implements ImageCache {
 
   private final long maxSize;
   private final String cacheDirPath;
-  private DiskLruCache cache;
   private final byte[] cacheLock = new byte[0];
   private final ByteArrayPool byteArrayPool;
   private final Context context;
+  private DiskLruCache cache;
 
 
   public ImageFileCache(Context context, String cacheDirPath, long maxSizeInByte, ByteArrayPool byteArrayPool) {
@@ -45,6 +45,26 @@ public class ImageFileCache implements ImageCache {
     this.cacheDirPath = cacheDirPath;
     this.byteArrayPool = byteArrayPool;
     maxSize = maxSizeInByte;
+  }
+
+  private static String encodeImageKey(String key) {
+    MessageDigest md5 = null;
+    try {
+      md5 = MessageDigest.getInstance("MD5");
+    } catch (NoSuchAlgorithmException e) {
+      throw new IllegalStateException(e);
+    }
+    return convertToHex(md5.digest(key.getBytes()));
+  }
+
+  private static String convertToHex(byte[] byteData) {
+    Formatter formatter = new Formatter();
+    for (byte b : byteData) {
+      formatter.format("%02x", b);
+    }
+    String ret = formatter.out().toString();
+    formatter.close();
+    return ret;
   }
 
   private DiskLruCache getCache() {
@@ -167,26 +187,6 @@ public class ImageFileCache implements ImageCache {
       return 0;
     }
     return cache.size();
-  }
-
-  private static String encodeImageKey(String key) {
-    MessageDigest md5 = null;
-    try {
-      md5 = MessageDigest.getInstance("MD5");
-    } catch (NoSuchAlgorithmException e) {
-      throw new IllegalStateException(e);
-    }
-    return convertToHex(md5.digest(key.getBytes()));
-  }
-
-  private static String convertToHex(byte[] byteData) {
-    Formatter formatter = new Formatter();
-    for (byte b : byteData) {
-      formatter.format("%02x", b);
-    }
-    String ret = formatter.out().toString();
-    formatter.close();
-    return ret;
   }
 
 }

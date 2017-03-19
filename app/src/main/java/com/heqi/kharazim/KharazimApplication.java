@@ -47,29 +47,6 @@ public class KharazimApplication extends Application {
     return archives;
   }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-
-    initApp();
-  }
-
-  /**
-   * initialize application.
-   */
-  private void initApp() {
-
-    /** catch application exception */
-    Thread.setDefaultUncaughtExceptionHandler(new KharazimUncaughtExceptionHandler(
-        getApplicationContext()));
-
-    setAppContext(this);
-
-    initByteArrayPool();
-    initImageView();
-    initArchives();
-  }
-
   private static void initByteArrayPool() {
     byteArrayPool = new ByteArrayPool(BYTE_ARRAY_MAX_SIZE);
   }
@@ -141,6 +118,29 @@ public class KharazimApplication extends Application {
 
   private static void initArchives() {
     archives = new ArchivesImpl(appContext);
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+    initApp();
+  }
+
+  /**
+   * initialize application.
+   */
+  private void initApp() {
+
+    /** catch application exception */
+    Thread.setDefaultUncaughtExceptionHandler(new KharazimUncaughtExceptionHandler(
+        getApplicationContext()));
+
+    setAppContext(this);
+
+    initByteArrayPool();
+    initImageView();
+    initArchives();
   }
 
 }

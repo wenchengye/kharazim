@@ -1,16 +1,16 @@
-package com.heqi.kharazim.explore.consume;
+package com.heqi.kharazim.consume;
 
 import android.content.Context;
 import android.widget.VideoView;
 
-import com.heqi.kharazim.explore.consume.api.Consumer;
-import com.heqi.kharazim.explore.consume.api.ConsumerWrapper;
-import com.heqi.kharazim.explore.consume.internal.DefaultConsumer;
-import com.heqi.kharazim.explore.consume.internal.DefaultConsumerWrapper;
-import com.heqi.kharazim.explore.consume.internal.MediaPlayerAudioConsumer;
-import com.heqi.kharazim.explore.consume.internal.VideoViewConsumer;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.consume.core.api.Consumer;
+import com.heqi.kharazim.consume.core.api.ConsumerFactory;
+import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
+import com.heqi.kharazim.consume.core.internal.DefaultConsumer;
+import com.heqi.kharazim.consume.core.internal.DefaultConsumerWrapper;
+import com.heqi.kharazim.consume.core.internal.MediaPlayerAudioConsumer;
+import com.heqi.kharazim.consume.core.internal.VideoViewConsumer;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternal;
 
 /**
  * Created by overspark on 2017/3/3.

@@ -23,7 +23,7 @@ import com.heqi.image.view.AsyncImageView;
 
 /**
  * Some useful methods for views.
- * 
+ *
  * @author liuchunyu@wandoujia.com (Chunyu Liu)
  */
 public class ViewUtils {
@@ -34,13 +34,14 @@ public class ViewUtils {
   private static final int TOAST_LENGTH = 25;
   private static final long TOAST_TIME = 500L;
 
-  private ViewUtils() {}
+  private ViewUtils() {
+  }
 
   /**
    * Changes the size of a view.
-   * 
-   * @param view the view to change size
-   * @param width the new width
+   *
+   * @param view   the view to change size
+   * @param width  the new width
    * @param height the new height
    */
   public static void setViewSize(View view, int width, int height) {
@@ -52,7 +53,7 @@ public class ViewUtils {
 
   /**
    * Resumes asynchronous loading of all {@link AsyncImageView}s in activity.
-   * 
+   *
    * @param activity activity
    */
   public static void resumeAsyncImagesLoading(Activity activity) {
@@ -62,7 +63,7 @@ public class ViewUtils {
 
   /**
    * Pauses asynchronous loading of all {@link AsyncImageView}s in activity.
-   * 
+   *
    * @param activity activity
    */
   public static void pauseAsyncImagesLoading(Activity activity) {
@@ -72,7 +73,7 @@ public class ViewUtils {
 
   /**
    * Resumes asynchronous loading of all {@link AsyncImageView}s in fragment.
-   * 
+   *
    * @param fragment fragment
    */
   public static void resumeAsyncImagesLoading(Fragment fragment) {
@@ -82,7 +83,7 @@ public class ViewUtils {
 
   /**
    * Pauses asynchronous loading of all {@link AsyncImageView}s in fragment.
-   * 
+   *
    * @param fragment fragment
    */
   public static void pauseAsyncImagesLoading(Fragment fragment) {
@@ -109,8 +110,8 @@ public class ViewUtils {
 
   /**
    * Sets the background of view.
-   * 
-   * @param view view
+   *
+   * @param view       view
    * @param background background drawable
    */
   @SuppressWarnings("deprecation")
@@ -125,9 +126,9 @@ public class ViewUtils {
 
   /**
    * Creates a view.
-   * 
+   *
    * @param parent parent view
-   * @param resId resource id
+   * @param resId  resource id
    * @return view
    */
   public static View newInstance(ViewGroup parent, int resId) {
@@ -136,9 +137,9 @@ public class ViewUtils {
 
   /**
    * Creates a view.
-   * 
+   *
    * @param context context
-   * @param resId resource id
+   * @param resId   resource id
    * @return view
    */
   public static View newInstance(Context context, int resId) {
@@ -147,14 +148,14 @@ public class ViewUtils {
 
   /**
    * get a String of which with a Drawable in front.
-   * 
+   *
    * @param textSize the size of text
-   * @param text the content of text
+   * @param text     the content of text
    * @param drawable the drawable you want to put in front of text
    * @return String with drawable
    */
   public static CharSequence getDrawableTextSpan(final int textSize,
-      String text, final Drawable drawable) {
+                                                 String text, final Drawable drawable) {
     SpannableStringBuilder sb = new SpannableStringBuilder(" ");
     sb.append(text);
     DynamicDrawableSpan drawableSpan = new DynamicDrawableSpan() {
@@ -195,7 +196,7 @@ public class ViewUtils {
 
   /**
    * Scroll the specific AbsListView to top.
-   * 
+   *
    * @param listView the specific list view
    * @return true if scrollToTop is handled, false otherwise
    */

@@ -37,7 +37,8 @@ public class SystemUtil {
   private static String wandoujiaVersionName = null;
   private static int versionCode = 0;
 
-  private SystemUtil() {}
+  private SystemUtil() {
+  }
 
   public static boolean aboveApiLevel(int sdkInt) {
     return getApiLevel() >= sdkInt;
@@ -519,15 +520,11 @@ public class SystemUtil {
     return false;
   }
 
-  public static enum InstallOption {
-    AUTO, EXTERNAL, INTERNAL, ERROR
-  }
-
   /**
    * check if the mobile has been rooted
    *
-   * @exception IOException
    * @return the mobile has been rooted
+   * @throws IOException
    * @author TQS
    */
   public static boolean isRooted() {
@@ -623,5 +620,9 @@ public class SystemUtil {
       default:
         return "xxhdpi";
     }
+  }
+
+  public static enum InstallOption {
+    AUTO, EXTERNAL, INTERNAL, ERROR
   }
 }

@@ -27,18 +27,16 @@ import java.util.concurrent.ExecutionException;
 public abstract class NetworkListAsyncloadFragment<M>
     extends AsyncLoadFragment {
 
-  private ListView contentListView;
-  private AbstractFetchMoreFooterView footerView;
-  protected HeaderViewAdapter headerViewAdapter;
-  protected DataAdapter<M> contentAdapter;
-  private FetchHelper<M> fetchHelper;
-  private List<M> newData;
-
-  private int lastTryFetch;
-  private Parcelable listState;
-
   protected static final int FIRST_FETCH_COUNT = 15;
   protected static final int PAGE_SIZE = 15;
+  protected HeaderViewAdapter headerViewAdapter;
+  protected DataAdapter<M> contentAdapter;
+  private ListView contentListView;
+  private AbstractFetchMoreFooterView footerView;
+  private FetchHelper<M> fetchHelper;
+  private List<M> newData;
+  private int lastTryFetch;
+  private Parcelable listState;
   private boolean isReload;
 
   protected BaseFetcher.Callback<M> fetchCallback =

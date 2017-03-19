@@ -23,31 +23,31 @@ public class LoginActivity extends PendingNavigateActivity {
 
   private LoginFragment.LoginFragmentListener loginFragmentListener =
       new LoginFragment.LoginFragmentListener() {
-    @Override
-    public void onLoginFinished() {
-      navigate(new Runnable() {
         @Override
-        public void run() {
-          handleLoginFinished();
+        public void onLoginFinished() {
+          navigate(new Runnable() {
+            @Override
+            public void run() {
+              handleLoginFinished();
+            }
+          });
         }
-      });
-    }
 
-    @Override
-    public void onGotoRegister() {
-      setCurrentFragment(registerFragment);
-    }
-  };
+        @Override
+        public void onGotoRegister() {
+          setCurrentFragment(registerFragment);
+        }
+      };
 
   private RegisterFragment.RegisterFragmentListener registerFragmentListener =
       new RegisterFragment.RegisterFragmentListener() {
-    @Override
-    public void onRegisterFinished() {
-      if (current instanceof RegisterFragment) {
-        setCurrentFragment(loginFragment);
-      }
-    }
-  };
+        @Override
+        public void onRegisterFinished() {
+          if (current instanceof RegisterFragment) {
+            setCurrentFragment(loginFragment);
+          }
+        }
+      };
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {

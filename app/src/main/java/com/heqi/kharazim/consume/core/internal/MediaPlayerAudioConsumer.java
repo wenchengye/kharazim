@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -8,7 +8,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 
 import com.heqi.base.utils.HttpUtil;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternal;
 import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.io.IOException;

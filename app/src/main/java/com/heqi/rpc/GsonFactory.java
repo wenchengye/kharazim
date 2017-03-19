@@ -13,7 +13,8 @@ public class GsonFactory {
     gson = new Gson();
   }
 
-  private GsonFactory() {}
+  private GsonFactory() {
+  }
 
   /**
    * Gets gson object.

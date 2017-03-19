@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.VideoView;
 
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternal;
 import com.heqi.kharazim.utils.KharazimUtils;
 
 /**

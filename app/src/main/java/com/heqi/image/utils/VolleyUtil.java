@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 /**
  * util methods of volley
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class VolleyUtil {
@@ -18,11 +18,11 @@ public class VolleyUtil {
 
   /**
    * get byte array from a input stream
-   * 
+   *
    * @param pool
    * @param in
    * @param length
-   * @param callback if length <= 0, callback will be ignored because we can't calculate progress
+   * @param callback              if length <= 0, callback will be ignored because we can't calculate progress
    * @param careThreadInterrupted check if current thread is interrupted while reading
    * @return
    * @throws IOException
@@ -30,7 +30,7 @@ public class VolleyUtil {
    * @throws InterruptedException
    */
   public static byte[] getByteArrayFromInputStream(ByteArrayPool pool, InputStream in, int length,
-      ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
+                                                   ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
       ServerError, InterruptedException {
     if (length >= 0) {
       return getByteArrayByNewBytes(pool, in, length, callback, careThreadInterrupted);
@@ -40,7 +40,7 @@ public class VolleyUtil {
   }
 
   private static byte[] getByteArrayByNewBytes(ByteArrayPool pool, InputStream is, int length,
-      ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
+                                               ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
       ServerError, InterruptedException {
     byte[] byteArr = new byte[length];
     byte[] buffer = null;
@@ -84,7 +84,7 @@ public class VolleyUtil {
   }
 
   private static byte[] getByteArrayByBytePool(ByteArrayPool pool, InputStream is, int length,
-      ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
+                                               ReadByteArrayCallback callback, boolean careThreadInterrupted) throws IOException,
       ServerError, InterruptedException {
     PoolingByteArrayOutputStream bytes = new PoolingByteArrayOutputStream(pool, length);
     byte[] buffer = null;
@@ -117,9 +117,8 @@ public class VolleyUtil {
 
   /**
    * call back of read bytes
-   * 
+   *
    * @author yangkai@wandoujia.com
-   * 
    */
   public static interface ReadByteArrayCallback {
     public void notifyProgressChanged(int progress);

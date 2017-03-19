@@ -6,10 +6,11 @@
     <include android:id="@+id/explore_consumer_activity_header"
         layout="@layout/explore_header_bg_view"/>
 
-    <com.heqi.kharazim.explore.view.ExploreConsumerViewImpl android:id="@+id/explore_portrait_consumer_view"
-                                                            android:layout_width="match_parent"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_alignParentBottom="true">
+    <com.heqi.kharazim.consume.view.ConsumerViewImpl
+        android:id="@+id/explore_portrait_consumer_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
         <FrameLayout android:id="@+id/consumer_view_info_layout"
             android:layout_width="match_parent"
             android:layout_height="204dp"
@@ -71,7 +72,7 @@
         </FrameLayout>
 
 
-    </com.heqi.kharazim.explore.view.ExploreConsumerViewImpl>
+    </com.heqi.kharazim.consume.view.ConsumerViewImpl>
 
     <VideoView android:id="@+id/explore_consumer_video_view"
         android:layout_width="match_parent"

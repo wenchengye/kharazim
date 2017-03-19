@@ -22,13 +22,6 @@ public class KharazimUncaughtExceptionHandler implements UncaughtExceptionHandle
     this.defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
   }
 
-  @Override
-  public void uncaughtException(Thread thread, Throwable ex) {
-    saveCrashLog(ex);
-    reportCrashDetail(ex);
-    this.defaultUEH.uncaughtException(thread, ex);
-  }
-
   /**
    * report crash log to server end.
    *
@@ -43,6 +36,13 @@ public class KharazimUncaughtExceptionHandler implements UncaughtExceptionHandle
       detail = detail.replace("\t", "#");
       // TODO report detail 2 server
     }
+  }
+
+  @Override
+  public void uncaughtException(Thread thread, Throwable ex) {
+    saveCrashLog(ex);
+    reportCrashDetail(ex);
+    this.defaultUEH.uncaughtException(thread, ex);
   }
 
   /**

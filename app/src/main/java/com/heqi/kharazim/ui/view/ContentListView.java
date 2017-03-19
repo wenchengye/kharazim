@@ -19,6 +19,10 @@ public class ContentListView extends ListView implements OnScrollListenerHolder 
   private boolean showShadow = false;
   private View shadowView;
 
+  {
+    super.setOnScrollListener(compositeScrollListener);
+  }
+
   public ContentListView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
   }
@@ -29,10 +33,6 @@ public class ContentListView extends ListView implements OnScrollListenerHolder 
 
   public ContentListView(Context context) {
     super(context);
-  }
-
-  {
-    super.setOnScrollListener(compositeScrollListener);
   }
 
   /**

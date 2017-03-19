@@ -11,7 +11,7 @@ import java.util.TimerTask;
 
 /**
  * Memory cache for displaying recent bitmap.
- * 
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public final class ImageMemoryCache implements ImageCache, ImageLoader.ImageCache {
@@ -28,17 +28,17 @@ public final class ImageMemoryCache implements ImageCache, ImageLoader.ImageCach
     };
     new Timer().scheduleAtFixedRate(new TimerTask() {
 
-      @Override
-      public void run() {
-        Map<String, BitmapWrapper> snapShot = cache.snapshot();
-        long currentTime = System.currentTimeMillis();
-        for (Map.Entry<String, BitmapWrapper> entry : snapShot.entrySet()) {
-          if (currentTime - entry.getValue().lastHitTimeMs > RELEASE_RESOURCES_INTERVAL_MS) {
-            cache.remove(entry.getKey());
-          }
-        }
-      }
-    },
+                                      @Override
+                                      public void run() {
+                                        Map<String, BitmapWrapper> snapShot = cache.snapshot();
+                                        long currentTime = System.currentTimeMillis();
+                                        for (Map.Entry<String, BitmapWrapper> entry : snapShot.entrySet()) {
+                                          if (currentTime - entry.getValue().lastHitTimeMs > RELEASE_RESOURCES_INTERVAL_MS) {
+                                            cache.remove(entry.getKey());
+                                          }
+                                        }
+                                      }
+                                    },
         RELEASE_RESOURCES_INTERVAL_MS, RELEASE_RESOURCES_INTERVAL_MS);
   }
 

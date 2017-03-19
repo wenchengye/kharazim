@@ -22,10 +22,6 @@ import com.heqi.kharazim.utils.ViewUtils;
 
 public class ExplorePlanLiteView extends RelativeLayout {
 
-  public interface ExplorePlanLiteViewListener {
-    void onAddPlan();
-  }
-
   private AsyncImageView planSummaryIv;
   private TextView planTitleTv;
   private FrameLayout planDifficultyPlaceHolder;
@@ -34,9 +30,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
   private TextView planSpanTv;
   private TextView planSpanDailyTv;
   private ImageView planAddBtn;
-
   private PlanLiteInfo data;
-
   private ExplorePlanLiteViewListener listener;
 
   public ExplorePlanLiteView(Context context) {
@@ -116,5 +110,9 @@ public class ExplorePlanLiteView extends RelativeLayout {
 
   public void setListener(ExplorePlanLiteViewListener listener) {
     this.listener = listener;
+  }
+
+  public interface ExplorePlanLiteViewListener {
+    void onAddPlan();
   }
 }

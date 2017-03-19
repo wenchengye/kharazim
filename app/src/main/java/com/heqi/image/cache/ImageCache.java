@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 /**
  * Interface for image cache.
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public interface ImageCache {
@@ -14,14 +14,14 @@ public interface ImageCache {
    *
    * @param key image key
    * @return {@link Bitmap}, can be null if there is no such image or some error
-   *     happens
+   * happens
    */
   Bitmap get(String key);
 
   /**
    * Puts image to cache.
    *
-   * @param key image key
+   * @param key    image key
    * @param bitmap image bitmap
    */
   void put(String key, Bitmap bitmap);

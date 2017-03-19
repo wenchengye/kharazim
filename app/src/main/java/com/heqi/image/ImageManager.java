@@ -37,10 +37,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Image client to get images from local or network.
- *
+ * <p>
  * <p>
  * Usage 1:
- *
+ * <p>
  * <pre>
  *     LoadImageCallback loadImageCallback = new loadImageCallback() {
  *
@@ -56,28 +56,30 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *     // If you want to cancel loading
  *     requestContainer.cancelRequest();
  * </pre>
- *
+ * <p>
  * </p>
- *
+ * <p>
  * <p>
  * Usage 2:
- *
+ * <p>
  * <pre>
  *     ImageContainer requestContainer = imageManager.getNetworkImage(url);
  *     ....
  *     // Wait for finishing loading
  *     Bitmap bitmap = requestContainer.getBitmap();
  * </pre>
- *
+ * <p>
  * </p>
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class ImageManager {
 
   private static final int DEFAULT_BYTE_ARRAY_SIZE = 128 * 1024;
   private static final String VOLLEY_CACHE_DIR = "volley";
-  /** Amount of time to wait after first response arrives before delivering all responses. */
+  /**
+   * Amount of time to wait after first response arrives before delivering all responses.
+   */
   private static final int BATCH_RESPONSE_DELAY_MS = 100;
   private static final long IMAGE_RENDER_DELAY_WHILE_SCROLLING = 200L;
   private final ImageMemoryCache memoryCache;
@@ -93,14 +95,20 @@ public class ImageManager {
    */
   private final HashMap<String, BatchedImageRequest> inFlightRequests =
       new HashMap<String, BatchedImageRequest>();
-  /** HashMap of the currently pending responses (waiting to be delivered). */
+  /**
+   * HashMap of the currently pending responses (waiting to be delivered).
+   */
   private final HashMap<String, BatchedImageRequest> batchedResponses =
       new HashMap<String, BatchedImageRequest>();
   private boolean enableNetwork = true;
   private boolean isWaiting = false;
-  /** Runnable for in-flight response delivery. */
+  /**
+   * Runnable for in-flight response delivery.
+   */
   private Runnable responseRunnable;
-  /** Resources for plugin use */
+  /**
+   * Resources for plugin use
+   */
   private Resources resources;
 
   public ImageManager(Context context, Config config) {
@@ -150,9 +158,9 @@ public class ImageManager {
   /**
    * Creates a cache key for use with the L1 cache.
    *
-   * @param uri The URI of the request, can be URL of a network request,
-   *          or path of a local request.
-   * @param maxWidth The max-width of the output.
+   * @param uri       The URI of the request, can be URL of a network request,
+   *                  or path of a local request.
+   * @param maxWidth  The max-width of the output.
    * @param maxHeight The max-height of the output.
    */
   private static String getCacheKey(String uri, int maxWidth, int maxHeight) {
@@ -185,7 +193,7 @@ public class ImageManager {
    * <b>Should only call in UI thread</b>
    * </p>
    *
-   * @param url url
+   * @param url      url
    * @param callback callback for loading events, can be null
    * @return requestContainer
    */
@@ -199,9 +207,9 @@ public class ImageManager {
    * <b>Should only call in UI thread</b>
    * </p>
    *
-   * @param url url
-   * @param callback callback for loading events
-   * @param maxWidth the max-width of the loaded bitmap, 0 means no limit, should not be negative
+   * @param url       url
+   * @param callback  callback for loading events
+   * @param maxWidth  the max-width of the loaded bitmap, 0 means no limit, should not be negative
    * @param maxHeight The max-height of the loaded bitmap, 0 means no limit, should not be negative
    * @return ImageContainer
    */
@@ -261,9 +269,9 @@ public class ImageManager {
    * <b>Should only call in UI thread</b>
    * </p>
    *
-   * @param filePath file path
-   * @param callback callback for loading events
-   * @param maxWidth the max-width of the loaded bitmap, 0 means no limit, should not be negative
+   * @param filePath  file path
+   * @param callback  callback for loading events
+   * @param maxWidth  the max-width of the loaded bitmap, 0 means no limit, should not be negative
    * @param maxHeight The max-height of the loaded bitmap, 0 means no limit, should not be negative
    * @return requestContainer
    */
@@ -303,7 +311,7 @@ public class ImageManager {
    * </p>
    *
    * @param packageName app package name
-   * @param callback callback for loading events
+   * @param callback    callback for loading events
    * @return requestContainer
    */
   public ImageContainer getAppIcon(final String packageName, LoadImageCallback callback) {
@@ -404,7 +412,7 @@ public class ImageManager {
    * </p>
    *
    * @param context context
-   * @param resId resource id
+   * @param resId   resource id
    * @return bitmap
    */
   public Bitmap getResourceImageBitmap(Context context, int resId) {
@@ -485,7 +493,6 @@ public class ImageManager {
    * <p>
    * <b>Should only call in UI thread</b>
    * </p>
-
    */
   public void pauseImageLoading() {
     // only fulfill requests that were initiated from the main thread.
@@ -539,7 +546,7 @@ public class ImageManager {
    * Called when bitmap is loaded.
    *
    * @param cacheKey the key for cache the bitmap
-   * @param bitmap the loaded bitmap
+   * @param bitmap   the loaded bitmap
    */
   private void onImageLoaded(final String cacheKey, final Bitmap bitmap) {
     if (Looper.myLooper() != Looper.getMainLooper()) {
@@ -585,7 +592,7 @@ public class ImageManager {
    * Starts the runnable for batched delivery of responses if it is not already started.
    *
    * @param cacheKey The cacheKey of the response being delivered.
-   * @param request The BatchedImageRequest to be delivered.
+   * @param request  The BatchedImageRequest to be delivered.
    */
   private void batchResponse(String cacheKey, BatchedImageRequest request) {
     batchedResponses.put(cacheKey, request);
@@ -631,17 +638,23 @@ public class ImageManager {
    * interested in its results.
    */
   private static class BatchedImageRequest {
-    /** The request being tracked */
+    /**
+     * The request being tracked
+     */
     private final ImageRequest request;
-    /** List of all of the active ImageContainers that are interested in the request */
+    /**
+     * List of all of the active ImageContainers that are interested in the request
+     */
     private final LinkedList<ImageContainer> imageContainers = new LinkedList<ImageContainer>();
-    /** The result of the request being tracked by this item */
+    /**
+     * The result of the request being tracked by this item
+     */
     private Bitmap responseBitmap;
 
     /**
      * Constructs a new BatchedImageRequest object
      *
-     * @param request The request being tracked
+     * @param request   The request being tracked
      * @param container The ImageContainer of the person who initiated the request.
      */
     public BatchedImageRequest(ImageRequest request, ImageContainer container) {
@@ -685,7 +698,8 @@ public class ImageManager {
     }
 
     @Override
-    public void putBitmap(String url, Bitmap bitmap) {}
+    public void putBitmap(String url, Bitmap bitmap) {
+    }
   }
 
   private abstract class ImageRequest {

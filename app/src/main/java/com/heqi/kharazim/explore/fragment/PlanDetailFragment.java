@@ -30,22 +30,13 @@ import java.util.concurrent.ExecutionException;
 
 public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo> {
 
-  public interface PlanDetailFragmentListener {
-
-    void onAddPlan(PlanLiteInfo planLiteInfo);
-
-    void onConsumePlan(String courseId);
-  }
-
   // data
   private PlanLiteInfo planLiteInfo;
   private PlanDetailInfo planDetailInfo;
   private boolean inArchives = false;
-
   // view
   private ExplorePlanDetailCourseListView courseListView;
   private ExplorePlanDetailUserProgressView userProgressView;
-
   // status
   private PlanDetailFragmentListener listener;
 
@@ -135,10 +126,10 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     if (inArchives) {
       request = new PlanDetailInArchivesReqeust(listener, errorListener,
           KharazimApplication.getArchives().getCurrentAccessToken());
-      ((PlanDetailInArchivesReqeust)request).setPlanId(planLiteInfo.getId());
+      ((PlanDetailInArchivesReqeust) request).setPlanId(planLiteInfo.getId());
     } else {
       request = new PlanDetailRequest(listener, errorListener);
-      ((PlanDetailRequest)request).setId(planLiteInfo.getId());
+      ((PlanDetailRequest) request).setId(planLiteInfo.getId());
     }
 
     return request;
@@ -147,18 +138,18 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
   private void addPlan() {
     KharazimApplication.getArchives().addPlan(this.planLiteInfo.getId(),
         new Archives.ArchivesTaskCallback() {
-      @Override
-      public void onTaskSuccess(int code, String msg) {
-        if (KharazimUtils.isRetCodeOK(code) && listener != null) {
-          listener.onAddPlan(planLiteInfo);
-        }
-      }
+          @Override
+          public void onTaskSuccess(int code, String msg) {
+            if (KharazimUtils.isRetCodeOK(code) && listener != null) {
+              listener.onAddPlan(planLiteInfo);
+            }
+          }
 
-      @Override
-      public void onTaskFailed() {
+          @Override
+          public void onTaskFailed() {
 
-      }
-    });
+          }
+        });
   }
 
   private void consumePlan() {
@@ -168,13 +159,25 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     }
   }
 
-  protected void showLoadingTipsView() {}
+  protected void showLoadingTipsView() {
+  }
 
-  protected void hideLoadingTipsView() {}
+  protected void hideLoadingTipsView() {
+  }
 
-  protected void showFetchFailedTipsView(ExecutionException e) {}
+  protected void showFetchFailedTipsView(ExecutionException e) {
+  }
 
-  protected void hideFetchFailedTipsView() {}
+  protected void hideFetchFailedTipsView() {
+  }
 
-  protected void onNoFetchResult() {}
+  protected void onNoFetchResult() {
+  }
+
+  public interface PlanDetailFragmentListener {
+
+    void onAddPlan(PlanLiteInfo planLiteInfo);
+
+    void onConsumePlan(String courseId);
+  }
 }

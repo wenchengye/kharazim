@@ -1,10 +1,10 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.net.Uri;
 
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalState;
-import com.heqi.kharazim.explore.consume.internal.api.InternalState;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternal;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternalState;
+import com.heqi.kharazim.consume.core.internal.api.InternalState;
 import com.heqi.kharazim.utils.KharazimUtils;
 
 /**

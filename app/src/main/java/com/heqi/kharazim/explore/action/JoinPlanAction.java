@@ -9,7 +9,6 @@ public class JoinPlanAction implements Runnable {
   private String planId;
 
   /**
-   *
    * @param planId the id of the plan to join
    */
   public JoinPlanAction(String planId) {

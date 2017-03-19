@@ -2,9 +2,6 @@ package com.heqi.kharazim.archives.http.request;
 
 import com.android.volley.Response;
 import com.heqi.kharazim.explore.model.PlanListInfo;
-import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
-
-import java.util.Map;
 
 /**
  * Created by overspark on 2017/3/19.

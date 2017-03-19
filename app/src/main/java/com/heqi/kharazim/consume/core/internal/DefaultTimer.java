@@ -1,10 +1,10 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.heqi.kharazim.explore.consume.internal.api.Timer;
+import com.heqi.kharazim.consume.core.internal.api.Timer;
 
 import java.util.HashSet;
 import java.util.Set;

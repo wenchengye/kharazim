@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.api;
+package com.heqi.kharazim.consume.core.api;
 
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;

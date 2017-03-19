@@ -11,12 +11,20 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Http helper class using Volley.
- *
+ * <p>
  * Created by wenchengye on 16/8/28.
  */
 public class RpcHelper {
 
   private static RpcHelper instance;
+  private RequestQueue requestQueue;
+  private Context context;
+
+  private RpcHelper(Context context) {
+    this.context = context;
+    // using application context, keep from leaking Activity.
+    requestQueue = Volley.newRequestQueue(this.context.getApplicationContext());
+  }
 
   public static synchronized RpcHelper getInstance(Context context) {
     if (instance == null) {
@@ -33,15 +41,6 @@ public class RpcHelper {
       instance.requestQueue.stop();
     }
     instance = null;
-  }
-
-  private RequestQueue requestQueue;
-  private Context context;
-
-  private RpcHelper(Context context) {
-    this.context = context;
-    // using application context, keep from leaking Activity.
-    requestQueue = Volley.newRequestQueue(this.context.getApplicationContext());
   }
 
   /**

@@ -1,7 +1,5 @@
 package com.heqi.kharazim.ui.view.sticky;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,17 +22,14 @@ import android.widget.ListView;
 
 import com.heqi.kharazim.ui.view.ContentListView;
 
+import java.util.ArrayList;
+
 
 /**
  * @author Emil Sjölander
  */
 @SuppressLint("NewApi")
 public class StickyListHeadersListView extends ContentListView implements OnClickListener {
-
-  public interface OnHeaderClickListener {
-    public void onHeaderClick(StickyListHeadersListView l, View header,
-                              int itemPosition, long headerId, boolean currentlySticky);
-  }
 
   private boolean areHeadersSticky = true;
   private int dividerHeight;
@@ -49,10 +44,6 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
   private StickyListHeadersListViewWrapper frame;
   private boolean drawingListUnderStickyHeader = true;
   private boolean dataChanged = false;
-  private boolean drawSelectorOnTop;
-  private OnItemLongClickListener onItemLongClickListenerDelegate;
-  private MultiChoiceModeListener multiChoiceModeListenerDelegate;
-
   private final DataSetObserver dataSetChangedObserver = new DataSetObserver() {
 
     @Override
@@ -67,20 +58,6 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
       frame.removeHeader();
     }
   };
-  private final OnItemLongClickListener onItemLongClickListenerWrapper =
-      new OnItemLongClickListener() {
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> l, View v, int position,
-            long id) {
-          if (onItemLongClickListenerDelegate != null) {
-            return onItemLongClickListenerDelegate.onItemLongClick(l, v,
-                adapter.translateListViewPosition(position), id);
-          }
-          return false;
-        }
-
-      };
   private final OnScrollListener onScrollListener = new OnScrollListener() {
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -89,13 +66,29 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-        int totalItemCount) {
+                         int totalItemCount) {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
         scrollChanged(firstVisibleItem);
       }
     }
   };
+  private boolean drawSelectorOnTop;
+  private OnItemLongClickListener onItemLongClickListenerDelegate;
+  private final OnItemLongClickListener onItemLongClickListenerWrapper =
+      new OnItemLongClickListener() {
 
+        @Override
+        public boolean onItemLongClick(AdapterView<?> l, View v, int position,
+                                       long id) {
+          if (onItemLongClickListenerDelegate != null) {
+            return onItemLongClickListenerDelegate.onItemLongClick(l, v,
+                adapter.translateListViewPosition(position), id);
+          }
+          return false;
+        }
+
+      };
+  private MultiChoiceModeListener multiChoiceModeListenerDelegate;
   private MultiChoiceModeListener multiChoiceModeListenerWrapper;
 
   public StickyListHeadersListView(Context context) {
@@ -107,7 +100,7 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
   }
 
   public StickyListHeadersListView(Context context, AttributeSet attrs,
-      int defStyle) {
+                                   int defStyle) {
     super(context, attrs, defStyle);
     super.setOnScrollListener(onScrollListener);
     // null out divider, dividers are handled by adapter so they look good
@@ -116,7 +109,7 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
     super.setDividerHeight(0);
     setVerticalFadingEdgeEnabled(false);
 
-    int[] attrsArray = new int[] {android.R.attr.drawSelectorOnTop};
+    int[] attrsArray = new int[]{android.R.attr.drawSelectorOnTop};
 
     TypedArray a = context.obtainStyledAttributes(attrs, attrsArray,
         defStyle, 0);
@@ -167,7 +160,7 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
 
       @Override
       public void onItemCheckedStateChanged(ActionMode mode, int position,
-          long id, boolean checked) {
+                                            long id, boolean checked) {
         if (multiChoiceModeListenerDelegate != null) {
           position = adapter.translateListViewPosition(position);
           multiChoiceModeListenerDelegate.onItemCheckedStateChanged(mode,
@@ -394,6 +387,10 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
     }
   }
 
+  public boolean getAreHeadersSticky() {
+    return areHeadersSticky;
+  }
+
   public void setAreHeadersSticky(boolean areHeadersSticky) {
     if (this.areHeadersSticky != areHeadersSticky) {
       if (areHeadersSticky) {
@@ -402,10 +399,6 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
       requestLayout();
       this.areHeadersSticky = areHeadersSticky;
     }
-  }
-
-  public boolean getAreHeadersSticky() {
-    return areHeadersSticky;
   }
 
   @Override
@@ -529,7 +522,7 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
 
         if (viewToWatch == null
             || (!viewToWatchIsFooter && !adapter
-                .isHeader(viewToWatch))
+            .isHeader(viewToWatch))
             || ((childIsFooter || adapter.isHeader(child)) && childDistance < watchingChildDistance)) {
           viewToWatch = child;
           viewToWatchIsFooter = childIsFooter;
@@ -675,6 +668,11 @@ public class StickyListHeadersListView extends ContentListView implements OnClic
   public void setDrawingListUnderStickyHeader(
       boolean drawingListUnderStickyHeader) {
     this.drawingListUnderStickyHeader = drawingListUnderStickyHeader;
+  }
+
+  public interface OnHeaderClickListener {
+    public void onHeaderClick(StickyListHeadersListView l, View header,
+                              int itemPosition, long headerId, boolean currentlySticky);
   }
 
 }

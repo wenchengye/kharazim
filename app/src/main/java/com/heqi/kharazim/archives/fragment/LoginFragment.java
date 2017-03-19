@@ -19,12 +19,6 @@ import com.heqi.kharazim.utils.KharazimUtils;
 
 public class LoginFragment extends AsyncLoadFragment {
 
-  public interface LoginFragmentListener {
-    void onLoginFinished();
-
-    void onGotoRegister();
-  }
-
   private EditText userIdEditText;
   private EditText passwordEditText;
   private TextView loginBtn;
@@ -32,7 +26,6 @@ public class LoginFragment extends AsyncLoadFragment {
   private ImageView wechatLoginBtn;
   private ImageView weiboLoginBtn;
   private ImageView qqLoginBtn;
-
   private LoginFragmentListener listener;
 
   public void setListener(LoginFragmentListener listener) {
@@ -166,6 +159,12 @@ public class LoginFragment extends AsyncLoadFragment {
   @Override
   protected boolean needToLoadData() {
     return false;
+  }
+
+  public interface LoginFragmentListener {
+    void onLoginFinished();
+
+    void onGotoRegister();
   }
 
 }

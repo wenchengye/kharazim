@@ -13,12 +13,17 @@ import java.util.Set;
 
 /**
  * SharedPreferences wrapper class, allow to put and get object by Gson.
- *
+ * <p>
  * Created by wenchengye on 16/8/28.
  */
 public class Preferences implements SharedPreferences {
 
   public static final String PREFERENCE_PREFIX = "pref_id_";
+  private SharedPreferences mPreference;
+
+  public Preferences(SharedPreferences preference) {
+    this.mPreference = preference;
+  }
 
   public static Preferences getById(Context context, String id) {
     final String prefName = PREFERENCE_PREFIX + id;
@@ -66,12 +71,6 @@ public class Preferences implements SharedPreferences {
   private static <T> T stringToObject(String json, Type type) {
     Gson gson = new Gson();
     return gson.fromJson(json, type);
-  }
-
-  private SharedPreferences mPreference;
-
-  public Preferences(SharedPreferences preference) {
-    this.mPreference = preference;
   }
 
   @Override

@@ -1,7 +1,5 @@
 package com.heqi.kharazim.ui.view.sticky;
 
-import java.util.WeakHashMap;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
@@ -12,13 +10,15 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 
+import java.util.WeakHashMap;
+
 /**
  * A {@link ListAdapter} which wraps a {@link StickyListHeadersAdapter} and
  * automatically handles wrapping the result of
  * {@link StickyListHeadersAdapter#getView(int, View, ViewGroup)} and
  * {@link StickyListHeadersAdapter#getHeaderView(int, View, ViewGroup)}
  * appropriately.
- * 
+ *
  * @author Jake Wharton (jakewharton@gmail.com)
  */
 class StickyListHeadersAdapterWrapper extends BaseAdapter implements
@@ -29,15 +29,14 @@ class StickyListHeadersAdapterWrapper extends BaseAdapter implements
   private static final int EXTRA_VIEW_TYPE_COUNT = 2;
   private static final int HEADER_POSITION = -1;
   private static final int DIVIDER_POSITION = -2;
-
-  private final Context context;
   final StickyListHeadersAdapter delegate;
-  private Drawable divider;
-  private int dividerHeight;
+  private final Context context;
   private final WeakHashMap<View, Void> headers = new WeakHashMap<View, Void>();
   private final SparseIntArray positionMapping = new SparseIntArray();
   int dividerViewType;
   int headerViewType;
+  private Drawable divider;
+  private int dividerHeight;
   private int headerCount;
   private int dividerCount;
   private int cachedCount = -1;
@@ -47,17 +46,21 @@ class StickyListHeadersAdapterWrapper extends BaseAdapter implements
     public void onChanged() {
       cachedCount = -1;
       notifyDataSetChanged();
-    };
+    }
+
+    ;
 
     @Override
     public void onInvalidated() {
       cachedCount = -1;
       notifyDataSetInvalidated();
-    };
+    }
+
+    ;
   };
 
   StickyListHeadersAdapterWrapper(Context context,
-      StickyListHeadersAdapter delegate) {
+                                  StickyListHeadersAdapter delegate) {
     this.context = context;
     this.delegate = delegate;
     delegate.registerDataSetObserver(datasetObserver);

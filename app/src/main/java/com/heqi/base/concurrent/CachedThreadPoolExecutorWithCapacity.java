@@ -45,8 +45,8 @@ public class CachedThreadPoolExecutorWithCapacity implements ExecutorService {
    * Constructor.
    *
    * @param maxThreadNum maximum number of threads
-   * @param cacheTimeMs how long a thread will live if there is no task, if it <= 0, means quit
-   *          immediately
+   * @param cacheTimeMs  how long a thread will live if there is no task, if it <= 0, means quit
+   *                     immediately
    */
   public CachedThreadPoolExecutorWithCapacity(int maxThreadNum, long cacheTimeMs) {
     this(maxThreadNum, new LinkedBlockingQueue<Runnable>(), cacheTimeMs, null);
@@ -55,11 +55,11 @@ public class CachedThreadPoolExecutorWithCapacity implements ExecutorService {
   /**
    * Constructor.
    *
-   * @param maxThreadNum maximum number of threads
-   * @param cacheTimeMs how long a thread will live if there is no task, if it <= 0, means quit
-   *          immediately
+   * @param maxThreadNum   maximum number of threads
+   * @param cacheTimeMs    how long a thread will live if there is no task, if it <= 0, means quit
+   *                       immediately
    * @param threadPoolName thread pool name, all thread will be named as "threadPoolName-number",
-   *          can be null
+   *                       can be null
    */
   public CachedThreadPoolExecutorWithCapacity(int maxThreadNum, long cacheTimeMs,
                                               String threadPoolName) {
@@ -69,13 +69,13 @@ public class CachedThreadPoolExecutorWithCapacity implements ExecutorService {
   /**
    * Constructor.
    *
-   * @param maxThreadNum maximum number of threads
-   * @param queue queue for waiting tasks. Can pass in a customized queue, such as
-   *          PriorityBlockingQueue to meet different needs
-   * @param cacheTimeMs how long a thread will live if there is no task, if it <= 0, means quit
-   *          immediately
+   * @param maxThreadNum   maximum number of threads
+   * @param queue          queue for waiting tasks. Can pass in a customized queue, such as
+   *                       PriorityBlockingQueue to meet different needs
+   * @param cacheTimeMs    how long a thread will live if there is no task, if it <= 0, means quit
+   *                       immediately
    * @param threadPoolName thread pool name, all thread will be named as "threadPoolName-number",
-   *          can be null
+   *                       can be null
    */
   public CachedThreadPoolExecutorWithCapacity(
       int maxThreadNum, BlockingQueue<Runnable> queue, long cacheTimeMs, String threadPoolName) {
@@ -111,14 +111,14 @@ public class CachedThreadPoolExecutorWithCapacity implements ExecutorService {
   /**
    * Cancels a task.
    *
-   * @param runnable the task to cancel
+   * @param runnable              the task to cancel
    * @param mayInterruptIfRunning true if the thread executing this task should be interrupted;
-   *          otherwise, in-progress tasks are allowed to complete. Note that even if it's true, the
-   *          running thread may not be interrupted. Caller should implement additional logic to
-   *          stop
-   *          pending operations, such as InputStream.close()
+   *                              otherwise, in-progress tasks are allowed to complete. Note that even if it's true, the
+   *                              running thread may not be interrupted. Caller should implement additional logic to
+   *                              stop
+   *                              pending operations, such as InputStream.close()
    * @return false if the task could not be cancelled, typically because it has already completed
-   *         normally; true otherwise
+   * normally; true otherwise
    */
   public boolean cancel(Runnable runnable, boolean mayInterruptIfRunning) {
     if (mayInterruptIfRunning) {
@@ -337,10 +337,10 @@ public class CachedThreadPoolExecutorWithCapacity implements ExecutorService {
 
   private final class CustomFuture<T> implements Future<T> {
 
+    private final CountDownLatch latch = new CountDownLatch(1);
     private Runnable runnable;
     private boolean isCancelled;
     private T result;
-    private final CountDownLatch latch = new CountDownLatch(1);
 
     private void setRunnable(Runnable runnable) {
       this.runnable = runnable;

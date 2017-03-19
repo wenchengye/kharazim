@@ -12,9 +12,9 @@ import java.util.List;
 
 public class HeaderViewAdapter extends BaseAdapter {
 
-  private ListAdapter mAdapter;
   protected final List<View> mHeaderViews;
   private final List<View> mFooterViews;
+  private ListAdapter mAdapter;
 
   public HeaderViewAdapter(List<View> headerViews, List<View> footerViews, ListAdapter adapter) {
     mAdapter = adapter;
@@ -30,11 +30,6 @@ public class HeaderViewAdapter extends BaseAdapter {
     } else {
       mFooterViews = footerViews;
     }
-  }
-
-  public void setWrappedAdapter(ListAdapter adapter) {
-    mAdapter = adapter;
-    notifyDataSetChanged();
   }
 
   public void setHeaders(Collection<? extends View> headers) {
@@ -215,5 +210,10 @@ public class HeaderViewAdapter extends BaseAdapter {
 
   public ListAdapter getWrappedAdapter() {
     return mAdapter;
+  }
+
+  public void setWrappedAdapter(ListAdapter adapter) {
+    mAdapter = adapter;
+    notifyDataSetChanged();
   }
 }

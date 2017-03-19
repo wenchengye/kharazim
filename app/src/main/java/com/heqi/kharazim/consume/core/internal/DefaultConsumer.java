@@ -1,16 +1,16 @@
-package com.heqi.kharazim.explore.consume.internal;
+package com.heqi.kharazim.consume.core.internal;
 
 import android.net.Uri;
 import android.os.Looper;
 
-import com.heqi.kharazim.explore.consume.api.Consumer;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerFactory;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternal;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalState;
-import com.heqi.kharazim.explore.consume.internal.api.ConsumerInternalStateRepeat;
-import com.heqi.kharazim.explore.consume.internal.api.InternalState;
-import com.heqi.kharazim.explore.consume.internal.api.Timeline;
-import com.heqi.kharazim.explore.consume.internal.api.Timer;
+import com.heqi.kharazim.consume.core.api.Consumer;
+import com.heqi.kharazim.consume.core.api.ConsumerFactory;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternal;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternalState;
+import com.heqi.kharazim.consume.core.internal.api.ConsumerInternalStateRepeat;
+import com.heqi.kharazim.consume.core.internal.api.InternalState;
+import com.heqi.kharazim.consume.core.internal.api.Timeline;
+import com.heqi.kharazim.consume.core.internal.api.Timer;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 

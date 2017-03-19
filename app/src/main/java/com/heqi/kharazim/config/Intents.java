@@ -8,7 +8,9 @@ public class Intents {
 
   public static final String EXTRA_LIST_STATE = "kharazim.intent.extra.LIST_STATE";
 
-  /** explore */
+  /**
+   * explore
+   */
   public static final String EXTRA_PLAN_LITE_INFO = "kharazim.intent.extra.PLAN_LITE_INFO";
 
   public static final String EXTRA_COURSE_DETAIL_TYPE = "kharazim.intent.extra.COURSE_DETAIL_TYPE";
@@ -23,5 +25,6 @@ public class Intents {
 
   public static final String ACTION_CONSUMER_PLAY = "kharazim.intent.action.CONSUMER_PLAY";
 
-  private Intents() {}
+  private Intents() {
+  }
 }

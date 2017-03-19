@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A canned request for retrieving the response body at a given URL as a String.
- *
+ * <p>
  * Created by wenchengye on 16/8/28.
  */
 public abstract class StringVolleyRequest extends AbstractVolleyRequest<String> {
@@ -20,7 +20,7 @@ public abstract class StringVolleyRequest extends AbstractVolleyRequest<String> 
   /**
    * Creates a new request with the given method.
    *
-   * @param listener Listener to receive the String response.
+   * @param listener      Listener to receive the String response.
    * @param errorListener Error listener, or null to ignore errors.
    */
   public StringVolleyRequest(Response.Listener<String> listener,

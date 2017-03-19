@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.api;
+package com.heqi.kharazim.consume.core.api;
 
 
 /**

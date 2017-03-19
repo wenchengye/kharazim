@@ -1,7 +1,5 @@
 package com.heqi.kharazim.ui.view.sticky;
 
-import java.lang.reflect.Field;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,9 +12,10 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
+
+import java.lang.reflect.Field;
 
 public class StickyListHeadersListViewWrapper extends FrameLayout {
 
@@ -24,15 +23,12 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
       Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
   private static Field mTop;
   private static Field mBottom;
-
+  private final ViewConfiguration viewConfig;
+  private final Rect selectorBounds = new Rect();
   private View header = null;
   private int headerBottomPosition = -1;
   private Drawable selector;
-  private final ViewConfiguration viewConfig;
   private boolean showSelector;
-  private boolean drawSelectorOnTop = false;
-  private final Rect selectorBounds = new Rect();
-
   private final GestureDetector gestureDetector = new GestureDetector(getContext(),
       new GestureDetector.SimpleOnGestureListener() {
 
@@ -43,7 +39,6 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
         }
 
       });
-
   private final OnTouchListener onHeaderTouchListener = new OnTouchListener() {
 
     float startY;
@@ -66,13 +61,13 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
       return isScrolling;
     }
   };
-
+  private boolean drawSelectorOnTop = false;
+  private boolean inLayout;
+  private boolean headerChangedDuringLayout;
   private final OnGlobalLayoutListener onGlobalLayoutListener =
-      new OnGlobalLayoutListener()
-      {
+      new OnGlobalLayoutListener() {
         @Override
-        public void onGlobalLayout()
-        {
+        public void onGlobalLayout() {
           if (headerChangedDuringLayout) {
             if (getChildCount() > 1) {
               removeViewAt(1);
@@ -85,9 +80,6 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
         }
       };
 
-  private boolean inLayout;
-  private boolean headerChangedDuringLayout;
-
   public StickyListHeadersListViewWrapper(Context context) {
     this(context, null, 0);
   }
@@ -97,7 +89,7 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
   }
 
   public StickyListHeadersListViewWrapper(Context context,
-      AttributeSet attrs, int defStyle) {
+                                          AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     if (!HONEYCOMB_OR__ABOVE) {
       try {
@@ -145,7 +137,7 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right,
-      int bottom) {
+                          int bottom) {
     inLayout = true;
     super.onLayout(changed, left, top, right, bottom);
     setHeaderBottomPosition(this.headerBottomPosition);
@@ -182,13 +174,17 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
         .getLayoutParams();
     int width = getMeasuredWidth()
         - (params == null ? 0
-            : (params.leftMargin + params.rightMargin));
+        : (params.leftMargin + params.rightMargin));
     int parentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(width,
         MeasureSpec.EXACTLY);
     int parentHeightMeasureSpec = MeasureSpec.makeMeasureSpec(getHeight(),
         MeasureSpec.EXACTLY);
     measureChild(header, parentWidthMeasureSpec, parentHeightMeasureSpec);
     return header.getMeasuredHeight();
+  }
+
+  int getHeaderBottomPosition() {
+    return headerBottomPosition;
   }
 
   @SuppressLint("NewApi")
@@ -210,10 +206,6 @@ public class StickyListHeadersListViewWrapper extends FrameLayout {
       }
     }
     this.headerBottomPosition = headerBottomPosition;
-  }
-
-  int getHeaderBottomPosition() {
-    return headerBottomPosition;
   }
 
   public void setSelector(Drawable selector) {

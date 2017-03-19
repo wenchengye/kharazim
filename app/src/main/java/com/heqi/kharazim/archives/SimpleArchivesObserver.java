@@ -9,17 +9,22 @@ import com.heqi.kharazim.archives.model.UserProfile;
 
 public class SimpleArchivesObserver implements Archives.ArchivesObserver {
   @Override
-  public void onLogin(String userId) {}
+  public void onLogin(String userId) {
+  }
 
   @Override
-  public void onUserProfileUpdated(String userId, UserProfile userProfile) {}
+  public void onUserProfileUpdated(String userId, UserProfile userProfile) {
+  }
 
   @Override
-  public void onHealthConditionUpdated(String userId, HealthCondition healthCondition) {}
+  public void onHealthConditionUpdated(String userId, HealthCondition healthCondition) {
+  }
 
   @Override
-  public void onAddPlan(String userId, String planId) {}
+  public void onAddPlan(String userId, String planId) {
+  }
 
   @Override
-  public void onRemovePlan(String userId, String planId) {}
+  public void onRemovePlan(String userId, String planId) {
+  }
 }

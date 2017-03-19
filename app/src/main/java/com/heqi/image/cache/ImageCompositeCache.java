@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Composite image cache, which can combine multiple cache into one. Thread safe for
  * {@link ImageCompositeCache#get(String) and ImageCompositeCache#put(String, Bitmap)}.
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public final class ImageCompositeCache implements ImageCache {

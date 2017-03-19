@@ -12,10 +12,6 @@ public class DeviceHelper {
 
   public static final String FILE_ROOT = "heqi_kharazim";
 
-  public enum KHARAZIM_DIR {
-    CRASH;
-  }
-
   private DeviceHelper() {
   }
 
@@ -62,5 +58,9 @@ public class DeviceHelper {
     } else {
       return null;
     }
+  }
+
+  public enum KHARAZIM_DIR {
+    CRASH;
   }
 }

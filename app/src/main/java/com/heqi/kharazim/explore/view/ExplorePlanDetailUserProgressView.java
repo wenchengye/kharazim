@@ -57,7 +57,7 @@ public class ExplorePlanDetailUserProgressView extends RelativeLayout {
 
     int index = 0;
     int size = planDetailInfo.getData_info() != null ? planDetailInfo.getData_info().size() : 0;
-    for(; index < size; ++index) {
+    for (; index < size; ++index) {
       if (TextUtils.isEmpty(planDetailInfo.getData_info().get(index).getCpdatetime())) {
         break;
       } else {
@@ -66,8 +66,8 @@ public class ExplorePlanDetailUserProgressView extends RelativeLayout {
     }
 
     this.current = index >= size
-        ? (planDetailInfo.getData_info() != null  && planDetailInfo.getData_info().size() > 0
-            ? planDetailInfo.getData_info().get(0) : null)
+        ? (planDetailInfo.getData_info() != null && planDetailInfo.getData_info().size() > 0
+        ? planDetailInfo.getData_info().get(0) : null)
         : planDetailInfo.getData_info().get(index);
 
     //TODO: time progress
@@ -97,7 +97,7 @@ public class ExplorePlanDetailUserProgressView extends RelativeLayout {
 
     currentCourseText.setText(this.current == null ? ""
         : String.format(KharazimApplication.getAppContext().getString(
-            R.string.explore_detail_current_course_text_format),this.current.getDailydec()));
+        R.string.explore_detail_current_course_text_format), this.current.getDailydec()));
   }
 
   public PlanDetailInfo.PlanCourseInfo getCurrent() {

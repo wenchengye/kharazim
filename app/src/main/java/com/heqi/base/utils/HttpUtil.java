@@ -15,6 +15,9 @@ public class HttpUtil {
   private static final String HTTP_URI_SCHEME = "http";
   private static final String HTTPS_URI_SCHEME = "https";
 
+  private HttpUtil() {
+  }
+
   public static boolean isHttpScheme(String scheme) {
     return scheme != null && (scheme.toLowerCase().startsWith(HTTP_URI_SCHEME)
         || scheme.toLowerCase().startsWith(HTTPS_URI_SCHEME));
@@ -107,6 +110,4 @@ public class HttpUtil {
     formatter.close();
     return ret;
   }
-
-  private HttpUtil() {}
 }

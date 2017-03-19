@@ -12,6 +12,19 @@ public class ImageUri implements Serializable {
   private String imageUri;
   private ImageUriType imageUriType;
 
+  public ImageUri(String imageUri, ImageUriType urlType) {
+    this.imageUri = imageUri;
+    this.imageUriType = urlType;
+  }
+
+  public String getImageUri() {
+    return imageUri;
+  }
+
+  public ImageUriType getImageUriType() {
+    return imageUriType;
+  }
+
   public enum ImageUriType {
     /**
      * uri should be image http url
@@ -37,18 +50,5 @@ public class ImageUri implements Serializable {
      * unspecified uri type
      */
     UNSPECIFIED,
-  }
-
-  public ImageUri(String imageUri, ImageUriType urlType) {
-    this.imageUri = imageUri;
-    this.imageUriType = urlType;
-  }
-
-  public String getImageUri() {
-    return imageUri;
-  }
-
-  public ImageUriType getImageUriType() {
-    return imageUriType;
   }
 }

@@ -16,20 +16,20 @@ import java.io.Writer;
 
 /**
  * Utility class to handle I/O operations.
- * 
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class IOUtils {
 
+  public static final String DEFAULT_ENCODING = "utf-8";
   private static final int BUFFER_SIZE = 8 * 1024;
 
-  public static final String DEFAULT_ENCODING = "utf-8";
-
-  private IOUtils() {}
+  private IOUtils() {
+  }
 
   /**
    * Read the Stream content as a string (use utf-8).
-   * 
+   *
    * @param is The stream to read
    * @return The String content
    * @throws IOException IOException
@@ -40,7 +40,7 @@ public class IOUtils {
 
   /**
    * Read the Stream content as a string.
-   * 
+   *
    * @param is The stream to read
    * @return The String content
    * @throws IOException IOException
@@ -69,7 +69,7 @@ public class IOUtils {
 
   /**
    * Read file content to a String (always use utf-8).
-   * 
+   *
    * @param file The file to read
    * @return The String content
    * @throws IOException IOException
@@ -80,7 +80,7 @@ public class IOUtils {
 
   /**
    * Read file content to a String.
-   * 
+   *
    * @param file The file to read
    * @return The String content
    * @throws IOException IOException
@@ -94,7 +94,7 @@ public class IOUtils {
    * <p>
    * <b>Warning: Do not use on large file !</b>
    * </p>
-   * 
+   *
    * @param file The file te read
    * @return The binary data
    * @throws IOException IOException
@@ -116,7 +116,7 @@ public class IOUtils {
    * <p>
    * <b>Warning: Do not use on large stream !</b>
    * </p>
-   * 
+   *
    * @param is The stream to read
    * @return The binary data
    * @throws IOException IOException
@@ -139,9 +139,9 @@ public class IOUtils {
 
   /**
    * Write String content to a stream (always use utf-8).
-   * 
+   *
    * @param content The content to read
-   * @param os The stream to write
+   * @param os      The stream to write
    * @throws IOException IOException
    */
   public static void writeString(String content, OutputStream os) throws IOException {
@@ -150,9 +150,9 @@ public class IOUtils {
 
   /**
    * Write String content to a stream (always use utf-8).
-   * 
+   *
    * @param content The content to read
-   * @param os The stream to write
+   * @param os      The stream to write
    * @throws IOException IOException
    */
   public static void writeString(String content, OutputStream os, String encoding)
@@ -169,7 +169,7 @@ public class IOUtils {
 
   /**
    * Write stream to another stream.
-   * 
+   *
    * @param is The stream to read
    * @param os The stream to write
    * @throws IOException IOException
@@ -180,15 +180,15 @@ public class IOUtils {
 
   /**
    * Write stream to another stream.
-   * 
-   * @param is The stream to read
+   *
+   * @param is                The stream to read
    * @param closeInputStream
-   * @param os The stream to write
+   * @param os                The stream to write
    * @param closeOutputStream
    * @throws IOException IOException
    */
   public static void write(InputStream is, boolean closeInputStream, OutputStream os,
-      boolean closeOutputStream) throws IOException {
+                           boolean closeOutputStream) throws IOException {
     try {
       byte[] buffer = new byte[BUFFER_SIZE];
       int count;
@@ -208,8 +208,8 @@ public class IOUtils {
 
   /**
    * Write stream to a file.
-   * 
-   * @param is The stream to read
+   *
+   * @param is   The stream to read
    * @param file The file to write
    * @throws IOException
    */
@@ -231,7 +231,7 @@ public class IOUtils {
 
   /**
    * Write binay data to a file.
-   * 
+   *
    * @param data The binary data to write
    * @param file The file to write
    * @throws IOException
@@ -242,7 +242,7 @@ public class IOUtils {
 
   /**
    * Write binay data to a file.
-   * 
+   *
    * @param data The binary data to write
    * @param file The file to write
    * @throws IOException
@@ -260,7 +260,7 @@ public class IOUtils {
 
   /**
    * Close stream.
-   * 
+   *
    * @param is The stream to close
    */
   public static void close(Closeable is) {

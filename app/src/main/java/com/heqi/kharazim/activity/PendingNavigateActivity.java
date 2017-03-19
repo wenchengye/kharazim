@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PendingNavigateActivity extends FragmentActivity {
 
-  private Runnable pendingNavigation = null;
   private final AtomicBoolean paused = new AtomicBoolean(false);
+  private Runnable pendingNavigation = null;
 
   @Override
   protected void onPause() {

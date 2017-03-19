@@ -1,4 +1,4 @@
-package com.heqi.kharazim.explore.consume.internal.api;
+package com.heqi.kharazim.consume.core.internal.api;
 
 import android.net.Uri;
 

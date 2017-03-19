@@ -58,6 +58,17 @@ public class ExploreCircleProgressView extends View {
     initView(context, attrs);
   }
 
+  private static int validate2PxInteger(float value) {
+    return Math.max(Math.round(value), 1);
+  }
+
+  private static String combineProgressText(String progressText, String maxText) {
+    return String.format(
+        KharazimApplication.getAppContext().getString(R.string.explore_circle_progress_text_format),
+        TextUtils.isEmpty(progressText) ? "" : progressText,
+        TextUtils.isEmpty(maxText) ? "" : maxText);
+  }
+
   private void initView(Context context, AttributeSet attrs) {
     TypedArray typedArray = context.getTheme().obtainStyledAttributes(
         attrs,
@@ -205,16 +216,5 @@ public class ExploreCircleProgressView extends View {
   public void setProgress(float progress) {
     this.progress = progress;
     invalidate();
-  }
-
-  private static int validate2PxInteger(float value) {
-    return Math.max(Math.round(value), 1);
-  }
-
-  private static String combineProgressText(String progressText, String maxText) {
-    return String.format(
-        KharazimApplication.getAppContext().getString(R.string.explore_circle_progress_text_format),
-        TextUtils.isEmpty(progressText) ? "" : progressText,
-        TextUtils.isEmpty(maxText) ? "" : maxText);
   }
 }

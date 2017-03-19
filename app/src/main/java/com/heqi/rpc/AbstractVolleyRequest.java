@@ -63,7 +63,8 @@ public abstract class AbstractVolleyRequest<T> extends Request<T> {
    *
    * @param params
    */
-  protected void setGetParams(Map<String, String> params) {}
+  protected void setGetParams(Map<String, String> params) {
+  }
 
   /**
    * Get request timeout.

@@ -12,10 +12,10 @@ import android.view.ViewGroup;
  * the ViewPager is finished rather than still scrolling, so the UI will not lag when scrolling.
  */
 public abstract class AsyncLoadFragment extends Fragment {
+  protected boolean isInflated;
   private boolean allowLoading = true;
   private boolean pendingToLoad = false;
   private View contentView;
-  protected boolean isInflated;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

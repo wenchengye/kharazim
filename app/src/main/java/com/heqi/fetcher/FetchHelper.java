@@ -11,13 +11,12 @@ public class FetchHelper<T> {
 
   private final int firstSize;
   private final int pageSize;
-  protected int currentIndex;
   private final boolean twoPhraseLoading;
-  private boolean hasMore;
-
   private final BaseFetcher<T> fetcher;
   private final BaseFetcher.Callback<T> callback;
   private final BaseFetcher.Callback<T> callbackProxy;
+  protected int currentIndex;
+  private boolean hasMore;
 
   public FetchHelper(BaseFetcher<T> fetcher, BaseFetcher.Callback<T> callback) {
     this(fetcher, callback, DEFAULT_FIRST_SIZE, DEFAULT_PAGE_SIZE, false);
@@ -28,22 +27,22 @@ public class FetchHelper<T> {
    * network.
    */
   public FetchHelper(BaseFetcher<T> fetcher, BaseFetcher.Callback<T> callback,
-      boolean twoPhraseLoading) {
+                     boolean twoPhraseLoading) {
     this(fetcher, callback, DEFAULT_FIRST_SIZE, DEFAULT_PAGE_SIZE, twoPhraseLoading);
   }
 
   public FetchHelper(BaseFetcher<T> fetcher, BaseFetcher.Callback<T> callback, int firstSize,
-      boolean twoPhraseLoading) {
+                     boolean twoPhraseLoading) {
     this(fetcher, callback, firstSize, DEFAULT_PAGE_SIZE, twoPhraseLoading);
   }
 
   public FetchHelper(BaseFetcher<T> fetcher, BaseFetcher.Callback<T> callback,
-      int firstSize, int pageSize) {
+                     int firstSize, int pageSize) {
     this(fetcher, callback, firstSize, pageSize, false);
   }
 
   public FetchHelper(BaseFetcher<T> fetcher, BaseFetcher.Callback<T> callback,
-      int firstSize, int pageSize, boolean twoPhraseLoading) {
+                     int firstSize, int pageSize, boolean twoPhraseLoading) {
     this.fetcher = fetcher;
     this.callback = callback;
     this.firstSize = firstSize;
@@ -66,7 +65,7 @@ public class FetchHelper<T> {
 
   /**
    * Move current index to a new position.
-   * 
+   *
    * @param pos new position.
    */
   public void moveToPosition(int pos) {
@@ -75,7 +74,7 @@ public class FetchHelper<T> {
 
   /**
    * fetch more data.
-   * 
+   *
    * @param size the size want to fetch, begin with the last fetched num.
    */
   public void fetchMore(int size) {

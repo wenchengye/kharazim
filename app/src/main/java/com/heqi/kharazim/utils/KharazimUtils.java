@@ -27,7 +27,8 @@ import java.io.UnsupportedEncodingException;
 
 public class KharazimUtils {
 
-  private KharazimUtils() {}
+  private KharazimUtils() {
+  }
 
   // ui
   public static void showToast(String text) {

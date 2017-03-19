@@ -16,7 +16,7 @@ import com.heqi.image.LoadImageCallback;
 
 /**
  * Image view to perform asynchronous image loading.
- *
+ * <p>
  * Created by wenchengye on 16/10/11.
  */
 public class AsyncImageView extends ImageView {
@@ -24,10 +24,6 @@ public class AsyncImageView extends ImageView {
   private static final int SHOW_ANIMATION_INTERVAL = 200;
   private static ImageManagerHolder imageManagerHolder;
   private final AlphaAnimation animation;
-  {
-    animation = new AlphaAnimation(0.4f, 1.0f);
-    animation.setDuration(SHOW_ANIMATION_INTERVAL);
-  }
   private ImageManager.ImageContainer imageContainer;
   private int defaultRes;
   private String requestKey;
@@ -39,6 +35,11 @@ public class AsyncImageView extends ImageView {
   private boolean defaultImmediately = true;
   private int requiredWidth = 0;
   private int requiredHeight = 0;
+
+  {
+    animation = new AlphaAnimation(0.4f, 1.0f);
+    animation.setDuration(SHOW_ANIMATION_INTERVAL);
+  }
 
   public AsyncImageView(Context context) {
     super(context);
@@ -59,10 +60,6 @@ public class AsyncImageView extends ImageView {
    */
   public static void setImageManagerHolder(ImageManagerHolder imageManagerHolder) {
     AsyncImageView.imageManagerHolder = imageManagerHolder;
-  }
-
-  public interface ImageManagerHolder {
-    ImageManager getImageManager();
   }
 
   @Override
@@ -189,7 +186,6 @@ public class AsyncImageView extends ImageView {
     }
   }
 
-  // edit start by chengye at 2014.6.5
   /**
    * whether show default image while loading. set false if you want default image only show when
    * loading failed. using when continuous image replacement happens and don`t show default image
@@ -201,12 +197,12 @@ public class AsyncImageView extends ImageView {
     this.defaultImmediately = defaultImmediately;
   }
 
+  // edit start by chengye at 2014.6.5
+
   protected void setRequireSize(int requiredWidth, int requiredHeight) {
     this.requiredWidth = requiredWidth;
     this.requiredHeight = requiredHeight;
   }
-
-  // edit end
 
   /**
    * Returns status of this view. Null for not started.
@@ -216,6 +212,8 @@ public class AsyncImageView extends ImageView {
   public AsyncTask.Status getStatus() {
     return status;
   }
+
+  // edit end
 
   private void setStatus(AsyncTask.Status status) {
     if (this.status == status) {
@@ -273,7 +271,7 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads image from network using a http url in asynchronous mode.
    *
-   * @param url image url
+   * @param url               image url
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public void loadNetworkImage(String url, int defaultImageResId) {
@@ -287,7 +285,7 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads application icon from local using its package name in asynchronous mode.
    *
-   * @param packageName the app must be installed already, otherwise, it fails to load
+   * @param packageName       the app must be installed already, otherwise, it fails to load
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public void loadLocalAppIcon(String packageName, int defaultImageResId) {
@@ -301,7 +299,7 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads apk icon from the apk filepath given in asynchronous mode.
    *
-   * @param filePath path of apk file.
+   * @param filePath          path of apk file.
    * @param defaultImageResId default image resource id, which is shown before loading.
    */
   public void loadLocalApkIcon(String filePath, int defaultImageResId) {
@@ -315,7 +313,7 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads video thumbnail from local in asynchronous mode.
    *
-   * @param videoFilePath file path of video
+   * @param videoFilePath     file path of video
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public void loadVideoThumbnail(String videoFilePath, int defaultImageResId) {
@@ -329,7 +327,7 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads local image in asynchronous mode.
    *
-   * @param filePath file path of image
+   * @param filePath          file path of image
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public void loadLocalImage(String filePath, int defaultImageResId) {
@@ -339,8 +337,8 @@ public class AsyncImageView extends ImageView {
   /**
    * Loads local image in asynchronous mode.
    *
-   * @param filePath file path of image
-   * @param rotate rotate degree of image
+   * @param filePath          file path of image
+   * @param rotate            rotate degree of image
    * @param defaultImageResId default image resource id, which is shown before loading
    */
   public void loadLocalImage(String filePath, int rotate, int defaultImageResId) {
@@ -504,6 +502,10 @@ public class AsyncImageView extends ImageView {
 
   private enum ImageRequestType {
     NETWORK, APP_ICON, LOCAL_IMAGE, VIDEO_THUMBNAIL, APK_ICON
+  }
+
+  public interface ImageManagerHolder {
+    ImageManager getImageManager();
   }
 
   public interface OnStatusChangedListener {

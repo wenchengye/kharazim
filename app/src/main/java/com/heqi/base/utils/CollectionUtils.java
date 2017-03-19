@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Usage: Util for collections.
- * 
+ *
  * @author zhulantian@wandoujia.com.
  */
 public class CollectionUtils {
