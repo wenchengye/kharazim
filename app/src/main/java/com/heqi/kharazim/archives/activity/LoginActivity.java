@@ -68,7 +68,7 @@ public class LoginActivity extends PendingNavigateActivity {
 
 
   private void handleLoginFinished() {
-    NavigationManager.navigateToExplore(KharazimApplication.getAppContext());
+    NavigationManager.navigateToHome(KharazimApplication.getAppContext());
     finish();
   }
 }

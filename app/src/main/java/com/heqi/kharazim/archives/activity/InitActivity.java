@@ -10,7 +10,7 @@ import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.NavigationManager;
 import com.heqi.kharazim.activity.PendingNavigateActivity;
-import com.heqi.kharazim.archives.Archives;
+import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.utils.KharazimUtils;
 
 /**
@@ -28,7 +28,7 @@ public class InitActivity extends PendingNavigateActivity {
   private Runnable goExploreRunnable = new Runnable() {
     @Override
     public void run() {
-      NavigationManager.navigateToExplore(KharazimApplication.getAppContext());
+      NavigationManager.navigateToHome(KharazimApplication.getAppContext());
       finish();
     }
   };
@@ -41,7 +41,7 @@ public class InitActivity extends PendingNavigateActivity {
     }
   };
 
-  private Archives.ArchivesTaskCallback loginCallback = new Archives.ArchivesTaskCallback() {
+  private ArchivesService.ArchivesTaskCallback loginCallback = new ArchivesService.ArchivesTaskCallback() {
     @Override
     public void onTaskSuccess(int code, String msg) {
       if (KharazimUtils.isRetCodeOK(code)) stayAndNavigate(goExploreRunnable);
@@ -63,9 +63,9 @@ public class InitActivity extends PendingNavigateActivity {
   }
 
   private void init() {
-    Archives archives = KharazimApplication.getArchives();
+    ArchivesService archives = KharazimApplication.getArchives();
 
-    if (archives.getState() == Archives.State.ONLINE) {
+    if (archives.getState() == ArchivesService.State.ONLINE) {
       stayAndNavigate(goExploreRunnable);
     } else if (TextUtils.isEmpty(archives.getLastUserId())) {
       stayAndNavigate(goLoginRunnable);

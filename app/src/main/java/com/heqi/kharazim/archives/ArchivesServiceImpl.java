@@ -32,7 +32,7 @@ import java.util.List;
  * Created by overspark on 2017/3/13.
  */
 
-public class ArchivesImpl implements Archives {
+public class ArchivesServiceImpl implements ArchivesService {
 
   private final Context context;
   private final Preferences archivesPreferences;
@@ -45,7 +45,7 @@ public class ArchivesImpl implements Archives {
   private Bundle currentUserBundle = null;
   private String accessToken = null;
 
-  public ArchivesImpl(Context context) {
+  public ArchivesServiceImpl(Context context) {
     this.context = context;
     archivesPreferences = Preferences.getById(this.context, Const.ARCHIVES_PREFERENCE_NAME);
     this.state = State.OFFLINE;
@@ -223,10 +223,10 @@ public class ArchivesImpl implements Archives {
 
             if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
               boolean notify = false;
-              synchronized (ArchivesImpl.this) {
+              synchronized (ArchivesServiceImpl.this) {
                 if (userIdRef != null
                     && userIdRef.equals(currentUserId)) {
-                  currentUserBundle.putSerializable(ArchivesImpl.Const.BUNDLE_KEY_USER_PROFILE_OBJECT,
+                  currentUserBundle.putSerializable(ArchivesServiceImpl.Const.BUNDLE_KEY_USER_PROFILE_OBJECT,
                       response.getData_src());
 
                   String bundleKey = getUserBundleKey(currentUserId);
@@ -287,11 +287,11 @@ public class ArchivesImpl implements Archives {
           public void onResponse(final HealthConditionResult response) {
             if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
               boolean notify = false;
-              synchronized (ArchivesImpl.this) {
+              synchronized (ArchivesServiceImpl.this) {
                 if (userIdRef != null
                     && userIdRef.equals(currentUserId)) {
                   currentUserBundle.putSerializable(
-                      ArchivesImpl.Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT,
+                      ArchivesServiceImpl.Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT,
                       response.getData_src());
 
                   String bundleKey = getUserBundleKey(currentUserId);
@@ -362,7 +362,7 @@ public class ArchivesImpl implements Archives {
           public void onResponse(final ArchivesCommonResult response) {
             if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
               boolean notify = false;
-              synchronized (ArchivesImpl.this) {
+              synchronized (ArchivesServiceImpl.this) {
                 if (userIdRef != null
                     && userIdRef.equals(currentUserId)) {
                   notify = true;

@@ -8,7 +8,6 @@ import com.heqi.kharazim.archives.activity.InitActivity;
 import com.heqi.kharazim.archives.activity.LoginActivity;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.consume.activity.ConsumeActivity;
-import com.heqi.kharazim.explore.activity.ExploreActivity;
 import com.heqi.kharazim.explore.activity.PlanDetailActivity;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 
@@ -34,10 +33,17 @@ public class NavigationManager {
     context.startActivity(intent);
   }
 
-  public static void navigateToExplore(Context context) {
-    Intent intent = new Intent(context, ExploreActivity.class);
+  public static void navigateToHome(Context context) {
+    navigateToHome(context, null);
+  }
+
+  public static void navigateToHome(Context context, VerticalType verticalType) {
+    Intent intent = new Intent(context, HomeActivity.class);
     if (!(context instanceof Activity)) {
       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+    if (verticalType != null) {
+      intent.putExtra(Intents.EXTRA_VERTICAL_TYPE, verticalType.name());
     }
     context.startActivity(intent);
   }

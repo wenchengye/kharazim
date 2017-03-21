@@ -10,7 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.archives.Archives;
+import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesReqeust;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
@@ -137,7 +137,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
   private void addPlan() {
     KharazimApplication.getArchives().addPlan(this.planLiteInfo.getId(),
-        new Archives.ArchivesTaskCallback() {
+        new ArchivesService.ArchivesTaskCallback() {
           @Override
           public void onTaskSuccess(int code, String msg) {
             if (KharazimUtils.isRetCodeOK(code) && listener != null) {

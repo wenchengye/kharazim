@@ -15,6 +15,11 @@ public class Intents {
 
   public static final String EXTRA_COURSE_DETAIL_TYPE = "kharazim.intent.extra.COURSE_DETAIL_TYPE";
 
+  public static final String EXTRA_VERTICAL_TYPE = "kharazim.intent.extra.VERTICAL_TYPE";
+
+  /**
+   * consume
+   */
   public static final int EXTRA_VALUE_COURSE_DETAIL_TYPE_DAILY_ID = 0;
   public static final int EXTRA_VALUE_COURSE_DETAIL_TYPE_INFO = 1;
 

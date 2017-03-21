@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.archives.Archives;
+import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
 import com.heqi.kharazim.utils.KharazimUtils;
 
@@ -97,7 +97,7 @@ public class LoginFragment extends AsyncLoadFragment {
       return;
     }
 
-    Archives.ArchivesTaskCallback loginListener = new Archives.ArchivesTaskCallback() {
+    ArchivesService.ArchivesTaskCallback loginListener = new ArchivesService.ArchivesTaskCallback() {
       @Override
       public void onTaskSuccess(int code, String msg) {
         if (KharazimUtils.isRetCodeOK(code)) {

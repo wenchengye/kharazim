@@ -10,8 +10,8 @@ import com.android.volley.toolbox.ByteArrayPool;
 import com.heqi.base.utils.SystemUtil;
 import com.heqi.image.ImageManager;
 import com.heqi.image.view.AsyncImageView;
-import com.heqi.kharazim.archives.Archives;
-import com.heqi.kharazim.archives.ArchivesImpl;
+import com.heqi.kharazim.archives.ArchivesService;
+import com.heqi.kharazim.archives.ArchivesServiceImpl;
 
 import java.io.File;
 
@@ -33,7 +33,7 @@ public class KharazimApplication extends Application {
   private static Context appContext;
   private static ByteArrayPool byteArrayPool;
   private static ImageManager imageManager;
-  private static Archives archives;
+  private static ArchivesService archives;
 
   public static Context getAppContext() {
     return appContext;
@@ -43,7 +43,7 @@ public class KharazimApplication extends Application {
     appContext = context;
   }
 
-  public static Archives getArchives() {
+  public static ArchivesService getArchives() {
     return archives;
   }
 
@@ -117,7 +117,7 @@ public class KharazimApplication extends Application {
   }
 
   private static void initArchives() {
-    archives = new ArchivesImpl(appContext);
+    archives = new ArchivesServiceImpl(appContext);
   }
 
   @Override

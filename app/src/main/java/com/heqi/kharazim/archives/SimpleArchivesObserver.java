@@ -7,7 +7,7 @@ import com.heqi.kharazim.archives.model.UserProfile;
  * Created by overspark on 2017/3/19.
  */
 
-public class SimpleArchivesObserver implements Archives.ArchivesObserver {
+public class SimpleArchivesObserver implements ArchivesService.ArchivesObserver {
   @Override
   public void onLogin(String userId) {
   }

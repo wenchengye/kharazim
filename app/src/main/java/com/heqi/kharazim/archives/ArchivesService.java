@@ -7,7 +7,7 @@ import com.heqi.kharazim.archives.model.UserProfile;
  * Created by overspark on 2017/3/13.
  */
 
-public interface Archives {
+public interface ArchivesService {
 
   int getState();
 
