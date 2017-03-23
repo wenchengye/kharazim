@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include layout="@layout/archives_login_bg_iv"/>
+
+    <RelativeLayout android:id="@+id/archives_register_content_layout"
+        android:layout_width="@dimen/archives_login_content_width"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout android:id="@+id/archives_register_user_input_layout"
+                        style="@style/archives_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true">
+            <EditText android:id="@+id/archives_register_user_input_et"
+                      android:layout_centerVertical="true"
+                      android:inputType="text"
+                      android:gravity="start"
+                      android:hint="@string/archives_login_input_user_hint_text"
+                      style="@style/archives_input_edit_text"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:id="@+id/archives_register_nickname_input_layout"
+                        style="@style/archives_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_below="@id/archives_register_user_input_layout"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true">
+            <EditText android:id="@+id/archives_register_nickname_input_et"
+                      android:layout_centerVertical="true"
+                      android:inputType="text"
+                      android:gravity="start"
+                      android:hint="@string/archives_login_input_nickname_hint_text"
+                      style="@style/archives_input_edit_text"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:id="@+id/archives_register_password_input_layout"
+                        style="@style/archives_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_below="@id/archives_register_nickname_input_layout"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true">
+            <EditText android:id="@+id/archives_register_password_input_et"
+                      android:layout_centerVertical="true"
+                      android:inputType="textPassword"
+                      android:gravity="start"
+                      android:hint="@string/archives_login_input_password_hint_text"
+                      style="@style/archives_input_edit_text"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:id="@+id/archives_register_password_confirm_input_layout"
+                        style="@style/archives_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_below="@id/archives_register_password_input_layout"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true">
+            <EditText android:id="@+id/archives_register_password_confirm_input_et"
+                      android:layout_centerVertical="true"
+                      android:inputType="textPassword"
+                      android:gravity="start"
+                      android:hint="@string/archives_login_input_password_confirm_hint_text"
+                      style="@style/archives_input_edit_text"/>
+        </RelativeLayout>
+
+        <TextView android:id="@+id/archives_register_action_register_btn"
+            style="@style/archives_login_action_btn"
+            android:layout_below="@id/archives_register_password_confirm_input_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp"
+            android:text="@string/confirm"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/archives_register_content_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_kharazim_text_logo"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

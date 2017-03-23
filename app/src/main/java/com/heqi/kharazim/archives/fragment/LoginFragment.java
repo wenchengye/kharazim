@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
@@ -21,11 +19,11 @@ public class LoginFragment extends AsyncLoadFragment {
 
   private EditText userIdEditText;
   private EditText passwordEditText;
-  private TextView loginBtn;
-  private TextView registerBtn;
-  private ImageView wechatLoginBtn;
-  private ImageView weiboLoginBtn;
-  private ImageView qqLoginBtn;
+  private View loginBtn;
+  private View registerBtn;
+  private View wechatLoginBtn;
+  private View weiboLoginBtn;
+  private View qqLoginBtn;
   private LoginFragmentListener listener;
 
   public void setListener(LoginFragmentListener listener) {
@@ -39,6 +37,15 @@ public class LoginFragment extends AsyncLoadFragment {
   }
 
   private void initView(View contentView) {
+    if (contentView == null) return;
+
+    userIdEditText = (EditText) contentView.findViewById(R.id.archives_login_user_input_et);
+    passwordEditText = (EditText) contentView.findViewById(R.id.archives_login_password_input_et);
+    loginBtn = contentView.findViewById(R.id.archives_login_action_login_btn);
+    registerBtn = contentView.findViewById(R.id.archives_login_action_register_btn);
+    wechatLoginBtn = contentView.findViewById(R.id.archives_login_wechat_iv);
+    weiboLoginBtn = contentView.findViewById(R.id.archives_login_weibo_iv);
+    qqLoginBtn = contentView.findViewById(R.id.archives_login_qq_iv);
   }
 
   private void initListeners() {
@@ -143,7 +150,7 @@ public class LoginFragment extends AsyncLoadFragment {
 
   @Override
   protected int getLayoutResId() {
-    return 0;
+    return R.layout.archives_login_fragment_layout;
   }
 
   @Override

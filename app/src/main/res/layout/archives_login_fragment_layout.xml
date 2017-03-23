@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/archives_login_bg_iv"/>
+
+    <LinearLayout android:id="@+id/archives_login_third_part_layout"
+        android:layout_width="@dimen/archives_login_content_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageView android:id="@+id/archives_login_wechat_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:src="@drawable/icon_archives_login_wechat"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView android:id="@+id/archives_login_weibo_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:src="@drawable/icon_archives_login_weibo"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView android:id="@+id/archives_login_qq_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:src="@drawable/icon_archives_login_qq"/>
+    </LinearLayout>
+
+    <TextView android:id="@+id/archives_login_third_part_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@id/archives_login_third_part_layout"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"
+        android:text="@string/archives_login_third_part_hint_text"/>
+
+    <View android:id="@+id/archives_login_third_part_divider"
+        android:layout_width="@dimen/archives_login_content_width"
+        android:layout_height="1dp"
+        android:layout_above="@id/archives_login_third_part_tv"
+        android:layout_marginBottom="12dp"
+        android:layout_centerHorizontal="true"
+        android:background="#646565"/>
+
+    <LinearLayout android:id="@+id/archives_login_action_layout"
+        android:layout_width="@dimen/archives_login_content_width"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/archives_login_third_part_divider"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="35dp">
+
+        <TextView android:id="@+id/archives_login_action_login_btn"
+            android:layout_weight="0"
+            android:text="@string/archives_login_action_login_text"
+            style="@style/archives_login_action_btn"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView android:id="@+id/archives_login_action_register_btn"
+                  android:layout_weight="0"
+                  android:text="@string/archives_login_action_register_text"
+                  style="@style/archives_login_action_btn"/>
+
+    </LinearLayout>
+
+    <TextView android:id="@+id/archives_login_action_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/archives_login_action_layout"
+        android:layout_marginBottom="33dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/kharazim_desgin_color"
+        android:textSize="@dimen/text_size_xtiny"
+        android:text="@string/archives_login_action_hint_text"/>
+
+    <RelativeLayout android:id="@+id/archives_login_password_input_layout"
+        style="@style/archives_input_layout"
+        android:layout_above="@id/archives_login_action_tv"
+        android:layout_marginBottom="22dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/archives_login_content_width">
+
+        <TextView android:id="@+id/archives_login_password_input_label"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/archives_login_input_password_label_text"
+            style="@style/archives_input_label"/>
+
+        <EditText android:id="@+id/archives_login_password_input_et"
+                  android:layout_toRightOf="@id/archives_login_password_input_label"
+                  android:layout_toEndOf="@id/archives_login_password_input_label"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginStart="10dp"
+                  android:layout_centerVertical="true"
+                  android:inputType="textPassword"
+                  android:gravity="end"
+                  android:hint="@string/archives_login_input_password_hint_text"
+                  style="@style/archives_input_edit_text"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/archives_login_user_input_layout"
+                    style="@style/archives_input_layout"
+                    android:layout_width="@dimen/archives_login_content_width"
+                    android:layout_above="@id/archives_login_password_input_layout"
+                    android:layout_marginBottom="19dp"
+                    android:layout_centerHorizontal="true">
+
+        <TextView android:id="@+id/archives_login_user_input_label"
+                  android:layout_alignParentStart="true"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:text="@string/archives_login_input_user_label_text"
+                  style="@style/archives_input_label"/>
+
+        <EditText android:id="@+id/archives_login_user_input_et"
+                  android:layout_toRightOf="@id/archives_login_user_input_label"
+                  android:layout_toEndOf="@id/archives_login_user_input_label"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginStart="10dp"
+                  android:layout_centerVertical="true"
+                  android:inputType="text"
+                  android:gravity="end"
+                  android:hint="@string/archives_login_input_user_hint_text"
+                  style="@style/archives_input_edit_text"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/archives_login_user_input_layout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_kharazim_image_logo"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+</RelativeLayout>

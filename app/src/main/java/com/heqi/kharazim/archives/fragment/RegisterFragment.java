@@ -27,7 +27,7 @@ public class RegisterFragment extends AsyncLoadFragment {
   private EditText nicknameEditText;
   private EditText passwordEditText;
   private EditText passwordConfirmEditText;
-  private TextView registerBtn;
+  private View registerBtn;
   private RegisterFragmentListener listener;
 
   public void setListener(RegisterFragmentListener listener) {
@@ -41,7 +41,16 @@ public class RegisterFragment extends AsyncLoadFragment {
   }
 
   private void initView(View contentView) {
+    if (contentView == null) return;
 
+    userIdEditText = (EditText) contentView.findViewById(R.id.archives_register_user_input_et);
+    nicknameEditText = (EditText) contentView.findViewById(
+        R.id.archives_register_nickname_input_et);
+    passwordEditText = (EditText) contentView.findViewById(
+        R.id.archives_register_password_input_et);
+    passwordConfirmEditText = (EditText) contentView.findViewById(
+        R.id.archives_register_password_confirm_input_et);
+    registerBtn = contentView.findViewById(R.id.archives_register_action_register_btn);
   }
 
   private void initListeners() {
@@ -136,7 +145,7 @@ public class RegisterFragment extends AsyncLoadFragment {
 
   @Override
   protected int getLayoutResId() {
-    return 0;
+    return R.layout.archives_register_fragment_layout;
   }
 
   @Override

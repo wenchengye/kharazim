@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">kharazim</string>
-    <string name="hello_world">Hello World !</string>
-    <string name="action_settings">Settings</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
 
     <!-- explore -->
     <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
@@ -33,4 +33,14 @@
     <string name="archives_register_password_confirm_failed_hint_text">两次输入的密码不一致</string>
     <string name="archives_register_success_hint_text">注册成功</string>
     <string name="archives_register_failed_hint_text">注册失败</string>
+    <string name="archives_login_third_part_hint_text">使用其他社交工具登录</string>
+    <string name="archives_login_action_login_text">登录</string>
+    <string name="archives_login_action_register_text">注册</string>
+    <string name="archives_login_action_hint_text">我已阅读注册说明</string>
+    <string name="archives_login_input_password_label_text">密码</string>
+    <string name="archives_login_input_password_hint_text">输入密码</string>
+    <string name="archives_login_input_user_label_text">用户</string>
+    <string name="archives_login_input_user_hint_text">电话/邮箱</string>
+    <string name="archives_login_input_nickname_hint_text">输入昵称</string>
+    <string name="archives_login_input_password_confirm_hint_text">确认密码</string>
 </resources>
