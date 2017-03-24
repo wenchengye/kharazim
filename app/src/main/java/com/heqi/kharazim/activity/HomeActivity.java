@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.fragment.ArchivesFragment;
 import com.heqi.kharazim.archives.fragment.SettingsFragment;
 import com.heqi.kharazim.config.Intents;
@@ -25,19 +26,28 @@ public class HomeActivity extends FragmentActivity {
       new HomeNavigateView.OnVerticalTypeSelectedListener() {
     @Override
     public void onVerticalTypeSelected(VerticalType type) {
-      navigateToVertical(type);
+      navigateToVerticalInternal(type);
     }
   };
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.home_activity_layout);
 
+    initView();
     handleIntent(getIntent());
   }
 
   private void initView() {
+    navigateView = (HomeNavigateView) findViewById(R.id.home_navigate_view);
 
+    if (navigateView != null) {
+      navigateView.setListener(naviListener);
+      navigateView.addVerticalType(VerticalType.Explore);
+      navigateView.addVerticalType(VerticalType.Archives);
+      navigateView.addVerticalType(VerticalType.Settings);
+    }
   }
 
   private void handleIntent(Intent intent) {
@@ -53,6 +63,8 @@ public class HomeActivity extends FragmentActivity {
         type = VerticalType.Explore;
       }
     }
+
+    navigateToVertical(type);
   }
 
   private void navigateToVertical(VerticalType type) {
@@ -67,14 +79,14 @@ public class HomeActivity extends FragmentActivity {
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
 
-    Fragment currentFragment = fm.findFragmentById(android.R.id.content);
+    Fragment currentFragment = fm.findFragmentById(R.id.home_fragment_container);
     switch (type) {
       case Explore:
         if (currentFragment instanceof PlanListFragment) {
           return;
         } else {
           PlanListFragment planListFragment = new PlanListFragment();
-          ft.replace(android.R.id.content, planListFragment);
+          ft.replace(R.id.home_fragment_container, planListFragment);
         }
         break;
       case Archives:
@@ -82,7 +94,7 @@ public class HomeActivity extends FragmentActivity {
           return;
         } else {
           ArchivesFragment archivesFragment = new ArchivesFragment();
-          ft.replace(android.R.id.content, archivesFragment);
+          ft.replace(R.id.home_fragment_container, archivesFragment);
         }
         break;
       case Settings:
@@ -90,7 +102,7 @@ public class HomeActivity extends FragmentActivity {
           return;
         } else {
           SettingsFragment settingsFragment = new SettingsFragment();
-          ft.replace(android.R.id.content, settingsFragment);
+          ft.replace(R.id.home_fragment_container, settingsFragment);
         }
         break;
       default:
