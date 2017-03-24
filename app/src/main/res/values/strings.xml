@@ -16,6 +16,8 @@
     <string name="explore_detail_consume_text">开启今日的健康之旅</string>
     <string name="explore_circle_progress_text_format">%1$s / %2$s</string>
     <string name="explore_detail_current_course_text_format">今日计划 : %1$s</string>
+    <string name="explore_add_plan_success_toast">添加计划成功</string>
+    <string name="explore_add_plan_failed_toast">添加计划失败</string>
 
     <!-- consumer -->
     <string name="consumer_interpretation_text">穴位与动作说明</string>

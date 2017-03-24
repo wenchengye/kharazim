@@ -36,8 +36,7 @@ public class ArchivesServiceImpl implements ArchivesService {
 
   private final Context context;
   private final Preferences archivesPreferences;
-  private final List<WeakReference<ArchivesObserver>> observers =
-      new ArrayList<WeakReference<ArchivesObserver>>();
+  private final List<WeakReference<ArchivesObserver>> observers = new ArrayList<>();
   private int state;
   private int originState;
   private String lastUserId = null;

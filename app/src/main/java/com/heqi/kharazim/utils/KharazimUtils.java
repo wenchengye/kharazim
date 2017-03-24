@@ -35,6 +35,11 @@ public class KharazimUtils {
     Toast.makeText(KharazimApplication.getAppContext(), text, Toast.LENGTH_LONG).show();
   }
 
+  public static void showToast(int resId) {
+    Toast.makeText(KharazimApplication.getAppContext(),
+        KharazimApplication.getAppContext().getString(resId), Toast.LENGTH_LONG).show();
+  }
+
   // media
   public static boolean validateSourceUri(Uri uri) {
     return uri != null && !TextUtils.isEmpty(uri.toString());

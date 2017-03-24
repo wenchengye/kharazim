@@ -76,7 +76,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
         @Override
         public void onClick(View view) {
           if (listener != null) {
-            listener.onAddPlan();
+            listener.onAddPlan(data);
           }
         }
       });
@@ -106,6 +106,10 @@ public class ExplorePlanLiteView extends RelativeLayout {
     if (planSpanDailyTv != null) {
       planSpanDailyTv.setText(this.data.getDaytime());
     }
+
+    if (planAddBtn != null) {
+      planAddBtn.setVisibility(this.data.isMyplan() ? View.GONE : View.VISIBLE);
+    }
   }
 
   public void setListener(ExplorePlanLiteViewListener listener) {
@@ -113,6 +117,6 @@ public class ExplorePlanLiteView extends RelativeLayout {
   }
 
   public interface ExplorePlanLiteViewListener {
-    void onAddPlan();
+    void onAddPlan(PlanLiteInfo data);
   }
 }
