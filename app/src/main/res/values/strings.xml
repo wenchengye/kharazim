@@ -46,10 +46,15 @@
     <string name="archives_login_input_user_hint_text">电话/邮箱</string>
     <string name="archives_login_input_nickname_hint_text">输入昵称</string>
     <string name="archives_login_input_password_confirm_hint_text">确认密码</string>
-    <string name="archives_user_progress_time_upper_text">共计</string>
-    <string name="archives_user_progress_time_lower_text">分钟</string>
+    <string name="archives_user_progress_time_minute_upper_text">共计</string>
+    <string name="archives_user_progress_time_minute_lower_text">分钟</string>
+    <string name="archives_user_progress_time_day_upper_text">累计</string>
+    <string name="archives_user_progress_time_day_lower_text">天</string>
     <string name="archives_user_progress_acupoint_upper_text">完成</string>
     <string name="archives_user_progress_acupoint_lower_text">穴位</string>
     <string name="archives_user_progress_count_upper_text">累计</string>
     <string name="archives_user_progress_count_lower_text">次</string>
+    <string name="archives_user_progress_kharazim_point_label_text">元气</string>
+    <string name="archives_user_progress_kharazim_point_unit_text">点</string>
+    <string name="archives_add_more_hint_text">添加新的健康计划</string>
 </resources>

@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 
 import com.heqi.fetcher.BaseFetcher;
+import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.NavigationManager;
+import com.heqi.kharazim.activity.VerticalType;
+import com.heqi.kharazim.archives.ArchivesService;
+import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.http.fetcher.PlanListInArchivesFetcher;
 import com.heqi.kharazim.archives.view.ArchivesListAddMoreView;
 import com.heqi.kharazim.archives.view.ArchivesListHeaderView;
@@ -33,6 +37,8 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   private ArchivesUserProgressView userProgressView;
   private ArchivesListAddMoreView addMoreView;
   private ArchivesListPreviewView previewView;
+  private ArchivesFragmentArchivesObserver archivesObserver =
+      new ArchivesFragmentArchivesObserver();
 
   @Override
   protected void onInflated(View contentView, Bundle savedInstanceState) {
@@ -45,6 +51,15 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
     headerViewAdapter.addHeader(userProgressView);
     headerViewAdapter.addFooter(addMoreView);
     headerViewAdapter.addFooter(previewView);
+
+    addMoreView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        NavigationManager.navigateToHome(getActivity(), VerticalType.Explore);
+      }
+    });
+
+    KharazimApplication.getArchives().addObserver(archivesObserver);
   }
 
   @Override
@@ -134,6 +149,8 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
       }
 
       view.setData(getItem(position));
+      view.setShowAddIcon(false);
+      view.setShowProgress(true);
       view.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -141,6 +158,18 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
         }
       });
       return view;
+    }
+  }
+
+  private class ArchivesFragmentArchivesObserver extends SimpleArchivesObserver {
+    @Override
+    public void onAddPlan(String userId, String planId) {
+      requestLoad();
+    }
+
+    @Override
+    public void onRemovePlan(String userId, String planId) {
+      requestLoad();
     }
   }
 

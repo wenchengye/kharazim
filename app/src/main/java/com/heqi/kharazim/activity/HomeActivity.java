@@ -1,12 +1,15 @@
 package com.heqi.kharazim.activity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.fragment.ArchivesFragment;
@@ -29,6 +32,8 @@ public class HomeActivity extends FragmentActivity {
       navigateToVerticalInternal(type);
     }
   };
+  private ImageView leftHeaderBtn;
+  private ImageView rightHeaderBtn;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +53,9 @@ public class HomeActivity extends FragmentActivity {
       navigateView.addVerticalType(VerticalType.Archives);
       navigateView.addVerticalType(VerticalType.Settings);
     }
+
+    leftHeaderBtn = (ImageView) findViewById(R.id.explore_header_left_button);
+    rightHeaderBtn = (ImageView) findViewById(R.id.explore_header_right_button);
   }
 
   private void handleIntent(Intent intent) {
@@ -109,5 +117,48 @@ public class HomeActivity extends FragmentActivity {
         break;
     }
     ft.commitAllowingStateLoss();
+
+    updateHeaderWithVertical(type);
+  }
+
+  private void updateHeaderWithVertical(VerticalType type) {
+
+    switch (type) {
+      case Explore:
+        if (leftHeaderBtn != null) {
+          leftHeaderBtn.setImageDrawable(null);
+          leftHeaderBtn.setOnClickListener(null);
+        }
+        if (rightHeaderBtn != null) {
+          rightHeaderBtn.setImageDrawable(null);
+          rightHeaderBtn.setOnClickListener(null);
+        }
+        break;
+      case Archives:
+
+        if (leftHeaderBtn != null) {
+          leftHeaderBtn.setImageResource(R.drawable.icon_header_navigate_stats);
+          leftHeaderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //TODO: go to stats
+            }
+          });
+        }
+
+        break;
+      case Settings:
+        if (leftHeaderBtn != null) {
+          leftHeaderBtn.setImageDrawable(null);
+          leftHeaderBtn.setOnClickListener(null);
+        }
+        if (rightHeaderBtn != null) {
+          rightHeaderBtn.setImageDrawable(null);
+          rightHeaderBtn.setOnClickListener(null);
+        }
+        break;
+      default:
+        break;
+    }
   }
 }

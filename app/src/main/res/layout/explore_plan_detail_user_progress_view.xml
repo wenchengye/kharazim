@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="115dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:paddingLeft="11dp"
-                android:paddingStart="11dp"
-                android:paddingRight="11dp"
-                android:paddingEnd="11dp">
+<com.heqi.kharazim.explore.view.ExplorePlanDetailUserProgressView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="115dp"
+    android:paddingBottom="13dp"
+    android:paddingEnd="11dp"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp"
+    android:paddingStart="11dp"
+    android:paddingTop="13dp">
+
     <TextView android:id="@+id/current_course_title_tv"
         style="@style/simple_tv"
         android:textColor="@color/text_color_black"
@@ -27,8 +29,8 @@
             android:id="@+id/user_progress_time_progress"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:upperMinorText="@string/archives_user_progress_time_upper_text"
-            app:lowerMinorText="@string/archives_user_progress_time_lower_text"
+            app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"
+            app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"
             android:layout_weight="0"
             android:layout_gravity="center_vertical"/>
 
@@ -103,4 +105,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</com.heqi.kharazim.explore.view.ExplorePlanDetailUserProgressView>

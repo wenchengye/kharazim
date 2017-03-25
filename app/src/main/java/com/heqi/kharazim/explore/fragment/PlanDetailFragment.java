@@ -61,7 +61,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     ImageView backBtn = (ImageView) contentView.findViewById(R.id.explore_header_left_button);
     if (backBtn != null) {
-      backBtn.setImageResource(R.drawable.icon_navigate_back);
+      backBtn.setImageResource(R.drawable.icon_header_navigate_back);
       backBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,6 +79,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     if (planLiteView != null) {
 
       planLiteView.setShowAddIcon(false);
+      planLiteView.setShowProgress(false);
 
       if (planLiteInfo != null) {
         planLiteView.setData(planLiteInfo);

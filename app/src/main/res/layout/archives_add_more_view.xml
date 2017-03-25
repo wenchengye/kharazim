@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.archives.view.ArchivesListAddMoreView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="21dp"
+    android:background="@color/explore_layout_bg_dark_gray">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_archives_add_more"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_xtiny"
+            android:text="@string/archives_add_more_hint_text"/>
+
+
+    </LinearLayout>
+
+</com.heqi.kharazim.archives.view.ArchivesListAddMoreView>

@@ -30,10 +30,13 @@ public class ExplorePlanLiteView extends RelativeLayout {
   private TextView planSpanTv;
   private TextView planSpanDailyTv;
   private ImageView planAddBtn;
+  private ExploreCircleProgressView progressView;
+
   private PlanLiteInfo data;
   private ExplorePlanLiteViewListener listener;
 
   private boolean showAddIcon = true;
+  private boolean showProgress = false;
 
   public ExplorePlanLiteView(Context context) {
     super(context);
@@ -62,6 +65,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
     planSpanTv = (TextView) findViewById(R.id.plan_lite_span_tv);
     planSpanDailyTv = (TextView) findViewById(R.id.plan_lite_span_daily_tv);
     planAddBtn = (ImageView) findViewById(R.id.plan_lite_add_btn);
+    progressView = (ExploreCircleProgressView) findViewById(R.id.plan_lite_progress);
 
     if (planDifficultyPlaceHolder != null) {
       planDifficultyView = ExploreDifficultyLevelView.newInstance(planDifficultyPlaceHolder);
@@ -78,6 +82,10 @@ public class ExplorePlanLiteView extends RelativeLayout {
         }
       });
       adjustAddIconVisibility();
+    }
+
+    if (progressView != null) {
+      adjustProgressVisibility();
     }
   }
 
@@ -108,6 +116,15 @@ public class ExplorePlanLiteView extends RelativeLayout {
     if (planAddBtn != null) {
       adjustAddIconVisibility();
     }
+
+    if (this.data.isMyplan() && progressView != null) {
+      progressView.setMax(this.data.getCpdays());
+      progressView.setMaxText(String.valueOf(this.data.getCpdays()));
+      progressView.setProgress(this.data.getMycpdays());
+      progressView.setProgressText(String.valueOf(this.data.getMycpdays()));
+
+      adjustProgressVisibility();
+    }
   }
 
   public void setListener(ExplorePlanLiteViewListener listener) {
@@ -121,8 +138,20 @@ public class ExplorePlanLiteView extends RelativeLayout {
     }
   }
 
+  public void setShowProgress(boolean showProgress) {
+    this.showProgress = showProgress;
+    if (progressView != null) {
+      adjustProgressVisibility();
+    }
+  }
+
   private void adjustAddIconVisibility() {
     planAddBtn.setVisibility(((this.data == null || this.data.isMyplan()) && this.showAddIcon)
+        ? View.GONE : View.VISIBLE);
+  }
+
+  private void adjustProgressVisibility() {
+    progressView.setVisibility(this.data != null && this.data.isMyplan() && this.showProgress
         ? View.GONE : View.VISIBLE);
   }
 

@@ -5,6 +5,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.heqi.kharazim.R;
+import com.heqi.kharazim.utils.ViewUtils;
+
 /**
  * Created by overspark on 2017/3/19.
  */
@@ -24,7 +27,8 @@ public class ArchivesListAddMoreView extends TextView {
   }
 
   public static ArchivesListAddMoreView newInstance(ViewGroup viewGroup) {
-    return null;
+    return (ArchivesListAddMoreView) ViewUtils.newInstance(viewGroup,
+        R.layout.archives_add_more_view);
   }
 
 }
