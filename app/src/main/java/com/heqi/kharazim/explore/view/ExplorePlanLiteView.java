@@ -33,6 +33,8 @@ public class ExplorePlanLiteView extends RelativeLayout {
   private PlanLiteInfo data;
   private ExplorePlanLiteViewListener listener;
 
+  private boolean showAddIcon = true;
+
   public ExplorePlanLiteView(Context context) {
     super(context);
   }
@@ -47,11 +49,6 @@ public class ExplorePlanLiteView extends RelativeLayout {
 
   public static ExplorePlanLiteView newInstance(ViewGroup parent) {
     return (ExplorePlanLiteView) ViewUtils.newInstance(parent, R.layout.explore_plan_lite_card);
-  }
-
-  public static ExplorePlanLiteView newInstanceInDetail(ViewGroup parent) {
-    return (ExplorePlanLiteView) ViewUtils.newInstance(parent,
-        R.layout.explore_plan_lite_in_detail_card);
   }
 
   @Override
@@ -80,6 +77,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
           }
         }
       });
+      adjustAddIconVisibility();
     }
   }
 
@@ -108,12 +106,24 @@ public class ExplorePlanLiteView extends RelativeLayout {
     }
 
     if (planAddBtn != null) {
-      planAddBtn.setVisibility(this.data.isMyplan() ? View.GONE : View.VISIBLE);
+      adjustAddIconVisibility();
     }
   }
 
   public void setListener(ExplorePlanLiteViewListener listener) {
     this.listener = listener;
+  }
+
+  public void setShowAddIcon(boolean showAddIcon) {
+    this.showAddIcon = showAddIcon;
+    if (planAddBtn != null) {
+      adjustAddIconVisibility();
+    }
+  }
+
+  private void adjustAddIconVisibility() {
+    planAddBtn.setVisibility(((this.data == null || this.data.isMyplan()) && this.showAddIcon)
+        ? View.GONE : View.VISIBLE);
   }
 
   public interface ExplorePlanLiteViewListener {

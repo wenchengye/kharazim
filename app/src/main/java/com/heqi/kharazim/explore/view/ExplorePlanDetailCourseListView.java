@@ -25,7 +25,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
   private TextView previewTitleTv;
   private TextView explainTitleTv;
   private LinearLayout coursesListLayout;
-  private TextView coursesExplainTv;
+  private LinearLayout explainListLayout;
   private ExploreActionImageList actionImageList;
 
   private PlanDetailInfo planDetailInfo;
@@ -56,7 +56,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
     previewTitleTv = (TextView) findViewById(R.id.courses_preview_title_tv);
     explainTitleTv = (TextView) findViewById(R.id.courses_explain_title_tv);
     coursesListLayout = (LinearLayout) findViewById(R.id.courses_list_layout);
-    coursesExplainTv = (TextView) findViewById(R.id.courses_explain_tv);
+    explainListLayout = (LinearLayout) findViewById(R.id.explain_list_layout);
 
     previewTitleTv.setOnClickListener(new OnClickListener() {
       @Override
@@ -97,14 +97,21 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
           this.coursesListLayout.addView(view);
         }
       }
-
     }
 
     if (lite != null && lite != this.planLiteInfo) {
       this.planLiteInfo = lite;
 
-      if (this.coursesExplainTv != null) {
-        this.coursesExplainTv.setText(this.planLiteInfo.getPlandec());
+      if (this.explainListLayout != null) {
+        this.explainListLayout.removeAllViews();
+
+        if (this.planLiteInfo.getPlandeclist() != null) {
+          for (int i = 0; i < this.planLiteInfo.getPlandeclist().size(); ++i) {
+            ExplorePlanDetailExplainView view =
+                ExplorePlanDetailExplainView.newInstance(this.explainListLayout);
+            view.setData(this.planLiteInfo.getPlandeclist().get(i));
+          }
+        }
       }
     }
   }
@@ -149,13 +156,13 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
   }
 
 
-  private void enablePreview() {
+  public void enablePreview() {
     if (coursesListLayout != null) {
       coursesListLayout.setVisibility(View.VISIBLE);
     }
 
-    if (coursesExplainTv != null) {
-      coursesExplainTv.setVisibility(View.GONE);
+    if (explainListLayout != null) {
+      explainListLayout.setVisibility(View.GONE);
     }
 
     if (previewTitleTv != null) {
@@ -167,13 +174,13 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
     }
   }
 
-  private void enableExplain() {
+  public void enableExplain() {
     if (coursesListLayout != null) {
       coursesListLayout.setVisibility(View.GONE);
     }
 
-    if (coursesExplainTv != null) {
-      coursesExplainTv.setVisibility(View.VISIBLE);
+    if (explainListLayout != null) {
+      explainListLayout.setVisibility(View.VISIBLE);
     }
 
     if (previewTitleTv != null) {

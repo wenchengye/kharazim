@@ -20,6 +20,7 @@
     <color name="explore_plan_lite_shadow_bg">#33000000</color>
     <color name="explore_difficulty_level_view_item_disable">#bababa</color>
     <color name="explore_plan_detail_shadow_bg">#66000000</color>
+    <color name="explore_divider_color">#cfcfcf</color>
 
     <color name="explore_layout_bg_dark_gray">#f2f1f1</color>
     <color name="explore_layout_bg_light_gray">#fafafa</color>

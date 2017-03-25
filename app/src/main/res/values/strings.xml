@@ -18,6 +18,7 @@
     <string name="explore_detail_current_course_text_format">今日计划 : %1$s</string>
     <string name="explore_add_plan_success_toast">添加计划成功</string>
     <string name="explore_add_plan_failed_toast">添加计划失败</string>
+    <string name="explore_detail_course_not_finish_time_text">---- / -- / -- ----</string>
 
     <!-- consumer -->
     <string name="consumer_interpretation_text">穴位与动作说明</string>
@@ -45,4 +46,10 @@
     <string name="archives_login_input_user_hint_text">电话/邮箱</string>
     <string name="archives_login_input_nickname_hint_text">输入昵称</string>
     <string name="archives_login_input_password_confirm_hint_text">确认密码</string>
+    <string name="archives_user_progress_time_upper_text">共计</string>
+    <string name="archives_user_progress_time_lower_text">分钟</string>
+    <string name="archives_user_progress_acupoint_upper_text">完成</string>
+    <string name="archives_user_progress_acupoint_lower_text">穴位</string>
+    <string name="archives_user_progress_count_upper_text">累计</string>
+    <string name="archives_user_progress_count_lower_text">次</string>
 </resources>

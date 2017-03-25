@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
+import com.heqi.kharazim.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +43,19 @@ public class ExplorePlanDetailUserProgressView extends RelativeLayout {
   }
 
   public static ExplorePlanDetailUserProgressView newInstance(ViewGroup parent) {
-    return null;
+    return (ExplorePlanDetailUserProgressView)ViewUtils.newInstance(parent,
+        R.layout.explore_plan_detail_user_progress_view);
   }
 
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
+
+    timeProgress = (ExploreCircleProgressView) findViewById(R.id.user_progress_time_progress);
+    acupointProgress = (ExploreCircleProgressView)
+        findViewById(R.id.user_progress_acupoint_progress);
+    courseProgressText = (TextView) findViewById(R.id.user_progress_count_tv);
+    currentCourseText = (TextView) findViewById(R.id.current_course_title_tv);
 
 
   }

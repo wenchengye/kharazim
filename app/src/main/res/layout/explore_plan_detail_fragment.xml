@@ -11,19 +11,30 @@
 
     </RelativeLayout>
 
+
+
+    <FrameLayout android:id="@+id/explore_plan_detail_footer"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView android:id="@+id/plan_action_btn"
+                  android:layout_gravity="center"
+                  style="@style/explore_large_btn"/>
+
+    </FrameLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/explore_plan_detail_header">
-
+        android:layout_below="@id/explore_plan_detail_header"
+        android:layout_above="@id/explore_plan_detail_footer">
         <LinearLayout
             android:id="@+id/explore_plan_detail_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
         </LinearLayout>
-
     </ScrollView>
 
 </RelativeLayout>

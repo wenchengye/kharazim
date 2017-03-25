@@ -140,6 +140,7 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
         }
       });
       view.setListener(this.listener);
+      view.setShowAddIcon(true);
       return view;
     }
   }

@@ -38,13 +38,12 @@
             android:orientation="vertical">
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/courses_explain_tv"
+        <LinearLayout
+            android:id="@+id/explain_list_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_tiny"/>
+            android:orientation="vertical">
+        </LinearLayout>
 
     </FrameLayout>
 

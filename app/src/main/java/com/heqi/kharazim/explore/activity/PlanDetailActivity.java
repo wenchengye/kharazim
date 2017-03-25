@@ -38,7 +38,11 @@ public class PlanDetailActivity extends PendingNavigateActivity {
               NavigationManager.navigateToConsume(PlanDetailActivity.this, courseId);
             }
           });
+        }
 
+        @Override
+        public void onBack() {
+          finish();
         }
       };
 

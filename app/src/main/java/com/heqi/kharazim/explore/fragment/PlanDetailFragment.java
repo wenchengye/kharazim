@@ -3,6 +3,7 @@ package com.heqi.kharazim.explore.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,11 +58,27 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
   @Override
   protected void onInflated(View contentView, Bundle savedInstanceState) {
+
+    ImageView backBtn = (ImageView) contentView.findViewById(R.id.explore_header_left_button);
+    if (backBtn != null) {
+      backBtn.setImageResource(R.drawable.icon_navigate_back);
+      backBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if (listener != null) {
+            listener.onBack();
+          }
+        }
+      });
+    }
+
     LinearLayout planDetailContentLayout =
         (LinearLayout) contentView.findViewById(R.id.explore_plan_detail_content);
     ExplorePlanLiteView planLiteView =
-        ExplorePlanLiteView.newInstanceInDetail((ViewGroup) contentView);
+        ExplorePlanLiteView.newInstance((ViewGroup) contentView);
     if (planLiteView != null) {
+
+      planLiteView.setShowAddIcon(false);
 
       if (planLiteInfo != null) {
         planLiteView.setData(planLiteInfo);
@@ -70,24 +87,32 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
       if (planDetailContentLayout != null) {
         planDetailContentLayout.addView(planLiteView);
       }
+    }
 
-      TextView planDetailActionBtn = (TextView) planLiteView.findViewById(R.id.plan_action_btn);
-      if (planDetailActionBtn != null) {
-        if (!inArchives && this.planLiteInfo != null) {
+    TextView planDetailActionBtn = (TextView) contentView.findViewById(R.id.plan_action_btn);
+    if (planDetailActionBtn != null) {
+      if (!inArchives) {
+        if (this.planLiteInfo != null) {
           planDetailActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               addPlan();
             }
           });
-        } else if (inArchives) {
-          planDetailActionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              consumePlan();
-            }
-          });
         }
+        planDetailActionBtn.setText(KharazimApplication.getAppContext().getString(
+            R.string.explore_detail_join_text));
+
+      } else {
+        planDetailActionBtn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            consumePlan();
+          }
+        });
+        planDetailActionBtn.setText(KharazimApplication.getAppContext().getString(
+            R.string.explore_detail_consume_text
+        ));
       }
     }
     if (inArchives) {
@@ -115,6 +140,9 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     this.planDetailInfo = data;
     courseListView.setData(this.planDetailInfo, this.planLiteInfo, false);
+    if (userProgressView != null) {
+      userProgressView.setData(this.planDetailInfo);
+    }
   }
 
   protected Request<PlanDetailInfo> newRequest(Response.Listener<PlanDetailInfo> listener,
@@ -179,5 +207,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     void onAddPlan(PlanLiteInfo planLiteInfo);
 
     void onConsumePlan(String courseId);
+
+    void onBack();
   }
 }

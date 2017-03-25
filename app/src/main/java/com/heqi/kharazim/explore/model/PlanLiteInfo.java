@@ -1,6 +1,7 @@
 package com.heqi.kharazim.explore.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by overspark on 2016/11/13.
@@ -28,6 +29,7 @@ public class PlanLiteInfo implements Serializable {
   private boolean myplan;
   private String userplanid;
   private int mycpdays;
+  private List<PlanDescriptionInfo> plandeclist;
 
   public String getId() {
     return id;
@@ -171,5 +173,28 @@ public class PlanLiteInfo implements Serializable {
 
   public void setMycpdays(int mycpdays) {
     this.mycpdays = mycpdays;
+  }
+
+  public List<PlanDescriptionInfo> getPlandeclist() {
+    return plandeclist;
+  }
+
+  public void setPlandeclist(List<PlanDescriptionInfo> plandeclist) {
+    this.plandeclist = plandeclist;
+  }
+
+  public static class PlanDescriptionInfo implements Serializable {
+
+    private static final long serialVersionUID = 3894569751797214523L;
+
+    private String plandecl;
+
+    public String getPlandecl() {
+      return plandecl;
+    }
+
+    public void setPlandecl(String plandecl) {
+      this.plandecl = plandecl;
+    }
   }
 }

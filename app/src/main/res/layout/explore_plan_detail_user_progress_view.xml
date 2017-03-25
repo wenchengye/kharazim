@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:paddingLeft="11dp"
+                android:paddingStart="11dp"
+                android:paddingRight="11dp"
+                android:paddingEnd="11dp">
+    <TextView android:id="@+id/current_course_title_tv"
+        style="@style/simple_tv"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_size_xtiny"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_course_title_tv"
+        android:orientation="horizontal">
+        
+        <com.heqi.kharazim.explore.view.ExploreCircleProgressView
+            android:id="@+id/user_progress_time_progress"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:upperMinorText="@string/archives_user_progress_time_upper_text"
+            app:lowerMinorText="@string/archives_user_progress_time_lower_text"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@color/explore_divider_color"/>
+
+        <com.heqi.kharazim.explore.view.ExploreCircleProgressView
+            android:id="@+id/user_progress_acupoint_progress"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:upperMinorText="@string/archives_user_progress_acupoint_upper_text"
+            app:lowerMinorText="@string/archives_user_progress_acupoint_lower_text"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@color/explore_divider_color"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/text_color_gray_light"
+                android:textSize="@dimen/text_size_xtiny"
+                android:text="@string/archives_user_progress_count_upper_text"/>
+
+            <TextView
+                android:id="@+id/user_progress_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/kharazim_desgin_color"
+                android:textSize="@dimen/text_size_xlarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text_color_gray_light"
+                android:textSize="@dimen/text_size_xtiny"
+                android:text="@string/archives_user_progress_count_lower_text"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

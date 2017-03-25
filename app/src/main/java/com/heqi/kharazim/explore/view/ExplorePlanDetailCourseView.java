@@ -1,12 +1,14 @@
 package com.heqi.kharazim.explore.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.utils.ViewUtils;
@@ -71,7 +73,14 @@ public class ExplorePlanDetailCourseView extends RelativeLayout {
     courseFinishDateTv.setVisibility(showFinish ? VISIBLE : GONE);
 
     if (showFinish) {
-      //TODO: finsh content
+      if (TextUtils.isEmpty(info.getCpdatetime())) {
+        courseFinishStatusIv.setImageResource(R.drawable.icon_explore_detail_course_not_finish);
+        courseFinishDateTv.setText(KharazimApplication.getAppContext().getString(
+            R.string.explore_detail_course_not_finish_time_text));
+      } else {
+        courseFinishStatusIv.setImageResource(R.drawable.icon_explore_detail_course_finish);
+        courseFinishDateTv.setText(info.getCpdatetime());
+      }
     }
   }
 
