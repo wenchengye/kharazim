@@ -50,6 +50,8 @@
     <string name="archives_user_progress_time_minute_lower_text">分钟</string>
     <string name="archives_user_progress_time_day_upper_text">累计</string>
     <string name="archives_user_progress_time_day_lower_text">天</string>
+    <string name="archives_user_progress_time_continue_day_upper_text">连续</string>
+    <string name="archives_user_progress_time_continue_day_lower_text">天</string>
     <string name="archives_user_progress_acupoint_upper_text">完成</string>
     <string name="archives_user_progress_acupoint_lower_text">穴位</string>
     <string name="archives_user_progress_count_upper_text">累计</string>
@@ -57,4 +59,13 @@
     <string name="archives_user_progress_kharazim_point_label_text">元气</string>
     <string name="archives_user_progress_kharazim_point_unit_text">点</string>
     <string name="archives_add_more_hint_text">添加新的健康计划</string>
+    <string name="archives_stats_day_filter_label_text">日</string>
+    <string name="archives_stats_week_filter_label_text">周</string>
+    <string name="archives_stats_month_filter_label_text">月</string>
+    <string name="archives_stats_all_filter_label_text">总</string>
+    <string name="archives_stats_list_label_text">计划明细</string>
+    <string name="archives_settings_account_tab_title">账号管理</string>
+    <string name="archives_settings_health_aim_tab_title">保健目标</string>
+    <string name="archives_settings_cache_tab_title">缓存管理</string>
+    <string name="archives_settings_about_tab_title">关于</string>
 </resources>

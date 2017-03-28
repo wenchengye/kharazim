@@ -48,6 +48,8 @@
     <dimen name="archives_login_content_width">192dp</dimen>
     <dimen name="archives_login_action_btn_width">84dp</dimen>
     <dimen name="archives_login_action_btn_height">33dp</dimen>
+    <dimen name="archives_stats_detail_right_content_width">160dp</dimen>
+    <dimen name="archives_settings_divider_height">13dp</dimen>
 
 
 </resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    
+    <com.heqi.kharazim.view.HorizontalListView
+        android:id="@+id/horizontal_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:background="@color/bg_color_white"
+        style="@style/list_view"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:background="@color/explore_layout_bg_dark_gray"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/bg_color_white"
+        android:textSize="@dimen/text_size_xtiny"
+        android:textColor="@color/text_color_black"
+        android:gravity="center"
+        android:text="@string/archives_stats_list_label_text"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/explore_divider_color"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/bg_color_white">
+
+        <TextView
+            android:id="@+id/archives_stats_list_header_time_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_xtiny"
+            android:textColor="@color/text_color_black"/>
+
+        <TextView
+            android:id="@+id/archives_stats_list_header_time_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_xtiny"
+            android:textColor="@color/text_color_black"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/explore_divider_color"/>
+
+
+</LinearLayout>
