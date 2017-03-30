@@ -18,12 +18,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_below="@id/explain_content_tv"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/explore_divider_color"/>
-
+        style="@style/dark_divider_horizontal"/>
 </com.heqi.kharazim.explore.view.ExplorePlanDetailExplainView>

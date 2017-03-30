@@ -28,7 +28,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/explore_divider_color"/>
+        android:background="@color/explore_gray_divider_color"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/explore_divider_color"/>
+        android:background="@color/explore_gray_divider_color"/>
 
 
 </LinearLayout>

@@ -11,14 +11,17 @@
 
         <RelativeLayout
             android:id="@+id/archives_settings_user_profile_tab"
-            android:layout_width="82dp"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:background="@color/bg_color_white">
             
             <com.heqi.image.view.AsyncImageView
                 android:id="@+id/archives_settings_user_head_iv"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:scaleType="centerCrop"/>
             
             <View
@@ -30,11 +33,11 @@
                 android:layout_toEndOf="@id/archives_settings_user_head_iv"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
-                android:background="@color/explore_divider_color"/>
+                android:background="@color/explore_gray_divider_color"/>
             
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
+                android:layout_height="32dp"
                 android:layout_toRightOf="@id/archives_settings_user_profile_divider"
                 android:layout_toEndOf="@id/archives_settings_user_profile_divider"
                 android:layout_marginLeft="13dp"
@@ -54,7 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/text_color_black"
-                    android:textSize="@dimen/text_size_xtiny"/>
+                    android:textSize="@dimen/text_size_xtiny"
+                    android:text="@string/archives_settings_user_state_holder_text"/>
 
             </RelativeLayout>
 

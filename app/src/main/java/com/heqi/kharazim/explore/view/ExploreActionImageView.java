@@ -53,7 +53,8 @@ public class ExploreActionImageView extends RelativeLayout {
     this.data = data;
 
     if (actionImageIv != null) {
-      actionImageIv.loadNetworkImage(data.getActimg(), 0);
+      //TODO: default image
+      actionImageIv.loadNetworkImage(data.getActimg(), R.drawable.icon_kharazim_image_logo);
     }
 
     if (actionNameTv != null) {

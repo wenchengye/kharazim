@@ -3,6 +3,7 @@ package com.heqi.kharazim.explore.http.fetcher;
 import com.android.volley.toolbox.RequestFuture;
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.KharazimApplication;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.explore.http.request.PlanListRequest;
 import com.heqi.kharazim.explore.model.PlanListInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
@@ -24,14 +25,17 @@ public class PlanListFetcher extends BaseFetcher<PlanLiteInfo> {
   @Override
   protected List<PlanLiteInfo> fetchHttpData(int start, int size) throws ExecutionException {
 
-    //TODO: temp code, solve this with server end.
-    if (start != 0) return null;
-
     RequestFuture<PlanListInfo> future = RequestFuture.newFuture();
     PlanListRequest request = new PlanListRequest(future, future);
-    if (usingToken) {
+    if (isUsingToken()) {
       request.setAccessToken(KharazimApplication.getArchives().getCurrentAccessToken());
     }
+
+    if (start != 0) {
+      request.setPageSize(start);
+      request.setPageNumber(Const.KHARAZIM_FETCHER_SECOND_PAGE_NUMBER);
+    }
+
     PlanListInfo planListInfo =
         RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequest(request, future);
 

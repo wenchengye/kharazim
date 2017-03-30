@@ -91,7 +91,7 @@
         android:layout_above="@+id/archives_login_action_layout"
         android:layout_marginBottom="33dp"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/kharazim_desgin_color"
+        android:textColor="@color/kharazim_design_color"
         android:textSize="@dimen/text_size_xtiny"
         android:text="@string/archives_login_action_hint_text"/>
 

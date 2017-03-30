@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="wrap_content"
     android:paddingBottom="13dp"
     android:paddingEnd="11dp"
     android:paddingLeft="11dp"
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/current_course_title_tv"
+        android:layout_marginTop="13dp"
         android:orientation="horizontal">
         
         <com.heqi.kharazim.explore.view.ExploreCircleProgressView
@@ -41,7 +42,7 @@
             android:layout_marginRight="15dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:background="@color/explore_divider_color"/>
+            android:background="@color/explore_gray_divider_color"/>
 
         <com.heqi.kharazim.explore.view.ExploreCircleProgressView
             android:id="@+id/user_progress_acupoint_progress"
@@ -59,7 +60,7 @@
             android:layout_marginRight="15dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:background="@color/explore_divider_color"/>
+            android:background="@color/explore_gray_divider_color"/>
 
         <View
             android:layout_width="0dp"
@@ -87,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/kharazim_desgin_color"
+                android:textColor="@color/kharazim_design_color"
                 android:textSize="@dimen/text_size_xlarge"/>
 
             <TextView

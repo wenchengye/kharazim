@@ -1,5 +1,7 @@
 package com.heqi.kharazim.explore.model;
 
+import com.heqi.kharazim.utils.KharazimUtils;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class PlanLiteInfo implements Serializable {
   private int planlev;
   private String senddatetime;
   private String version;
-  private boolean myplan;
+  private int myplan;
   private String userplanid;
   private int mycpdays;
   private List<PlanDescriptionInfo> plandeclist;
@@ -152,11 +154,11 @@ public class PlanLiteInfo implements Serializable {
   }
 
   public boolean isMyplan() {
-    return myplan;
+    return KharazimUtils.kharazimInt2Bool(this.myplan);
   }
 
   public void setMyplan(boolean myplan) {
-    this.myplan = myplan;
+    this.myplan = KharazimUtils.kharazimBool2Int(myplan);
   }
 
   public String getUserplanid() {

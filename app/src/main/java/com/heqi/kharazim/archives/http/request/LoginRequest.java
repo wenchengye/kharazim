@@ -19,6 +19,8 @@ public class LoginRequest extends AbstractKharazimHttpRequest<LoginResult> {
   private static final String GET_PARAMS_KEY_EMAIL = "email";
   private static final String GET_PARAMS_KEY_LOGIN_PASSWORD = "loginpw";
 
+  private static final String GET_PARAMS_VALUE_DEFAULT_ZONE_NUMBER = "86";
+
   private String phoneNumber;
   private String zoneNumber;
   private String email;
@@ -44,6 +46,8 @@ public class LoginRequest extends AbstractKharazimHttpRequest<LoginResult> {
 
     if (this.zoneNumber != null) {
       params.put(GET_PARAMS_KEY_ZONE_NUMBER, this.zoneNumber);
+    } else if (this.phoneNumber != null) {
+      params.put(GET_PARAMS_KEY_ZONE_NUMBER, GET_PARAMS_VALUE_DEFAULT_ZONE_NUMBER);
     }
 
     if (this.email != null) {

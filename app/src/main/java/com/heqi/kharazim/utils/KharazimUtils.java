@@ -53,7 +53,7 @@ public class KharazimUtils {
   public static String getKharazimResource(final String resourceUrl) {
     String ret = resourceUrl;
 
-    if (!HttpUtil.isHttpScheme(Uri.parse(resourceUrl).getScheme())) {
+    if (resourceUrl != null && !HttpUtil.isHttpScheme(Uri.parse(resourceUrl).getScheme())) {
       try {
         ret = HttpUtil.encodeUri(Const.KHARAZIM_SERVER + resourceUrl, "UTF-8", true);
       } catch (UnsupportedEncodingException e) {
@@ -138,6 +138,8 @@ public class KharazimUtils {
   }
 
   public static void redirectKharazimModel(@NonNull PlanListInfo planListInfo) {
+    if (planListInfo.getPage_data() == null) return;
+
     for (PlanLiteInfo planLiteInfo : planListInfo.getPage_data()) {
       redirectKharazimModel(planLiteInfo);
     }
@@ -149,5 +151,13 @@ public class KharazimUtils {
 
   public static void redirectKharazimModel(@NonNull UserProfile userProfile) {
     userProfile.setHeadimg(getKharazimResource(userProfile.getHeadimg()));
+  }
+
+  public static int kharazimBool2Int(boolean value) {
+    return value ? 1 : 0;
+  }
+
+  public static boolean kharazimInt2Bool(int value) {
+    return !(value == 0);
   }
 }

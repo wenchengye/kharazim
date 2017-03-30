@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.VerticalType;
+import com.heqi.kharazim.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +54,16 @@ public class HomeNavigateView extends LinearLayout {
       }
     });
     verticalViews.add(verticalView);
+    this.addView(verticalView);
 
+    requestLayout();
+    invalidate();
   }
 
   public void selectVerticalType(VerticalType type) {
     for (HomeNavigateVerticalView view : verticalViews) {
       if (view != null) {
-        view.setSelected(view.getVerticalType().ordinal() == type.ordinal());
+        view.setVerticalViewSelected(view.getVerticalType().ordinal() == type.ordinal());
       }
     }
 
@@ -69,36 +74,6 @@ public class HomeNavigateView extends LinearLayout {
 
   public void setListener(OnVerticalTypeSelectedListener listener) {
     this.listener = listener;
-  }
-
-  private static class HomeNavigateVerticalView extends ImageView {
-
-    private VerticalType type;
-
-    public HomeNavigateVerticalView(Context context) {
-      super(context);
-    }
-
-    public HomeNavigateVerticalView(Context context, AttributeSet attrs) {
-      super(context, attrs);
-    }
-
-    public HomeNavigateVerticalView(Context context, AttributeSet attrs, int defStyleAttr) {
-      super(context, attrs, defStyleAttr);
-    }
-
-    public static HomeNavigateVerticalView newInstance(ViewGroup viewGroup) {
-      return null;
-    }
-
-    public void setVerticalType(VerticalType type) {
-      this.type = type;
-      this.setImageResource(type.getIconRes());
-    }
-
-    public VerticalType getVerticalType() {
-      return type;
-    }
   }
 
   public interface OnVerticalTypeSelectedListener {

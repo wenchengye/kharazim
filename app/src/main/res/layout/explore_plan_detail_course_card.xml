@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heqi.kharazim.explore.view.ExplorePlanDetailCourseView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="27dp">
+                android:layout_height="36dp">
     <TextView
         android:id="@+id/course_day_index_tv"
         android:layout_centerVertical="true"
@@ -41,13 +41,12 @@
     
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginLeft="9dp"
         android:layout_marginStart="9dp"
         android:layout_marginRight="9dp"
         android:layout_marginEnd="9dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/text_color_gray_light"
+        style="@style/dark_divider_horizontal"
         />
 
 </com.heqi.kharazim.explore.view.ExplorePlanDetailCourseView>

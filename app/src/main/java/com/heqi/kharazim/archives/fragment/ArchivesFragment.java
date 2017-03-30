@@ -35,6 +35,7 @@ import java.util.concurrent.ExecutionException;
 public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo> {
 
   private ArchivesUserProgressView userProgressView;
+  private ArchivesListHeaderView listHeaderView;
   private ArchivesListAddMoreView addMoreView;
   private ArchivesListPreviewView previewView;
   private ArchivesFragmentArchivesObserver archivesObserver =
@@ -45,10 +46,12 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
     super.onInflated(contentView, savedInstanceState);
 
     userProgressView = ArchivesUserProgressView.newInstance((ViewGroup) contentView);
+    listHeaderView = ArchivesListHeaderView.newInstance((ViewGroup) contentView);
     addMoreView = ArchivesListAddMoreView.newInstance((ViewGroup) contentView);
     previewView = ArchivesListPreviewView.newInstance((ViewGroup) contentView);
 
     headerViewAdapter.addHeader(userProgressView);
+    headerViewAdapter.addHeader(listHeaderView);
     headerViewAdapter.addFooter(addMoreView);
     headerViewAdapter.addFooter(previewView);
 
@@ -73,15 +76,8 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   }
 
   @Override
-  protected ListAdapter newListAdapter() {
-    contentAdapter = newContentAdapter();
-    headerViewAdapter = new StickyHeaderViewAdapter(null, null, contentAdapter);
-    return headerViewAdapter;
-  }
-
-  @Override
   protected int getLayoutResId() {
-    return R.layout.common_sticky_listview_layout;
+    return R.layout.common_listview_layout;
   }
 
   @Override
@@ -114,29 +110,12 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
 
   }
 
-  private static class ArchivesListAdapter extends DataAdapter<PlanLiteInfo>
-      implements StickyListHeadersAdapter {
+  private static class ArchivesListAdapter extends DataAdapter<PlanLiteInfo> {
 
     private Context context;
 
-    public ArchivesListAdapter(Context context) {
+    private ArchivesListAdapter(Context context) {
       this.context = context;
-    }
-
-    @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-      ArchivesListHeaderView view;
-      if (convertView instanceof ArchivesListHeaderView) {
-        view = (ArchivesListHeaderView) convertView;
-      } else {
-        view = ArchivesListHeaderView.newInstance(parent);
-      }
-      return view;
-    }
-
-    @Override
-    public long getHeaderId(int position) {
-      return 0;
     }
 
     @Override

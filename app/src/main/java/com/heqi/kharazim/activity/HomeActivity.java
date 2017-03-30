@@ -44,6 +44,13 @@ public class HomeActivity extends FragmentActivity {
     handleIntent(getIntent());
   }
 
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+
+    handleIntent(intent);
+  }
+
   private void initView() {
     navigateView = (HomeNavigateView) findViewById(R.id.home_navigate_view);
 

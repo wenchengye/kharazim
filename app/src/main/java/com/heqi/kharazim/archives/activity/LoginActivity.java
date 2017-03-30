@@ -59,13 +59,21 @@ public class LoginActivity extends PendingNavigateActivity {
     setCurrentFragment(this.loginFragment);
   }
 
+  @Override
+  public void onBackPressed() {
+    if (current instanceof RegisterFragment) {
+      setCurrentFragment(loginFragment);
+    } else {
+      super.onBackPressed();
+    }
+  }
+
   private void setCurrentFragment(Fragment fragment) {
     getSupportFragmentManager().beginTransaction()
         .replace(R.id.fragments_container, fragment)
         .commit();
     this.current = fragment;
   }
-
 
   private void handleLoginFinished() {
     NavigationManager.navigateToHome(KharazimApplication.getAppContext());

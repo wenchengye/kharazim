@@ -95,7 +95,8 @@ public class ExplorePlanLiteView extends RelativeLayout {
 
     this.data = data;
     if (!TextUtils.isEmpty(this.data.getPlanimg()) && planSummaryIv != null) {
-      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), 0);
+      //TODO: default image
+      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), R.drawable.icon_kharazim_image_logo);
     }
     if (planDifficultyView != null) {
       planDifficultyView.setDifficultyLevel(this.data.getPlanlev());
@@ -146,13 +147,13 @@ public class ExplorePlanLiteView extends RelativeLayout {
   }
 
   private void adjustAddIconVisibility() {
-    planAddBtn.setVisibility(((this.data == null || this.data.isMyplan()) && this.showAddIcon)
+    planAddBtn.setVisibility(this.data == null || this.data.isMyplan() || !this.showAddIcon
         ? View.GONE : View.VISIBLE);
   }
 
   private void adjustProgressVisibility() {
     progressView.setVisibility(this.data != null && this.data.isMyplan() && this.showProgress
-        ? View.GONE : View.VISIBLE);
+        ? View.VISIBLE : View.GONE);
   }
 
   public interface ExplorePlanLiteViewListener {

@@ -5,6 +5,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.heqi.kharazim.R;
+import com.heqi.kharazim.utils.ViewUtils;
+
 /**
  * Created by overspark on 2017/3/19.
  */
@@ -24,7 +27,8 @@ public class ArchivesListHeaderView extends TextView {
   }
 
   public static ArchivesListHeaderView newInstance(ViewGroup parent) {
-    return null;
+    return (ArchivesListHeaderView) ViewUtils.newInstance(parent,
+        R.layout.archives_list_header_card);
   }
 
 }

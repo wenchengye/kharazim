@@ -98,16 +98,16 @@ public class ExploreCircleProgressView extends View {
     backgroundPaint.setStyle(Paint.Style.STROKE);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      foregroundPaint.setColor(context.getColor(R.color.kharazim_desgin_color));
+      foregroundPaint.setColor(context.getColor(R.color.kharazim_design_color));
     } else {
-      foregroundPaint.setColor(context.getResources().getColor(R.color.kharazim_desgin_color));
+      foregroundPaint.setColor(context.getResources().getColor(R.color.kharazim_design_color));
     }
     foregroundPaint.setStyle(Paint.Style.STROKE);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      majorTextPaint.setColor(context.getColor(R.color.kharazim_desgin_color));
+      majorTextPaint.setColor(context.getColor(R.color.kharazim_design_color));
     } else {
-      majorTextPaint.setColor(context.getResources().getColor(R.color.kharazim_desgin_color));
+      majorTextPaint.setColor(context.getResources().getColor(R.color.kharazim_design_color));
     }
     majorTextPaint.setTextAlign(Paint.Align.LEFT);
 

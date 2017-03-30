@@ -57,7 +57,7 @@ public class ExploreDifficultyLevelView extends LinearLayout {
     }
 
     for (int i = 0; i < this.difficultyLevel; ++i) {
-      this.getChildAt(i).setBackgroundResource(R.color.kharazim_desgin_color);
+      this.getChildAt(i).setBackgroundResource(R.color.kharazim_design_color);
     }
   }
 }

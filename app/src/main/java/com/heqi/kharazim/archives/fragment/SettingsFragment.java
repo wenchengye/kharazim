@@ -37,7 +37,7 @@ public class SettingsFragment extends AsyncLoadFragment {
     UserProfile userProfile = KharazimApplication.getArchives().getCurrentUserProfile();
 
     if (userProfile != null) {
-      headIconIv.loadNetworkImage(userProfile.getHeadimg(), 0);
+      headIconIv.loadNetworkImage(userProfile.getHeadimg(), R.drawable.icon_kharazim_image_logo);
       nicknameTv.setText(userProfile.getNickname());
     }
 
@@ -77,7 +77,7 @@ public class SettingsFragment extends AsyncLoadFragment {
     public void onUserProfileUpdated(String userId, UserProfile userProfile) {
       if (userProfile == null) return;
 
-      headIconIv.loadNetworkImage(userProfile.getHeadimg(), 0);
+      headIconIv.loadNetworkImage(userProfile.getHeadimg(), R.drawable.icon_kharazim_image_logo);
       nicknameTv.setText(userProfile.getNickname());
     }
   }

@@ -86,11 +86,20 @@ public class LoginFragment extends AsyncLoadFragment {
         }
       });
     }
+
+    if (weiboLoginBtn != null) {
+      weiboLoginBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          weiboLogin();
+        }
+      });
+    }
   }
 
   private void standardLogin() {
     String userId = userIdEditText.getText().toString().trim();
-    String password = userIdEditText.getText().toString().trim();
+    String password = passwordEditText.getText().toString().trim();
 
     if (TextUtils.isEmpty(userId)) {
       KharazimUtils.showToast(KharazimApplication.getAppContext().getString(

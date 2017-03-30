@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="96dp"
     android:orientation="horizontal"
     android:paddingEnd="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingStart="20dp">
+    android:paddingStart="20dp"
+    android:background="@color/bg_color_white">
 
     <com.heqi.kharazim.explore.view.ExploreCircleProgressView
         android:id="@+id/archives_user_progress_course_progress"
@@ -76,7 +77,7 @@
                   android:layout_toEndOf="@id/archives_user_progress_kharazim_point_label"
                   android:layout_marginLeft="9dp"
                   android:layout_marginRight="9dp"
-                  android:textColor="@color/kharazim_desgin_color"
+                  android:textColor="@color/kharazim_design_color"
                   android:textSize="@dimen/text_size_large"/>
 
         <TextView
@@ -110,7 +111,7 @@
                   android:layout_toEndOf="@id/archives_user_progress_day_label"
                   android:layout_alignLeft="@id/archives_user_progress_kharazim_point_progress_tv"
                   android:layout_alignStart="@id/archives_user_progress_kharazim_point_progress_tv"
-                  android:textColor="@color/kharazim_desgin_color"
+                  android:textColor="@color/kharazim_design_color"
                   android:textSize="@dimen/text_size_large"/>
 
         <TextView

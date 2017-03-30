@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.archives.view.ArchivesListHeaderView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:background="@color/explore_layout_bg_dark_gray"
+    android:textColor="@color/text_color_black"
+    android:textSize="@dimen/text_size_tiny"
+    android:text="@string/archives_plan_list_header_label_text"
+    android:gravity="center">
+
+</com.heqi.kharazim.archives.view.ArchivesListHeaderView>

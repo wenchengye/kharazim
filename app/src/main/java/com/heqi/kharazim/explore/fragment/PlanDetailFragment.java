@@ -12,7 +12,7 @@ import com.android.volley.Response;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.ArchivesService;
-import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesReqeust;
+import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesRequest;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
@@ -128,6 +128,11 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     if (courseListView != null && planDetailContentLayout != null) {
       planDetailContentLayout.addView(courseListView);
     }
+
+    if (courseListView != null) {
+      if (inArchives) courseListView.enablePreview();
+      else courseListView.enableExplain();
+    }
   }
 
   @Override
@@ -153,9 +158,9 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     Request<PlanDetailInfo> request;
     if (inArchives) {
-      request = new PlanDetailInArchivesReqeust(listener, errorListener,
+      request = new PlanDetailInArchivesRequest(listener, errorListener,
           KharazimApplication.getArchives().getCurrentAccessToken());
-      ((PlanDetailInArchivesReqeust) request).setPlanId(planLiteInfo.getId());
+      ((PlanDetailInArchivesRequest) request).setPlanId(planLiteInfo.getId());
     } else {
       request = new PlanDetailRequest(listener, errorListener);
       ((PlanDetailRequest) request).setId(planLiteInfo.getId());

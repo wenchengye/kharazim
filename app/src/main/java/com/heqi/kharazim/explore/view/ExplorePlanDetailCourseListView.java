@@ -110,6 +110,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
             ExplorePlanDetailExplainView view =
                 ExplorePlanDetailExplainView.newInstance(this.explainListLayout);
             view.setData(this.planLiteInfo.getPlandeclist().get(i));
+            this.explainListLayout.addView(view);
           }
         }
       }
