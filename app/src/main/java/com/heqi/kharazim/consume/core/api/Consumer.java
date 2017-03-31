@@ -53,6 +53,8 @@ public interface Consumer {
 
   boolean canJump2Action(int index);
 
+  boolean isGuiding();
+
   void setConsumerCallback(ConsumerCallback callback);
 
   public interface ConsumerCallback {

@@ -25,6 +25,10 @@
     <string name="consumer_progress_upper_text">完成</string>
     <string name="consumer_progress_repeat_lower_text">次数</string>
     <string name="consumer_progress_duration_lower_text">时间</string>
+    <string name="consumer_guide_label_text">穴位说明与动作指导</string>
+    <string name="consumer_progress_guide_upper_text">教学</string>
+    <string name="consumer_progress_guide_lower_text">时长</string>
+    <string name="consumer_skip_guide_label_text">跳过教学指导</string>
 
     <!-- archives -->
     <string name="archives_in_login_progress_hint_text">正在登录中</string>

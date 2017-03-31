@@ -74,8 +74,17 @@ public class ConsumeActivity extends FragmentActivity {
     }
 
     @Override
-    public void onGuideStart(ActionDetailInfo action, int actionIndex) {
-
+    public void onGuideStart(final ActionDetailInfo action, final int actionIndex) {
+      uiHandler.post(new Runnable() {
+        @Override
+        public void run() {
+          consumerView.setAction(action);
+          consumerView.setProgress(0, consumer.getDuration());
+          consumerView.setRepeat(0, consumer.getActionRepeatSum());
+          consumerView.setState(State.PLAYING);
+          consumerView.showGuideView();
+        }
+      });
     }
 
     @Override
@@ -87,6 +96,7 @@ public class ConsumeActivity extends FragmentActivity {
           consumerView.setProgress(0, consumer.getDuration());
           consumerView.setRepeat(0, consumer.getActionRepeatSum());
           consumerView.setState(State.PLAYING);
+          consumerView.showNormalView();
         }
       });
     }
@@ -208,6 +218,13 @@ public class ConsumeActivity extends FragmentActivity {
         public void onExitPressed() {
           exit();
         }
+
+        @Override
+        public void onSkipGuidePressed() {
+          if (consumer != null) {
+            consumer.skipGuide();
+          }
+        }
       };
 
   @Override
@@ -252,6 +269,12 @@ public class ConsumeActivity extends FragmentActivity {
       this.consumerView.initContent(this.consumer.getAction(), this.consumer.getProgress(),
           this.consumer.getDuration(), this.consumer.getActionIndex(),
           this.consumer.getActionRepeatSum(), this.consumer.getState());
+
+      if (this.consumer.isGuiding()) {
+        this.consumerView.showGuideView();
+      } else {
+        this.consumerView.showNormalView();
+      }
     }
   }
 

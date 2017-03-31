@@ -169,6 +169,7 @@ public class DefaultConsumer implements Consumer {
   @Override
   public void skipGuide() {
     if (guiding) {
+      guiding = false;
       stop();
       prepare2Action();
       play();
@@ -258,6 +259,11 @@ public class DefaultConsumer implements Consumer {
   @Override
   public boolean canJump2Action(int index) {
     return courseManager.getActionTimelineItem(index) != null;
+  }
+
+  @Override
+  public boolean isGuiding() {
+    return guiding;
   }
 
   @Override

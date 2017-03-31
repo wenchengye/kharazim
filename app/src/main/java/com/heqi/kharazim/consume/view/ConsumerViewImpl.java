@@ -18,6 +18,7 @@ import com.heqi.kharazim.explore.view.ExploreCircleProgressView;
 
 public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
 
+  private View consumerNormalLayout;
   private ImageView playBtn;
   private ImageView previousBtn;
   private ImageView nextBtn;
@@ -25,6 +26,11 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
   private TextView interpretationBtn;
   private ExploreCircleProgressView repeatProgress;
   private ExploreCircleProgressView durationProgress;
+
+  private View consumerGuideLayout;
+  private ExploreCircleProgressView guideProgress;
+  private View skipGuideBtn;
+
 
   private ExploreConsumerViewListener listener;
 
@@ -51,6 +57,7 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
   }
 
   private void init() {
+    consumerNormalLayout = findViewById(R.id.consumer_view_normal_layout);
     playBtn = (ImageView) findViewById(R.id.consumer_play_button);
     previousBtn = (ImageView) findViewById(R.id.consumer_backward_button);
     nextBtn = (ImageView) findViewById(R.id.consumer_forward_button);
@@ -58,7 +65,17 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
     repeatProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_repeat_progress);
     durationProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_duration_progress);
 
+    consumerGuideLayout = findViewById(R.id.consumer_view_guide_layout);
+    guideProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_guide_progress);
+    skipGuideBtn = findViewById(R.id.consumer_skip_guide_btn);
+
+    if (guideProgress != null) {
+      guideProgress.setProgressType(ExploreCircleProgressView.ProgressType.PROGRESS_ONLY);
+    }
+
     initGeneralListeners();
+
+    showNormalView();
   }
 
   private void initGeneralListeners() {
@@ -122,6 +139,15 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
       durationProgress.setLowerMinorText(
           getContext().getString(R.string.consumer_progress_duration_lower_text));
     }
+
+    if (skipGuideBtn != null) {
+      skipGuideBtn.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if (listener != null) listener.onSkipGuidePressed();
+        }
+      });
+    }
   }
 
   @Override
@@ -148,6 +174,12 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
       this.durationProgress.setProgressText(String.valueOf(progress));
       this.durationProgress.setMaxText(String.valueOf(duration));
     }
+
+    if (this.guideProgress != null) {
+      this.guideProgress.setProgress(progress);
+      this.guideProgress.setMax(duration);
+      this.guideProgress.setProgressText(String.valueOf(progress));
+    }
   }
 
   @Override
@@ -168,5 +200,27 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
   @Override
   public void setExploreConsumerViewListener(ExploreConsumerViewListener listener) {
     this.listener = listener;
+  }
+
+  @Override
+  public void showGuideView() {
+    if (consumerGuideLayout != null) {
+      consumerGuideLayout.setVisibility(View.VISIBLE);
+    }
+
+    if (consumerNormalLayout != null) {
+      consumerNormalLayout.setVisibility(View.GONE);
+    }
+  }
+
+  @Override
+  public void showNormalView() {
+    if (consumerGuideLayout != null) {
+      consumerGuideLayout.setVisibility(View.GONE);
+    }
+
+    if (consumerNormalLayout != null) {
+      consumerNormalLayout.setVisibility(View.VISIBLE);
+    }
   }
 }

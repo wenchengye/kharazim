@@ -20,6 +20,13 @@ import com.heqi.kharazim.R;
 
 public class ExploreCircleProgressView extends View {
 
+  public static class ProgressType {
+    public static final int PROGRESS_AND_DURATION = 0;
+    public static final int PROGRESS_ONLY = 1;
+
+    private ProgressType() {}
+  }
+
   private static final int VALUE_DEFAULT_MIN = 0;
   private static final int VALUE_DEFAULT_MAX = 100;
   private static final float VALUE_DEFAULT_PROGRESS = 0.f;
@@ -38,6 +45,7 @@ public class ExploreCircleProgressView extends View {
   private int max;
   private float progress;
   private String majorText;
+  private int progressType = ProgressType.PROGRESS_AND_DURATION;
 
   private Paint backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private Paint foregroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -84,7 +92,7 @@ public class ExploreCircleProgressView extends View {
       max = typedArray.getInt(R.styleable.ExploreCircleProgressView_max, VALUE_DEFAULT_MAX);
       progress = typedArray.getFloat(R.styleable.ExploreCircleProgressView_progress,
           VALUE_DEFAULT_PROGRESS);
-      majorText = combineProgressText(progressText, maxText);
+      majorText = generateMajorText(progressText, maxText);
 
     } finally {
       typedArray.recycle();
@@ -178,7 +186,7 @@ public class ExploreCircleProgressView extends View {
   public void setMaxText(String maxText) {
     this.maxText = maxText;
 
-    majorText = combineProgressText(progressText, maxText);
+    majorText = generateMajorText(progressText, maxText);
     resetStartPointX(majorText, majorStartPoint, majorTextPaint);
     invalidate();
   }
@@ -186,7 +194,7 @@ public class ExploreCircleProgressView extends View {
   public void setProgressText(String progressText) {
     this.progressText = progressText;
 
-    majorText = combineProgressText(progressText, maxText);
+    majorText = generateMajorText(progressText, maxText);
     resetStartPointX(majorText, majorStartPoint, majorTextPaint);
     invalidate();
   }
@@ -216,5 +224,17 @@ public class ExploreCircleProgressView extends View {
   public void setProgress(float progress) {
     this.progress = progress;
     invalidate();
+  }
+
+  public void setProgressType(int progressType) {
+    this.progressType = progressType;
+  }
+
+  private String generateMajorText(String progressText, String maxText) {
+    if (this.progressType == ProgressType.PROGRESS_AND_DURATION) {
+      return combineProgressText(progressText, maxText);
+    } else {
+      return progressText;
+    }
   }
 }

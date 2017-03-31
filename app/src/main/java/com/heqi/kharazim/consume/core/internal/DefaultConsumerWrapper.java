@@ -301,7 +301,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     consumerHandler.post(new Runnable() {
       @Override
       public void run() {
-
+        skipGuideInternal();
       }
     });
   }
@@ -391,6 +391,10 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     return getState() != State.OFF && consumer.canJump2Action(index);
   }
 
+  @Override
+  public boolean isGuiding() {
+    return getState() != State.OFF && consumer.isGuiding();
+  }
 
   @Override
   final public void setConsumerCallback(ConsumerCallback callback) {

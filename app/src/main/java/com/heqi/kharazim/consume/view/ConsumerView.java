@@ -20,6 +20,10 @@ public interface ConsumerView {
 
   void setState(State state);
 
+  void showGuideView();
+
+  void showNormalView();
+
   void setExploreConsumerViewListener(ExploreConsumerViewListener listener);
 
   interface ExploreConsumerViewListener {
@@ -33,5 +37,7 @@ public interface ConsumerView {
     void onInterpretationPressed();
 
     void onExitPressed();
+
+    void onSkipGuidePressed();
   }
 }

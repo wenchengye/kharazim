@@ -30,4 +30,7 @@
     <color name="archives_init_bg_color">#2a2c2c</color>
     <color name="archives_login_input_hint_text_color">#666767</color>
 
+    <!-- consume -->
+    <color name="consume_guide_layout_bg_color">#992e2e2e</color>
+
 </resources>
