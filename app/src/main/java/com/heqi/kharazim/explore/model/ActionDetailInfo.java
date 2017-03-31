@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ActionDetailInfo implements Serializable {
 
+  private static final long serialVersionUID = 3795829301858970767L;
+
   private String id;
   private String actname;
   private String actdec;
@@ -18,6 +20,8 @@ public class ActionDetailInfo implements Serializable {
   private String acttype;
   private int cptime;
   private int cpcnt;
+  private int guidetime;
+  private int guidecnt;
   private List<ActionSoundInfo> actSoundDtoList;
 
   public String getId() {
@@ -101,6 +105,12 @@ public class ActionDetailInfo implements Serializable {
   }
 
   public static class ActionSoundInfo implements Serializable {
+
+    private static final long serialVersionUID = -1602377887029351204L;
+
+    public static final int PLAY_TYPE_VALUE_GUIDE = 1;
+    public static final int PLAY_TYPE_VALUE_NORMAL = 0;
+
     private int num;
     private int starttime;
     private int playtype;

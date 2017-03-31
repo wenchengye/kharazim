@@ -48,6 +48,21 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     }
 
     @Override
+    public void onGuideStart() {
+      checkOnConsumerThread();
+
+      setState(State.PLAYING);
+      final ActionDetailInfo action = consumer.getAction();
+      final int actionIndex = consumer.getActionIndex();
+      notifyObserver(new NotifyObserverRunnable() {
+        @Override
+        public void notify(ConsumerObserver observer) {
+          observer.onGuideStart(action, actionIndex);
+        }
+      });
+    }
+
+    @Override
     public void onPlayStart() {
 
       checkOnConsumerThread();
@@ -282,6 +297,16 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   }
 
   @Override
+  public void skipGuide() {
+    consumerHandler.post(new Runnable() {
+      @Override
+      public void run() {
+
+      }
+    });
+  }
+
+  @Override
   public void seek(final int second) {
     consumerHandler.post(new Runnable() {
       @Override
@@ -328,12 +353,12 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
   @Override
   public int getProgress() {
-    return getState() != State.OFF ? consumer.getProgress() : 0;
+    return getState() != State.OFF ? millisecond2Second(consumer.getProgress()) : 0;
   }
 
   @Override
   public int getDuration() {
-    return getState() != State.OFF ? consumer.getDuration() : 0;
+    return getState() != State.OFF ? millisecond2Second(consumer.getDuration()) : 0;
   }
 
   @Override
@@ -480,6 +505,14 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
     consumer.backward();
     onPreparingInternal(Reason.CLIENT_EVENT);
+  }
+
+  private void skipGuideInternal() {
+    checkOnConsumerThread();
+
+    if (getState() != State.PLAYING && getState() != State.PAUSE) return;
+
+    consumer.skipGuide();
   }
 
   private void seekToInternal(int second) {

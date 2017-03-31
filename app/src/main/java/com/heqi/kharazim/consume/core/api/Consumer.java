@@ -23,6 +23,8 @@ public interface Consumer {
 
   void backward();
 
+  void skipGuide();
+
   void seek(int second);
 
   void jump2Action(int index);
@@ -56,6 +58,8 @@ public interface Consumer {
   public interface ConsumerCallback {
 
     void onPreparing();
+
+    void onGuideStart();
 
     void onPlayStart();
 

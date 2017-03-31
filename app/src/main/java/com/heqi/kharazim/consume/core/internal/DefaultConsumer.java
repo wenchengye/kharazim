@@ -30,6 +30,7 @@ public class DefaultConsumer implements Consumer {
   private ConsumerInternalStateRepeat musicConsumer;
   private ConsumerCallback callback;
 
+  private boolean guiding = false;
   private int actionIndex;
   private int repeatIndex;
   private int progress;
@@ -61,8 +62,13 @@ public class DefaultConsumer implements Consumer {
         @Override
         public void onPrepared() {
           actionConsumer.start();
+
           if (callback != null) {
-            callback.onPlayStart();
+            if (guiding) {
+              callback.onGuideStart();
+            } else {
+              callback.onPlayStart();
+            }
           }
         }
 
@@ -161,6 +167,15 @@ public class DefaultConsumer implements Consumer {
   }
 
   @Override
+  public void skipGuide() {
+    if (guiding) {
+      stop();
+      prepare2Action();
+      play();
+    }
+  }
+
+  @Override
   public void seek(int second) {
 
   }
@@ -206,7 +221,9 @@ public class DefaultConsumer implements Consumer {
 
   @Override
   public int getDuration() {
-    Timeline.TimelineItem actionTimelineItem = courseManager.getActionTimelineItem(actionIndex);
+    Timeline.TimelineItem actionTimelineItem = guiding
+        ? courseManager.getGuideActionTimelineItem(actionIndex) :
+        courseManager.getActionTimelineItem(actionIndex);
     return actionTimelineItem != null ? actionTimelineItem.getTotalDuration() : 0;
   }
 
@@ -253,6 +270,31 @@ public class DefaultConsumer implements Consumer {
     progress = 0;
     repeatIndex = 0;
 
+    guiding = prepare2Guide();
+
+    if (!guiding) prepare2Action();
+  }
+
+  private boolean prepare2Guide() {
+    Timeline.TimelineItem guideActionItem = courseManager.getGuideActionTimelineItem(actionIndex);
+
+    if (guideActionItem == null) return false;
+
+    actionConsumer.setSource(guideActionItem.getSource(),
+        guideActionItem.getRepeat(), guideActionItem.getMargin());
+    time = courseManager.getActionTimeline().getItemStartTime(guideActionItem);
+
+    currentSound = courseManager.getGuideSoundTimelineItem(actionIndex);
+    if (currentSound != null) {
+      soundConsumer.setSource(currentSound.getSource());
+    } else {
+      soundConsumer.setSource(null);
+    }
+
+    return true;
+  }
+
+  private void prepare2Action() {
     Timeline.TimelineItem actionItem = courseManager.getActionTimelineItem(actionIndex);
     if (actionItem != null) {
       actionConsumer.setSource(actionItem.getSource(),
@@ -289,7 +331,8 @@ public class DefaultConsumer implements Consumer {
   }
 
   private boolean isActionConsumerFunctional() {
-    return courseManager.getActionTimelineItem(actionIndex) != null;
+    return (guiding && courseManager.getGuideActionTimelineItem(actionIndex) != null) ||
+        (!guiding && courseManager.getActionTimelineItem(actionIndex) != null);
   }
 
   private boolean isSoundConsumerFunctional() {
@@ -301,6 +344,10 @@ public class DefaultConsumer implements Consumer {
   }
 
   private void updateProgress() {
+
+    Timeline.TimelineItem currentActionItem = guiding ?
+        courseManager.getGuideActionTimelineItem(actionIndex) :
+        courseManager.getActionTimelineItem(actionIndex);
 
     do {
 
@@ -320,19 +367,19 @@ public class DefaultConsumer implements Consumer {
           progress = actionConsumer.getProgress();
           break;
         case PlayOver:
-          progress = courseManager.getActionTimelineItem(actionIndex).getDuration();
+          progress = courseManager.getActionTimelineItem(actionIndex).getTotalDuration();
           break;
         default:
           break;
       }
+
       time = courseManager.getActionTimeline().getItemStartTime(
-          courseManager.getActionTimelineItem(actionIndex)) + progress;
+          currentActionItem) + progress;
 
     } while (false);
 
     if (this.callback != null && actionConsumer.getInternalState() == InternalState.Playing) {
-      this.callback.onProgress(progress,
-          courseManager.getActionTimelineItem(actionIndex).getDuration());
+      this.callback.onProgress(progress, currentActionItem.getTotalDuration());
     }
 
   }
@@ -353,15 +400,17 @@ public class DefaultConsumer implements Consumer {
       }
     }
 
-    Timeline.TimelineItem upcomingSound = courseManager.getSoundTimeline(actionIndex) == null
-        ? null : courseManager.getSoundTimeline(actionIndex).getHitOrUpcomingItem(time);
+    if (!guiding) {
+      Timeline.TimelineItem upcomingSound = courseManager.getSoundTimeline(actionIndex) == null
+          ? null : courseManager.getSoundTimeline(actionIndex).getHitOrUpcomingItem(time);
 
-    if (upcomingSound != currentSound) {
-      currentSound = upcomingSound;
-      if (currentSound != null) {
-        soundConsumer.setSource(currentSound.getSource());
-      } else {
-        soundConsumer.setSource(null);
+      if (upcomingSound != currentSound) {
+        currentSound = upcomingSound;
+        if (currentSound != null) {
+          soundConsumer.setSource(currentSound.getSource());
+        } else {
+          soundConsumer.setSource(null);
+        }
       }
     }
 
@@ -399,12 +448,18 @@ public class DefaultConsumer implements Consumer {
   }
 
   private void onActionOver() {
-    if (canForward()) {
-      forward();
+    if (guiding) {
+      guiding = false;
+      prepare2Action();
+      play();
     } else {
-      stop();
-      if (callback != null) {
-        callback.onPlayOver();
+      if (canForward()) {
+        forward();
+      } else {
+        stop();
+        if (callback != null) {
+          callback.onPlayOver();
+        }
       }
     }
   }

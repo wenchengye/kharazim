@@ -15,7 +15,7 @@ public class CourseDetailInfo implements Serializable {
   private String courseimg;
   private int actcnt;
   private int acupointcnt;
-  private int coursetype;
+  private String coursetype;
   private int cptime;
   private int courselev;
   private int lev;
@@ -72,11 +72,11 @@ public class CourseDetailInfo implements Serializable {
     this.acupointcnt = acupointcnt;
   }
 
-  public int getCoursetype() {
+  public String getCoursetype() {
     return coursetype;
   }
 
-  public void setCoursetype(int coursetype) {
+  public void setCoursetype(String coursetype) {
     this.coursetype = coursetype;
   }
 
@@ -133,6 +133,9 @@ public class CourseDetailInfo implements Serializable {
   }
 
   public static class CourseMusicInfo implements Serializable {
+
+    private static final long serialVersionUID = -5863921282943009305L;
+
     private int num;
     private int starttime;
     private int playtype;

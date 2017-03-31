@@ -74,6 +74,11 @@ public class ConsumeActivity extends FragmentActivity {
     }
 
     @Override
+    public void onGuideStart(ActionDetailInfo action, int actionIndex) {
+
+    }
+
+    @Override
     public void onPlayStart(final ActionDetailInfo action, int actionIndex) {
       uiHandler.post(new Runnable() {
         @Override

@@ -15,6 +15,8 @@ public interface ConsumerObserver {
 
   void onPreparing(ActionDetailInfo action, int actionIndex, Reason reason);
 
+  void onGuideStart(ActionDetailInfo action, int actionIndex);
+
   void onPlayStart(ActionDetailInfo action, int actionIndex);
 
   void onPlayOver(ActionDetailInfo action, int actionIndex);
