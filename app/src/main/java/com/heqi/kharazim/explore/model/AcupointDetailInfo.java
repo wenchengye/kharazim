@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class AcupointDetailInfo implements Serializable {
 
+  private static final long serialVersionUID = 7986737949178370757L;
+
   private String id;
   private String acupointno;
   private String techniqueno;

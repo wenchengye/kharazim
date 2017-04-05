@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.VideoView;
 
 import com.android.volley.Response;
@@ -19,6 +20,10 @@ import com.heqi.kharazim.consume.core.api.ConsumerObserver;
 import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
 import com.heqi.kharazim.consume.core.api.Reason;
 import com.heqi.kharazim.consume.core.api.State;
+import com.heqi.kharazim.consume.fragment.ConsumerInterpretationFragment;
+import com.heqi.kharazim.consume.view.ConsumeFinishView;
+import com.heqi.kharazim.consume.view.ConsumeGiveUpView;
+import com.heqi.kharazim.consume.view.ConsumerPauseView;
 import com.heqi.kharazim.consume.view.ConsumerView;
 import com.heqi.kharazim.explore.http.request.CourseDetailWithDailyIdRequest;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
@@ -38,6 +43,12 @@ public class ConsumeActivity extends FragmentActivity {
 
   private VideoView videoView;
   private ConsumerView consumerView;
+  private ConsumerPauseView pauseView;
+  private ConsumeGiveUpView giveUpView;
+  private ConsumeFinishView finishView;
+
+  private ConsumerInterpretationFragment interpretationFragment;
+
 
   private int requestCourseTag = 0;
 
@@ -109,7 +120,9 @@ public class ConsumeActivity extends FragmentActivity {
           consumerView.setAction(action);
           consumerView.setProgress(consumer.getDuration(), consumer.getDuration());
           consumerView.setRepeat(consumer.getActionRepeatSum(), consumer.getActionRepeatSum());
-          consumerView.setState(State.PLAYING);
+          consumerView.setState(State.IDLE);
+
+          showFinishView();
         }
       });
     }
@@ -204,6 +217,7 @@ public class ConsumeActivity extends FragmentActivity {
         public void onPlayPressed() {
           if (consumer.getState() == State.PLAYING) {
             consumer.pause();
+            showPauseView();
           } else {
             consumer.play();
           }
@@ -211,7 +225,8 @@ public class ConsumeActivity extends FragmentActivity {
 
         @Override
         public void onInterpretationPressed() {
-
+          consumer.pause();
+          showInterpretation(true);
         }
 
         @Override
@@ -226,6 +241,46 @@ public class ConsumeActivity extends FragmentActivity {
           }
         }
       };
+
+  private ConsumerPauseView.ConsumerPauseViewListener pauseViewListener =
+      new ConsumerPauseView.ConsumerPauseViewListener() {
+    @Override
+    public void onPlayPressed() {
+      consumer.play();
+      hidePauseView();
+    }
+
+    @Override
+    public void onInterpretationPressed() {
+      showInterpretation(false);
+    }
+
+    @Override
+    public void onSetMusicVolume(float volume) {
+
+    }
+
+    @Override
+    public void onSetSoundVolume(float volume) {
+
+    }
+  };
+
+  private ConsumeGiveUpView.ConsumeGiveUpViewListener giveUpViewListener =
+      new ConsumeGiveUpView.ConsumeGiveUpViewListener() {
+    @Override
+    public void onConfirmPressed() {
+      exit();
+    }
+  };
+
+  private ConsumeFinishView.ConsumeFinishViewListener finishViewListener =
+      new ConsumeFinishView.ConsumeFinishViewListener() {
+    @Override
+    public void onConfirmPressed(int star) {
+      exit();
+    }
+  };
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -253,8 +308,21 @@ public class ConsumeActivity extends FragmentActivity {
 
   private void initViews() {
     videoView = (VideoView) findViewById(R.id.explore_consumer_video_view);
+
     consumerView = (ConsumerView) findViewById(R.id.explore_portrait_consumer_view);
     consumerView.setExploreConsumerViewListener(this.consumerViewListener);
+
+    pauseView = (ConsumerPauseView) findViewById(R.id.consumer_pause_view);
+    pauseView.setListener(pauseViewListener);
+    ((View) pauseView).setVisibility(View.GONE);
+
+    giveUpView = (ConsumeGiveUpView) findViewById(R.id.consumer_give_up_view);
+    giveUpView.setListener(giveUpViewListener);
+    giveUpView.setVisibility(View.GONE);
+
+    finishView = (ConsumeFinishView) findViewById(R.id.consumer_finish_view);
+    finishView.setListener(finishViewListener);
+    finishView.setVisibility(View.GONE);
   }
 
   private void initConsumer() {
@@ -356,5 +424,55 @@ public class ConsumeActivity extends FragmentActivity {
     }
     this.consumerFactory = null;
     finish();
+  }
+
+  private void showPauseView() {
+    pauseView.setAction(consumer.getAction());
+    ((View) pauseView).setVisibility(View.VISIBLE);
+  }
+
+  private void hidePauseView() {
+    ((View) pauseView).setVisibility(View.GONE);
+  }
+
+  private void showInterpretation(final boolean causePause) {
+    interpretationFragment = new ConsumerInterpretationFragment();
+    interpretationFragment.setListener(
+        new ConsumerInterpretationFragment.ConsumerInterpretationFragmentListener() {
+      @Override
+      public void onExitPressed() {
+        hideInterpretation();
+        if (causePause) consumer.play();
+      }
+    });
+    interpretationFragment.setData(consumer.getCourse().getActlist(), consumer.getActionIndex());
+
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.consumer_fragment_container, interpretationFragment)
+        .commit();
+  }
+
+  private void hideInterpretation() {
+    getSupportFragmentManager().beginTransaction()
+        .remove(interpretationFragment)
+        .commit();
+    interpretationFragment.setListener(null);
+    interpretationFragment = null;
+  }
+
+  private void showGiveUpView() {
+    giveUpView.setVisibility(View.VISIBLE);
+  }
+
+  private void hideGiveUpView() {
+    giveUpView.setVisibility(View.GONE);
+  }
+
+  private void showFinishView() {
+    finishView.setVisibility(View.VISIBLE);
+  }
+
+  private void hideFinishView() {
+    finishView.setVisibility(View.GONE);
   }
 }

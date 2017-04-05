@@ -89,6 +89,11 @@ public class ConsumerInternalStateRepeatWrapper implements ConsumerInternalState
   }
 
   @Override
+  public void setVolume(float volume) {
+    this.internal.setVolume(volume);
+  }
+
+  @Override
   public int getProgress() {
     return this.repeatIndex * this.internal.getDuration() + this.internal.getProgress();
   }
@@ -96,6 +101,11 @@ public class ConsumerInternalStateRepeatWrapper implements ConsumerInternalState
   @Override
   public int getDuration() {
     return this.repeatSum * this.internal.getDuration();
+  }
+
+  @Override
+  public float getVolume() {
+    return this.internal.getVolume();
   }
 
   @Override

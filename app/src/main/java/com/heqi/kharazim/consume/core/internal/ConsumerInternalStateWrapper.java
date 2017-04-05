@@ -102,6 +102,11 @@ public class ConsumerInternalStateWrapper implements ConsumerInternalState {
   }
 
   @Override
+  public void setVolume(float volume) {
+    consumer.setVolume(volume);
+  }
+
+  @Override
   public int getProgress() {
     return consumer.getProgress();
   }
@@ -109,6 +114,11 @@ public class ConsumerInternalStateWrapper implements ConsumerInternalState {
   @Override
   public int getDuration() {
     return consumer.getDuration();
+  }
+
+  @Override
+  public float getVolume() {
+    return consumer.getVolume();
   }
 
   @Override

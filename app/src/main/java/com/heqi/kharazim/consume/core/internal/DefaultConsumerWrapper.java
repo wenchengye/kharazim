@@ -11,6 +11,8 @@ import com.heqi.kharazim.consume.core.api.ConsumerObserver;
 import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
 import com.heqi.kharazim.consume.core.api.Reason;
 import com.heqi.kharazim.consume.core.api.State;
+import com.heqi.kharazim.consume.core.internal.api.ConsumeRecorder;
+import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 
@@ -37,6 +39,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   private volatile State targetState;
   private ConsumerFactory consumerFactory;
   private Consumer consumer;
+  private ConsumeRecorder recorder;
 
   private final Consumer.ConsumerCallback consumerCallback = new ConsumerCallback() {
     @Override
@@ -44,6 +47,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
       checkOnConsumerThread();
 
+      recorder.recordActionStarted(consumer.getAction(), consumer.getActionIndex());
       onPreparingInternal(Reason.INTERNAL_EVENT);
     }
 
@@ -76,6 +80,14 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
           observer.onPlayStart(action, actionIndex);
         }
       });
+    }
+
+    @Override
+    public void onPlayEnd() {
+
+      checkOnConsumerThread();
+
+      recorder.recordActionEnded(consumer.getAction());
     }
 
     @Override
@@ -116,6 +128,9 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
       checkOnConsumerThread();
 
+      if (!isGuiding()) {
+        recorder.recordActionProgressed(consumer.getAction(), milliseconds);
+      }
       notifyObserver(new NotifyObserverRunnable() {
         @Override
         public void notify(ConsumerObserver observer) {
@@ -140,6 +155,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   public DefaultConsumerWrapper(Context context, ConsumerFactory consumerFactory) {
     this.context = context;
     this.consumerFactory = consumerFactory;
+    this.recorder = new DefaultConsumeRecorder();
     setState(State.OFF);
 
     consumerHandler.post(new Runnable() {
@@ -223,6 +239,11 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
         }
       }
     }
+  }
+
+  @Override
+  public ConsumeCourseRecord getRecord() {
+    return recorder.getRecord();
   }
 
   @Override
@@ -342,6 +363,26 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   }
 
   @Override
+  public void setSoundVolume(final float volume) {
+    consumerHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        setSoundVolume(volume);
+      }
+    });
+  }
+
+  @Override
+  public void setMusicVolume(final float volume) {
+    consumerHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        setMusicVolume(volume);
+      }
+    });
+  }
+
+  @Override
   public ActionDetailInfo getAction() {
     return getState() != State.OFF ? consumer.getAction() : null;
   }
@@ -369,6 +410,16 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   @Override
   public int getActionRepeatSum() {
     return getState() != State.OFF ? consumer.getActionRepeatSum() : 0;
+  }
+
+  @Override
+  public float getMusicVolume() {
+    return getState() != State.OFF ? consumer.getMusicVolume() : 0.f;
+  }
+
+  @Override
+  public float getSoundVolume() {
+    return getState() != State.OFF ? consumer.getSoundVolume() : 0.f;
   }
 
   @Override
@@ -497,6 +548,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
     if (getState() == State.OFF || !consumer.canForward()) return;
 
+    recorder.recordActionSkipped(consumer.getAction());
     consumer.forward();
     onPreparingInternal(Reason.CLIENT_EVENT);
   }
@@ -507,6 +559,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
 
     if (getState() == State.OFF || !consumer.canBackward()) return;
 
+    recorder.recordActionSkipped(consumer.getAction());
     consumer.backward();
     onPreparingInternal(Reason.CLIENT_EVENT);
   }
@@ -545,7 +598,26 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     if (getState() == State.OFF) return;
 
     consumer.setCourse(course);
+    recorder.reset(course);
     onPreparingInternal(Reason.CLIENT_EVENT);
+  }
+
+  private void setSoundVolumeInternal(float volume) {
+
+    checkOnConsumerThread();
+
+    if (getState() == State.OFF) return;
+
+    consumer.setSoundVolume(volume);
+  }
+
+  private void setMusicVolumeInternal(float volume) {
+
+    checkOnConsumerThread();
+
+    if (getState() == State.OFF) return;
+
+    consumer.setMusicVolume(volume);
   }
 
   private void onPreparingInternal(final Reason reason) {

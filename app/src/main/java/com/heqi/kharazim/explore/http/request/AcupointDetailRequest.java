@@ -48,4 +48,8 @@ public class AcupointDetailRequest extends AbstractKharazimHttpRequest<AcupointQ
     }
     return ret;
   }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 }

@@ -30,6 +30,11 @@ public class Intents {
 
   public static final String ACTION_CONSUMER_PLAY = "kharazim.intent.action.CONSUMER_PLAY";
 
+  public static final String EXTRA_CONSUME_TIME_MINUTES =
+      "kharazim.intent.extra.CONSUME_TIME_MINUTES";
+  public static final String EXTRA_CONSUME_ACTION_COUNT =
+      "kharazim.intent.extra.CONSUME_ACTION_COUNT";
+
   private Intents() {
   }
 }

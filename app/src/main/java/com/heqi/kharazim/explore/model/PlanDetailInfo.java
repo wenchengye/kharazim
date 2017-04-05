@@ -9,6 +9,8 @@ import java.util.List;
 
 public class PlanDetailInfo implements Serializable {
 
+  private static final long serialVersionUID = -3751827341211931065L;
+
   private String ret_msg;
   private int ret_code;
   private List<PlanCourseInfo> data_info;

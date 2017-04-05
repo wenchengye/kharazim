@@ -206,6 +206,20 @@ public class DefaultConsumer implements Consumer {
   }
 
   @Override
+  public void setSoundVolume(float volume) {
+    if (soundConsumer != null) {
+      soundConsumer.setVolume(volume);
+    }
+  }
+
+  @Override
+  public void setMusicVolume(float volume) {
+    if (musicConsumer != null) {
+      musicConsumer.setVolume(volume);
+    }
+  }
+
+  @Override
   public ActionDetailInfo getAction() {
     return courseManager.getAction(actionIndex);
   }
@@ -237,6 +251,16 @@ public class DefaultConsumer implements Consumer {
   public int getActionRepeatSum() {
     Timeline.TimelineItem actionTimelineItem = courseManager.getActionTimelineItem(actionIndex);
     return actionTimelineItem != null ? actionTimelineItem.getRepeat() : 0;
+  }
+
+  @Override
+  public float getMusicVolume() {
+    return musicConsumer != null ? musicConsumer.getVolume() : 0.f;
+  }
+
+  @Override
+  public float getSoundVolume() {
+    return soundConsumer != null ? soundConsumer.getVolume() : 0.f;
   }
 
   @Override

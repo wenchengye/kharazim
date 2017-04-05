@@ -2,6 +2,7 @@
     <string name="app_name">kharazim</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
+    <string name="endl">\r\n</string>
 
     <!-- explore -->
     <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
@@ -29,6 +30,14 @@
     <string name="consumer_progress_guide_upper_text">教学</string>
     <string name="consumer_progress_guide_lower_text">时长</string>
     <string name="consumer_skip_guide_label_text">跳过教学指导</string>
+    <string name="consumer_interpretation_label_acupoint_name">【穴位名称】 </string>
+    <string name="consumer_interpretation_label_acupoint_position">【定位】 </string>
+    <string name="consumer_interpretation_label_acupoint_bodypart">【所在部位】 </string>
+    <string name="consumer_interpretation_label_acupoint_meridian">【所属经络】 </string>
+    <string name="consumer_interpretation_label_acupoint_technique">【手法】 </string>
+    <string name="consumer_interpretation_label_acupoint_operation">【操作方法】 </string>
+    <string name="consumer_interpretation_label_acupoint_function">【功能】 </string>
+    <string name="consumer_record_action_time_format">%1$s 秒</string>
 
     <!-- archives -->
     <string name="archives_in_login_progress_hint_text">正在登录中</string>

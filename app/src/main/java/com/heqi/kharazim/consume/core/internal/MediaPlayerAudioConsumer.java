@@ -19,12 +19,15 @@ import java.io.IOException;
 
 public class MediaPlayerAudioConsumer implements ConsumerInternal {
 
+  private static final float DEFAULT_VOLUME = 0.5f;
+
   private Context context;
   private MediaPlayer player;
 
   private ConsumerInternalCallback callback;
 
   private Uri source;
+  private float volume;
 
   private OnPreparedListener preparedListener = new OnPreparedListener() {
     @Override
@@ -61,6 +64,9 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
     player.setOnPreparedListener(preparedListener);
     player.setOnCompletionListener(completionListener);
     player.setOnErrorListener(errorListener);
+
+    this.volume = DEFAULT_VOLUME;
+    player.setVolume(this.volume, this.volume);
   }
 
   @Override
@@ -118,6 +124,12 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
   }
 
   @Override
+  public void setVolume(float volume) {
+    this.volume = volume;
+    player.setVolume(this.volume, this.volume);
+  }
+
+  @Override
   public int getProgress() {
     return player.getCurrentPosition();
   }
@@ -130,6 +142,11 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
   @Override
   public void setSource(Uri uri) {
     this.source = uri;
+  }
+
+  @Override
+  public float getVolume() {
+    return volume;
   }
 
   @Override

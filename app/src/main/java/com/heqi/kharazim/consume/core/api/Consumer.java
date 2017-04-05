@@ -33,6 +33,10 @@ public interface Consumer {
 
   void setCourse(CourseDetailInfo course);
 
+  void setMusicVolume(float volume);
+
+  void setSoundVolume(float volume);
+
   ActionDetailInfo getAction();
 
   int getActionIndex();
@@ -44,6 +48,10 @@ public interface Consumer {
   int getActionRepeatIndex();
 
   int getActionRepeatSum();
+
+  float getMusicVolume();
+
+  float getSoundVolume();
 
   boolean canForward();
 
@@ -64,6 +72,8 @@ public interface Consumer {
     void onGuideStart();
 
     void onPlayStart();
+
+    void onPlayEnd();
 
     void onPlayOver();
 

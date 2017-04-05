@@ -126,7 +126,33 @@
 
             </FrameLayout>
         </RelativeLayout>
-
-
     </com.heqi.kharazim.consume.view.ConsumerViewImpl>
+
+    <com.heqi.kharazim.consume.view.ConsumerPauseViewImpl
+        android:id="@+id/consumer_pause_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.heqi.kharazim.consume.view.ConsumerPauseViewImpl>
+
+    <FrameLayout
+        android:id="@+id/consumer_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <com.heqi.kharazim.consume.view.ConsumeGiveUpView
+        android:id="@+id/consumer_give_up_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.heqi.kharazim.consume.view.ConsumeGiveUpView>
+
+    <com.heqi.kharazim.consume.view.ConsumeFinishView
+        android:id="@+id/consumer_finish_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.heqi.kharazim.consume.view.ConsumeFinishView>
 </RelativeLayout>

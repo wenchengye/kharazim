@@ -6,6 +6,12 @@ package com.heqi.kharazim.config;
 
 public class Const {
 
+  // common
+  public static final long SECOND = 1000L;
+  public static final long MINTUE = SECOND * 60;
+  public static final long HOUR = MINTUE * 60;
+  public static final long DAY = HOUR * 24;
+
   // http
   //public static final String KHARAZIM_SERVER = "http://115.28.11.62:8080/";
   public static final String KHARAZIM_SERVER = "https://manager.heal361.com/";
