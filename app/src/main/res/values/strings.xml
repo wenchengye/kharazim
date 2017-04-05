@@ -38,6 +38,12 @@
     <string name="consumer_interpretation_label_acupoint_operation">【操作方法】 </string>
     <string name="consumer_interpretation_label_acupoint_function">【功能】 </string>
     <string name="consumer_record_action_time_format">%1$s 秒</string>
+    <string name="consumer_pause_content_text_1">充足的睡眠可以缓解头部的疲劳</string>
+    <string name="consumer_pause_content_text_2">新鲜的空气和放松的心情有助于脑力的回复</string>
+    <string name="consumer_pause_content_text_3">当你无法使用HEAL时</string>
+    <string name="consumer_pause_content_text_4">闭目养神尝试深呼吸10次，也是不错的办法</string>
+    <string name="consumer_pause_sound_volume_label_text">指导音量</string>
+    <string name="consumer_pause_music_volume_label_text">音乐音量</string>
 
     <!-- archives -->
     <string name="archives_in_login_progress_hint_text">正在登录中</string>

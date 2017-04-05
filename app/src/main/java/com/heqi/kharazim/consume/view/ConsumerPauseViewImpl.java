@@ -46,6 +46,11 @@ public class ConsumerPauseViewImpl extends RelativeLayout implements ConsumerPau
   }
 
   private void init() {
+    actionIv = (AsyncImageView) findViewById(R.id.consumer_pause_view_action_iv);
+    interpretationBtn = findViewById(R.id.consumer_pause_view_interpretation_btn);
+    soundVolumeSeekBar = (SeekBar) findViewById(R.id.consumer_pause_view_sound_volume_seekbar);
+    musicVolumeSeekBar = (SeekBar) findViewById(R.id.consumer_pause_view_music_volume_seekbar);
+    playBtn = findViewById(R.id.consumer_pause_view_play_btn);
 
     initGeneralListeners();
   }
