@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.consume.view.ConsumeActionRecordCard xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="114dp"
+             android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/consumer_finish_acupoint_card_title"
+        android:layout_gravity="start"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"
+        style="@style/simple_tv"/>
+
+    <TextView
+        android:id="@+id/consumer_finish_acupoint_card_count"
+        android:layout_gravity="end"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"
+        style="@style/simple_tv"/>
+
+</com.heqi.kharazim.consume.view.ConsumeActionRecordCard>

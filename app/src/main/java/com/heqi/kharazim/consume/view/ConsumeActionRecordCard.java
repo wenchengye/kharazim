@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
+import com.heqi.kharazim.utils.ViewUtils;
 
 /**
  * Created by overspark on 2017/4/1.
@@ -32,7 +33,8 @@ public class ConsumeActionRecordCard extends FrameLayout {
   }
 
   public static ConsumeActionRecordCard newInstance(ViewGroup parent) {
-    return null;
+    return (ConsumeActionRecordCard) ViewUtils.newInstance(parent,
+        R.layout.consumer_finish_acupoint_card);
   }
 
   @Override
@@ -42,6 +44,8 @@ public class ConsumeActionRecordCard extends FrameLayout {
   }
 
   private void initView() {
+    acupointNameTv = (TextView) findViewById(R.id.consumer_finish_acupoint_card_title);
+    consumeTimeTv = (TextView) findViewById(R.id.consumer_finish_acupoint_card_count);
 
   }
 

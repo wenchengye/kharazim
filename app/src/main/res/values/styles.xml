@@ -47,6 +47,11 @@
         <item name="android:background">@color/explore_black_divider_color</item>
     </style>
 
+    <style name="gray_divider_horizontal">
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/explore_gray_divider_color</item>
+    </style>
+
     <!-- explore -->
     <style name="explore_plan_lite_intro_tv" parent="@style/simple_tv">
         <item name="android:textColor">@color/text_color_white</item>

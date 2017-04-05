@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.heqi.kharazim.R;
+
+import org.w3c.dom.Text;
+
 /**
  * Created by overspark on 2017/4/1.
  */
@@ -52,6 +56,10 @@ public class ConsumeGiveUpView extends RelativeLayout {
   }
 
   private void initView() {
+    consumeTimeTv = (TextView) findViewById(R.id.consumer_give_up_progress_time_tv);
+    consumeCountTv = (TextView) findViewById(R.id.consumer_give_up_count_tv);
+    confirmBtn = findViewById(R.id.consumer_give_up_confirm_btn);
+
     if (confirmBtn != null) {
       confirmBtn.setOnClickListener(new OnClickListener() {
         @Override
