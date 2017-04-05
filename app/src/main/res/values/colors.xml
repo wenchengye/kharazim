@@ -32,5 +32,6 @@
 
     <!-- consume -->
     <color name="consume_guide_layout_bg_color">#992e2e2e</color>
+    <color name="consume_interpretation_bg_color">#303030</color>
 
 </resources>

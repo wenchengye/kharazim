@@ -115,6 +115,19 @@ public class ConsumerInterpretationFragment extends NetworkAsyncLoadFragment<Acu
 
   private void initViews(View contentView) {
 
+    if (contentView != null) {
+
+      exitBtn = contentView.findViewById(R.id.consumer_interpretation_exit_btn);
+      interpretationIv = (AsyncImageView) contentView.findViewById(R.id.consumer_interpretation_iv);
+      interpretationTv = (TextView)
+          contentView.findViewById(R.id.consumer_interpretation_content_tv);
+      interperataionVv = (VideoView) contentView.findViewById(R.id.consumer_interpretation_vv);
+      indexTv = (TextView) contentView.findViewById(R.id.consumer_interpretation_index_tv);
+      forwardBtn = contentView.findViewById(R.id.consumer_interpretation_forward_btn);
+      backwardBtn = contentView.findViewById(R.id.consumer_interpretation_backward_btn);
+      
+    }
+
     invalidateIndexView();
     invalidateVideoView();
   }

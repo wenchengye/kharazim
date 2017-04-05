@@ -178,7 +178,8 @@
             android:layout_height="93dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/consumer_pause_view_content_tv_4"
-            android:layout_marginTop="47dp"/>
+            android:layout_marginTop="47dp"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/consumer_pause_view_interpretation_btn"
