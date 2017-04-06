@@ -84,7 +84,6 @@ public class VideoViewConsumer implements ConsumerInternal {
     this.videoView.setOnPreparedListener(null);
     this.videoView.setOnErrorListener(null);
     this.videoView.setOnCompletionListener(null);
-    this.videoView.stopPlayback();
     this.videoView = null;
   }
 

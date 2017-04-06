@@ -87,7 +87,7 @@ public class ConsumeFinishView extends RelativeLayout {
 
     this.record = record;
     if (this.consumeTimeTv != null) {
-      this.consumeCountTv.setText(String.valueOf(this.record.getTotalConsumeTimeInMinute()));
+      this.consumeTimeTv.setText(String.valueOf(this.record.getTotalConsumeTimeInMinute()));
     }
 
     if (this.kharazimPointTv != null) {

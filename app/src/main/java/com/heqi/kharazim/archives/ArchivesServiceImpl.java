@@ -13,6 +13,8 @@ import com.heqi.kharazim.archives.http.request.AddPlanRequest;
 import com.heqi.kharazim.archives.http.request.HealthConditionRequest;
 import com.heqi.kharazim.archives.http.request.LoginRequest;
 import com.heqi.kharazim.archives.http.request.ReloginRequest;
+import com.heqi.kharazim.archives.http.request.UploadConsumeProgressRequest;
+import com.heqi.kharazim.archives.http.request.UploadConsumeStarRequest;
 import com.heqi.kharazim.archives.http.request.UserProfileRequest;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
 import com.heqi.kharazim.archives.model.HealthCondition;
@@ -21,6 +23,7 @@ import com.heqi.kharazim.archives.model.LoginResult;
 import com.heqi.kharazim.archives.model.ReloginResult;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.archives.model.UserProfileResult;
+import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 import com.heqi.kharazim.utils.KharazimUtils;
 import com.heqi.rpc.RpcHelper;
 
@@ -342,6 +345,89 @@ public class ArchivesServiceImpl implements ArchivesService {
   public boolean uploadCurrentHealthCondition(HealthCondition healthCondition,
                                               ArchivesTaskCallback callback) {
     return false;
+  }
+
+  @Override
+  public boolean uploadConsumeProgress(ConsumeCourseRecord record,
+                                       final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    UploadConsumeProgressRequest request = new UploadConsumeProgressRequest(successListener,
+        errorListener, accessTokenRef);
+    request.setRecord(record);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
+  }
+
+  @Override
+  public boolean uploadConsumeStar(String userplanid, String dailyid, String courseid, int star,
+                                   final ArchivesTaskCallback callback) {
+
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    UploadConsumeStarRequest request = new UploadConsumeStarRequest(successListener,
+        errorListener, accessTokenRef);
+    request.setUserPlanId(userplanid);
+    request.setDailyId(dailyid);
+    request.setCourseId(courseid);
+    request.setStar(star);
+    request.setDate(KharazimUtils.formatTime(System.currentTimeMillis()));
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
   }
 
   @Override

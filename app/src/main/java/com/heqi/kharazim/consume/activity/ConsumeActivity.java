@@ -1,5 +1,7 @@
 package com.heqi.kharazim.consume.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.android.volley.Response;
@@ -21,6 +24,7 @@ import com.heqi.kharazim.consume.core.api.ConsumerWrapper;
 import com.heqi.kharazim.consume.core.api.Reason;
 import com.heqi.kharazim.consume.core.api.State;
 import com.heqi.kharazim.consume.fragment.ConsumerInterpretationFragment;
+import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 import com.heqi.kharazim.consume.view.ConsumeFinishView;
 import com.heqi.kharazim.consume.view.ConsumeGiveUpView;
 import com.heqi.kharazim.consume.view.ConsumerPauseView;
@@ -46,11 +50,13 @@ public class ConsumeActivity extends FragmentActivity {
   private ConsumerPauseView pauseView;
   private ConsumeGiveUpView giveUpView;
   private ConsumeFinishView finishView;
+  private ImageView exitBtn;
 
   private ConsumerInterpretationFragment interpretationFragment;
 
-
   private int requestCourseTag = 0;
+  private String dailyId;
+  private String userPlanId;
 
   private ConsumerObserver consumerObserver = new ConsumerObserver() {
 
@@ -122,6 +128,7 @@ public class ConsumeActivity extends FragmentActivity {
           consumerView.setRepeat(consumer.getActionRepeatSum(), consumer.getActionRepeatSum());
           consumerView.setState(State.IDLE);
 
+          uploadUserProgress();
           showFinishView();
         }
       });
@@ -278,6 +285,7 @@ public class ConsumeActivity extends FragmentActivity {
       new ConsumeFinishView.ConsumeFinishViewListener() {
     @Override
     public void onConfirmPressed(int star) {
+      uploadStar(star);
       exit();
     }
   };
@@ -323,6 +331,33 @@ public class ConsumeActivity extends FragmentActivity {
     finishView = (ConsumeFinishView) findViewById(R.id.consumer_finish_view);
     finishView.setListener(finishViewListener);
     finishView.setVisibility(View.GONE);
+
+    exitBtn = (ImageView) findViewById(R.id.explore_header_left_button);
+    exitBtn.setImageResource(R.drawable.icon_header_navigate_back);
+    exitBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        consumer.pause();
+        AlertDialog.Builder builder = new AlertDialog.Builder(ConsumeActivity.this);
+        builder.setMessage(R.string.consumer_exit_dialog_message)
+            .setPositiveButton(R.string.consumer_exit_confirm_text,
+                new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                showGiveUpView();
+              }
+            })
+            .setNegativeButton(R.string.consumer_exit_cancel_text,
+                new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                consumer.play();
+              }
+            })
+            .setCancelable(false)
+            .create().show();
+      }
+    });
   }
 
   private void initConsumer() {
@@ -350,20 +385,16 @@ public class ConsumeActivity extends FragmentActivity {
 
     if (intent == null) return;
 
-    if (Intents.ACTION_CONSUMER_PLAY.equals(intent.getAction())
-        && intent.hasExtra(Intents.EXTRA_COURSE_DETAIL_TYPE)) {
-      int detailType = intent.getIntExtra(Intents.EXTRA_COURSE_DETAIL_TYPE,
-          Intents.EXTRA_VALUE_COURSE_DETAIL_TYPE_DAILY_ID);
+    if (Intents.ACTION_CONSUMER_PLAY.equals(intent.getAction())) {
+      this.dailyId = intent.getStringExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID);
+      this.userPlanId = intent.getStringExtra(Intents.EXTRA_USER_PLAN_ID);
 
-      if (detailType == Intents.EXTRA_VALUE_COURSE_DETAIL_TYPE_DAILY_ID
-          && intent.hasExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID)) {
-        String dailyId = intent.getStringExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID);
-        requestCourseDetailInfo(dailyId);
-      } else if (detailType == Intents.EXTRA_VALUE_COURSE_DETAIL_TYPE_INFO
-          && intent.hasExtra(Intents.EXTRA_COURSE_DETAIL_INFO)) {
+      if (intent.hasExtra(Intents.EXTRA_COURSE_DETAIL_INFO)) {
         CourseDetailInfo courseDetailInfo =
             (CourseDetailInfo) intent.getSerializableExtra(Intents.EXTRA_COURSE_DETAIL_INFO);
         startCourse(courseDetailInfo);
+      } else {
+        requestCourseDetailInfo(this.dailyId);
       }
     }
   }
@@ -428,6 +459,7 @@ public class ConsumeActivity extends FragmentActivity {
 
   private void showPauseView() {
     pauseView.setAction(consumer.getAction());
+    pauseView.setVolumes(consumer.getSoundVolume(), consumer.getMusicVolume());
     ((View) pauseView).setVisibility(View.VISIBLE);
   }
 
@@ -461,6 +493,8 @@ public class ConsumeActivity extends FragmentActivity {
   }
 
   private void showGiveUpView() {
+    ConsumeCourseRecord record = consumer.getRecord();
+    giveUpView.setContent(record.getTotalConsumeTimeInMinute(), record.getAcupointCount());
     giveUpView.setVisibility(View.VISIBLE);
   }
 
@@ -469,10 +503,23 @@ public class ConsumeActivity extends FragmentActivity {
   }
 
   private void showFinishView() {
+    finishView.setData(consumer.getRecord());
     finishView.setVisibility(View.VISIBLE);
   }
 
   private void hideFinishView() {
     finishView.setVisibility(View.GONE);
+  }
+
+  private void uploadUserProgress() {
+    ConsumeCourseRecord record = consumer.getRecord();
+    record.setUserplanid(this.userPlanId);
+    record.setDailyId(this.dailyId);
+    KharazimApplication.getArchives().uploadConsumeProgress(record, null);
+  }
+
+  private void uploadStar(int star) {
+    KharazimApplication.getArchives().uploadConsumeStar(this.userPlanId, this.dailyId,
+        consumer.getCourse().getId(), star, null);
   }
 }

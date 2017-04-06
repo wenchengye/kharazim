@@ -31,11 +31,11 @@ public class PlanDetailActivity extends PendingNavigateActivity {
         }
 
         @Override
-        public void onConsumePlan(final String courseId) {
+        public void onConsumePlan(final String courseId, final String userPlanId) {
           navigate(new Runnable() {
             @Override
             public void run() {
-              NavigationManager.navigateToConsume(PlanDetailActivity.this, courseId);
+              NavigationManager.navigateToConsume(PlanDetailActivity.this, courseId, userPlanId);
             }
           });
         }

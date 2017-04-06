@@ -2,6 +2,7 @@ package com.heqi.kharazim.archives;
 
 import com.heqi.kharazim.archives.model.HealthCondition;
 import com.heqi.kharazim.archives.model.UserProfile;
+import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 
 /**
  * Created by overspark on 2017/3/13.
@@ -32,6 +33,11 @@ public interface ArchivesService {
   boolean addPlan(String planId, ArchivesTaskCallback callback);
 
   boolean removePlan(String planId, ArchivesTaskCallback callback);
+
+  boolean uploadConsumeProgress(ConsumeCourseRecord record, ArchivesTaskCallback callback);
+
+  boolean uploadConsumeStar(String userplanid, String dailyid, String courseid, int star,
+                            ArchivesTaskCallback callback);
 
   void logout();
 

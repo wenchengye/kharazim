@@ -47,6 +47,9 @@
     <string name="consumer_give_up_content_text_1">继续努力</string>
     <string name="consumer_give_up_content_text_2">本次计划尚未完成</string>
     <string name="consumer_finish_star_label_text">感觉如何</string>
+    <string name="consumer_exit_dialog_message">健康计划还未结束,现在退出无法保存训练数据,还要退出吗?</string>
+    <string name="consumer_exit_cancel_text">继续训练</string>
+    <string name="consumer_exit_confirm_text">结束计划</string>
 
     <!-- archives -->
     <string name="archives_in_login_progress_hint_text">正在登录中</string>

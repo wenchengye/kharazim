@@ -20,6 +20,9 @@ import com.heqi.kharazim.explore.model.PlanListInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by overspark on 2017/3/17.
@@ -28,6 +31,12 @@ import java.io.UnsupportedEncodingException;
 public class KharazimUtils {
 
   private KharazimUtils() {
+  }
+
+  // time
+  public static String formatTime(long time) {
+    SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    return formatter.format(new Date(time));
   }
 
   // ui

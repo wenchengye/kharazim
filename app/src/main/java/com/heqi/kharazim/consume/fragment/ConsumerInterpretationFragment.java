@@ -80,7 +80,7 @@ public class ConsumerInterpretationFragment extends NetworkAsyncLoadFragment<Acu
       this.indexTv.setText(String.format(
           KharazimApplication.getAppContext().getString(
               R.string.explore_circle_progress_text_format),
-          String.valueOf(this.index),
+          String.valueOf(this.index + 1),
           String.valueOf(this.dataList != null ? this.dataList.size() : 0)));
     }
   }
@@ -95,7 +95,7 @@ public class ConsumerInterpretationFragment extends NetworkAsyncLoadFragment<Acu
         source = this.dataList.get(index).getActvediofile();
       }
 
-      if (TextUtils.isEmpty(source)) {
+      if (!TextUtils.isEmpty(source)) {
         this.interperataionVv.setVideoURI(Uri.parse(source));
         this.interperataionVv.start();
       }
@@ -208,7 +208,7 @@ public class ConsumerInterpretationFragment extends NetworkAsyncLoadFragment<Acu
 
   @Override
   protected int getLayoutResId() {
-    return 0;
+    return R.layout.consumer_interpretation_fragment_layout;
   }
 
   private static String generateInterperataionText(AcupointDetailInfo info) {

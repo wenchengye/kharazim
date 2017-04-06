@@ -57,12 +57,11 @@ public class NavigationManager {
     context.startActivity(intent);
   }
 
-  public static void navigateToConsume(Context context, String id) {
+  public static void navigateToConsume(Context context, String dailyId, String userPlanId) {
     Intent intent = new Intent(context, ConsumeActivity.class);
     intent.setAction(Intents.ACTION_CONSUMER_PLAY);
-    intent.putExtra(Intents.EXTRA_COURSE_DETAIL_TYPE,
-        Intents.EXTRA_VALUE_COURSE_DETAIL_TYPE_DAILY_ID);
-    intent.putExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID, id);
+    intent.putExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID, dailyId);
+    intent.putExtra(Intents.EXTRA_USER_PLAN_ID, userPlanId);
     context.startActivity(intent);
   }
 }

@@ -1,6 +1,7 @@
 package com.heqi.kharazim.consume.core.internal;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
@@ -64,6 +65,7 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
     player.setOnPreparedListener(preparedListener);
     player.setOnCompletionListener(completionListener);
     player.setOnErrorListener(errorListener);
+    player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
     this.volume = DEFAULT_VOLUME;
     player.setVolume(this.volume, this.volume);

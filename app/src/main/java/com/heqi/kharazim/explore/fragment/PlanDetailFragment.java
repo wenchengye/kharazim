@@ -189,7 +189,8 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
   private void consumePlan() {
     if (this.userProgressView != null && this.userProgressView.getCurrent() != null
         && this.listener != null) {
-      this.listener.onConsumePlan(userProgressView.getCurrent().getId());
+      this.listener.onConsumePlan(userProgressView.getCurrent().getId(),
+          planLiteInfo.getUserplanid());
     }
   }
 
@@ -212,7 +213,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     void onAddPlan(PlanLiteInfo planLiteInfo);
 
-    void onConsumePlan(String courseId);
+    void onConsumePlan(String courseId, String userPlanId);
 
     void onBack();
   }

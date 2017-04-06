@@ -2,7 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.heqi.image.view.AsyncImageView
+                android:id="@+id/consumer_interpretation_iv"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/consumer_interpretation_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/consume_interpretation_bg_color"
+                android:padding="20dp"
+                android:textColor="@color/bg_color_white"
+                android:textSize="@dimen/text_size_tiny"
+                />
+            
+            <VideoView android:id="@+id/consumer_interpretation_vv"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
+    </ScrollView>
+
     <RelativeLayout
         android:id="@+id/consumer_interpretation_control_layout"
         android:layout_width="match_parent"
@@ -41,39 +78,6 @@
             android:textColor="@color/text_color_white"/>
 
     </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/consumer_interpretation_control_layout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.heqi.image.view.AsyncImageView
-                android:id="@+id/consumer_interpretation_iv"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"/>
-
-            <TextView
-                android:id="@+id/consumer_interpretation_content_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/consume_interpretation_bg_color"
-                android:padding="20dp"
-                android:textColor="@color/bg_color_white"
-                android:textSize="@dimen/text_size_tiny"
-                />
-            
-            <VideoView android:id="@+id/consumer_interpretation_vv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-    </ScrollView>
 
     <ImageView
         android:id="@+id/consumer_interpretation_exit_btn"

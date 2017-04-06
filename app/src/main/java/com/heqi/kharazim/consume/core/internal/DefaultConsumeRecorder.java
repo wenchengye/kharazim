@@ -5,6 +5,7 @@ import com.heqi.kharazim.consume.core.internal.api.ConsumeRecorder;
 import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
 
   @Override
   public void recordActionStarted(ActionDetailInfo action, int actionIndex) {
-    current = createActionRecord(action.getId(), actionIndex, action.getAcupointid());
+    current = createActionRecord(action.getId(), actionIndex, action.getActname());
     trySwapIntoRecord(current);
   }
 
@@ -45,7 +46,7 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
 
   @Override
   public void recordActionEnded(ActionDetailInfo action) {
-    current.setEndtime(formatTime(System.currentTimeMillis()));
+    current.setEndtime(KharazimUtils.formatTime(System.currentTimeMillis()));
     current.setCpflg(String.valueOf(TRUE_VALUE));
     current.setSkipflg(String.valueOf(FLASE_VALUE));
 
@@ -54,7 +55,7 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
 
   @Override
   public void recordActionSkipped(ActionDetailInfo action) {
-    current.setEndtime(formatTime(System.currentTimeMillis()));
+    current.setEndtime(KharazimUtils.formatTime(System.currentTimeMillis()));
     current.setCpflg(String.valueOf(FLASE_VALUE));
     current.setSkipflg(String.valueOf(TRUE_VALUE));
 
@@ -94,14 +95,11 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
     ret.setAcupointname(acupointName);
     ret.setCpflg(String.valueOf(FLASE_VALUE));
     ret.setSkipflg(String.valueOf(FLASE_VALUE));
-    ret.setStarttime(formatTime(System.currentTimeMillis()));
+    ret.setStarttime(KharazimUtils.formatTime(System.currentTimeMillis()));
     ret.setCptime(String.valueOf(0));
 
     return ret;
   }
 
-  private static String formatTime(long time) {
-    SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-    return formatter.format(new Date(time));
-  }
+
 }

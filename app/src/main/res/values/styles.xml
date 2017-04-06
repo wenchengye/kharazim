@@ -84,6 +84,19 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="explore_middle_btn">
+        <item name="android:layout_height">28dp</item>
+        <item name="android:layout_width">135dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:background">@drawable/bg_explore_middle_button</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:textSize">@dimen/text_size_xtiny</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <!-- archives -->
     <style name="archives_login_action_btn">
         <item name="android:layout_width">@dimen/archives_login_action_btn_width</item>

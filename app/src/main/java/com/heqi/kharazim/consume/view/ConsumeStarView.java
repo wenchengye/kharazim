@@ -54,6 +54,16 @@ public class ConsumeStarView extends LinearLayout {
       }
     }
 
+    for (int i = 0; i < starViews.size(); ++i) {
+      final int indexRef = i;
+      starViews.get(i).setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          setStar(indexRef + 1);
+        }
+      });
+    }
+
     setStar(0);
   }
 
