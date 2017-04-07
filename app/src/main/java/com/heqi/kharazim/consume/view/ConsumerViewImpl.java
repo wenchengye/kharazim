@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.consume.core.api.State;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
@@ -30,6 +31,7 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
   private View consumerGuideLayout;
   private ExploreCircleProgressView guideProgress;
   private View skipGuideBtn;
+  private AsyncImageView guideActionIv;
 
 
   private ExploreConsumerViewListener listener;
@@ -61,6 +63,7 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
     playBtn = (ImageView) findViewById(R.id.consumer_play_button);
     previousBtn = (ImageView) findViewById(R.id.consumer_backward_button);
     nextBtn = (ImageView) findViewById(R.id.consumer_forward_button);
+    exitBtn = (ImageView) findViewById(R.id.consumer_exit_button);
     interpretationBtn = (TextView) findViewById(R.id.consumer_interpretation_button);
     repeatProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_repeat_progress);
     durationProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_duration_progress);
@@ -68,6 +71,7 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
     consumerGuideLayout = findViewById(R.id.consumer_view_guide_layout);
     guideProgress = (ExploreCircleProgressView) findViewById(R.id.consumer_guide_progress);
     skipGuideBtn = findViewById(R.id.consumer_skip_guide_btn);
+    guideActionIv = (AsyncImageView) findViewById(R.id.consumer_view_guide_iv);
 
     if (guideProgress != null) {
       guideProgress.setProgressType(ExploreCircleProgressView.ProgressType.PROGRESS_ONLY);
@@ -148,6 +152,11 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
         }
       });
     }
+
+    consumerGuideLayout.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {}
+    });
   }
 
   @Override
@@ -163,7 +172,9 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
 
   @Override
   public void setAction(ActionDetailInfo action) {
-    // Do nothing
+    if (this.guideActionIv != null) {
+      this.guideActionIv.loadNetworkImage(action.getActimg(), R.drawable.icon_kharazim_image_logo);
+    }
   }
 
   @Override

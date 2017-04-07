@@ -126,6 +126,11 @@ public class ConsumerInterpretationFragment extends NetworkAsyncLoadFragment<Acu
       forwardBtn = contentView.findViewById(R.id.consumer_interpretation_forward_btn);
       backwardBtn = contentView.findViewById(R.id.consumer_interpretation_backward_btn);
 
+      contentView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {}
+      });
+
     }
 
     invalidateIndexView();

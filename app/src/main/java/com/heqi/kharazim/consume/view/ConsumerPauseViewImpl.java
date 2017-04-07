@@ -111,6 +111,11 @@ public class ConsumerPauseViewImpl extends RelativeLayout implements ConsumerPau
         public void onStopTrackingTouch(SeekBar seekBar) {}
       });
     }
+
+    this.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {}
+    });
   }
 
   @Override

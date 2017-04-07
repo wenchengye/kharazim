@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/explore_consumer_video_view_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.heqi.kharazim.consume.view.ConsumerViewImpl
+        android:id="@+id/explore_portrait_consumer_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/consumer_view_normal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/consumer_exit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="@dimen/consumer_landscape_margin_small_horizontal"
+                android:layout_marginStart="@dimen/consumer_landscape_margin_small_horizontal"
+                android:src="@drawable/icon_header_navigate_close"/>
+
+            <ImageView
+                android:id="@+id/consumer_backward_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginLeft="@dimen/consumer_landscape_margin_small_horizontal"
+                android:layout_marginStart="@dimen/consumer_landscape_margin_small_horizontal"
+                android:src="@drawable/icon_consumer_landscape_back"/>
+
+            <ImageView
+                android:id="@+id/consumer_play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/icon_consumer_landscape_pause"/>
+
+            <ImageView
+                android:id="@+id/consumer_forward_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="@dimen/consumer_landscape_margin_small_horizontal"
+                android:layout_marginRight="@dimen/consumer_landscape_margin_small_horizontal"
+                android:src="@drawable/icon_consumer_landscape_forward"/>
+
+            <com.heqi.kharazim.explore.view.ExploreCircleProgressView
+                android:id="@+id/consumer_duration_progress"
+                android:layout_width="@dimen/consumer_landscape_progress_view_size"
+                android:layout_height="@dimen/consumer_landscape_progress_view_size"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="13dp"
+                />
+
+            <com.heqi.kharazim.explore.view.ExploreCircleProgressView
+                android:id="@+id/consumer_repeat_progress"
+                android:layout_width="@dimen/consumer_landscape_progress_view_size"
+                android:layout_height="@dimen/consumer_landscape_progress_view_size"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="96dp"
+                android:layout_marginRight="96dp"
+                android:layout_marginBottom="13dp"
+                />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/consumer_view_guide_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="34dp"
+            android:paddingLeft="34dp"
+            android:paddingEnd="34dp"
+            android:paddingRight="34dp"
+            android:paddingTop="58dp"
+            android:paddingBottom="58dp"
+            android:background="@color/consume_guide_layout_bg_color">
+
+            <FrameLayout
+                android:id="@+id/consumer_view_guide_right_layout"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_micro"
+                    android:text="@string/consumer_guide_label_text"/>
+
+                <com.heqi.kharazim.explore.view.ExploreCircleProgressView
+                    android:id="@+id/consumer_guide_progress"
+                    android:layout_width="107dp"
+                    android:layout_height="107dp"
+                    android:layout_gravity="center"
+                    app:upperMinorText="@string/consumer_progress_guide_upper_text"
+                    app:lowerMinorText="@string/consumer_progress_guide_lower_text"/>
+
+                <TextView
+                    android:id="@+id/consumer_skip_guide_btn"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="@string/consumer_skip_guide_label_text"
+                    style="@style/explore_middle_btn"/>
+            </FrameLayout>
+
+            <com.heqi.image.view.AsyncImageView
+                android:id="@+id/consumer_view_guide_iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_toLeftOf="@id/consumer_view_guide_right_layout"/>
+        </RelativeLayout>
+
+    </com.heqi.kharazim.consume.view.ConsumerViewImpl>
+
+    <com.heqi.kharazim.consume.view.ConsumerPauseViewImpl
+        android:id="@+id/consumer_pause_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/consume_interpretation_bg_color">
+
+
+        <ImageView
+            android:id="@+id/consumer_pause_view_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="19dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/icon_consumer_portrait_play"/>
+
+        <RelativeLayout
+            android:id="@+id/consumer_pause_view_right_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/consumer_pause_view_play_btn"
+            android:layout_toEndOf="@+id/consumer_pause_view_play_btn"
+            android:paddingLeft="44dp"
+            android:paddingStart="44dp"
+            android:paddingBottom="26dp"
+            android:paddingRight="19dp"
+            android:paddingEnd="19dp"
+            android:paddingTop="40dp">
+
+
+            <SeekBar
+                android:id="@+id/consumer_pause_view_sound_volume_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:maxHeight="1.5dp"
+                android:minHeight="1.5dp"
+                android:progressDrawable="@drawable/layer_consumer_volume"
+                />
+
+            <TextView
+                android:id="@+id/consumer_pause_view_sound_volume_label"
+                android:layout_above="@id/consumer_pause_view_sound_volume_seekbar"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size_xtiny"
+                android:textColor="@color/kharazim_design_color"
+                android:text="@string/consumer_pause_sound_volume_label_text"
+                style="@style/simple_tv"/>
+
+            <SeekBar
+                android:id="@+id/consumer_pause_view_music_volume_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/consumer_pause_view_sound_volume_label"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:maxHeight="1.5dp"
+                android:minHeight="1.5dp"
+                android:progressDrawable="@drawable/layer_consumer_volume"
+                />
+
+            <TextView
+                android:id="@+id/consumer_pause_view_music_volume_label"
+                android:layout_above="@id/consumer_pause_view_music_volume_seekbar"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size_xtiny"
+                android:textColor="@color/kharazim_design_color"
+                android:text="@string/consumer_pause_music_volume_label_text"
+                style="@style/simple_tv"/>
+
+            <RelativeLayout
+                android:id="@+id/consumer_pause_view_content_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:id="@+id/consumer_pause_view_content_tv_1"
+                    android:layout_marginTop="13dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_xtiny"
+                    android:text="@string/consumer_pause_content_text_1"
+                    style="@style/simple_tv"/>
+
+                <TextView
+                    android:id="@+id/consumer_pause_view_content_tv_2"
+                    android:layout_below="@id/consumer_pause_view_content_tv_1"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_xtiny"
+                    android:text="@string/consumer_pause_content_text_2"
+                    style="@style/simple_tv"/>
+
+                <TextView
+                    android:id="@+id/consumer_pause_view_content_tv_3"
+                    android:layout_below="@id/consumer_pause_view_content_tv_2"
+                    android:layout_marginTop="19dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_xtiny"
+                    android:text="@string/consumer_pause_content_text_3"
+                    style="@style/simple_tv"/>
+
+                <TextView
+                    android:id="@+id/consumer_pause_view_content_tv_4"
+                    android:layout_below="@id/consumer_pause_view_content_tv_3"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_xtiny"
+                    android:text="@string/consumer_pause_content_text_4"
+                    style="@style/simple_tv"/>
+
+                <TextView
+                    android:id="@+id/consumer_pause_view_interpretation_btn"
+                    android:layout_below="@id/consumer_pause_view_content_tv_4"
+                    android:layout_marginTop="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/consumer_interpretation_text"
+                    style="@style/explore_middle_btn"/>
+            </RelativeLayout>
+
+            <com.heqi.image.view.AsyncImageView
+                android:id="@+id/consumer_pause_view_action_iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/consumer_pause_view_music_volume_label"
+                android:layout_toLeftOf="@id/consumer_pause_view_content_layout"
+                android:layout_marginBottom="50dp"
+                android:scaleType="centerCrop"/>
+
+        </RelativeLayout>
+
+
+    </com.heqi.kharazim.consume.view.ConsumerPauseViewImpl>
+
+    <FrameLayout
+        android:id="@+id/consumer_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>

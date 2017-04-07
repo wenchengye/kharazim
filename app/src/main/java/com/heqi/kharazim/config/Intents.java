@@ -33,6 +33,8 @@ public class Intents {
   public static final String EXTRA_CONSUME_ACTION_COUNT =
       "kharazim.intent.extra.CONSUME_ACTION_COUNT";
 
+  public static final String EXTRA_CONSUME_RECORD = "kharazim.intent.extra.CONSUME_RECORD";
+
   private Intents() {
   }
 }

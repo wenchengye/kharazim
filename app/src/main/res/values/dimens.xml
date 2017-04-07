@@ -43,6 +43,9 @@
     <dimen name="consumer_portrait_progress_view_size">76dp</dimen>
     <dimen name="consumer_portrait_info_layout_margin_bottom">28dp</dimen>
     <dimen name="consumer_portrait_control_layout_margin_horizontal">73dp</dimen>
+    <dimen name="consumer_landscape_margin_small_horizontal">30dp</dimen>
+    <dimen name="consumer_landscape_progress_view_size">67dp</dimen>
+
 
     <!-- archives -->
     <dimen name="archives_login_content_width">192dp</dimen>

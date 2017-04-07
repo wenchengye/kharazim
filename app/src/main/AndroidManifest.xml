@@ -13,11 +13,13 @@
 
         <activity android:name=".activity.HomeActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".archives.activity.InitActivity"
                   android:theme="@android:style/Theme.Light.NoTitleBar"
-                  android:launchMode="singleTask">
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,17 +28,21 @@
 
         <activity android:name=".archives.activity.LoginActivity"
                   android:theme="@android:style/Theme.Light.NoTitleBar"
-                  android:launchMode="singleTask"/>
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
 
         <activity android:name=".archives.activity.StatsActivity"
-                  android:theme="@android:style/Theme.Light.NoTitleBar"/>
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:screenOrientation="portrait"/>
 
         <activity android:name=".explore.activity.PlanDetailActivity"
-                  android:theme="@android:style/Theme.Light.NoTitleBar"/>
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:screenOrientation="portrait"/>
 
         <activity android:name=".consume.activity.ConsumeActivity"
                   android:theme="@android:style/Theme.Light.NoTitleBar"
-                  android:launchMode="singleTask"/>
+                  android:launchMode="singleTask"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
 
     </application>
 

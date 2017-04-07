@@ -109,6 +109,8 @@ public class DefaultConsumer implements Consumer {
 
   @Override
   public void release() {
+    timer.stop();
+
     actionConsumer.setCallback(null);
     actionConsumer.release();
     soundConsumer.release();
