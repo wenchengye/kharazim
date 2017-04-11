@@ -267,12 +267,12 @@ public class ConsumeActivity extends FragmentActivity {
 
     @Override
     public void onSetMusicVolume(float volume) {
-
+      consumer.setMusicVolume(volume);
     }
 
     @Override
     public void onSetSoundVolume(float volume) {
-
+      consumer.setSoundVolume(volume);
     }
   };
 
@@ -322,6 +322,23 @@ public class ConsumeActivity extends FragmentActivity {
     super.onConfigurationChanged(newConfig);
 
     setup(newConfig.orientation);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+
+    release();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    if (consumer != null) {
+      consumer.pause();
+      showPauseView();
+    }
   }
 
   private void setup(int orientation) {
@@ -482,6 +499,11 @@ public class ConsumeActivity extends FragmentActivity {
   }
 
   private void exit() {
+    release();
+    finish();
+  }
+
+  private void release() {
     if (this.consumerView != null) {
       this.consumerView.setExploreConsumerViewListener(null);
       this.consumerView = null;
@@ -493,7 +515,6 @@ public class ConsumeActivity extends FragmentActivity {
       this.consumer = null;
     }
     this.consumerFactory = null;
-    finish();
   }
 
   private void showPauseView() {

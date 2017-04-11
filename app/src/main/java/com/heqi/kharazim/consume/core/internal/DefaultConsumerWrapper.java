@@ -367,7 +367,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     consumerHandler.post(new Runnable() {
       @Override
       public void run() {
-        setSoundVolume(volume);
+        setSoundVolumeInternal(volume);
       }
     });
   }
@@ -377,7 +377,7 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
     consumerHandler.post(new Runnable() {
       @Override
       public void run() {
-        setMusicVolume(volume);
+        setMusicVolumeInternal(volume);
       }
     });
   }

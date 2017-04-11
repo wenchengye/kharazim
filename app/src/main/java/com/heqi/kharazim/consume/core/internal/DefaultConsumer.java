@@ -2,6 +2,7 @@ package com.heqi.kharazim.consume.core.internal;
 
 import android.net.Uri;
 import android.os.Looper;
+import android.util.Log;
 
 import com.heqi.kharazim.consume.core.api.Consumer;
 import com.heqi.kharazim.consume.core.api.ConsumerFactory;
@@ -19,6 +20,8 @@ import com.heqi.kharazim.explore.model.CourseDetailInfo;
  */
 
 public class DefaultConsumer implements Consumer {
+
+  private static final String LOG_TAG = DefaultConsumer.class.getSimpleName();
 
   private static final int MUSIC_REPEAT_FOREVER = 99;
 
@@ -431,16 +434,28 @@ public class DefaultConsumer implements Consumer {
     }
 
     if (!guiding) {
-      Timeline.TimelineItem upcomingSound = courseManager.getSoundTimeline(actionIndex) == null
-          ? null : courseManager.getSoundTimeline(actionIndex).getHitOrUpcomingItem(time);
 
-      if (upcomingSound != currentSound) {
-        currentSound = upcomingSound;
-        if (currentSound != null) {
+      if (soundConsumer.getInternalState() == InternalState.IDLE
+          || soundConsumer.getInternalState() == InternalState.PlayOver) {
+        Timeline.TimelineItem upcomingSound = courseManager.getSoundTimeline(actionIndex) == null
+            ? null : courseManager.getSoundTimeline(actionIndex).getHitOrUpcomingItem(time);
+
+        if (upcomingSound != null && upcomingSound != currentSound) {
+          Log.d(LOG_TAG, "replace sound soft" + upcomingSound.getSource().toString());
+          logTime();
+          currentSound = upcomingSound;
           soundConsumer.setSource(currentSound.getSource());
-        } else {
-          soundConsumer.setSource(null);
         }
+      }
+
+      Timeline.TimelineItem hitSound = courseManager.getSoundTimeline(actionIndex) == null
+          ? null : courseManager.getSoundTimeline(actionIndex).getHitItem(time);
+
+      if (hitSound != null && hitSound != currentSound) {
+        Log.d(LOG_TAG, "replace sound hard " + hitSound.getSource().toString());
+        logTime();
+        currentSound = hitSound;
+        soundConsumer.setSource(currentSound.getSource());
       }
     }
 
@@ -448,10 +463,14 @@ public class DefaultConsumer implements Consumer {
       switch (soundConsumer.getInternalState()) {
         case IDLE:
           soundConsumer.prepare();
+          Log.d(LOG_TAG, "prepare sound " + currentSound.getSource().toString());
+          logTime();
           break;
         case Prepared:
           if (courseManager.getSoundTimeline(actionIndex).isItemHit(currentSound, time)) {
             soundConsumer.start();
+            Log.d(LOG_TAG, "start sound " + currentSound.getSource().toString());
+            logTime();
           }
           break;
         case Paused:
@@ -492,5 +511,9 @@ public class DefaultConsumer implements Consumer {
         }
       }
     }
+  }
+
+  private void logTime() {
+    Log.d(LOG_TAG, "consumer time is : ------------" + time + "-----------");
   }
 }

@@ -1,5 +1,7 @@
 package com.heqi.base.utils;
 
+import android.net.Uri;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -59,9 +61,9 @@ public class HttpUtil {
               escharContained = true;
             }
             if (status == 0) {
-              entity = URLEncoder.encode(String.valueOf(c), "UTF-8");
+              entity = Uri.encode(String.valueOf(c));
             } else if (status == 1) {
-              entity = URLEncoder.encode(String.valueOf(c), charset);
+              entity = Uri.encode(String.valueOf(c));
             }
           }
           break;

@@ -16,7 +16,7 @@ import java.util.Set;
 public class DefaultTimer implements Timer {
 
   private static final int TICK_SECOND_MESSAGE = 1;
-  private static final long TICK_SECOND_PERIOD = 1000L;
+  private static final long TICK_SECOND_PERIOD = 100L;
 
   private Handler handler;
   private Set<TimerRunner> runners = new HashSet<>();

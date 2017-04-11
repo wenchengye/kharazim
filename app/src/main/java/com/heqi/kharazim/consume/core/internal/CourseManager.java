@@ -77,7 +77,7 @@ public class CourseManager {
 
         Timeline.TimelineItem guideSoundItem = new Timeline.TimelineItem(
             Uri.parse(guideSound.getSoundfile()),
-            offset,
+            0,
             guideSound.getLen(),
             1,
             0
