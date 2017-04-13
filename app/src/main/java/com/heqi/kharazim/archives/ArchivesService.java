@@ -4,11 +4,32 @@ import com.heqi.kharazim.archives.model.HealthCondition;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 
+import java.util.Map;
+
 /**
  * Created by overspark on 2017/3/13.
  */
 
 public interface ArchivesService {
+
+  class ParamsKey {
+    public static final String PARAMS_KEY_CHINESE_NAME = "chname";
+    public static final String PARAMS_KEY_NICKNAME = "nickname";
+    public static final String PARAMS_KEY_ADDRESS = "address";
+    public static final String PARAMS_KEY_POSTCODE = "postcode";
+    public static final String PARAMS_KEY_SEX = "sex";
+    public static final String PARAMS_KEY_BIRTHDAY = "birthday";
+    public static final String PARAMS_KEY_NAME = "truename";
+    public static final String PARAMS_KEY_ID_NUMBER = "idnumber";
+    public static final String PARAMS_KEY_ID_NUMBER_OTHER = "idnumberother";
+    public static final String PARAMS_KEY_USER_AIM = "useraim";
+    public static final String PARAMS_KEY_HEIGHT = "stature";
+    public static final String PARAMS_KEY_WEIGHT = "weight";
+    public static final String PARAMS_KEY_HEART_RATE = "heartrate";
+    public static final String PARAMS_KEY_PRESSURE_HIGH = "pressurehigh";
+    public static final String PARAMS_KEY_PRESSURE_LOW = "pressurelow";
+    public static final String PARAMS_KEY_OTHER_DEC = "otherdec";
+  }
 
   int getState();
 
@@ -25,10 +46,12 @@ public interface ArchivesService {
 
   boolean updateCurrentHealthCondition(ArchivesTaskCallback callback);
 
-  boolean uploadCurrentUserProfile(UserProfile userProfile, ArchivesTaskCallback callback);
+  boolean uploadCurrentUserProfile(Map<String, Object> params, ArchivesTaskCallback callback);
 
-  boolean uploadCurrentHealthCondition(HealthCondition healthCondition,
+  boolean uploadCurrentHealthCondition(Map<String, Object> params,
                                        ArchivesTaskCallback callback);
+
+  boolean uploadHeadImage(byte[] image, ArchivesTaskCallback callback);
 
   boolean addPlan(String planId, ArchivesTaskCallback callback);
 
@@ -64,7 +87,11 @@ public interface ArchivesService {
 
     void onUserProfileUpdated(String userId, UserProfile userProfile);
 
+    void onUserProfileUpload(String userId);
+
     void onHealthConditionUpdated(String userId, HealthCondition healthCondition);
+
+    void onHealthConditionUpload(String userId);
 
     void onAddPlan(String userId, String planId);
 

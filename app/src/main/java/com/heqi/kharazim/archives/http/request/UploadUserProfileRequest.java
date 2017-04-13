@@ -32,7 +32,7 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
   private String name;
   private String idNumber;
   private String otherIdNubmer;
-  private int userAim;
+  private Integer userAim;
 
   public UploadUserProfileRequest(Response.Listener<ArchivesCommonResult> listener,
                                   Response.ErrorListener errorListener,
@@ -84,7 +84,7 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
       params.put(GET_PARAMS_KEY_ID_NUMBER_OTHER, this.otherIdNubmer);
     }
 
-    if (this.userAim != 0) {
+    if (this.userAim != null) {
       params.put(GET_PARAMS_KEY_USER_AIM, String.valueOf(this.userAim));
     }
   }

@@ -7,10 +7,6 @@ import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 import com.heqi.kharazim.utils.KharazimUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 /**
  * Created by overspark on 2017/4/5.
  */

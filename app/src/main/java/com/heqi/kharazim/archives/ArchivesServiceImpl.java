@@ -15,6 +15,9 @@ import com.heqi.kharazim.archives.http.request.LoginRequest;
 import com.heqi.kharazim.archives.http.request.ReloginRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeProgressRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeStarRequest;
+import com.heqi.kharazim.archives.http.request.UploadHeadImageRequest;
+import com.heqi.kharazim.archives.http.request.UploadHealthConditionRequest;
+import com.heqi.kharazim.archives.http.request.UploadUserProfileRequest;
 import com.heqi.kharazim.archives.http.request.UserProfileRequest;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
 import com.heqi.kharazim.archives.model.HealthCondition;
@@ -30,6 +33,7 @@ import com.heqi.rpc.RpcHelper;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by overspark on 2017/3/13.
@@ -337,14 +341,223 @@ public class ArchivesServiceImpl implements ArchivesService {
   }
 
   @Override
-  public boolean uploadCurrentUserProfile(UserProfile userProfile, ArchivesTaskCallback callback) {
-    return false;
+  public boolean uploadCurrentUserProfile(Map<String, Object> params,
+                                          final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesServiceImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onUserProfileUpload(userIdRef);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    UploadUserProfileRequest request = new UploadUserProfileRequest(successListener,
+        errorListener, accessTokenRef);
+    if (params.containsKey(ParamsKey.PARAMS_KEY_CHINESE_NAME)) {
+      request.setChineseName((String) params.get(ParamsKey.PARAMS_KEY_CHINESE_NAME));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_NICKNAME)) {
+      request.setNickname((String) params.get(ParamsKey.PARAMS_KEY_NICKNAME));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_ADDRESS)) {
+      request.setAddress((String) params.get(ParamsKey.PARAMS_KEY_ADDRESS));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_POSTCODE)) {
+      request.setPostcode((String) params.get(ParamsKey.PARAMS_KEY_POSTCODE));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_SEX)) {
+      request.setSex((String) params.get(ParamsKey.PARAMS_KEY_SEX));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_BIRTHDAY)) {
+      request.setBirthday((String) params.get(ParamsKey.PARAMS_KEY_BIRTHDAY));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_NAME)) {
+      request.setName((String) params.get(ParamsKey.PARAMS_KEY_NAME));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_ID_NUMBER)) {
+      request.setIdNumber((String) params.get(ParamsKey.PARAMS_KEY_ID_NUMBER));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_ID_NUMBER_OTHER)) {
+      request.setOtherIdNubmer((String) params.get(ParamsKey.PARAMS_KEY_ID_NUMBER_OTHER));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_USER_AIM)) {
+      request.setUserAim((Integer) params.get(ParamsKey.PARAMS_KEY_USER_AIM));
+    }
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
   }
 
   @Override
-  public boolean uploadCurrentHealthCondition(HealthCondition healthCondition,
-                                              ArchivesTaskCallback callback) {
-    return false;
+  public boolean uploadCurrentHealthCondition(Map<String, Object> params,
+                                              final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesServiceImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onHealthConditionUpload(userIdRef);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    UploadHealthConditionRequest request = new UploadHealthConditionRequest(successListener,
+        errorListener, accessTokenRef);
+    if (params.containsKey(ParamsKey.PARAMS_KEY_HEIGHT)) {
+      request.setHeight((Integer) params.get(ParamsKey.PARAMS_KEY_HEIGHT));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_WEIGHT)) {
+      request.setWeight((Integer) params.get(ParamsKey.PARAMS_KEY_WEIGHT));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_HEART_RATE)) {
+      request.setHeartRate((Integer) params.get(ParamsKey.PARAMS_KEY_HEART_RATE));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_PRESSURE_HIGH)) {
+      request.setPressureHigh((Integer) params.get(ParamsKey.PARAMS_KEY_PRESSURE_HIGH));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_PRESSURE_LOW)) {
+      request.setPressureLow((Integer) params.get(ParamsKey.PARAMS_KEY_PRESSURE_LOW));
+    }
+    if (params.containsKey(ParamsKey.PARAMS_KEY_OTHER_DEC)) {
+      request.setOtherDec((String) params.get(ParamsKey.PARAMS_KEY_OTHER_DEC));
+    }
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
+  }
+
+  @Override
+  public boolean uploadHeadImage(byte[] image, final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesServiceImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onUserProfileUpload(userIdRef);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+
+    UploadHeadImageRequest request = new UploadHeadImageRequest(successListener,
+        errorListener, accessTokenRef);
+    request.setImage(image);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
   }
 
   @Override

@@ -4,13 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.VerticalType;
-import com.heqi.kharazim.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;

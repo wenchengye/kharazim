@@ -27,4 +27,12 @@ public class SimpleArchivesObserver implements ArchivesService.ArchivesObserver 
   @Override
   public void onRemovePlan(String userId, String planId) {
   }
+
+  @Override
+  public void onUserProfileUpload(String userId) {
+  }
+
+  @Override
+  public void onHealthConditionUpload(String userId) {
+  }
 }

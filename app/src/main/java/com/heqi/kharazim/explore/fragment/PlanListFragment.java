@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.KharazimApplication;
@@ -13,8 +12,6 @@ import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.NavigationManager;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
-import com.heqi.kharazim.archives.model.HealthCondition;
-import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.explore.http.fetcher.PlanListFetcher;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;

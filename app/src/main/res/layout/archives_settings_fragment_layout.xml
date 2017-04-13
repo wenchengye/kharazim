@@ -15,7 +15,7 @@
             android:layout_height="82dp"
             android:background="@color/bg_color_white">
             
-            <com.heqi.image.view.AsyncImageView
+            <com.heqi.kharazim.view.CircleAsyncImageView
                 android:id="@+id/archives_settings_user_head_iv"
                 android:layout_width="55dp"
                 android:layout_height="55dp"

@@ -12,6 +12,9 @@ import com.heqi.image.ImageManager;
 import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.ArchivesServiceImpl;
+import com.heqi.kharazim.third.imagepicker.SimpleImageLoader;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.view.CropImageView;
 
 import java.io.File;
 
@@ -27,6 +30,9 @@ public class KharazimApplication extends Application {
   private static final float BITMAP_MEMORY_CACHE_SIZE_SCALE_ABOVE_64 = 0.1f;
   private static final int IMAGE_NETWORK_THREAD_POOL_SIZE = 3;
   private static final int IMAGE_LOCAL_THREAD_POOL_SIZE = 1;
+  private static final int IMAGE_PICK_SELECT_SIZE = 1;
+  private static final int IMAGE_PICK_CLIP_SIZE = 800; //800px
+  private static final int IMAGE_PICK_SAVE_SIZE = 1000; //1000px
 
   //TODO this singleton may cause muti-process problem.
   //static appContext is assigned in every process's initApp();
@@ -45,6 +51,10 @@ public class KharazimApplication extends Application {
 
   public static ArchivesService getArchives() {
     return archives;
+  }
+
+  public static ImagePicker getImagePicker() {
+    return ImagePicker.getInstance();
   }
 
   private static void initByteArrayPool() {
@@ -120,6 +130,20 @@ public class KharazimApplication extends Application {
     archives = new ArchivesServiceImpl(appContext);
   }
 
+  private static void initImagePicker() {
+    ImagePicker imagePicker = ImagePicker.getInstance();
+    imagePicker.setImageLoader(new SimpleImageLoader());
+    imagePicker.setShowCamera(true);
+    imagePicker.setCrop(true);
+    imagePicker.setSaveRectangle(true);
+    imagePicker.setSelectLimit(IMAGE_PICK_SELECT_SIZE);
+    imagePicker.setStyle(CropImageView.Style.RECTANGLE);
+    imagePicker.setFocusWidth(IMAGE_PICK_CLIP_SIZE);
+    imagePicker.setFocusHeight(IMAGE_PICK_CLIP_SIZE);
+    imagePicker.setOutPutX(IMAGE_PICK_SAVE_SIZE);
+    imagePicker.setOutPutY(IMAGE_PICK_SAVE_SIZE);
+  }
+
   @Override
   public void onCreate() {
     super.onCreate();
@@ -141,6 +165,7 @@ public class KharazimApplication extends Application {
     initByteArrayPool();
     initImageView();
     initArchives();
+    initImagePicker();
   }
 
 }

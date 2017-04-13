@@ -1,5 +1,6 @@
 package com.heqi.kharazim.utils;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -19,6 +20,8 @@ import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.explore.model.PlanListInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +40,41 @@ public class KharazimUtils {
   public static String formatTime(long time) {
     SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     return formatter.format(new Date(time));
+  }
+
+  public static String formatDate(Date date) {
+    SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.CHINA);
+    return formatter.format(date);
+  }
+
+  // image
+  public static byte[] bitmapToBytes(Bitmap bitmap) {
+
+    byte[] result = null;
+    ByteArrayOutputStream baos = null;
+    try {
+      if (bitmap != null) {
+        baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        baos.flush();
+        baos.close();
+
+        result = baos.toByteArray();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (baos != null) {
+          baos.flush();
+          baos.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return result;
   }
 
   // ui

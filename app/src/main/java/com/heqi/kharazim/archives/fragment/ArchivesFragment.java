@@ -4,14 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.activity.NavigationManager;
 import com.heqi.kharazim.activity.VerticalType;
-import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.http.fetcher.PlanListInArchivesFetcher;
 import com.heqi.kharazim.archives.view.ArchivesListAddMoreView;
@@ -21,10 +19,8 @@ import com.heqi.kharazim.archives.view.ArchivesUserProgressView;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.adapter.DataAdapter;
-import com.heqi.kharazim.ui.adapter.StickyHeaderViewAdapter;
 import com.heqi.kharazim.ui.fragment.async.NetworkListAsyncloadFragment;
 import com.heqi.kharazim.ui.view.AbstractFetchMoreFooterView;
-import com.heqi.kharazim.ui.view.sticky.StickyListHeadersAdapter;
 
 import java.util.concurrent.ExecutionException;
 

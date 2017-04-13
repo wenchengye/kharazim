@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
+import com.heqi.kharazim.view.CircleAsyncImageView;
 
 /**
  * Created by overspark on 2017/3/19.
@@ -22,12 +22,11 @@ public class SettingsFragment extends AsyncLoadFragment {
   private View healthAimView;
   private View localManagementView;
   private View aboutUsView;
-  private AsyncImageView headIconIv;
+  private CircleAsyncImageView headIconIv;
   private TextView nicknameTv;
 
   private SettingsFragmentArchivesObserver archivesObserver =
       new SettingsFragmentArchivesObserver();
-
 
   @Override
   protected void onInflated(View contentView, Bundle savedInstanceState) {
@@ -52,7 +51,8 @@ public class SettingsFragment extends AsyncLoadFragment {
     healthAimView = contentView.findViewById(R.id.archives_settings_health_aim_tab);
     localManagementView = contentView.findViewById(R.id.archives_settings_cache_tab);
     aboutUsView = contentView.findViewById(R.id.archives_settings_about_tab);
-    headIconIv = (AsyncImageView) contentView.findViewById(R.id.archives_settings_user_head_iv);
+    headIconIv = (CircleAsyncImageView) contentView.findViewById(
+        R.id.archives_settings_user_head_iv);
     nicknameTv = (TextView) contentView.findViewById(R.id.archives_settings_user_nickname_tv);
 
   }
