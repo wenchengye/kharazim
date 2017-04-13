@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.archives.model.UserStatsInfo;
 import com.heqi.kharazim.explore.view.ExploreCircleProgressView;
 import com.heqi.kharazim.utils.ViewUtils;
 
@@ -49,5 +50,20 @@ public class ArchivesUserProgressView extends LinearLayout {
     kharazimPointTv = (TextView) findViewById(
         R.id.archives_user_progress_kharazim_point_progress_tv);
     dayProgressTv = (TextView) findViewById(R.id.archives_user_progress_day_tv);
+  }
+
+  public void setData(UserStatsInfo data) {
+    timeProgress.setMax(data.getCptimes());
+    timeProgress.setProgress(data.getCptimes());
+    timeProgress.setMaxText(String.valueOf(data.getCptimes()));
+    timeProgress.setProgressText(String.valueOf(data.getCptimes()));
+
+    courseProgress.setMax(data.getCpcnt());
+    courseProgress.setProgress(data.getCpcnt());
+    courseProgress.setMaxText(String.valueOf(data.getCpcnt()));
+    courseProgress.setProgressText(String.valueOf(data.getCpcnt()));
+
+    kharazimPointTv.setText(String.valueOf(data.getVitality()));
+    dayProgressTv.setText(String.valueOf(data.getDaycnt()));
   }
 }

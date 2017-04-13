@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Response;
 import com.heqi.fetcher.BaseFetcher;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
@@ -12,6 +13,8 @@ import com.heqi.kharazim.activity.NavigationManager;
 import com.heqi.kharazim.activity.VerticalType;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.http.fetcher.PlanListInArchivesFetcher;
+import com.heqi.kharazim.archives.http.request.UserStatsRequest;
+import com.heqi.kharazim.archives.model.UserStatsResult;
 import com.heqi.kharazim.archives.view.ArchivesListAddMoreView;
 import com.heqi.kharazim.archives.view.ArchivesListHeaderView;
 import com.heqi.kharazim.archives.view.ArchivesListPreviewView;
@@ -21,6 +24,7 @@ import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.adapter.DataAdapter;
 import com.heqi.kharazim.ui.fragment.async.NetworkListAsyncloadFragment;
 import com.heqi.kharazim.ui.view.AbstractFetchMoreFooterView;
+import com.heqi.rpc.RpcHelper;
 
 import java.util.concurrent.ExecutionException;
 
@@ -104,6 +108,29 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   @Override
   protected void onNoFetchResult() {
 
+  }
+
+  @Override
+  protected void onStartLoading() {
+    super.onStartLoading();
+
+    if (!isInflated) {
+      return;
+    }
+
+    Response.Listener<UserStatsResult> successListener = new Response.Listener<UserStatsResult>() {
+      @Override
+      public void onResponse(UserStatsResult response) {
+        if (response != null && response.getRet_data() != null
+            && !response.getRet_data().isEmpty()) {
+          userProgressView.setData(response.getRet_data().get(0));
+        }
+      }
+    };
+
+    UserStatsRequest request = new UserStatsRequest(successListener, null,
+        KharazimApplication.getArchives().getCurrentAccessToken());
+    RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
   }
 
   private static class ArchivesListAdapter extends DataAdapter<PlanLiteInfo> {
