@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -289,17 +290,30 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
     this.listener = listener;
   }
 
-  public void onPickedImage(ArrayList<ImageItem> images) {
+  public void onPickedImage(final ArrayList<ImageItem> images) {
     if (images == null || images.isEmpty()) return;
 
-    try {
-      Bitmap image = Picasso.with(getActivity())
-          .load(Uri.parse(images.get(0).path)).get();
+    AsyncTask<Void, Void, Bitmap> task = new AsyncTask<Void, Void, Bitmap>() {
+      @Override
+      protected Bitmap doInBackground(Void... params) {
+        Bitmap ret = null;
+        try {
+          ret = Picasso.with(getActivity())
+              .load(Uri.fromFile(new File(images.get(0).path))).get();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return ret;
+      }
 
-      KharazimApplication.getArchives().uploadHeadImage(KharazimUtils.bitmapToBytes(image), null);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+      @Override
+      protected void onPostExecute(Bitmap bitmap) {
+        KharazimApplication.getArchives().uploadHeadImage(KharazimUtils.bitmapToBytes(bitmap),
+            null);
+      }
+    };
+
+    task.execute();
   }
 
   private void showImagePicker() {

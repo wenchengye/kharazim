@@ -100,9 +100,7 @@ public class EditUserAimFragment extends AsyncLoadFragment {
 
   private void uploadAim() {
     if (this.aim != null) {
-      Map<String, Object> params = new HashMap<>();
-      params.put(ArchivesService.ParamsKey.PARAMS_KEY_USER_AIM, this.aim.getValue());
-      KharazimApplication.getArchives().uploadCurrentUserProfile(params, null);
+      KharazimApplication.getArchives().uploadUserAim(this.aim.getValue(), null);
     }
 
     if (listener != null) {

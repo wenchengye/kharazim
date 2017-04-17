@@ -3,6 +3,7 @@ package com.heqi.kharazim.archives;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Base64;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -13,6 +14,7 @@ import com.heqi.kharazim.archives.http.request.AddPlanRequest;
 import com.heqi.kharazim.archives.http.request.HealthConditionRequest;
 import com.heqi.kharazim.archives.http.request.LoginRequest;
 import com.heqi.kharazim.archives.http.request.ReloginRequest;
+import com.heqi.kharazim.archives.http.request.UploadAimRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeProgressRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeStarRequest;
 import com.heqi.kharazim.archives.http.request.UploadHeadImageRequest;
@@ -417,11 +419,9 @@ public class ArchivesServiceImpl implements ArchivesService {
       request.setIdNumber((String) params.get(ParamsKey.PARAMS_KEY_ID_NUMBER));
     }
     if (params.containsKey(ParamsKey.PARAMS_KEY_ID_NUMBER_OTHER)) {
-      request.setOtherIdNubmer((String) params.get(ParamsKey.PARAMS_KEY_ID_NUMBER_OTHER));
+      request.setOtherIdNumber((String) params.get(ParamsKey.PARAMS_KEY_ID_NUMBER_OTHER));
     }
-    if (params.containsKey(ParamsKey.PARAMS_KEY_USER_AIM)) {
-      request.setUserAim((Integer) params.get(ParamsKey.PARAMS_KEY_USER_AIM));
-    }
+
     RpcHelper.getInstance(this.context).executeRequestAsync(request);
 
     return true;
@@ -554,7 +554,65 @@ public class ArchivesServiceImpl implements ArchivesService {
 
     UploadHeadImageRequest request = new UploadHeadImageRequest(successListener,
         errorListener, accessTokenRef);
-    request.setImage(image);
+    request.setImage(Base64.encodeToString(image, Base64.DEFAULT));
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
+  }
+
+  @Override
+  public boolean uploadUserAim(int aim, final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesServiceImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onUserProfileUpload(userIdRef);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+
+    UploadAimRequest request = new UploadAimRequest(successListener,
+        errorListener, accessTokenRef);
+    request.setUserAim(aim);
     RpcHelper.getInstance(this.context).executeRequestAsync(request);
 
     return true;

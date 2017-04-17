@@ -21,7 +21,7 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
   private static final String GET_PARAMS_KEY_NAME = "truename";
   private static final String GET_PARAMS_KEY_ID_NUMBER = "idnumber";
   private static final String GET_PARAMS_KEY_ID_NUMBER_OTHER = "idnumberother";
-  private static final String GET_PARAMS_KEY_USER_AIM = "useraim";
+
 
   private String chineseName;
   private String nickname;
@@ -31,8 +31,7 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
   private String birthday;
   private String name;
   private String idNumber;
-  private String otherIdNubmer;
-  private Integer userAim;
+  private String otherIdNumber;
 
   public UploadUserProfileRequest(Response.Listener<ArchivesCommonResult> listener,
                                   Response.ErrorListener errorListener,
@@ -80,12 +79,8 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
       params.put(GET_PARAMS_KEY_ID_NUMBER, this.idNumber);
     }
 
-    if (this.otherIdNubmer != null) {
-      params.put(GET_PARAMS_KEY_ID_NUMBER_OTHER, this.otherIdNubmer);
-    }
-
-    if (this.userAim != null) {
-      params.put(GET_PARAMS_KEY_USER_AIM, String.valueOf(this.userAim));
+    if (this.otherIdNumber != null) {
+      params.put(GET_PARAMS_KEY_ID_NUMBER_OTHER, this.otherIdNumber);
     }
   }
 
@@ -153,19 +148,11 @@ public class UploadUserProfileRequest extends AbstractKharazimArchivesHttpReques
     this.idNumber = idNumber;
   }
 
-  public String getOtherIdNubmer() {
-    return otherIdNubmer;
+  public String getOtherIdNumber() {
+    return otherIdNumber;
   }
 
-  public void setOtherIdNubmer(String otherIdNubmer) {
-    this.otherIdNubmer = otherIdNubmer;
-  }
-
-  public int getUserAim() {
-    return userAim;
-  }
-
-  public void setUserAim(int userAim) {
-    this.userAim = userAim;
+  public void setOtherIdNumber(String otherIdNumber) {
+    this.otherIdNumber = otherIdNumber;
   }
 }

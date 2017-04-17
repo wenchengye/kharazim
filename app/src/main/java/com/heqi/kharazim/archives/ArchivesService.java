@@ -22,7 +22,6 @@ public interface ArchivesService {
     public static final String PARAMS_KEY_NAME = "truename";
     public static final String PARAMS_KEY_ID_NUMBER = "idnumber";
     public static final String PARAMS_KEY_ID_NUMBER_OTHER = "idnumberother";
-    public static final String PARAMS_KEY_USER_AIM = "useraim";
     public static final String PARAMS_KEY_HEIGHT = "stature";
     public static final String PARAMS_KEY_WEIGHT = "weight";
     public static final String PARAMS_KEY_HEART_RATE = "heartrate";
@@ -52,6 +51,8 @@ public interface ArchivesService {
                                        ArchivesTaskCallback callback);
 
   boolean uploadHeadImage(byte[] image, ArchivesTaskCallback callback);
+
+  boolean uploadUserAim(int aim, ArchivesTaskCallback callback);
 
   boolean addPlan(String planId, ArchivesTaskCallback callback);
 
