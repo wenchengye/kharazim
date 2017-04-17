@@ -2,11 +2,14 @@ package com.heqi.kharazim.archives.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.heqi.kharazim.KharazimApplication;
+import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.model.UserProfile;
+import com.heqi.kharazim.archives.view.ArchivesSettingDividerView;
 import com.heqi.kharazim.archives.view.ArchivesUserAimView;
 import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
@@ -22,6 +25,7 @@ import java.util.Map;
 public class EditUserAimFragment extends AsyncLoadFragment {
 
   private View uploadUserAimView;
+  private LinearLayout contentLayout;
   private Map<Const.Aim, ArchivesUserAimView> aimViewMap = new HashMap<>();
 
   private Const.Aim aim;
@@ -42,6 +46,21 @@ public class EditUserAimFragment extends AsyncLoadFragment {
   }
 
   private void initView(View contentView) {
+
+    contentLayout = (LinearLayout) contentView.findViewById(
+        R.id.archives_edit_user_aim_content_layout);
+    uploadUserAimView = contentView.findViewById(R.id.archives_edit_user_aim_commit_button);
+
+    for (Const.Aim aim : Const.Aim.values()) {
+      ArchivesSettingDividerView dividerView =
+          ArchivesSettingDividerView.newInstance(contentLayout);
+      contentLayout.addView(dividerView);
+
+      ArchivesUserAimView aimView = ArchivesUserAimView.newInstance(contentLayout);
+      aimView.setData(aim);
+      aimViewMap.put(aim, aimView);
+      contentLayout.addView(aimView);
+    }
 
     if (KharazimApplication.getArchives().getCurrentUserProfile() != null) {
       selectedAim(Const.Aim.fromValue(
@@ -83,7 +102,7 @@ public class EditUserAimFragment extends AsyncLoadFragment {
     if (this.aim != null) {
       Map<String, Object> params = new HashMap<>();
       params.put(ArchivesService.ParamsKey.PARAMS_KEY_USER_AIM, this.aim.getValue());
-      KharazimApplication.getArchives().uploadCurrentHealthCondition(params, null);
+      KharazimApplication.getArchives().uploadCurrentUserProfile(params, null);
     }
 
     if (listener != null) {
@@ -93,7 +112,7 @@ public class EditUserAimFragment extends AsyncLoadFragment {
 
   @Override
   protected int getLayoutResId() {
-    return 0;
+    return R.layout.archives_edit_user_aim_fragment_layout;
   }
 
   @Override

@@ -65,16 +65,22 @@ public class Const {
 
   public enum Aim {
 
-    Junior(1), Middle(2), Senior(3);
+    Junior(1, R.string.aim_junior), Middle(2, R.string.aim_middle), Senior(3, R.string.aim_senior);
 
     private int value;
+    private int nameId;
 
-    Aim(int value) {
+    Aim(int value, int nameId) {
       this.value = value;
+      this.nameId = nameId;
     }
 
     public int getValue() {
       return value;
+    }
+
+    public String getName() {
+      return KharazimApplication.getAppContext().getString(nameId);
     }
 
     public static Aim fromValue(int value) {

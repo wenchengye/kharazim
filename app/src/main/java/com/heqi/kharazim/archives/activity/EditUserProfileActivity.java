@@ -35,6 +35,11 @@ public class EditUserProfileActivity extends FragmentActivity {
           Intent intent = new Intent(EditUserProfileActivity.this, ImageGridActivity.class);
           startActivityForResult(intent, IMAGE_PICKER_REQUEST_CODE);
         }
+
+        @Override
+        public void onBack() {
+          finish();
+        }
       };
 
   @Override

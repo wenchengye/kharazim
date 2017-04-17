@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.heqi.kharazim.archives.activity.EditUserAimActivity;
+import com.heqi.kharazim.archives.activity.EditUserProfileActivity;
 import com.heqi.kharazim.archives.activity.InitActivity;
 import com.heqi.kharazim.archives.activity.LoginActivity;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.consume.activity.ConsumeActivity;
 import com.heqi.kharazim.explore.activity.PlanDetailActivity;
@@ -62,6 +65,16 @@ public class NavigationManager {
     intent.setAction(Intents.ACTION_CONSUMER_PLAY);
     intent.putExtra(Intents.EXTRA_COURSE_DETAIL_DAILY_ID, dailyId);
     intent.putExtra(Intents.EXTRA_USER_PLAN_ID, userPlanId);
+    context.startActivity(intent);
+  }
+
+  public static void navigateToEditUserProfile(Context context) {
+    Intent intent = new Intent(context, EditUserProfileActivity.class);
+    context.startActivity(intent);
+  }
+
+  public static void navigateToEditUserAim(Context context) {
+    Intent intent = new Intent(context, EditUserAimActivity.class);
     context.startActivity(intent);
   }
 }

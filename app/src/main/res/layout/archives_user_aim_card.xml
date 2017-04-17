@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.archives.view.ArchivesUserAimView xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/archives_settings_item_style">
+    <TextView
+        android:id="@+id/aim_name_tv"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        style="@style/archives_settings_item_title_style"/>
+
+    <ImageView
+        android:id="@+id/aim_selected_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_explore_detail_course_not_finish"/>
+</com.heqi.kharazim.archives.view.ArchivesUserAimView>

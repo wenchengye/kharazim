@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="54dp"
+                 android:background="@color/kharazim_design_color">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_small"
+            android:text="@string/archives_edit_user_profile_title"
+            />
+        <ImageView
+            android:id="@+id/archives_edit_user_profile_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom|start"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:src="@drawable/icon_header_navigate_back"/>
+        <TextView
+            android:id="@+id/archives_edit_user_profile_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom|end"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginEnd="27dp"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"
+            android:text="@string/archives_edit_user_profile_save_text"/>
+    </FrameLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout
+        android:id="@+id/archives_edit_user_profile_head_image_tab"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:background="@color/bg_color_white">
+
+        <com.heqi.kharazim.view.CircleAsyncImageView
+            android:id="@+id/archives_edit_user_profile_head_iv"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_head_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/archives_edit_user_profile_head_iv"
+            android:layout_toEndOf="@id/archives_edit_user_profile_head_iv"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_small"
+            android:text="@string/archives_edit_user_profile_edit_head_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_nickname_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_nickname_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_nickname_text"/>
+
+        <EditText
+            android:id="@+id/archives_edit_user_profile_edit_nickname_et"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_nickname_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_nickname_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"
+            android:background="@android:color/transparent"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_gender_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_gender_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_gender_text"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_gender_tv"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_gender_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_gender_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_birthday_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_birthday_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_birthday_text"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_birthday_tv"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_birthday_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_birthday_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_area_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_area_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_area_text"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_area_tv"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_area_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_area_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_height_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_height_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_height_text"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_height_tv"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_height_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_height_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <RelativeLayout style="@style/archives_settings_item_style"
+                    android:id="@+id/archives_edit_user_profile_edit_weight_tab">
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_weight_title"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_edit_user_profile_edit_weight_text"/>
+
+        <TextView
+            android:id="@+id/archives_edit_user_profile_edit_weight_tv"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toRightOf="@id/archives_edit_user_profile_edit_weight_title"
+            android:layout_toEndOf="@id/archives_edit_user_profile_edit_weight_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/archives_edit_undefine_text"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+</LinearLayout>

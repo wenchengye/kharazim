@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.heqi.kharazim.archives.view.ArchivesSettingDividerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+      style="@style/archives_settings_divider_style">
+
+</com.heqi.kharazim.archives.view.ArchivesSettingDividerView>

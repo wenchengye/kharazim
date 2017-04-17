@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.activity.NavigationManager;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
@@ -54,6 +55,20 @@ public class SettingsFragment extends AsyncLoadFragment {
     headIconIv = (CircleAsyncImageView) contentView.findViewById(
         R.id.archives_settings_user_head_iv);
     nicknameTv = (TextView) contentView.findViewById(R.id.archives_settings_user_nickname_tv);
+
+    userProfileView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        NavigationManager.navigateToEditUserProfile(getActivity());
+      }
+    });
+
+    healthAimView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        NavigationManager.navigateToEditUserAim(getActivity());
+      }
+    });
 
   }
 

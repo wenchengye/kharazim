@@ -58,6 +58,7 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
   private TextView heightDisplayTv;
   private TextView weightDisplayTv;
   private View uploadEditView;
+  private View backView;
 
   private OptionsPickerView genderPicker;
   private List<String> genderOptionList;
@@ -161,7 +162,28 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
   }
 
   private void initView(View contentView) {
-
+    editHeadIconView = contentView.findViewById(R.id.archives_edit_user_profile_head_image_tab);
+    editGenderView = contentView.findViewById(R.id.archives_edit_user_profile_edit_gender_tab);
+    editBirthdayView = contentView.findViewById(R.id.archives_edit_user_profile_edit_birthday_tab);
+    editAreaView = contentView.findViewById(R.id.archives_edit_user_profile_edit_area_tab);
+    editHeightView = contentView.findViewById(R.id.archives_edit_user_profile_edit_height_tab);
+    editWeightView = contentView.findViewById(R.id.archives_edit_user_profile_edit_weight_tab);
+    editNicknameEv = (EditText) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_nickname_et);
+    headIconIv = (CircleAsyncImageView) contentView.findViewById(
+        R.id.archives_edit_user_profile_head_iv);
+    genderDisplayTv = (TextView) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_gender_tv);
+    birthdayDisplayTv = (TextView) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_birthday_tv);
+    areaDisplayTv = (TextView) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_area_tv);
+    heightDisplayTv = (TextView) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_height_tv);
+    weightDisplayTv = (TextView) contentView.findViewById(
+        R.id.archives_edit_user_profile_edit_weight_tv);
+    uploadEditView = contentView.findViewById(R.id.archives_edit_user_profile_save_button);
+    backView = contentView.findViewById(R.id.archives_edit_user_profile_back_button);
   }
 
   private void initListeners() {
@@ -214,7 +236,7 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
 
         if (!TextUtils.isEmpty(editNicknameEv.getText())) {
           userProfileParams.put(ArchivesService.ParamsKey.PARAMS_KEY_NICKNAME,
-              editNicknameEv.getText());
+              editNicknameEv.getText().toString());
         }
 
         if (selectGender != null) {
@@ -249,6 +271,15 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
 
         if (listener != null) {
           listener.onEditUpload();
+        }
+      }
+    });
+
+    backView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (listener != null) {
+          listener.onBack();
         }
       }
     });
@@ -395,7 +426,7 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
 
   @Override
   protected int getLayoutResId() {
-    return 0;
+    return R.layout.archives_edit_user_profile_fragment_layout;
   }
 
   @Override
@@ -519,5 +550,7 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
     void onEditUpload();
 
     void onRequestImagePicker();
+
+    void onBack();
   }
 }

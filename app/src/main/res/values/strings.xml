@@ -5,6 +5,9 @@
     <string name="endl">\r\n</string>
     <string name="gender_male">男</string>
     <string name="gender_female">女</string>
+    <string name="aim_junior">初级</string>
+    <string name="aim_middle">中级</string>
+    <string name="aim_senior">高级</string>
 
     <!-- explore -->
     <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
@@ -96,6 +99,17 @@
     <string name="archives_settings_health_aim_tab_title">保健目标</string>
     <string name="archives_settings_cache_tab_title">缓存管理</string>
     <string name="archives_settings_about_tab_title">关于</string>
-    <string name="archives_settings_user_state_holder_text">已经绑定个人邮箱 / 编辑用户资料</string>
+    <string name="archives_settings_user_state_holder_text">编辑用户资料</string>
     <string name="archives_edit_undefine_text">未填写</string>
+    <string name="archives_edit_user_profile_title">个人资料</string>
+    <string name="archives_edit_user_profile_save_text">保存</string>
+    <string name="archives_edit_user_profile_edit_head_text">更换头像</string>
+    <string name="archives_edit_user_profile_edit_nickname_text">昵称:</string>
+    <string name="archives_edit_user_profile_edit_gender_text">性别:</string>
+    <string name="archives_edit_user_profile_edit_birthday_text">生日:</string>
+    <string name="archives_edit_user_profile_edit_area_text">所在地区:</string>
+    <string name="archives_edit_user_profile_edit_height_text">身高:</string>
+    <string name="archives_edit_user_profile_edit_weight_text">体重:</string>
+    <string name="archives_edit_user_aim_commit_text">提交</string>
+    <string name="archives_edit_user_aim_title">保健目标</string>
 </resources>
