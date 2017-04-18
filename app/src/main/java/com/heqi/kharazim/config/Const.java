@@ -93,4 +93,28 @@ public class Const {
       return null;
     }
   }
+
+  public enum LoginType {
+    Standard(0), Wechat(1), QQ(2), Weibo(3);
+
+    private int value;
+
+    LoginType(int value) {
+      this.value = value;
+    }
+
+    public int getValue() {
+      return value;
+    }
+
+    public static LoginType fromValue(int value) {
+      for (LoginType type : LoginType.values()) {
+        if (type.getValue() == value) {
+          return type;
+        }
+      }
+
+      return null;
+    }
+  }
 }

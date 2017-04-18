@@ -35,4 +35,8 @@ public class SimpleArchivesObserver implements ArchivesService.ArchivesObserver 
   @Override
   public void onHealthConditionUpload(String userId) {
   }
+
+  @Override
+  public void onLogout() {
+  }
 }

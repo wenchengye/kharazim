@@ -14,6 +14,7 @@ import com.heqi.kharazim.archives.http.request.AddPlanRequest;
 import com.heqi.kharazim.archives.http.request.HealthConditionRequest;
 import com.heqi.kharazim.archives.http.request.LoginRequest;
 import com.heqi.kharazim.archives.http.request.ReloginRequest;
+import com.heqi.kharazim.archives.http.request.ThirdLoginRequest;
 import com.heqi.kharazim.archives.http.request.UploadAimRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeProgressRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeStarRequest;
@@ -49,7 +50,9 @@ public class ArchivesServiceImpl implements ArchivesService {
   private int state;
   private int originState;
   private String lastUserId = null;
+  private int lastLoginType;
   private String currentUserId = null;
+  private int currentLoginType;
   private Bundle currentUserBundle = null;
   private String accessToken = null;
 
@@ -59,6 +62,7 @@ public class ArchivesServiceImpl implements ArchivesService {
     this.state = State.OFFLINE;
     this.originState = State.OFFLINE;
     this.lastUserId = archivesPreferences.getString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, null);
+    this.lastLoginType = archivesPreferences.getInt(Const.PREFERENCE_KEY_LAST_LOGIN_TYOE_INT, 0);
   }
 
   private static String getUserBundleKey(String userId) {
@@ -103,7 +107,8 @@ public class ArchivesServiceImpl implements ArchivesService {
   }
 
   @Override
-  public boolean relogin(final String userId, final ArchivesTaskCallback callback) {
+  public boolean relogin(final String userId, final int loginType,
+                         final ArchivesTaskCallback callback) {
     if (!switchState2Logining()) return false;
 
     final Response.Listener<ReloginResult> successListener =
@@ -112,7 +117,7 @@ public class ArchivesServiceImpl implements ArchivesService {
           public void onResponse(ReloginResult response) {
             if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
 
-              handleLogin(userId, response.getAccesstoken());
+              handleLogin(userId, response.getAccesstoken(), loginType);
 
             } else {
               resetState2Origin();
@@ -152,7 +157,8 @@ public class ArchivesServiceImpl implements ArchivesService {
       public void onResponse(final LoginResult response) {
         if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
 
-          handleLogin(response.getRelogintoken(), response.getAccesstoken());
+          handleLogin(response.getRelogintoken(), response.getAccesstoken(),
+              com.heqi.kharazim.config.Const.LoginType.Standard.getValue());
 
         } else {
           resetState2Origin();
@@ -188,21 +194,64 @@ public class ArchivesServiceImpl implements ArchivesService {
     return true;
   }
 
-  private void handleLogin(final String userId, final String accessToken) {
+  @Override
+  public boolean thirdLogin(String openid, final int type, final ArchivesTaskCallback callback) {
+    if (!switchState2Logining()) return false;
+
+    final Response.Listener<LoginResult> successListener = new Response.Listener<LoginResult>() {
+      @Override
+      public void onResponse(final LoginResult response) {
+        if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+
+          handleLogin(response.getRelogintoken(), response.getAccesstoken(), type);
+
+        } else {
+          resetState2Origin();
+        }
+
+        if (callback != null) {
+          callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+        }
+      }
+    };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        resetState2Origin();
+
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    ThirdLoginRequest request = new ThirdLoginRequest(successListener, errorListener);
+    request.setOpenId(openid);
+    request.setType(type);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+    return true;
+  }
+
+  private void handleLogin(final String userId, final String accessToken, int loginType) {
     synchronized (this) {
       setState(State.ONLINE);
 
       this.accessToken = accessToken;
       this.lastUserId = userId;
+      this.lastLoginType = loginType;
       this.currentUserId = userId;
+      this.currentLoginType = loginType;
 
       String bundleKey = getUserBundleKey(this.currentUserId);
       this.currentUserBundle = this.archivesPreferences.getBundle(bundleKey, new Bundle());
       this.currentUserBundle.putString(Const.BUNDLE_KEY_USER_ID_STRING, this.currentUserId);
+      this.currentUserBundle.putInt(Const.BUNDLE_KEY_LOGIN_TYPE_INT, this.currentLoginType);
 
       SharePrefSubmitor.submit(this.archivesPreferences.edit()
           .putBundle(bundleKey, this.currentUserBundle)
-          .putString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, this.lastUserId));
+          .putString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, this.lastUserId)
+          .putInt(Const.PREFERENCE_KEY_LAST_LOGIN_TYOE_INT, this.lastLoginType));
     }
 
     notifyObservers(new NotifyRunnable() {
@@ -764,7 +813,24 @@ public class ArchivesServiceImpl implements ArchivesService {
 
   @Override
   public void logout() {
+    synchronized (this) {
+      this.accessToken = null;
+      this.lastUserId = null;
+      this.lastLoginType = 0;
+      this.currentUserId = null;
+      this.currentLoginType = 0;
 
+      SharePrefSubmitor.submit(this.archivesPreferences.edit()
+          .putString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, this.lastUserId)
+          .putInt(Const.PREFERENCE_KEY_LAST_LOGIN_TYOE_INT, this.lastLoginType));
+    }
+
+    notifyObservers(new NotifyRunnable() {
+      @Override
+      public void notify(ArchivesObserver observer) {
+        observer.onLogout();
+      }
+    });
   }
 
   @Override
@@ -773,8 +839,18 @@ public class ArchivesServiceImpl implements ArchivesService {
   }
 
   @Override
+  public int getLastLoginType() {
+    return lastLoginType;
+  }
+
+  @Override
   public String getCurrentUserId() {
     return this.state == State.ONLINE ? this.currentUserId : null;
+  }
+
+  @Override
+  public int getCurrentLoginType() {
+    return currentLoginType;
   }
 
   @Override
@@ -833,7 +909,11 @@ public class ArchivesServiceImpl implements ArchivesService {
 
     public static final String PREFERENCE_KEY_LAST_USER_ID_STRING = "kharazim_last_user_id";
 
+    public static final String PREFERENCE_KEY_LAST_LOGIN_TYOE_INT = "kharazim_last_login_type";
+
     public static final String BUNDLE_KEY_USER_ID_STRING = "kharazim_user_id";
+
+    public static final String BUNDLE_KEY_LOGIN_TYPE_INT = "kharazim_login_type";
 
     public static final String BUNDLE_KEY_USER_PROFILE_OBJECT = "kharazim_user_profile";
 

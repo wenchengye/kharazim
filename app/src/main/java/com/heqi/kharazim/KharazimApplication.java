@@ -12,6 +12,8 @@ import com.heqi.image.ImageManager;
 import com.heqi.image.view.AsyncImageView;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.ArchivesServiceImpl;
+import com.heqi.kharazim.third.ThirdPlatformService;
+import com.heqi.kharazim.third.ThirdPlatformServiceImpl;
 import com.heqi.kharazim.third.imagepicker.SimpleImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -40,6 +42,7 @@ public class KharazimApplication extends Application {
   private static ByteArrayPool byteArrayPool;
   private static ImageManager imageManager;
   private static ArchivesService archives;
+  private static ThirdPlatformService thirdPlatform;
 
   public static Context getAppContext() {
     return appContext;
@@ -51,6 +54,10 @@ public class KharazimApplication extends Application {
 
   public static ArchivesService getArchives() {
     return archives;
+  }
+
+  public static ThirdPlatformService getThirdPlatform() {
+    return thirdPlatform;
   }
 
   public static ImagePicker getImagePicker() {
@@ -144,6 +151,11 @@ public class KharazimApplication extends Application {
     imagePicker.setOutPutY(IMAGE_PICK_SAVE_SIZE);
   }
 
+  private static void initThirdPlatForm() {
+    thirdPlatform = new ThirdPlatformServiceImpl();
+    thirdPlatform.init(appContext);
+  }
+
   @Override
   public void onCreate() {
     super.onCreate();
@@ -166,6 +178,7 @@ public class KharazimApplication extends Application {
     initImageView();
     initArchives();
     initImagePicker();
+    initThirdPlatForm();
   }
 
 }

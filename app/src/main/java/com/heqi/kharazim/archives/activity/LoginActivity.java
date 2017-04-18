@@ -1,5 +1,6 @@
 package com.heqi.kharazim.archives.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -78,5 +79,12 @@ public class LoginActivity extends PendingNavigateActivity {
   private void handleLoginFinished() {
     NavigationManager.navigateToHome(KharazimApplication.getAppContext());
     finish();
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    KharazimApplication.getThirdPlatform().onActivityResult(requestCode, resultCode, data);
   }
 }

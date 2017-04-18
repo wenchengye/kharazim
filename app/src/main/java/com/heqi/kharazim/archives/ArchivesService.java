@@ -2,6 +2,7 @@ package com.heqi.kharazim.archives;
 
 import com.heqi.kharazim.archives.model.HealthCondition;
 import com.heqi.kharazim.archives.model.UserProfile;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.consume.model.ConsumeCourseRecord;
 
 import java.util.Map;
@@ -36,10 +37,11 @@ public interface ArchivesService {
 
   void removeObserver(ArchivesObserver observer);
 
-  boolean relogin(String userId, ArchivesTaskCallback callback);
+  boolean relogin(String userId, int loginType, ArchivesTaskCallback callback);
 
-  boolean login(String id, String password,
-                ArchivesTaskCallback callback);
+  boolean login(String id, String password, ArchivesTaskCallback callback);
+
+  boolean thirdLogin(String openid, int type, ArchivesTaskCallback callback);
 
   boolean updateCurrentUserProfile(ArchivesTaskCallback callback);
 
@@ -67,7 +69,11 @@ public interface ArchivesService {
 
   String getLastUserId();
 
+  int getLastLoginType();
+
   String getCurrentUserId();
+
+  int getCurrentLoginType();
 
   String getCurrentAccessToken();
 
@@ -97,6 +103,8 @@ public interface ArchivesService {
     void onAddPlan(String userId, String planId);
 
     void onRemovePlan(String userId, String planId);
+
+    void onLogout();
   }
 
   class State {

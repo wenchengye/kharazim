@@ -69,7 +69,8 @@ public class InitActivity extends PendingNavigateActivity {
       stayAndNavigate(goExploreRunnable);
     } else if (TextUtils.isEmpty(archives.getLastUserId())) {
       stayAndNavigate(goLoginRunnable);
-    } else if (!archives.relogin(archives.getLastUserId(), loginCallback)) {
+    } else if (!archives.relogin(archives.getLastUserId(), archives.getLastLoginType(),
+        loginCallback)) {
       stayAndNavigate(goLoginRunnable);
     }
   }
