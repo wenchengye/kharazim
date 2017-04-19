@@ -207,4 +207,11 @@ public class KharazimUtils {
   public static boolean kharazimInt2Bool(int value) {
     return !(value == 0);
   }
+
+  private static final String KHARAZIM_ENCODE_FIX = "HEALwww.heal361.com";
+
+  public static String kharazimEncode(String content) {
+    return HttpUtil.MD5(HttpUtil.MD5(KHARAZIM_ENCODE_FIX + content) + KHARAZIM_ENCODE_FIX);
+
+  }
 }

@@ -4,6 +4,7 @@ import com.android.volley.Response;
 import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class ResetPasswordRequest extends AbstractKharazimHttpRequest<ArchivesCo
     params.put(GET_PARAMS_KEY_DATA_TYPE, String.valueOf(this.dataType));
 
     if (this.loginPassword != null) {
-      params.put(GET_PARAMS_KEY_LOGIN_PASSWORD, HttpUtil.MD5(this.loginPassword));
+      params.put(GET_PARAMS_KEY_LOGIN_PASSWORD, KharazimUtils.kharazimEncode(this.loginPassword));
     }
 
     if (this.phoneNumber != null) {

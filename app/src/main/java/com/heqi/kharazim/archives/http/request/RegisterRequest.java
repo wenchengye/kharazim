@@ -4,6 +4,7 @@ import com.android.volley.Response;
 import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.archives.model.RegisterResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public class RegisterRequest extends AbstractKharazimHttpRequest<RegisterResult>
     }
 
     if (this.password != null) {
-      params.put(GET_PARAMS_KEY_LOGIN_PASSWORD, HttpUtil.MD5(this.password));
+      params.put(GET_PARAMS_KEY_LOGIN_PASSWORD, KharazimUtils.kharazimEncode(this.password));
     }
   }
 

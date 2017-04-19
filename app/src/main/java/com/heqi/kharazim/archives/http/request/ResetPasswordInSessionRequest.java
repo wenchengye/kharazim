@@ -3,6 +3,7 @@ package com.heqi.kharazim.archives.http.request;
 import com.android.volley.Response;
 import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
+import com.heqi.kharazim.utils.KharazimUtils;
 
 import java.util.Map;
 
@@ -36,11 +37,11 @@ public class ResetPasswordInSessionRequest extends
     super.setGetParams(params);
 
     if (this.oldPassword != null) {
-      params.put(GET_PARAMS_KEY_OLD_PASSWORD, HttpUtil.MD5(this.oldPassword));
+      params.put(GET_PARAMS_KEY_OLD_PASSWORD, KharazimUtils.kharazimEncode(this.oldPassword));
     }
 
     if (this.newPassword != null) {
-      params.put(GET_PARAMS_KEY_NEW_PASSWORD, HttpUtil.MD5(this.newPassword));
+      params.put(GET_PARAMS_KEY_NEW_PASSWORD, KharazimUtils.kharazimEncode(this.newPassword));
     }
   }
 
