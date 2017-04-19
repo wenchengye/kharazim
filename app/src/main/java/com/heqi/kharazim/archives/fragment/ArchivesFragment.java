@@ -124,6 +124,8 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
         if (response != null && response.getRet_data() != null
             && !response.getRet_data().isEmpty()) {
           userProgressView.setData(response.getRet_data().get(0));
+        } else {
+          userProgressView.setEmpty();
         }
       }
     };

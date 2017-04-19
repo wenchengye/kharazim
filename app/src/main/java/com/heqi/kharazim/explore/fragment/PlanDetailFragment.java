@@ -13,6 +13,9 @@ import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesRequest;
+import com.heqi.kharazim.archives.http.request.PlanProgressReqeust;
+import com.heqi.kharazim.archives.model.PlanProgressInfo;
+import com.heqi.kharazim.archives.model.PlanProgressResult;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
@@ -22,6 +25,7 @@ import com.heqi.kharazim.explore.view.ExplorePlanDetailUserProgressView;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
 import com.heqi.kharazim.ui.fragment.async.NetworkAsyncLoadFragment;
 import com.heqi.kharazim.utils.KharazimUtils;
+import com.heqi.rpc.RpcHelper;
 
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +38,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
   // data
   private PlanLiteInfo planLiteInfo;
   private PlanDetailInfo planDetailInfo;
+  private PlanProgressInfo planProgressInfo;
   private boolean inArchives = false;
   // view
   private ExplorePlanDetailCourseListView courseListView;
@@ -146,8 +151,40 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     this.planDetailInfo = data;
     courseListView.setData(this.planDetailInfo, this.planLiteInfo, false);
-    if (userProgressView != null) {
-      userProgressView.setData(this.planDetailInfo);
+
+    if (userProgressView != null && this.planProgressInfo != null) {
+      userProgressView.setData(this.planProgressInfo, this.planDetailInfo, this.planLiteInfo);
+    }
+  }
+
+  protected void applyProgress(PlanProgressInfo progress) {
+    this.planProgressInfo = progress;
+
+    if (userProgressView != null && this.planDetailInfo != null) {
+      userProgressView.setData(this.planProgressInfo, this.planDetailInfo, this.planLiteInfo);
+    }
+  }
+
+  @Override
+  protected void onStartLoading() {
+    super.onStartLoading();
+
+    if (inArchives) {
+      Response.Listener<PlanProgressResult> successListener =
+          new Response.Listener<PlanProgressResult>() {
+        @Override
+        public void onResponse(PlanProgressResult response) {
+          if (response != null && response.getRet_data() != null) {
+            applyProgress(response.getRet_data());
+          }
+        }
+      };
+
+      PlanProgressReqeust request = new PlanProgressReqeust(successListener, null,
+          KharazimApplication.getArchives().getCurrentAccessToken());
+      request.setPlanId(planLiteInfo.getId());
+      request.setUserPlanId(planLiteInfo.getUserplanid());
+      RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
     }
   }
 

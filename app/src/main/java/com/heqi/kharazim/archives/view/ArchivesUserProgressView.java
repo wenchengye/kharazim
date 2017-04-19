@@ -66,4 +66,19 @@ public class ArchivesUserProgressView extends LinearLayout {
     kharazimPointTv.setText(String.valueOf(data.getVitality()));
     dayProgressTv.setText(String.valueOf(data.getDaycnt()));
   }
+
+  public void setEmpty() {
+    timeProgress.setMax(0);
+    timeProgress.setProgress(0);
+    timeProgress.setMaxText(String.valueOf(0));
+    timeProgress.setProgressText(String.valueOf(0));
+
+    courseProgress.setMax(0);
+    courseProgress.setProgress(0);
+    courseProgress.setMaxText(String.valueOf(0));
+    courseProgress.setProgressText(String.valueOf(0));
+
+    kharazimPointTv.setText(String.valueOf(0));
+    dayProgressTv.setText(String.valueOf(0));
+  }
 }
