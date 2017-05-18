@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heqi.kharazim.explore.view.ExplorePlanLiteView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="142dp">
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="142dp">
+
     <com.heqi.image.view.AsyncImageView
         android:id="@+id/plan_lite_summary_bg"
         android:layout_width="match_parent"
@@ -12,120 +13,122 @@
         android:id="@+id/plan_lite_content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/explore_plan_lite_shadow_bg"
+        android:paddingBottom="21dp"
         android:paddingLeft="27dp"
         android:paddingRight="27dp"
-        android:paddingTop="21dp"
-        android:paddingBottom="21dp"
-        android:background="@color/explore_plan_lite_shadow_bg">
+        android:paddingTop="21dp">
 
         <TextView
             android:id="@+id/plan_lite_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textSize="@dimen/text_size_xlarge"
-            android:textColor="@color/text_color_white"
             android:maxLines="1"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xlarge"
             />
 
-        <FrameLayout android:id="@+id/plan_lite_difficulty_place_holder"
+        <FrameLayout
+            android:id="@+id/plan_lite_difficulty_place_holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/plan_lite_title_tv"
-            android:layout_toEndOf="@id/plan_lite_title_tv"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="6dp"
-                     android:layout_marginStart="6dp"
-                     android:layout_alignParentTop="true"
-            android:layout_marginTop="9dip"/>
-        
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="9dip"
+            android:layout_toEndOf="@id/plan_lite_title_tv"
+            android:layout_toRightOf="@id/plan_lite_title_tv"/>
+
         <TextView
             android:id="@+id/plan_lite_acupoint_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="24dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/plan_lite_title_tv"
+            android:layout_alignParentBottom="true"
             android:layout_alignStart="@id/plan_lite_title_tv"
-            android:textColor="@color/kharazim_design_color"
-            android:textSize="@dimen/text_size_xxlarge"
             android:gravity="center"
             android:maxLines="1"
+            android:minWidth="24dp"
+            android:textColor="@color/kharazim_design_color"
+            android:textSize="@dimen/text_size_large"
             />
 
         <TextView
             android:id="@+id/plan_lite_intro_1_tv"
+            style="@style/explore_plan_lite_intro_tv"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="6dp"
-            android:layout_toRightOf="@id/plan_lite_acupoint_count_tv"
-            android:layout_toEndOf="@id/plan_lite_acupoint_count_tv"
             android:layout_marginLeft="2dp"
             android:layout_marginStart="2dp"
+            android:layout_toEndOf="@id/plan_lite_acupoint_count_tv"
+            android:layout_toRightOf="@id/plan_lite_acupoint_count_tv"
             android:text="@string/explore_plan_lite_intro_1"
-            style="@style/explore_plan_lite_intro_tv"
             />
 
         <TextView
             android:id="@+id/plan_lite_span_tv"
+            style="@style/simple_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="4dp"
-            android:layout_toRightOf="@id/plan_lite_intro_1_tv"
-            android:layout_toEndOf="@id/plan_lite_intro_1_tv"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/plan_lite_intro_1_tv"
+            android:layout_toRightOf="@id/plan_lite_intro_1_tv"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_small"
-            style="@style/simple_tv"/>
+            android:textSize="@dimen/text_size_small"/>
 
         <TextView
             android:id="@+id/plan_lite_intro_2_tv"
+            style="@style/explore_plan_lite_intro_tv"
             android:layout_alignTop="@id/plan_lite_intro_1_tv"
-            android:layout_toRightOf="@id/plan_lite_span_tv"
-            android:layout_toEndOf="@id/plan_lite_span_tv"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
-            android:text="@string/explore_plan_lite_intro_2"
-            style="@style/explore_plan_lite_intro_tv"/>
+            android:layout_toEndOf="@id/plan_lite_span_tv"
+            android:layout_toRightOf="@id/plan_lite_span_tv"
+            android:text="@string/explore_plan_lite_intro_2"/>
 
         <TextView
             android:id="@+id/plan_lite_span_daily_tv"
+            style="@style/simple_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/plan_lite_span_tv"
-            android:layout_toRightOf="@id/plan_lite_intro_2_tv"
-            android:layout_toEndOf="@id/plan_lite_intro_2_tv"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/plan_lite_intro_2_tv"
+            android:layout_toRightOf="@id/plan_lite_intro_2_tv"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_small"
-            style="@style/simple_tv"/>
+            android:textSize="@dimen/text_size_small"/>
 
         <TextView
             android:id="@+id/plan_lite_intro_3_tv"
+            style="@style/explore_plan_lite_intro_tv"
             android:layout_alignTop="@id/plan_lite_intro_1_tv"
-            android:layout_toRightOf="@id/plan_lite_span_daily_tv"
-            android:layout_toEndOf="@id/plan_lite_span_daily_tv"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
-            android:text="@string/explore_plan_lite_intro_3"
-            style="@style/explore_plan_lite_intro_tv"/>
+            android:layout_toEndOf="@id/plan_lite_span_daily_tv"
+            android:layout_toRightOf="@id/plan_lite_span_daily_tv"
+            android:text="@string/explore_plan_lite_intro_3"/>
 
         <ImageView
             android:id="@+id/plan_lite_add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="6dp"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
             android:src="@drawable/btn_explore_plan_lite_add"/>
 
         <com.heqi.kharazim.explore.view.ExploreCircleProgressView
             android:id="@+id/plan_lite_progress"
             android:layout_width="63dp"
             android:layout_height="63dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
     </RelativeLayout>

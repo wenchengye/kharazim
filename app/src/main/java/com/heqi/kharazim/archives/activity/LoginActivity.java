@@ -1,9 +1,13 @@
 package com.heqi.kharazim.archives.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
@@ -38,6 +42,11 @@ public class LoginActivity extends PendingNavigateActivity {
         public void onGotoRegister() {
           setCurrentFragment(registerFragment);
         }
+
+        @Override
+        public void onForgetPassword() {
+
+        }
       };
 
   private RegisterFragment.RegisterFragmentListener registerFragmentListener =
@@ -58,6 +67,13 @@ public class LoginActivity extends PendingNavigateActivity {
     this.registerFragment.setListener(registerFragmentListener);
 
     setCurrentFragment(this.loginFragment);
+
+    findViewById(R.id.fragments_container).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        hideSoftKeyBoard(v.getWindowToken());
+      }
+    });
   }
 
   @Override
@@ -86,5 +102,13 @@ public class LoginActivity extends PendingNavigateActivity {
     super.onActivityResult(requestCode, resultCode, data);
 
     KharazimApplication.getThirdPlatform().onActivityResult(requestCode, resultCode, data);
+  }
+
+  private void hideSoftKeyBoard(IBinder token) {
+    if (token != null) {
+      InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+      im.hideSoftInputFromWindow(token,
+          InputMethodManager.HIDE_NOT_ALWAYS);
+    }
   }
 }

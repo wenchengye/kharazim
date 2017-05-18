@@ -1,13 +1,15 @@
 package com.heqi.kharazim.archives.fragment;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -19,6 +21,7 @@ import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.model.HealthCondition;
 import com.heqi.kharazim.archives.model.ProvinceInfo;
 import com.heqi.kharazim.archives.model.UserProfile;
+import com.heqi.kharazim.archives.view.ArchivesEditTextView;
 import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.ui.fragment.async.AsyncLoadFragment;
 import com.heqi.kharazim.utils.KharazimUtils;
@@ -45,13 +48,15 @@ import java.util.Map;
 
 public class EditUserProfileFragment extends AsyncLoadFragment {
 
+  Integer selectHeight;
+  Integer selectWeight;
   private View editHeadIconView;
   private View editGenderView;
   private View editBirthdayView;
   private View editAreaView;
   private View editHeightView;
   private View editWeightView;
-  private EditText editNicknameEv;
+  private ArchivesEditTextView editNicknameEv;
   private CircleAsyncImageView headIconIv;
   private TextView genderDisplayTv;
   private TextView birthdayDisplayTv;
@@ -60,14 +65,11 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
   private TextView weightDisplayTv;
   private View uploadEditView;
   private View backView;
-
   private OptionsPickerView genderPicker;
   private List<String> genderOptionList;
   private Const.Gender selectGender;
-
   private TimePickerView birthdayPicker;
   private String selectBirthday;
-
   private OptionsPickerView areaPicker;
   private List<String> provinceOptionList;
   private List<List<String>> cityOptionList;
@@ -75,15 +77,10 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
   private boolean parsingProvince = false;
   private ParseProvinceJsonTask provinceJsonTask = new ParseProvinceJsonTask();
   private String selectArea;
-
   private OptionsPickerView heightPicker;
   private List<Integer> heightOptionList;
-  Integer selectHeight;
-
   private OptionsPickerView weightPicker;
   private List<Integer> weightOptionList;
-  Integer selectWeight;
-
   private EditUserProfileFragmentListener listener;
 
   private EditUserProfileFragmentArchivesObserver archivesObserver =
@@ -91,27 +88,28 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
 
   private OptionsPickerView.OnOptionsSelectListener genderPickerListener =
       new OptionsPickerView.OnOptionsSelectListener() {
-    @Override
-    public void onOptionsSelect(int options1, int options2, int options3, View v) {
-      if (genderOptionList == null || options1 < 0 || options1 >= genderOptionList.size()) return;
+        @Override
+        public void onOptionsSelect(int options1, int options2, int options3, View v) {
+          if (genderOptionList == null || options1 < 0 || options1 >= genderOptionList.size())
+            return;
 
-      selectGender = Const.Gender.fromString(genderOptionList.get(options1));
-      if (selectGender != null) {
-        genderDisplayTv.setText(selectGender.getName());
-      }
-    }
-  };
+          selectGender = Const.Gender.fromString(genderOptionList.get(options1));
+          if (selectGender != null) {
+            genderDisplayTv.setText(selectGender.getName());
+          }
+        }
+      };
 
   private TimePickerView.OnTimeSelectListener birthdayPickerListener =
       new TimePickerView.OnTimeSelectListener() {
-    @Override
-    public void onTimeSelect(Date date, View v) {
-      if (date == null) return;
+        @Override
+        public void onTimeSelect(Date date, View v) {
+          if (date == null) return;
 
-      selectBirthday = KharazimUtils.formatDate(date);
-      birthdayDisplayTv.setText(selectBirthday);
-    }
-  };
+          selectBirthday = KharazimUtils.formatDate(date);
+          birthdayDisplayTv.setText(selectBirthday);
+        }
+      };
 
   private OptionsPickerView.OnOptionsSelectListener areaPickerListener =
       new OptionsPickerView.OnOptionsSelectListener() {
@@ -169,7 +167,7 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
     editAreaView = contentView.findViewById(R.id.archives_edit_user_profile_edit_area_tab);
     editHeightView = contentView.findViewById(R.id.archives_edit_user_profile_edit_height_tab);
     editWeightView = contentView.findViewById(R.id.archives_edit_user_profile_edit_weight_tab);
-    editNicknameEv = (EditText) contentView.findViewById(
+    editNicknameEv = (ArchivesEditTextView) contentView.findViewById(
         R.id.archives_edit_user_profile_edit_nickname_et);
     headIconIv = (CircleAsyncImageView) contentView.findViewById(
         R.id.archives_edit_user_profile_head_iv);
@@ -185,6 +183,13 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
         R.id.archives_edit_user_profile_edit_weight_tv);
     uploadEditView = contentView.findViewById(R.id.archives_edit_user_profile_save_button);
     backView = contentView.findViewById(R.id.archives_edit_user_profile_back_button);
+
+    contentView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        hideSoftKeyBoard(v.getWindowToken());
+      }
+    });
   }
 
   private void initListeners() {
@@ -401,8 +406,8 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
   private void invalidateUserProfile(UserProfile userProfile) {
     if (userProfile == null) return;
 
-    headIconIv.loadNetworkImage(userProfile.getHeadimg(), R.drawable.icon_kharazim_image_logo);
-    editNicknameEv.setText(userProfile.getNickname());
+    headIconIv.loadNetworkImage(userProfile.getHeadimg(), R.drawable.icon_head_image_place_holder);
+    editNicknameEv.getEditText().setText(userProfile.getNickname());
     if (TextUtils.isEmpty(userProfile.getSex())) {
       genderDisplayTv.setText(R.string.archives_edit_undefine_text);
     } else {
@@ -448,6 +453,15 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
 
   }
 
+  private void hideSoftKeyBoard(IBinder token) {
+    if (token != null) {
+      InputMethodManager im = (InputMethodManager)
+          KharazimApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      im.hideSoftInputFromWindow(token,
+          InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+  }
+
   @Override
   protected void onStartLoading() {
     KharazimApplication.getArchives().updateCurrentUserProfile(null);
@@ -457,6 +471,15 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
       parsingProvince = true;
       provinceJsonTask.execute();
     }
+  }
+
+  public interface EditUserProfileFragmentListener {
+
+    void onEditUpload();
+
+    void onRequestImagePicker();
+
+    void onBack();
   }
 
   private class EditUserProfileFragmentArchivesObserver extends SimpleArchivesObserver {
@@ -557,14 +580,5 @@ public class EditUserProfileFragment extends AsyncLoadFragment {
     protected void onPostExecute(Void aVoid) {
       parsingProvince = false;
     }
-  }
-
-  public interface EditUserProfileFragmentListener {
-
-    void onEditUpload();
-
-    void onRequestImagePicker();
-
-    void onBack();
   }
 }

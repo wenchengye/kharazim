@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
     <RelativeLayout
         android:id="@+id/explore_plan_detail_header"
         android:layout_width="match_parent"
@@ -12,24 +13,26 @@
     </RelativeLayout>
 
 
-
-    <FrameLayout android:id="@+id/explore_plan_detail_footer"
+    <FrameLayout
+        android:id="@+id/explore_plan_detail_footer"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_alignParentBottom="true">
 
-        <TextView android:id="@+id/plan_action_btn"
-                  android:layout_gravity="center"
-                  style="@style/explore_large_btn"/>
+        <TextView
+            android:id="@+id/plan_action_btn"
+            style="@style/explore_large_btn"
+            android:layout_gravity="center"/>
 
     </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/explore_plan_detail_header"
         android:layout_above="@id/explore_plan_detail_footer"
+        android:layout_below="@id/explore_plan_detail_header"
         android:background="@color/bg_color_white">
+
         <LinearLayout
             android:id="@+id/explore_plan_detail_content"
             android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 package com.heqi.kharazim.archives.http.request;
 
 import com.android.volley.Response;
-import com.heqi.base.utils.HttpUtil;
 import com.heqi.kharazim.archives.model.RegisterResult;
 import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
 import com.heqi.kharazim.utils.KharazimUtils;
@@ -52,7 +51,7 @@ public class RegisterRequest extends AbstractKharazimHttpRequest<RegisterResult>
 
     if (this.zoneNumber != null) {
       params.put(GET_PARAMS_KEY_ZONE_NUMBER, this.zoneNumber);
-    } else if (this.phoneNumber != null){
+    } else if (this.phoneNumber != null) {
       params.put(GET_PARAMS_KEY_ZONE_NUMBER, GET_PARAMS_VALUE_DEFAULT_ZONE_NUMBER);
     }
 

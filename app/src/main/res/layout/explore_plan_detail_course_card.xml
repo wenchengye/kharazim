@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heqi.kharazim.explore.view.ExplorePlanDetailCourseView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="36dp">
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="36dp">
+
     <TextView
         android:id="@+id/course_day_index_tv"
+        style="@style/explore_course_card_tv"
         android:layout_centerVertical="true"
         android:layout_marginLeft="27dp"
         android:layout_marginStart="27dp"
-        style="@style/explore_course_card_tv"
         />
-    
+
     <TextView
         android:id="@+id/course_content_size_tv"
+        style="@style/explore_course_card_tv"
         android:layout_alignTop="@id/course_day_index_tv"
-        android:layout_toRightOf="@id/course_day_index_tv"
-        android:layout_toEndOf="@id/course_day_index_tv"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
-        style="@style/explore_course_card_tv"/>
+        android:layout_toEndOf="@id/course_day_index_tv"
+        android:layout_toRightOf="@id/course_day_index_tv"/>
 
     <ImageView
         android:id="@+id/course_finish_status_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         />
 
     <TextView
         android:id="@+id/course_finish_date_tv"
-        android:layout_toLeftOf="@id/course_finish_status_iv"
-        android:layout_toStartOf="@id/course_finish_status_iv"
-        android:layout_marginRight="33dp"
-        android:layout_marginEnd="33dp"
+        style="@style/explore_course_card_tv"
         android:layout_alignTop="@id/course_day_index_tv"
-        style="@style/explore_course_card_tv"/>
-    
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_toLeftOf="@id/course_finish_status_iv"
+        android:layout_toStartOf="@id/course_finish_status_iv"/>
+
     <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="9dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginEnd="9dp"
-        android:layout_alignParentBottom="true"
         style="@style/dark_divider_horizontal"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginStart="9dp"
         />
 
 </com.heqi.kharazim.explore.view.ExplorePlanDetailCourseView>

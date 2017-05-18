@@ -19,6 +19,25 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
   private ConsumeCourseRecord record;
   private ConsumeCourseRecord.ConsumeActionRecord current;
 
+  private static boolean isBetterRecord(ConsumeCourseRecord.ConsumeActionRecord a,
+                                        ConsumeCourseRecord.ConsumeActionRecord b) {
+    return Integer.parseInt(b.getCptime()) >= Integer.parseInt(a.getCptime());
+  }
+
+  private static ConsumeCourseRecord.ConsumeActionRecord createActionRecord(String id, int index,
+                                                                            String acupointName) {
+    ConsumeCourseRecord.ConsumeActionRecord ret = new ConsumeCourseRecord.ConsumeActionRecord();
+    ret.setActid(id);
+    ret.setActnum(String.valueOf(index));
+    //ret.setAcupointname(acupointName);
+    ret.setCpflg(String.valueOf(FLASE_VALUE));
+    ret.setSkipflg(String.valueOf(FLASE_VALUE));
+    ret.setStarttime(KharazimUtils.formatTime(System.currentTimeMillis()));
+    ret.setCptime(String.valueOf(0));
+
+    return ret;
+  }
+
   @Override
   public ConsumeCourseRecord getRecord() {
     return record;
@@ -76,25 +95,6 @@ public class DefaultConsumeRecorder implements ConsumeRecorder {
     } else if (isBetterRecord(origin, actionRecord)) {
       this.record.getProgresslist().set(index, actionRecord);
     }
-  }
-
-  private static boolean isBetterRecord(ConsumeCourseRecord.ConsumeActionRecord a,
-                                        ConsumeCourseRecord.ConsumeActionRecord b) {
-    return Integer.parseInt(b.getCptime()) >= Integer.parseInt(a.getCptime());
-  }
-
-  private static ConsumeCourseRecord.ConsumeActionRecord createActionRecord(String id, int index,
-                                                                            String acupointName) {
-    ConsumeCourseRecord.ConsumeActionRecord ret = new ConsumeCourseRecord.ConsumeActionRecord();
-    ret.setActid(id);
-    ret.setActnum(String.valueOf(index));
-    ret.setAcupointname(acupointName);
-    ret.setCpflg(String.valueOf(FLASE_VALUE));
-    ret.setSkipflg(String.valueOf(FLASE_VALUE));
-    ret.setStarttime(KharazimUtils.formatTime(System.currentTimeMillis()));
-    ret.setCptime(String.valueOf(0));
-
-    return ret;
   }
 
 

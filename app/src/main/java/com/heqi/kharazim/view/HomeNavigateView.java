@@ -45,7 +45,7 @@ public class HomeNavigateView extends LinearLayout {
       @Override
       public void onClick(View v) {
         if (v instanceof HomeNavigateVerticalView) {
-          selectVerticalType(((HomeNavigateVerticalView)v).getVerticalType());
+          selectVerticalType(((HomeNavigateVerticalView) v).getVerticalType());
         }
       }
     });

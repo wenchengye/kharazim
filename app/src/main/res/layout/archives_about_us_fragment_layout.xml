@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/explore_text_header_bg_view"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/archives_about_us_logo_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_kharazim_image_logo"/>
+
+        <TextView
+            android:id="@+id/archives_about_us_version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/archives_about_us_logo_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_tiny"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/archives_about_us_service_contract_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_service_contract_title"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <RelativeLayout
+        android:id="@+id/archives_about_us_privacy_contract_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_privacy_contract_title"/>
+
+        <ImageView style="@style/archives_settings_item_arrow_style"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <RelativeLayout
+        android:id="@+id/archives_about_us_official_mail_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_privacy_contract_title"/>
+
+        <TextView
+            style="@style/simple_tv"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:text="@string/archives_official_mail"
+            android:textColor="@color/text_color_gray_light"
+            android:textSize="@dimen/text_size_tiny"/>
+    </RelativeLayout>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <RelativeLayout
+        android:id="@+id/archives_about_us_feed_back_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_feed_back_title"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

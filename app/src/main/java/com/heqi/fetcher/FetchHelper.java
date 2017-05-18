@@ -54,7 +54,7 @@ public class FetchHelper<T> {
 
   public void fetch() {
     final int size = currentIndex != 0 ? currentIndex : firstSize;
-    fetcher. fetch(0, size, callbackProxy, twoPhraseLoading);
+    fetcher.fetch(0, size, callbackProxy, twoPhraseLoading);
   }
 
   public void fetchMore() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">kharazim</string>
+    <string name="app_name">HEAL</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
     <string name="endl">\r\n</string>
@@ -8,6 +8,12 @@
     <string name="aim_junior">初级</string>
     <string name="aim_middle">中级</string>
     <string name="aim_senior">高级</string>
+    <string name="login_type_wechat">微信</string>
+    <string name="login_type_qq">QQ</string>
+    <string name="login_type_weibo">微博</string>
+    <string name="login_type_standard">默认</string>
+    <string name="login_type_phone">手机号</string>
+    <string name="login_type_mail">邮箱</string>
 
     <!-- explore -->
     <string name="explore_plan_lite_intro_1">个穴位 / 天数</string>
@@ -63,6 +69,12 @@
     <string name="archives_lack_password_hint_text">请输入密码</string>
     <string name="archives_lack_nickname_hint_text">请输入昵称</string>
     <string name="archives_lack_password_confirm_hint_text">请确认密码</string>
+    <string name="archives_lack_phone_number_hint_text">请输入手机号码</string>
+    <string name="archives_lack_email_hint_text">请输入邮箱地址</string>
+    <string name="archives_lack_verify_code_hint_text">请输入验证码</string>
+    <string name="archives_lack_old_password_hint_text">请输入原密码</string>
+    <string name="archives_lack_new_password_hint_text">请输入新密码</string>
+    <string name="archives_lack_new_password_confirm_hint_text">请确认新密码</string>
     <string name="archives_register_password_confirm_failed_hint_text">两次输入的密码不一致</string>
     <string name="archives_register_success_hint_text">注册成功</string>
     <string name="archives_register_failed_hint_text">注册失败</string>
@@ -76,6 +88,7 @@
     <string name="archives_login_input_user_hint_text">电话/邮箱</string>
     <string name="archives_login_input_nickname_hint_text">输入昵称</string>
     <string name="archives_login_input_password_confirm_hint_text">确认密码</string>
+    <string name="archives_login_forget_password_hint_text">忘记密码</string>
     <string name="archives_user_progress_time_minute_upper_text">共计</string>
     <string name="archives_user_progress_time_minute_lower_text">分钟</string>
     <string name="archives_user_progress_time_day_upper_text">累计</string>
@@ -90,6 +103,7 @@
     <string name="archives_user_progress_kharazim_point_unit_text">点</string>
     <string name="archives_plan_list_header_label_text">我的计划</string>
     <string name="archives_add_more_hint_text">添加新的健康计划</string>
+    <string name="archives_delete_plan_alert_message">确认删除计划?</string>
     <string name="archives_stats_day_filter_label_text">日</string>
     <string name="archives_stats_week_filter_label_text">周</string>
     <string name="archives_stats_month_filter_label_text">月</string>
@@ -112,4 +126,28 @@
     <string name="archives_edit_user_profile_edit_weight_text">体重:</string>
     <string name="archives_edit_user_aim_commit_text">提交</string>
     <string name="archives_edit_user_aim_title">保健目标</string>
+    <string name="archives_account_manage_current_login_type_text_format">您已使用%1$s登陆</string>
+    <string name="archives_account_manage_bind_phone_text">前往绑定手机</string>
+    <string name="archives_account_manage_bind_mail_text">前往绑定邮箱</string>
+    <string name="archives_account_manage_reset_password_text">修改密码</string>
+    <string name="archives_account_manage_logout_text">退出本账号</string>
+    <string name="archives_account_manage_title_text">账号管理</string>
+    <string name="archives_bind_failed_hint_text">绑定失败</string>
+    <string name="archives_bind_type_phone_label_text">手机</string>
+    <string name="archives_bind_type_mail_label_text">邮箱</string>
+    <string name="archives_bind_password_label_text">密码</string>
+    <string name="archives_bind_confirm_password_label_text">确认密码</string>
+    <string name="archives_bind_verify_code_label_text">验证码</string>
+    <string name="archives_bind_fetch_verify_code_text">点击获取验证码</string>
+    <string name="archives_bind_phone_title_text">绑定手机</string>
+    <string name="archives_bind_mail_title_text">绑定邮箱</string>
+    <string name="archives_bind_commit_text">提交</string>
+    <string name="archives_reset_password_failed_hint_text">重置密码失败</string>
+    <string name="archives_about_us_title_text">关于</string>
+    <string name="archives_service_contract_title">服务条款</string>
+    <string name="archives_privacy_contract_title">隐私条款</string>
+    <string name="archives_official_mail_title">邮箱</string>
+    <string name="archives_official_mail">heal@heal361.com</string>
+    <string name="archives_feed_back_title">用户反馈</string>
+    <string name="archives_app_version_text_format">HEAL V %1$s</string>
 </resources>

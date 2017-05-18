@@ -3,7 +3,6 @@ package com.heqi.kharazim.archives.http.request;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
-import com.heqi.base.utils.Base64;
 import com.heqi.kharazim.archives.model.ArchivesCommonResult;
 import com.heqi.kharazim.utils.KharazimUtils;
 

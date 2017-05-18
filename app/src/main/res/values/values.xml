@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ExploreCircleProgressView_ProgressTypeFull">0</integer>
+    <integer name="ExploreCircleProgressView_ProgressTypeProgressOnly">1</integer>
+    <integer name="ExploreCircleProgressView_ProgressTypeTextOnly">2</integer>
+</resources>

@@ -1,7 +1,10 @@
 package com.heqi.kharazim.archives.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,6 +43,13 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   private ArchivesListPreviewView previewView;
   private ArchivesFragmentArchivesObserver archivesObserver =
       new ArchivesFragmentArchivesObserver();
+  private ArchivesListAdapter.ArchivesListAdapterListener adapterListener =
+      new ArchivesListAdapter.ArchivesListAdapterListener() {
+        @Override
+        public void OnLongClickItem(@NonNull PlanLiteInfo item) {
+          deletePlan(item.getUserplanid());
+        }
+      };
 
   @Override
   protected void onInflated(View contentView, Bundle savedInstanceState) {
@@ -72,7 +82,7 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
 
   @Override
   protected DataAdapter<PlanLiteInfo> newContentAdapter() {
-    return new ArchivesListAdapter(getActivity());
+    return new ArchivesListAdapter(getActivity(), adapterListener);
   }
 
   @Override
@@ -135,12 +145,29 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
     RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
   }
 
+  private void deletePlan(final String planId) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+        .setMessage(R.string.archives_delete_plan_alert_message)
+        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            KharazimApplication.getArchives().removePlan(planId, null);
+          }
+        })
+        .setNegativeButton(R.string.cancel, null)
+        .setCancelable(true);
+    builder.create().show();
+    ;
+  }
+
   private static class ArchivesListAdapter extends DataAdapter<PlanLiteInfo> {
 
     private Context context;
+    private ArchivesListAdapterListener listener;
 
-    private ArchivesListAdapter(Context context) {
+    private ArchivesListAdapter(Context context, ArchivesListAdapterListener listener) {
       this.context = context;
+      this.listener = listener;
     }
 
     @Override
@@ -161,7 +188,23 @@ public class ArchivesFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
           NavigationManager.navigateToPlanDetail(context, getItem(position));
         }
       });
+      view.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+          if (getItem(position) != null) {
+            if (listener != null) {
+              listener.OnLongClickItem(getItem(position));
+            }
+            return true;
+          }
+          return false;
+        }
+      });
       return view;
+    }
+
+    public interface ArchivesListAdapterListener {
+      void OnLongClickItem(@NonNull PlanLiteInfo item);
     }
   }
 

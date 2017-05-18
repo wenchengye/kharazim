@@ -95,8 +95,7 @@ public class ExplorePlanLiteView extends RelativeLayout {
 
     this.data = data;
     if (!TextUtils.isEmpty(this.data.getPlanimg()) && planSummaryIv != null) {
-      //TODO: default image
-      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), R.drawable.icon_kharazim_image_logo);
+      planSummaryIv.loadNetworkImage(this.data.getPlanimg(), R.drawable.icon_plan_card_place_holder);
     }
     if (planDifficultyView != null) {
       planDifficultyView.setDifficultyLevel(this.data.getPlanlev());

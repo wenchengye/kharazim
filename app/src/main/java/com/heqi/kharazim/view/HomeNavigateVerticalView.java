@@ -35,11 +35,6 @@ public class HomeNavigateVerticalView extends ImageView {
         R.layout.home_navigate_vertical_view);
   }
 
-  public void setVerticalType(VerticalType type) {
-    this.type = type;
-    this.setImageResource(type.getIconRes());
-  }
-
   public void setVerticalViewSelected(boolean selected) {
     this.selected = selected;
     if (this.selected) {
@@ -51,5 +46,10 @@ public class HomeNavigateVerticalView extends ImageView {
 
   public VerticalType getVerticalType() {
     return type;
+  }
+
+  public void setVerticalType(VerticalType type) {
+    this.type = type;
+    this.setImageResource(type.getIconRes());
   }
 }

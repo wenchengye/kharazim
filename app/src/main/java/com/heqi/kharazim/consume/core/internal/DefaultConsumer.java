@@ -173,7 +173,8 @@ public class DefaultConsumer implements Consumer {
   public void skipGuide() {
     if (guiding) {
       guiding = false;
-      stop();
+      if (isActionConsumerFunctional()) actionConsumer.stop();
+      if (isSoundConsumerFunctional()) soundConsumer.stop();
       prepare2Action();
       play();
     }
@@ -206,20 +207,6 @@ public class DefaultConsumer implements Consumer {
     gotoActionIndex(0);
 
     play();
-  }
-
-  @Override
-  public void setSoundVolume(float volume) {
-    if (soundConsumer != null) {
-      soundConsumer.setVolume(volume);
-    }
-  }
-
-  @Override
-  public void setMusicVolume(float volume) {
-    if (musicConsumer != null) {
-      musicConsumer.setVolume(volume);
-    }
   }
 
   @Override
@@ -262,8 +249,22 @@ public class DefaultConsumer implements Consumer {
   }
 
   @Override
+  public void setMusicVolume(float volume) {
+    if (musicConsumer != null) {
+      musicConsumer.setVolume(volume);
+    }
+  }
+
+  @Override
   public float getSoundVolume() {
     return soundConsumer != null ? soundConsumer.getVolume() : 0.f;
+  }
+
+  @Override
+  public void setSoundVolume(float volume) {
+    if (soundConsumer != null) {
+      soundConsumer.setVolume(volume);
+    }
   }
 
   @Override
@@ -502,6 +503,9 @@ public class DefaultConsumer implements Consumer {
       prepare2Action();
       play();
     } else {
+      if (callback != null) {
+        callback.onPlayEnd();
+      }
       if (canForward()) {
         forward();
       } else {

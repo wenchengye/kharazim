@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.heqi.kharazim.archives.activity.AboutUsActivity;
+import com.heqi.kharazim.archives.activity.AccountManagementActivity;
 import com.heqi.kharazim.archives.activity.EditUserAimActivity;
 import com.heqi.kharazim.archives.activity.EditUserProfileActivity;
 import com.heqi.kharazim.archives.activity.InitActivity;
 import com.heqi.kharazim.archives.activity.LoginActivity;
-import com.heqi.kharazim.config.Const;
+import com.heqi.kharazim.archives.activity.PageActivity;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.consume.activity.ConsumeActivity;
 import com.heqi.kharazim.explore.activity.PlanDetailActivity;
@@ -25,6 +27,7 @@ public class NavigationManager {
 
   public static void navigateToInit(Context context) {
     Intent intent = new Intent(context, InitActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
     context.startActivity(intent);
   }
 
@@ -75,6 +78,32 @@ public class NavigationManager {
 
   public static void navigateToEditUserAim(Context context) {
     Intent intent = new Intent(context, EditUserAimActivity.class);
+    context.startActivity(intent);
+  }
+
+  public static void navigateToPage(Context context, String url, String title) {
+    Intent intent = new Intent(context, PageActivity.class);
+    if (!(context instanceof Activity)) {
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+    intent.putExtra(Intents.EXTRA_PAGE_TITLE, title);
+    intent.putExtra(Intents.EXTRA_PAGE_URL, url);
+    context.startActivity(intent);
+  }
+
+  public static void navigateToAccountManagement(Context context) {
+    Intent intent = new Intent(context, AccountManagementActivity.class);
+    if (!(context instanceof Activity)) {
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+    context.startActivity(intent);
+  }
+
+  public static void navigateToAboutUs(Context context) {
+    Intent intent = new Intent(context, AboutUsActivity.class);
+    if (!(context instanceof Activity)) {
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
     context.startActivity(intent);
   }
 }

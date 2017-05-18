@@ -12,10 +12,8 @@ import java.util.List;
 
 public class ConsumeCourseRecord implements Serializable {
 
-  private static final long serialVersionUID = 3761991379942554276L;
-
   public static final int KHARAZIM_POINT_BASE = 10;
-
+  private static final long serialVersionUID = 3761991379942554276L;
   private String dailyId;
   private String userplanid;
   private List<ConsumeActionRecord> progresslist = new ArrayList<>();
@@ -24,20 +22,20 @@ public class ConsumeCourseRecord implements Serializable {
     return userplanid;
   }
 
-  public String getDailyId() {
-    return dailyId;
+  public void setUserplanid(String userplanid) {
+    this.userplanid = userplanid;
   }
 
-  public List<ConsumeActionRecord> getProgresslist() {
-    return progresslist;
+  public String getDailyId() {
+    return dailyId;
   }
 
   public void setDailyId(String dailyId) {
     this.dailyId = dailyId;
   }
 
-  public void setUserplanid(String userplanid) {
-    this.userplanid = userplanid;
+  public List<ConsumeActionRecord> getProgresslist() {
+    return progresslist;
   }
 
   public void addActionRecord(ConsumeActionRecord record) {
@@ -49,7 +47,7 @@ public class ConsumeCourseRecord implements Serializable {
     for (ConsumeActionRecord record : progresslist) {
       sum += Integer.parseInt(record.getCptime());
     }
-    return (int)(sum * Const.SECOND / Const.MINTUE);
+    return (int) (sum * Const.SECOND / Const.MINTUE);
   }
 
   public int getKharazimPoint() {

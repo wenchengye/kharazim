@@ -363,26 +363,6 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   }
 
   @Override
-  public void setSoundVolume(final float volume) {
-    consumerHandler.post(new Runnable() {
-      @Override
-      public void run() {
-        setSoundVolumeInternal(volume);
-      }
-    });
-  }
-
-  @Override
-  public void setMusicVolume(final float volume) {
-    consumerHandler.post(new Runnable() {
-      @Override
-      public void run() {
-        setMusicVolumeInternal(volume);
-      }
-    });
-  }
-
-  @Override
   public ActionDetailInfo getAction() {
     return getState() != State.OFF ? consumer.getAction() : null;
   }
@@ -418,8 +398,28 @@ public class DefaultConsumerWrapper implements ConsumerWrapper {
   }
 
   @Override
+  public void setMusicVolume(final float volume) {
+    consumerHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        setMusicVolumeInternal(volume);
+      }
+    });
+  }
+
+  @Override
   public float getSoundVolume() {
     return getState() != State.OFF ? consumer.getSoundVolume() : 0.f;
+  }
+
+  @Override
+  public void setSoundVolume(final float volume) {
+    consumerHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        setSoundVolumeInternal(volume);
+      }
+    });
   }
 
   @Override

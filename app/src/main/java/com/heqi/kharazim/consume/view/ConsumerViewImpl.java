@@ -155,7 +155,8 @@ public class ConsumerViewImpl extends RelativeLayout implements ConsumerView {
 
     consumerGuideLayout.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View v) {}
+      public void onClick(View v) {
+      }
     });
   }
 

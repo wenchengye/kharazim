@@ -22,9 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="2dp"
+            android:text="@string/archives_add_more_hint_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_add_more_hint_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
 
     </LinearLayout>

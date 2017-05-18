@@ -35,6 +35,14 @@ public class Intents {
 
   public static final String EXTRA_CONSUME_RECORD = "kharazim.intent.extra.CONSUME_RECORD";
 
+  /**
+   * archives
+   */
+
+  public static final String EXTRA_PAGE_URL = "kharazim.intent.extra.PAGE_URL";
+
+  public static final String EXTRA_PAGE_TITLE = "karazim.intent.extra.PAGE_TITLE";
+
   private Intents() {
   }
 }

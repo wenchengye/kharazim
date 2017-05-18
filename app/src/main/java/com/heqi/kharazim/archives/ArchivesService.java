@@ -13,24 +13,6 @@ import java.util.Map;
 
 public interface ArchivesService {
 
-  class ParamsKey {
-    public static final String PARAMS_KEY_CHINESE_NAME = "chname";
-    public static final String PARAMS_KEY_NICKNAME = "nickname";
-    public static final String PARAMS_KEY_ADDRESS = "address";
-    public static final String PARAMS_KEY_POSTCODE = "postcode";
-    public static final String PARAMS_KEY_SEX = "sex";
-    public static final String PARAMS_KEY_BIRTHDAY = "birthday";
-    public static final String PARAMS_KEY_NAME = "truename";
-    public static final String PARAMS_KEY_ID_NUMBER = "idnumber";
-    public static final String PARAMS_KEY_ID_NUMBER_OTHER = "idnumberother";
-    public static final String PARAMS_KEY_HEIGHT = "stature";
-    public static final String PARAMS_KEY_WEIGHT = "weight";
-    public static final String PARAMS_KEY_HEART_RATE = "heartrate";
-    public static final String PARAMS_KEY_PRESSURE_HIGH = "pressurehigh";
-    public static final String PARAMS_KEY_PRESSURE_LOW = "pressurelow";
-    public static final String PARAMS_KEY_OTHER_DEC = "otherdec";
-  }
-
   int getState();
 
   void addObserver(ArchivesObserver observer);
@@ -42,6 +24,15 @@ public interface ArchivesService {
   boolean login(String id, String password, ArchivesTaskCallback callback);
 
   boolean thirdLogin(String openid, int type, ArchivesTaskCallback callback);
+
+  boolean bindMail(String email, String verifyCode, String password, ArchivesTaskCallback callback);
+
+  boolean bindPhone(String phone, String zone, String verifyCode, String password,
+                    ArchivesTaskCallback callback);
+
+  boolean bindThird(Const.LoginType loginType, String openid, ArchivesTaskCallback callback);
+
+  boolean resetPassword(String oldPassword, String newPassword, ArchivesTaskCallback callback);
 
   boolean updateCurrentUserProfile(ArchivesTaskCallback callback);
 
@@ -81,6 +72,8 @@ public interface ArchivesService {
 
   HealthCondition getCurrentHealthCondition();
 
+  int getLoginCode();
+
   interface ArchivesTaskCallback {
 
     void onTaskSuccess(int code, String msg);
@@ -105,6 +98,32 @@ public interface ArchivesService {
     void onRemovePlan(String userId, String planId);
 
     void onLogout();
+  }
+
+  class ParamsKey {
+    public static final String PARAMS_KEY_CHINESE_NAME = "chname";
+    public static final String PARAMS_KEY_NICKNAME = "nickname";
+    public static final String PARAMS_KEY_ADDRESS = "address";
+    public static final String PARAMS_KEY_POSTCODE = "postcode";
+    public static final String PARAMS_KEY_SEX = "sex";
+    public static final String PARAMS_KEY_BIRTHDAY = "birthday";
+    public static final String PARAMS_KEY_NAME = "truename";
+    public static final String PARAMS_KEY_ID_NUMBER = "idnumber";
+    public static final String PARAMS_KEY_ID_NUMBER_OTHER = "idnumberother";
+    public static final String PARAMS_KEY_HEIGHT = "stature";
+    public static final String PARAMS_KEY_WEIGHT = "weight";
+    public static final String PARAMS_KEY_HEART_RATE = "heartrate";
+    public static final String PARAMS_KEY_PRESSURE_HIGH = "pressurehigh";
+    public static final String PARAMS_KEY_PRESSURE_LOW = "pressurelow";
+    public static final String PARAMS_KEY_OTHER_DEC = "otherdec";
+  }
+
+  class LoginFlag {
+    public static final int PHONE_FLAG = 1 << 0;
+    public static final int MAIL_FLAG = 1 << 1;
+    public static final int WECHAT_FLAG = 1 << 2;
+    public static final int QQ_FLAG = 1 << 3;
+    public static final int WEIBO_FLAG = 1 << 4;
   }
 
   class State {

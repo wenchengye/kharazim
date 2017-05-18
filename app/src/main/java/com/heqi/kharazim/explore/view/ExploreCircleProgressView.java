@@ -20,23 +20,14 @@ import com.heqi.kharazim.R;
 
 public class ExploreCircleProgressView extends View {
 
-  public static class ProgressType {
-    public static final int PROGRESS_AND_DURATION = 0;
-    public static final int PROGRESS_ONLY = 1;
-
-    private ProgressType() {}
-  }
-
   private static final int VALUE_DEFAULT_MIN = 0;
   private static final int VALUE_DEFAULT_MAX = 100;
   private static final float VALUE_DEFAULT_PROGRESS = 0.f;
   private static final float PROGRESS_START_ANGLE = -90.f;
-
   private static final float PROGRESS_THICKNESS_PROPORTION = 0.052f;
   private static final float MINOR_FONT_SIZE_PROPORTION = 0.113f;
   private static final float MAJOR_FONT_SIZE_PROPORTION = 0.199f;
   private static final float INTERVAL_1_PROPORTION = 0.153f;
-
   private String progressText;
   private String maxText;
   private String upperMinorText;
@@ -46,13 +37,11 @@ public class ExploreCircleProgressView extends View {
   private float progress;
   private String majorText;
   private int progressType = ProgressType.PROGRESS_AND_DURATION;
-
   private Paint backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private Paint foregroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private Paint majorTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private Paint minorTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private RectF viewRectF = new RectF();
-
   private int size;
   private int progressThickness;
   private int minorFontSize;
@@ -60,7 +49,6 @@ public class ExploreCircleProgressView extends View {
   private Point majorStartPoint = new Point();
   private Point upperMinorStartPoint = new Point();
   private Point lowerMinorStartPoint = new Point();
-
   public ExploreCircleProgressView(Context context, AttributeSet attrs) {
     super(context, attrs);
     initView(context, attrs);
@@ -92,6 +80,8 @@ public class ExploreCircleProgressView extends View {
       max = typedArray.getInt(R.styleable.ExploreCircleProgressView_max, VALUE_DEFAULT_MAX);
       progress = typedArray.getFloat(R.styleable.ExploreCircleProgressView_progress,
           VALUE_DEFAULT_PROGRESS);
+      progressType = typedArray.getInt(R.styleable.ExploreCircleProgressView_progressType,
+          ProgressType.PROGRESS_AND_DURATION);
       majorText = generateMajorText(progressText, maxText);
 
     } finally {
@@ -162,8 +152,11 @@ public class ExploreCircleProgressView extends View {
     super.onDraw(canvas);
 
     canvas.drawOval(viewRectF, backgroundPaint);
-    float angle = 360 * (progress - min) / (max - min);
-    canvas.drawArc(viewRectF, PROGRESS_START_ANGLE, angle, false, foregroundPaint);
+    if (progressType == ProgressType.PROGRESS_AND_DURATION
+        || progressType == ProgressType.PROGRESS_ONLY) {
+      float angle = 360 * (progress - min) / (max - min);
+      canvas.drawArc(viewRectF, PROGRESS_START_ANGLE, angle, false, foregroundPaint);
+    }
 
     drawText(majorText, majorStartPoint, majorTextPaint, canvas);
     drawText(upperMinorText, upperMinorStartPoint, minorTextPaint, canvas);
@@ -235,6 +228,15 @@ public class ExploreCircleProgressView extends View {
       return combineProgressText(progressText, maxText);
     } else {
       return progressText;
+    }
+  }
+
+  public static class ProgressType {
+    public static final int PROGRESS_AND_DURATION = 0;
+    public static final int PROGRESS_ONLY = 1;
+    public static final int TEXT_ONLY = 2;
+
+    private ProgressType() {
     }
   }
 }

@@ -2,7 +2,6 @@ package com.heqi.kharazim.explore.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -14,9 +13,6 @@ import com.heqi.kharazim.archives.model.PlanProgressInfo;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
 import com.heqi.kharazim.utils.ViewUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by overspark on 2017/3/18.
@@ -44,7 +40,7 @@ public class ExplorePlanDetailUserProgressView extends RelativeLayout {
   }
 
   public static ExplorePlanDetailUserProgressView newInstance(ViewGroup parent) {
-    return (ExplorePlanDetailUserProgressView)ViewUtils.newInstance(parent,
+    return (ExplorePlanDetailUserProgressView) ViewUtils.newInstance(parent,
         R.layout.explore_plan_detail_user_progress_view);
   }
 

@@ -2,9 +2,9 @@
 <com.heqi.kharazim.ui.view.sticky.StickyListHeadersListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listview"
+    style="@style/list_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:cacheColorHint="@android:color/transparent"
-    style="@style/list_view">
+    android:cacheColorHint="@android:color/transparent">
 
 </com.heqi.kharazim.ui.view.sticky.StickyListHeadersListView>

@@ -11,24 +11,8 @@ import java.util.Map;
 
 public class UserStatsRequest extends AbstractKharazimArchivesHttpRequest<UserStatsResult> {
 
-  public enum UserStatsScale {
-    DAY(1), WEEK(2), MONTH(3), ALL(4);
-
-
-    private final int value;
-
-    private UserStatsScale(int value) {
-      this.value = value;
-    }
-
-    public int getValue() {
-      return value;
-    }
-  }
-
   private static final String USER_STATS_DIRECTORY = "usr/plan/count";
   private static final String GET_PARAMS_KEY_SCALE = "datatype";
-
   private UserStatsScale scale = UserStatsScale.ALL;
 
   public UserStatsRequest(Response.Listener<UserStatsResult> listener,
@@ -51,5 +35,20 @@ public class UserStatsRequest extends AbstractKharazimArchivesHttpRequest<UserSt
 
   public void setScale(UserStatsScale scale) {
     this.scale = scale;
+  }
+
+  public enum UserStatsScale {
+    DAY(1), WEEK(2), MONTH(3), ALL(4);
+
+
+    private final int value;
+
+    private UserStatsScale(int value) {
+      this.value = value;
+    }
+
+    public int getValue() {
+      return value;
+    }
   }
 }

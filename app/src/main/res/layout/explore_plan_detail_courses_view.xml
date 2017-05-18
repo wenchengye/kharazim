@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heqi.kharazim.explore.view.ExplorePlanDetailCourseListView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <LinearLayout android:id="@+id/courses_title_layout"
+                                                                android:layout_width="match_parent"
+                                                                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/courses_title_layout"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:orientation="horizontal">
@@ -12,25 +14,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/courses_preview_title"
-            android:textColor="@color/text_color_black"
-            android:gravity="center"/>
+            android:textColor="@color/text_color_black"/>
 
         <TextView
             android:id="@+id/courses_explain_title_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/courses_explain_title"
-            android:textColor="@color/text_color_black"
-            android:gravity="center"/>
+            android:textColor="@color/text_color_black"/>
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/courses_title_layout">
-        
+
         <LinearLayout
             android:id="@+id/courses_list_layout"
             android:layout_width="match_parent"

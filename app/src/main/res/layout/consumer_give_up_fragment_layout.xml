@@ -22,114 +22,114 @@
 
         <TextView
             android:id="@+id/consumer_give_up_content_tv_1"
-            android:layout_centerHorizontal="true"
+            style="@style/simple_tv"
             android:layout_below="@id/consumer_give_up_logo"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_micro"
             android:text="@string/consumer_give_up_content_text_1"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_micro"/>
 
         <TextView
             android:id="@+id/consumer_give_up_content_tv_2"
-            android:layout_centerHorizontal="true"
+            style="@style/simple_tv"
             android:layout_below="@id/consumer_give_up_content_tv_1"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_xtiny"
             android:text="@string/consumer_give_up_content_text_2"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:id="@+id/consumer_give_up_divider_1"
+            style="@style/gray_divider_horizontal"
             android:layout_width="match_parent"
+            android:layout_below="@id/consumer_give_up_content_tv_2"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="19dp"
             android:layout_marginTop="12dp"
-            android:layout_below="@id/consumer_give_up_content_tv_2"
-            style="@style/gray_divider_horizontal"
             />
 
         <TextView
             android:id="@+id/consumer_give_up_progress_time_upper_text"
+            style="@style/simple_tv"
             android:layout_below="@id/consumer_give_up_divider_1"
-            android:layout_marginTop="12dp"
             android:layout_marginLeft="33dp"
             android:layout_marginStart="33dp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_xtiny"
+            android:layout_marginTop="12dp"
             android:text="@string/archives_user_progress_time_minute_upper_text"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <TextView
             android:id="@+id/consumer_give_up_progress_time_tv"
-            android:layout_below="@id/consumer_give_up_progress_time_upper_text"
-            android:layout_marginTop="8dp"
+            style="@style/simple_tv"
             android:layout_alignLeft="@id/consumer_give_up_progress_time_upper_text"
             android:layout_alignStart="@id/consumer_give_up_progress_time_upper_text"
+            android:layout_below="@id/consumer_give_up_progress_time_upper_text"
+            android:layout_marginTop="8dp"
             android:textColor="@color/kharazim_design_color"
-            android:textSize="@dimen/text_size_large"
-            style="@style/simple_tv"/>
+            android:textSize="@dimen/text_size_large"/>
 
         <TextView
             android:id="@+id/consumer_give_up_progress_time_lower_text"
-            android:layout_below="@id/consumer_give_up_progress_time_tv"
-            android:layout_marginTop="8dp"
+            style="@style/simple_tv"
             android:layout_alignLeft="@id/consumer_give_up_progress_time_upper_text"
             android:layout_alignStart="@id/consumer_give_up_progress_time_upper_text"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_xtiny"
+            android:layout_below="@id/consumer_give_up_progress_time_tv"
+            android:layout_marginTop="8dp"
             android:text="@string/archives_user_progress_time_minute_lower_text"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <TextView
             android:id="@+id/consumer_give_up_count_upper_text"
-            android:layout_alignTop="@id/consumer_give_up_progress_time_upper_text"
-            android:layout_alignParentRight="true"
+            style="@style/simple_tv"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="33dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/consumer_give_up_progress_time_upper_text"
             android:layout_marginEnd="33dp"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_xtiny"
+            android:layout_marginRight="33dp"
             android:text="@string/archives_user_progress_acupoint_upper_text"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <TextView
             android:id="@+id/consumer_give_up_count_tv"
-            android:layout_alignTop="@id/consumer_give_up_progress_time_tv"
+            style="@style/simple_tv"
             android:layout_alignLeft="@id/consumer_give_up_count_upper_text"
             android:layout_alignStart="@id/consumer_give_up_count_upper_text"
+            android:layout_alignTop="@id/consumer_give_up_progress_time_tv"
             android:textColor="@color/kharazim_design_color"
-            android:textSize="@dimen/text_size_large"
-            style="@style/simple_tv"/>
+            android:textSize="@dimen/text_size_large"/>
 
         <TextView
             android:id="@+id/consumer_give_up_count_lower_text"
-            android:layout_alignTop="@id/consumer_give_up_progress_time_lower_text"
+            style="@style/simple_tv"
             android:layout_alignLeft="@id/consumer_give_up_count_upper_text"
             android:layout_alignStart="@id/consumer_give_up_count_upper_text"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_xtiny"
+            android:layout_alignTop="@id/consumer_give_up_progress_time_lower_text"
             android:text="@string/archives_user_progress_acupoint_lower_text"
-            style="@style/simple_tv"/>
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:id="@+id/consumer_give_up_divider_2"
+            style="@style/gray_divider_horizontal"
             android:layout_width="match_parent"
+            android:layout_below="@id/consumer_give_up_progress_time_lower_text"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="19dp"
             android:layout_marginTop="12dp"
-            android:layout_below="@id/consumer_give_up_progress_time_lower_text"
-            style="@style/gray_divider_horizontal"
             />
 
         <TextView
             android:id="@+id/consumer_give_up_confirm_btn"
+            style="@style/explore_middle_btn"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="13dp"
-            android:text="@string/confirm"
-            style="@style/explore_middle_btn"/>
+            android:text="@string/confirm"/>
 
     </RelativeLayout>
 

@@ -83,15 +83,17 @@ public class ConsumerPauseViewImpl extends RelativeLayout implements ConsumerPau
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
           if (fromUser && listener != null) {
-            listener.onSetSoundVolume(((float)progress) / seekBar.getMax());
+            listener.onSetSoundVolume(((float) progress) / seekBar.getMax());
           }
         }
 
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {}
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {}
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
       });
     }
 
@@ -100,21 +102,24 @@ public class ConsumerPauseViewImpl extends RelativeLayout implements ConsumerPau
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
           if (fromUser && listener != null) {
-            listener.onSetMusicVolume(((float)progress) / seekBar.getMax());
+            listener.onSetMusicVolume(((float) progress) / seekBar.getMax());
           }
         }
 
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {}
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {}
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
       });
     }
 
     this.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View v) {}
+      public void onClick(View v) {
+      }
     });
   }
 
@@ -128,11 +133,11 @@ public class ConsumerPauseViewImpl extends RelativeLayout implements ConsumerPau
   @Override
   public void setVolumes(float soundVolume, float musicVolume) {
     if (soundVolumeSeekBar != null) {
-      soundVolumeSeekBar.setProgress((int)(soundVolumeSeekBar.getMax() * soundVolume));
+      soundVolumeSeekBar.setProgress((int) (soundVolumeSeekBar.getMax() * soundVolume));
     }
 
     if (musicVolumeSeekBar != null) {
-      musicVolumeSeekBar.setProgress((int)(musicVolumeSeekBar.getMax() * musicVolume));
+      musicVolumeSeekBar.setProgress((int) (musicVolumeSeekBar.getMax() * musicVolume));
     }
   }
 

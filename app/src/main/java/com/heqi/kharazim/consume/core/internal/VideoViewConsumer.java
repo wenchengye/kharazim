@@ -147,11 +147,6 @@ public class VideoViewConsumer implements ConsumerInternal {
   }
 
   @Override
-  public void setVolume(float volume) {
-    // unused
-  }
-
-  @Override
   public int getProgress() {
     return videoView.getCurrentPosition();
   }
@@ -174,5 +169,10 @@ public class VideoViewConsumer implements ConsumerInternal {
   @Override
   public float getVolume() {
     return 0.f;
+  }
+
+  @Override
+  public void setVolume(float volume) {
+    // unused
   }
 }

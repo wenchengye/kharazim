@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="54dp"
+             android:background="@color/kharazim_design_color">
+
+    <TextView
+        android:id="@+id/explore_header_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="14dp"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_middle"
+        />
+
+    <ImageView
+        android:id="@+id/explore_header_left_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom|start"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:padding="8dp"/>
+
+    <ImageView
+        android:id="@+id/explore_header_right_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom|end"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:padding="8dp"/>
+</FrameLayout>

@@ -25,7 +25,7 @@
 
     <color name="explore_layout_bg_dark_gray">#f2f1f1</color>
     <color name="explore_layout_bg_light_gray">#fafafa</color>
-    
+
     <!-- archives -->
     <color name="archives_init_bg_color">#2a2c2c</color>
     <color name="archives_login_input_hint_text_color">#666767</color>

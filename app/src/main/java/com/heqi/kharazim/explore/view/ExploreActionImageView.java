@@ -2,6 +2,7 @@ package com.heqi.kharazim.explore.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,5 +61,9 @@ public class ExploreActionImageView extends RelativeLayout {
     if (actionNameTv != null) {
       actionNameTv.setText(data.getAcupointname());
     }
+  }
+
+  public View getImageView() {
+    return actionImageIv;
   }
 }

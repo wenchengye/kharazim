@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_gray"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/archives_standard_bind_header"
+        layout="@layout/explore_text_header_bg_view"/>
+
+    <com.heqi.kharazim.archives.view.ArchivesEditTextView
+        android:id="@+id/archives_standard_bind_target_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            android:id="@+id/archives_standard_bind_target_label_tv"
+            style="@style/archives_settings_item_title_style"/>
+
+        <EditText
+            android:id="@+id/archives_edit_text"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toEndOf="@id/archives_standard_bind_target_label_tv"
+            android:layout_toRightOf="@id/archives_standard_bind_target_label_tv"
+            android:background="@color/transparent"/>
+
+    </com.heqi.kharazim.archives.view.ArchivesEditTextView>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <com.heqi.kharazim.archives.view.ArchivesEditTextView
+        android:id="@+id/archives_standard_bind_password_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            android:id="@+id/archives_standard_bind_password_label_tv"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_bind_password_label_text"/>
+
+        <EditText
+            android:id="@id/archives_edit_text"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toEndOf="@id/archives_standard_bind_password_label_tv"
+            android:layout_toRightOf="@id/archives_standard_bind_password_label_tv"
+            android:background="@color/transparent"/>
+    </com.heqi.kharazim.archives.view.ArchivesEditTextView>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <com.heqi.kharazim.archives.view.ArchivesEditTextView
+        android:id="@+id/archives_standard_bind_confirm_password_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            android:id="@+id/archives_standard_bind_confirm_password_label_tv"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_bind_confirm_password_label_text"/>
+
+        <EditText
+            android:id="@id/archives_edit_text"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toEndOf="@id/archives_standard_bind_confirm_password_label_tv"
+            android:layout_toRightOf="@id/archives_standard_bind_confirm_password_label_tv"
+            android:background="@color/transparent"/>
+    </com.heqi.kharazim.archives.view.ArchivesEditTextView>
+
+    <View style="@style/archives_settings_divider_style"/>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <com.heqi.kharazim.archives.view.ArchivesEditTextView
+        android:id="@+id/archives_standard_bind_verify_code_tab"
+        style="@style/archives_settings_item_style">
+
+        <TextView
+            android:id="@+id/archives_standard_bind_verify_code_label_tv"
+            style="@style/archives_settings_item_title_style"
+            android:text="@string/archives_bind_verify_code_label_text"/>
+
+        <TextView
+            android:id="@+id/archives_standard_fetch_verify_code_btn"
+            style="@style/simple_tv"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/archives_bind_fetch_verify_code_text"
+            android:textColor="@color/kharazim_design_color"
+            android:textSize="@dimen/text_size_tiny"
+            />
+
+        <EditText
+            android:id="@id/archives_edit_text"
+            style="@style/archives_settings_item_title_style"
+            android:layout_toEndOf="@id/archives_standard_bind_verify_code_label_tv"
+            android:layout_toLeftOf="@id/archives_standard_fetch_verify_code_btn"
+            android:layout_toRightOf="@id/archives_standard_bind_verify_code_label_tv"
+            android:layout_toStartOf="@id/archives_standard_fetch_verify_code_btn"
+            android:background="@color/transparent"
+            />
+    </com.heqi.kharazim.archives.view.ArchivesEditTextView>
+
+    <View style="@style/archives_settings_slash_style"/>
+
+    <TextView
+        android:id="@+id/archives_bind_commit_btn"
+        style="@style/explore_large_btn"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:text="@string/archives_bind_commit_text"/>
+
+
+</LinearLayout>

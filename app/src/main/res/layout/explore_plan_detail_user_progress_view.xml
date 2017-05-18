@@ -11,13 +11,14 @@
     android:paddingStart="11dp"
     android:paddingTop="13dp">
 
-    <TextView android:id="@+id/current_course_title_tv"
+    <TextView
+        android:id="@+id/current_course_title_tv"
         style="@style/simple_tv"
-        android:textColor="@color/text_color_black"
-        android:textSize="@dimen/text_size_xtiny"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,22 +26,23 @@
         android:layout_below="@id/current_course_title_tv"
         android:layout_marginTop="13dp"
         android:orientation="horizontal">
-        
+
         <com.heqi.kharazim.explore.view.ExploreCircleProgressView
             android:id="@+id/user_progress_time_progress"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"
-            app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"
+            app:progressType="@integer/ExploreCircleProgressView_ProgressTypeTextOnly"
+            app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:background="@color/explore_gray_divider_color"/>
 
@@ -48,17 +50,18 @@
             android:id="@+id/user_progress_acupoint_progress"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:upperMinorText="@string/archives_user_progress_acupoint_upper_text"
-            app:lowerMinorText="@string/archives_user_progress_acupoint_lower_text"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            app:lowerMinorText="@string/archives_user_progress_acupoint_lower_text"
+            app:progressType="@integer/ExploreCircleProgressView_ProgressTypeTextOnly"
+            app:upperMinorText="@string/archives_user_progress_acupoint_upper_text"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:background="@color/explore_gray_divider_color"/>
 
@@ -78,9 +81,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:text="@string/archives_user_progress_count_upper_text"
                 android:textColor="@color/text_color_gray_light"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_count_upper_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:id="@+id/user_progress_count_tv"
@@ -96,12 +99,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
+                android:text="@string/archives_user_progress_count_lower_text"
                 android:textColor="@color/text_color_gray_light"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_count_lower_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
         </LinearLayout>
-
 
 
     </LinearLayout>

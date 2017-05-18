@@ -3,6 +3,7 @@ package com.heqi.kharazim.archives;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import com.android.volley.Response;
@@ -11,9 +12,14 @@ import com.heqi.base.utils.Preferences;
 import com.heqi.base.utils.SharePrefSubmitor;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.archives.http.request.AddPlanRequest;
+import com.heqi.kharazim.archives.http.request.BindMailRequest;
+import com.heqi.kharazim.archives.http.request.BindPhoneRequest;
+import com.heqi.kharazim.archives.http.request.BindThirdRequest;
+import com.heqi.kharazim.archives.http.request.DeletePlanRequest;
 import com.heqi.kharazim.archives.http.request.HealthConditionRequest;
 import com.heqi.kharazim.archives.http.request.LoginRequest;
 import com.heqi.kharazim.archives.http.request.ReloginRequest;
+import com.heqi.kharazim.archives.http.request.ResetPasswordInSessionRequest;
 import com.heqi.kharazim.archives.http.request.ThirdLoginRequest;
 import com.heqi.kharazim.archives.http.request.UploadAimRequest;
 import com.heqi.kharazim.archives.http.request.UploadConsumeProgressRequest;
@@ -260,6 +266,159 @@ public class ArchivesServiceImpl implements ArchivesService {
         observer.onLogin(userId);
       }
     });
+  }
+
+  @Override
+  public boolean bindThird(com.heqi.kharazim.config.Const.LoginType loginType, String openid,
+                           final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    if (loginType.ordinal() == com.heqi.kharazim.config.Const.LoginType.Wechat.ordinal()
+        && (getLoginCode() & LoginFlag.WECHAT_FLAG) > 0) {
+      return false;
+    }
+
+    if (loginType.ordinal() == com.heqi.kharazim.config.Const.LoginType.QQ.ordinal()
+        && (getLoginCode() & LoginFlag.QQ_FLAG) > 0) {
+      return false;
+    }
+
+    if (loginType.ordinal() == com.heqi.kharazim.config.Const.LoginType.Weibo.ordinal()
+        && (getLoginCode() & LoginFlag.WEIBO_FLAG) > 0) {
+      return false;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    BindThirdRequest request = new BindThirdRequest(successListener, errorListener, accessToken);
+    request.setLoginType(loginType);
+    request.setOpenid(openid);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
+  }
+
+  @Override
+  public boolean bindPhone(String phone, String zone, String verifyCode, String password,
+                           final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    if ((getLoginCode() & LoginFlag.PHONE_FLAG) > 0) return false;
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    BindPhoneRequest request = new BindPhoneRequest(successListener, errorListener,
+        this.accessToken);
+    request.setPhoneNumber(phone);
+    request.setZoneNumber(zone);
+    request.setVerifyCode(verifyCode);
+    request.setPassword(password);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+    return true;
+  }
+
+  @Override
+  public boolean bindMail(String email, String verifyCode, String password,
+                          final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    if ((getLoginCode() & LoginFlag.MAIL_FLAG) > 0) return false;
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    BindMailRequest request = new BindMailRequest(successListener, errorListener,
+        this.accessToken);
+    request.setEmail(email);
+    request.setVerifyCode(verifyCode);
+    request.setPassword(password);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
+  }
+
+  @Override
+  public boolean resetPassword(String oldPassword, String newPassword,
+                               final ArchivesTaskCallback callback) {
+
+    if (getState() != State.ONLINE) return false;
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    ResetPasswordInSessionRequest request = new ResetPasswordInSessionRequest(successListener,
+        errorListener, accessToken);
+    request.setOldPassword(oldPassword);
+    request.setNewPassword(newPassword);
+    RpcHelper.getInstance(this.context).executeRequestAsync(request);
+
+    return true;
   }
 
   @Override
@@ -807,8 +966,60 @@ public class ArchivesServiceImpl implements ArchivesService {
   }
 
   @Override
-  public boolean removePlan(String planId, ArchivesTaskCallback callback) {
-    return false;
+  public boolean removePlan(final String planId, final ArchivesTaskCallback callback) {
+    if (getState() != State.ONLINE) return false;
+
+    final String userIdRef;
+    final String accessTokenRef;
+    synchronized (this) {
+      userIdRef = this.currentUserId;
+      accessTokenRef = this.accessToken;
+    }
+
+    final Response.Listener<ArchivesCommonResult> successListener =
+        new Response.Listener<ArchivesCommonResult>() {
+          @Override
+          public void onResponse(final ArchivesCommonResult response) {
+            if (KharazimUtils.isRetCodeOK(response.getRet_code())) {
+              boolean notify = false;
+              synchronized (ArchivesServiceImpl.this) {
+                if (userIdRef != null
+                    && userIdRef.equals(currentUserId)) {
+                  notify = true;
+                }
+              }
+
+              if (notify) {
+                notifyObservers(new NotifyRunnable() {
+                  @Override
+                  public void notify(ArchivesObserver observer) {
+                    observer.onRemovePlan(userIdRef, planId);
+                  }
+                });
+              }
+            }
+
+            if (callback != null) {
+              callback.onTaskSuccess(response.getRet_code(), response.getRet_msg());
+            }
+          }
+        };
+
+    final Response.ErrorListener errorListener = new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        if (callback != null) {
+          callback.onTaskFailed();
+        }
+      }
+    };
+
+    DeletePlanRequest request =
+        new DeletePlanRequest(successListener, errorListener, accessTokenRef);
+    request.setPlanId(planId);
+    RpcHelper.getInstance(KharazimApplication.getAppContext()).executeRequestAsync(request);
+
+    return true;
   }
 
   @Override
@@ -819,6 +1030,7 @@ public class ArchivesServiceImpl implements ArchivesService {
       this.lastLoginType = 0;
       this.currentUserId = null;
       this.currentLoginType = 0;
+      this.state = State.OFFLINE;
 
       SharePrefSubmitor.submit(this.archivesPreferences.edit()
           .putString(Const.PREFERENCE_KEY_LAST_USER_ID_STRING, this.lastUserId)
@@ -871,6 +1083,34 @@ public class ArchivesServiceImpl implements ArchivesService {
         ? (HealthCondition) this.currentUserBundle.getSerializable(
         Const.BUNLDE_KEY_USER_HEALTH_CONDITION_OBJECT)
         : null;
+  }
+
+  @Override
+  public int getLoginCode() {
+    int ret = 0;
+
+    if (this.state != State.ONLINE) return ret;
+
+    UserProfile profile =
+        (UserProfile) this.currentUserBundle.getSerializable(Const.BUNDLE_KEY_USER_PROFILE_OBJECT);
+    if (profile == null) return ret;
+
+    if (!TextUtils.isEmpty(profile.getPhoneno())) ret |= LoginFlag.PHONE_FLAG;
+    if (!TextUtils.isEmpty(profile.getEmail())) ret |= LoginFlag.MAIL_FLAG;
+    if (!TextUtils.isEmpty(profile.getWxid())
+        || currentLoginType == com.heqi.kharazim.config.Const.LoginType.Wechat.ordinal()) {
+      ret |= LoginFlag.WECHAT_FLAG;
+    }
+    if (!TextUtils.isEmpty(profile.getQqid())
+        || currentLoginType == com.heqi.kharazim.config.Const.LoginType.QQ.ordinal()) {
+      ret |= LoginFlag.QQ_FLAG;
+    }
+    if (!TextUtils.isEmpty(profile.getWbid())
+        || currentLoginType == com.heqi.kharazim.config.Const.LoginType.Weibo.ordinal()) {
+      ret |= LoginFlag.QQ_FLAG;
+    }
+
+    return ret;
   }
 
   private void notifyObservers(NotifyRunnable runnable) {

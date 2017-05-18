@@ -9,11 +9,11 @@
         style="@style/tab_strip"/>
 
     <com.heqi.kharazim.ui.fragment.tab.CommonViewPager
-        android:layout_centerHorizontal="true"
         android:id="@+id/common_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs"/>
+        android:layout_below="@id/tabs"
+        android:layout_centerHorizontal="true"/>
 
     <View
         style="@style/top_shadow"

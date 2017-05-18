@@ -34,47 +34,18 @@ import org.json.JSONObject;
 
 public class ThirdPlatformServiceImpl implements ThirdPlatformService {
 
-  private static class Const {
-
-    public static final String THIRD_PLATFORM_PREFERENCE_NAME = "kharazim_third";
-    public static final String PREFERENCE_KEY_WECHAT_REFRESH_TOKEN =
-        "kharazim_wechat_refresh_token";
-
-
-    public static final String WECHAT_APPID = "wx2b15c26fc7d771c4";
-    public static final String WECHAT_APP_SECRET = "9ad31fac163333ece88598fabde9c0ea";
-    public static final String WECHAT_SCOPE_BASE = "snsapi_base";
-    public static final String WECHAT_SCOPE_USER_INFO = "snsapi_userinfo";
-    public static final String WECHAT_SCOPE_SPLITOR = ",";
-
-    public static final String QQ_APPID = "1105927530";
-    public static final String QQ_SCOPE = "get_user_info";
-    public static final String QQ_JSON_KEY_OPEN_ID = "openid";
-    public static final String QQ_JSON_KEY_ACCESS_TOKEN = "access_token";
-
-    public static final String WEIBO_APPID = "4129381655";
-    public static final String WEIBO_REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
-    public static final String WEIBO_SCOPE = "email,direct_messages_read,direct_messages_write";
-
-    private Const() {
-    }
-  }
-
   private Context context;
   private Preferences thirdPreferences;
-
   private IWXAPI wxapi;
   private String wxRefreshToken;
   private String wxAccessToken;
   private String wxOpenId;
   private ThirdPlatformTaskCallback wxLoginCallback;
-
   private Tencent tencent;
   private String qqAccessToken;
   private String qqOpenId;
   private QQLoginListener qqLoginListener;
   private ThirdPlatformTaskCallback qqLoginCallback;
-
   private SsoHandler ssoHandler;
   private Oauth2AccessToken weiboAccessToken;
   private ThirdPlatformTaskCallback weiboLoginCallback;
@@ -154,7 +125,7 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
       ssoHandler.authorizeCallBack(requestCode, resultCode, data);
     }
 
-    Tencent.onActivityResultData(requestCode,resultCode,data,qqLoginListener);
+    Tencent.onActivityResultData(requestCode, resultCode, data, qqLoginListener);
   }
 
   @Override
@@ -206,6 +177,32 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
     return weiboAccessToken != null ? weiboAccessToken.getUid() : null;
   }
 
+  private static class Const {
+
+    public static final String THIRD_PLATFORM_PREFERENCE_NAME = "kharazim_third";
+    public static final String PREFERENCE_KEY_WECHAT_REFRESH_TOKEN =
+        "kharazim_wechat_refresh_token";
+
+
+    public static final String WECHAT_APPID = "wx2b15c26fc7d771c4";
+    public static final String WECHAT_APP_SECRET = "9ad31fac163333ece88598fabde9c0ea";
+    public static final String WECHAT_SCOPE_BASE = "snsapi_base";
+    public static final String WECHAT_SCOPE_USER_INFO = "snsapi_userinfo";
+    public static final String WECHAT_SCOPE_SPLITOR = ",";
+
+    public static final String QQ_APPID = "1105927530";
+    public static final String QQ_SCOPE = "get_user_info";
+    public static final String QQ_JSON_KEY_OPEN_ID = "openid";
+    public static final String QQ_JSON_KEY_ACCESS_TOKEN = "access_token";
+
+    public static final String WEIBO_APPID = "4129381655";
+    public static final String WEIBO_REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
+    public static final String WEIBO_SCOPE = "email,direct_messages_read,direct_messages_write";
+
+    private Const() {
+    }
+  }
+
   private class WechatHttpLoginSuccessListener implements
       Response.Listener<WechatGetAccessTokenResult> {
     @Override
@@ -233,7 +230,7 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
   private class QQLoginListener implements IUiListener {
     @Override
     public void onComplete(Object o) {
-      if (o instanceof JSONObject && ((JSONObject)o).has(Const.QQ_JSON_KEY_ACCESS_TOKEN)) {
+      if (o instanceof JSONObject && ((JSONObject) o).has(Const.QQ_JSON_KEY_ACCESS_TOKEN)) {
         JSONObject json = (JSONObject) o;
         qqAccessToken = json.optString(Const.QQ_JSON_KEY_ACCESS_TOKEN);
         qqOpenId = json.optString(Const.QQ_JSON_KEY_OPEN_ID);

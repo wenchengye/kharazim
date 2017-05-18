@@ -1,8 +1,5 @@
 package com.heqi.kharazim;
 
-import android.content.Context;
-import android.os.Debug;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
@@ -24,7 +21,7 @@ public class KharazimEncodeTest {
 
   @Test
   public void simpleEncode() throws Exception {
-    Log.d(TAG, KharazimUtils.kharazimEncode("123"));
-    assertEquals(KharazimUtils.kharazimEncode("123"), "5e4e0ac941daf16d70273eaa58996dac");
+    Log.d(TAG, KharazimUtils.kharazimEncode("12345678"));
+    assertEquals(KharazimUtils.kharazimEncode("12345678"), "d299156dd0715f7407de39e55258fb6e");
   }
 }

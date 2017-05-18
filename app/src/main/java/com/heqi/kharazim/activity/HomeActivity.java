@@ -24,15 +24,15 @@ import com.heqi.kharazim.view.HomeNavigateView;
 public class HomeActivity extends FragmentActivity {
 
   private HomeNavigateView navigateView;
-  private HomeNavigateView.OnVerticalTypeSelectedListener naviListener =
-      new HomeNavigateView.OnVerticalTypeSelectedListener() {
-    @Override
-    public void onVerticalTypeSelected(VerticalType type) {
-      navigateToVerticalInternal(type);
-    }
-  };
   private ImageView leftHeaderBtn;
   private ImageView rightHeaderBtn;
+  private HomeNavigateView.OnVerticalTypeSelectedListener naviListener =
+      new HomeNavigateView.OnVerticalTypeSelectedListener() {
+        @Override
+        public void onVerticalTypeSelected(VerticalType type) {
+          navigateToVerticalInternal(type);
+        }
+      };
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {

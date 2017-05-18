@@ -9,160 +9,160 @@
 
     <TextView
         android:id="@+id/consumer_finish_view_confirm_btn"
+        style="@style/explore_large_btn"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="19dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/confirm"
-        style="@style/explore_large_btn"/>
+        android:layout_marginBottom="19dp"
+        android:text="@string/confirm"/>
 
     <FrameLayout
         android:id="@+id/consumer_finish_view_star_view_holder"
         android:layout_width="153dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/consumer_finish_view_confirm_btn"
-        android:layout_marginBottom="38dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp">
 
     </FrameLayout>
 
     <TextView
         android:id="@+id/consumer_finish_view_star_view_label"
+        style="@style/simple_tv"
         android:layout_above="@id/consumer_finish_view_star_view_holder"
-        android:layout_marginBottom="16dp"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/text_size_xtiny"
-        android:textColor="@color/text_color_white"
+        android:layout_marginBottom="16dp"
         android:text="@string/consumer_finish_star_label_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <View
         android:id="@+id/consumer_finish_view_divider_1"
+        style="@style/gray_divider_horizontal"
         android:layout_width="match_parent"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
         android:layout_above="@id/consumer_finish_view_star_view_label"
         android:layout_marginBottom="20dp"
-        style="@style/gray_divider_horizontal"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
         />
 
     <com.heqi.kharazim.ui.view.ContentListView
         android:id="@+id/consumer_finish_view_acupoint_list_view"
+        style="@style/list_view"
         android:layout_width="114dp"
         android:layout_height="81dp"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/consumer_finish_view_divider_1"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:cacheColorHint="@android:color/transparent"
-        style="@style/list_view"/>
+        android:cacheColorHint="@android:color/transparent"/>
 
     <View
         android:id="@+id/consumer_finish_view_divider_2"
+        style="@style/gray_divider_horizontal"
         android:layout_width="match_parent"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
         android:layout_above="@id/consumer_finish_view_acupoint_list_view"
         android:layout_marginBottom="10dp"
-        style="@style/gray_divider_horizontal"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
         />
 
     <TextView
         android:id="@+id/consumer_finish_view_progress_time_lower_text"
+        style="@style/simple_tv"
         android:layout_above="@id/consumer_finish_view_divider_2"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="39dp"
         android:layout_marginStart="39dp"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
         android:text="@string/archives_user_progress_time_minute_lower_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_progress_time_tv"
+        style="@style/simple_tv"
         android:layout_above="@id/consumer_finish_view_progress_time_lower_text"
-        android:layout_marginBottom="15dp"
         android:layout_alignLeft="@id/consumer_finish_view_progress_time_lower_text"
         android:layout_alignStart="@id/consumer_finish_view_progress_time_lower_text"
+        android:layout_marginBottom="15dp"
         android:textColor="@color/kharazim_design_color"
-        android:textSize="@dimen/text_size_large"
-        style="@style/simple_tv"/>
+        android:textSize="@dimen/text_size_large"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_progress_time_upper_text"
+        style="@style/simple_tv"
         android:layout_above="@id/consumer_finish_view_progress_time_tv"
-        android:layout_marginBottom="15dp"
         android:layout_alignLeft="@id/consumer_finish_view_progress_time_lower_text"
         android:layout_alignStart="@id/consumer_finish_view_progress_time_lower_text"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
+        android:layout_marginBottom="15dp"
         android:text="@string/archives_user_progress_time_minute_upper_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_kharazim_point_lower_text"
+        style="@style/simple_tv"
         android:layout_alignTop="@id/consumer_finish_view_progress_time_lower_text"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
         android:text="@string/archives_user_progress_kharazim_point_unit_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_kharazim_point_tv"
+        style="@style/simple_tv"
         android:layout_alignTop="@id/consumer_finish_view_progress_time_tv"
         android:layout_centerHorizontal="true"
         android:textColor="@color/kharazim_design_color"
-        android:textSize="@dimen/text_size_large"
-        style="@style/simple_tv"/>
+        android:textSize="@dimen/text_size_large"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_kharazim_point_upper_text"
+        style="@style/simple_tv"
         android:layout_alignTop="@id/consumer_finish_view_progress_time_upper_text"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
         android:text="@string/archives_user_progress_kharazim_point_label_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
 
     <TextView
         android:id="@+id/consumer_finish_view_count_lower_text"
-        android:layout_alignTop="@id/consumer_finish_view_progress_time_lower_text"
-        android:layout_alignParentRight="true"
+        style="@style/simple_tv"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="39dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/consumer_finish_view_progress_time_lower_text"
         android:layout_marginEnd="39dp"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
+        android:layout_marginRight="39dp"
         android:text="@string/archives_user_progress_acupoint_lower_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_count_tv"
-        android:layout_alignTop="@id/consumer_finish_view_progress_time_tv"
+        style="@style/simple_tv"
         android:layout_alignLeft="@id/consumer_finish_view_count_lower_text"
         android:layout_alignStart="@id/consumer_finish_view_count_lower_text"
+        android:layout_alignTop="@id/consumer_finish_view_progress_time_tv"
         android:textColor="@color/kharazim_design_color"
-        android:textSize="@dimen/text_size_large"
-        style="@style/simple_tv"/>
+        android:textSize="@dimen/text_size_large"/>
 
     <TextView
         android:id="@+id/consumer_finish_view_count_upper_text"
-        android:layout_alignTop="@id/consumer_finish_view_progress_time_upper_text"
+        style="@style/simple_tv"
         android:layout_alignLeft="@id/consumer_finish_view_count_lower_text"
         android:layout_alignStart="@id/consumer_finish_view_count_lower_text"
-        android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_xtiny"
+        android:layout_alignTop="@id/consumer_finish_view_progress_time_upper_text"
         android:text="@string/archives_user_progress_acupoint_upper_text"
-        style="@style/simple_tv"/>
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_xtiny"/>
 
     <View
         android:id="@+id/consumer_finish_view_divider_3"
+        style="@style/gray_divider_horizontal"
         android:layout_width="match_parent"
-        android:layout_marginLeft="27dp"
-        android:layout_marginRight="27dp"
         android:layout_above="@id/consumer_finish_view_progress_time_upper_text"
         android:layout_marginBottom="20dp"
-        style="@style/gray_divider_horizontal"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
         />
 
     <FrameLayout

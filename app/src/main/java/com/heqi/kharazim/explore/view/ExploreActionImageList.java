@@ -9,18 +9,26 @@ import com.heqi.kharazim.R;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.ui.adapter.DataAdapter;
 import com.heqi.kharazim.utils.ViewUtils;
-import com.heqi.kharazim.view.HorizontalListView;
 
 import java.util.List;
+
+import it.sephiroth.android.library.widget.HListView;
 
 /**
  * Created by overspark on 2016/11/27.
  */
 
-public class ExploreActionImageList extends HorizontalListView {
+public class ExploreActionImageList extends HListView {
 
   private ActionImageListAdapter adapter;
   private List<PlanDetailInfo.PlanActionInfo> data;
+  private ExploreActionImageListListener listener;
+  private ExploreActionImageListListener innerListener = new ExploreActionImageListListener() {
+    @Override
+    public void onActionClicked(List<PlanDetailInfo.PlanActionInfo> actionList, int index) {
+      if (listener != null) listener.onActionClicked(actionList, index);
+    }
+  };
 
   public ExploreActionImageList(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -31,11 +39,15 @@ public class ExploreActionImageList extends HorizontalListView {
         R.layout.explore_plan_detail_action_image_list);
   }
 
+  public void setListener(ExploreActionImageListListener listener) {
+    this.listener = listener;
+  }
+
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
 
-    adapter = new ActionImageListAdapter();
+    adapter = new ActionImageListAdapter(innerListener);
     this.setAdapter(adapter);
     if (this.data != null) {
       this.adapter.setData(this.data);
@@ -53,9 +65,20 @@ public class ExploreActionImageList extends HorizontalListView {
     }
   }
 
+  public interface ExploreActionImageListListener {
+    void onActionClicked(List<PlanDetailInfo.PlanActionInfo> actionList, int index);
+  }
+
   private static class ActionImageListAdapter extends DataAdapter<PlanDetailInfo.PlanActionInfo> {
+
+    private ExploreActionImageListListener listener;
+
+    public ActionImageListAdapter(ExploreActionImageListListener listener) {
+      this.listener = listener;
+    }
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
       ExploreActionImageView view;
       if (convertView instanceof ExploreActionImageView) {
         view = (ExploreActionImageView) convertView;
@@ -64,6 +87,16 @@ public class ExploreActionImageList extends HorizontalListView {
       }
 
       view.setData(getItem(position));
+      if (listener != null) {
+        view.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            if (listener != null) {
+              listener.onActionClicked(getData(), position);
+            }
+          }
+        });
+      }
 
       return view;
     }

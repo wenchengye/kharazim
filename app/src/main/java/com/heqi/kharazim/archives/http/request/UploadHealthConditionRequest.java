@@ -12,7 +12,7 @@ import java.util.Map;
 public class UploadHealthConditionRequest
     extends AbstractKharazimArchivesHttpRequest<ArchivesCommonResult> {
 
-  private static final String UPLOAD_HEALTH_CONDITION_DIRECTORY = "usr/bodyinfo";
+  private static final String UPLOAD_HEALTH_CONDITION_DIRECTORY = "usr/bodyupdate";
   private static final String GET_PARAMS_KEY_HEIGHT = "stature";
   private static final String GET_PARAMS_KEY_WEIGHT = "weight";
   private static final String GET_PARAMS_KEY_HEART_RATE = "heartrate";

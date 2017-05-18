@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include android:id="@+id/archives_stats_header"
-             layout="@layout/explore_header_bg_view"/>
+    <include
+        android:id="@+id/archives_stats_header"
+        layout="@layout/explore_header_bg_view"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,89 +17,89 @@
             android:id="@+id/archives_stats_day_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/archives_stats_day_filter_label_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_stats_day_filter_label_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="8dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"/>
 
         <TextView
             android:id="@+id/archives_stats_week_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/archives_stats_week_filter_label_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_stats_week_filter_label_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="8dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"/>
 
         <TextView
             android:id="@+id/archives_stats_month_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/archives_stats_month_filter_label_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_stats_month_filter_label_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="8dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"/>
 
         <TextView
             android:id="@+id/archives_stats_all_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/archives_stats_all_filter_label_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_stats_all_filter_label_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="8dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"/>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:paddingTop="13dp"
+        android:background="@color/explore_layout_bg_dark_gray"
         android:paddingBottom="13dp"
-        android:paddingLeft="20dp"
-        android:paddingStart="20dp"
-        android:paddingRight="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/explore_layout_bg_dark_gray">
-        
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:paddingTop="13dp">
+
         <TextView
             android:id="@+id/archives_stats_detail_description_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:textColor="@color/text_color_black"
             android:textSize="@dimen/text_size_xtiny"/>
 
@@ -106,118 +107,119 @@
             android:id="@+id/archives_stats_detail_time_minutes_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
             android:textColor="@color/kharazim_design_color"
             android:textSize="@dimen/text_size_xxhuge"/>
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/archives_stats_detail_time_minutes_tv"
             android:layout_toEndOf="@+id/archives_stats_detail_time_minutes_tv"
+            android:layout_toRightOf="@+id/archives_stats_detail_time_minutes_tv"
+            android:text="@string/archives_user_progress_time_minute_lower_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_user_progress_time_minute_lower_text"/>
-        
+            android:textSize="@dimen/text_size_xtiny"/>
+
         <LinearLayout
             android:layout_width="@dimen/archives_stats_detail_right_content_width"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentTop="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_count_upper_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_count_upper_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_time_continue_day_upper_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_time_continue_day_upper_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_time_day_upper_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_time_day_upper_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_kharazim_point_label_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_kharazim_point_label_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="@dimen/archives_stats_detail_right_content_width"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_count_lower_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_count_lower_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_time_continue_day_lower_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_time_continue_day_lower_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_time_day_lower_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_time_day_lower_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/archives_user_progress_kharazim_point_unit_text"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_xtiny"
-                android:text="@string/archives_user_progress_kharazim_point_unit_text"/>
+                android:textSize="@dimen/text_size_xtiny"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="@dimen/archives_stats_detail_right_content_width"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_centerVertical="true">
 
-            <TextView android:id="@+id/archives_stats_detail_count_tv"
+            <TextView
+                android:id="@+id/archives_stats_detail_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -225,29 +227,32 @@
                 android:textColor="@color/kharazim_design_color"
                 android:textSize="@dimen/text_size_large"/>
 
-            <TextView android:id="@+id/archives_stats_detail_continue_day_tv"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="center_vertical"
-                      android:layout_weight="1"
-                      android:textColor="@color/kharazim_design_color"
-                      android:textSize="@dimen/text_size_large"/>
+            <TextView
+                android:id="@+id/archives_stats_detail_continue_day_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@color/kharazim_design_color"
+                android:textSize="@dimen/text_size_large"/>
 
-            <TextView android:id="@+id/archives_stats_detail_day_tv"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="center_vertical"
-                      android:layout_weight="1"
-                      android:textColor="@color/kharazim_design_color"
-                      android:textSize="@dimen/text_size_large"/>
+            <TextView
+                android:id="@+id/archives_stats_detail_day_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@color/kharazim_design_color"
+                android:textSize="@dimen/text_size_large"/>
 
-            <TextView android:id="@+id/archives_stats_detail_kharazim_point_tv"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="center_vertical"
-                      android:layout_weight="1"
-                      android:textColor="@color/kharazim_design_color"
-                      android:textSize="@dimen/text_size_large"/>
+            <TextView
+                android:id="@+id/archives_stats_detail_kharazim_point_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@color/kharazim_design_color"
+                android:textSize="@dimen/text_size_large"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -255,9 +260,9 @@
     <com.heqi.kharazim.ui.view.ContentListView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listview"
+        style="@style/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:cacheColorHint="@android:color/transparent"
-        style="@style/list_view"/>
+        android:cacheColorHint="@android:color/transparent"/>
 
 </LinearLayout>

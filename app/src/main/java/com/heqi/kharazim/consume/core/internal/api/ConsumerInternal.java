@@ -20,13 +20,13 @@ public interface ConsumerInternal {
 
   void seek(int milliseconds);
 
-  void setVolume(float volume);
-
   int getProgress();
 
   int getDuration();
 
   float getVolume();
+
+  void setVolume(float volume);
 
   void setSource(Uri uri);
 

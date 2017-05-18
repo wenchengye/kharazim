@@ -97,6 +97,16 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="explore_small_btn" parent="explore_large_btn">
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">@dimen/text_size_xtiny</item>
+    </style>
+
     <!-- archives -->
     <style name="archives_login_action_btn">
         <item name="android:layout_width">@dimen/archives_login_action_btn_width</item>
@@ -109,7 +119,7 @@
     </style>
 
     <style name="archives_input_layout">
-        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_height">42dp</item>
         <item name="android:background">@drawable/bg_archives_login_input</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
@@ -118,18 +128,20 @@
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
     </style>
+
     <style name="archives_input_label">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color_white</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
     </style>
+
     <style name="archives_input_edit_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color_white</item>
         <item name="android:textColorHint">@color/archives_login_input_hint_text_color</item>
-        <item name="android:textSize">@dimen/text_size_xtiny</item>
+        <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
@@ -148,7 +160,7 @@
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:src">@drawable/icon_archives_settings_item_arrow</item>
     </style>
-    
+
     <style name="archives_settings_item_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">34dp</item>

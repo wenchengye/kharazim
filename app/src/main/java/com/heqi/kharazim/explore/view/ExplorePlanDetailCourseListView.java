@@ -32,6 +32,8 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
   private PlanLiteInfo planLiteInfo;
   private int currentOpenIndex = COURSE_VIEW_INDEX_NONE;
 
+  private ExploreActionImageList.ExploreActionImageListListener listener;
+
   public ExplorePlanDetailCourseListView(Context context) {
     super(context);
   }
@@ -47,6 +49,13 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
   public static ExplorePlanDetailCourseListView newInstance(ViewGroup parent) {
     return (ExplorePlanDetailCourseListView) ViewUtils.newInstance(parent,
         R.layout.explore_plan_detail_courses_view);
+  }
+
+  public void setListener(ExploreActionImageList.ExploreActionImageListListener listener) {
+    this.listener = listener;
+    if (actionImageList != null) {
+      actionImageList.setListener(this.listener);
+    }
   }
 
   @Override
@@ -146,6 +155,7 @@ public class ExplorePlanDetailCourseListView extends RelativeLayout {
 
     if (actionImageList == null) {
       actionImageList = ExploreActionImageList.newInstance(this);
+      actionImageList.setListener(this.listener);
     }
 
     coursesListLayout.addView(actionImageList, index + 1);

@@ -126,12 +126,6 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
   }
 
   @Override
-  public void setVolume(float volume) {
-    this.volume = volume;
-    player.setVolume(this.volume, this.volume);
-  }
-
-  @Override
   public int getProgress() {
     return player.getCurrentPosition();
   }
@@ -149,6 +143,12 @@ public class MediaPlayerAudioConsumer implements ConsumerInternal {
   @Override
   public float getVolume() {
     return volume;
+  }
+
+  @Override
+  public void setVolume(float volume) {
+    this.volume = volume;
+    player.setVolume(this.volume, this.volume);
   }
 
   @Override

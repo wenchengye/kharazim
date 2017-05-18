@@ -2,7 +2,6 @@ package com.heqi.kharazim.explore.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -44,21 +43,21 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
 
     ArchivesService.ArchivesTaskCallback taskCallback =
         new ArchivesService.ArchivesTaskCallback() {
-      @Override
-      public void onTaskSuccess(int code, String msg) {
-        int textId = R.string.explore_add_plan_failed_toast;
-        if (KharazimUtils.isRetCodeOK(code)) {
-          textId = R.string.explore_add_plan_success_toast;
-        }
+          @Override
+          public void onTaskSuccess(int code, String msg) {
+            int textId = R.string.explore_add_plan_failed_toast;
+            if (KharazimUtils.isRetCodeOK(code)) {
+              textId = R.string.explore_add_plan_success_toast;
+            }
 
-        KharazimUtils.showToast(textId);
-      }
+            KharazimUtils.showToast(textId);
+          }
 
-      @Override
-      public void onTaskFailed() {
-        KharazimUtils.showToast(R.string.explore_add_plan_failed_toast);
-      }
-    };
+          @Override
+          public void onTaskFailed() {
+            KharazimUtils.showToast(R.string.explore_add_plan_failed_toast);
+          }
+        };
 
     if (!KharazimApplication.getArchives().addPlan(plan.getId(), taskCallback)) {
       KharazimUtils.showToast(R.string.explore_add_plan_failed_toast);
@@ -66,8 +65,8 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
   }
 
   @Override
-  public void onInflate(Context context, AttributeSet attrs, Bundle savedInstanceState) {
-    super.onInflate(context, attrs, savedInstanceState);
+  public void onInflated(View contentView, Bundle savedInstanceState) {
+    super.onInflated(contentView, savedInstanceState);
 
     KharazimApplication.getArchives().addObserver(archivesObserver);
   }
@@ -147,30 +146,32 @@ public class PlanListFragment extends NetworkListAsyncloadFragment<PlanLiteInfo>
     @Override
     public void onAddPlan(String userId, String planId) {
 
-      boolean updated = false;
-      for (int i = 0; i < contentAdapter.getCount(); ++i) {
-        PlanLiteInfo data = contentAdapter.getItem(i);
-        if (data != null && data.getId().equals(planId)) {
-          data.setMyplan(true);
-          updated = true;
-        }
-      }
-
-      if (updated) headerViewAdapter.notifyDataSetChanged();
+//      boolean updated = false;
+//      for (int i = 0; i < contentAdapter.getCount(); ++i) {
+//        PlanLiteInfo data = contentAdapter.getItem(i);
+//        if (data != null && data.getId().equals(planId)) {
+//          data.setMyplan(true);
+//          updated = true;
+//        }
+//      }
+//
+//      if (updated) headerViewAdapter.notifyDataSetChanged();
+      requestLoad();
     }
 
     @Override
     public void onRemovePlan(String userId, String planId) {
-      boolean updated = false;
-      for (int i = 0; i < contentAdapter.getCount(); ++i) {
-        PlanLiteInfo data = contentAdapter.getItem(i);
-        if (data != null && data.getId().equals(planId)) {
-          data.setMyplan(false);
-          updated = true;
-        }
-      }
-
-      if (updated) headerViewAdapter.notifyDataSetChanged();
+//      boolean updated = false;
+//      for (int i = 0; i < contentAdapter.getCount(); ++i) {
+//        PlanLiteInfo data = contentAdapter.getItem(i);
+//        if (data != null && data.getId().equals(planId)) {
+//          data.setMyplan(false);
+//          updated = true;
+//        }
+//      }
+//
+//      if (updated) headerViewAdapter.notifyDataSetChanged();
+      requestLoad();
     }
   }
 }

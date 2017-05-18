@@ -24,6 +24,16 @@ public class ActionDetailInfo implements Serializable {
   private int guidecnt;
   private List<ActionSoundInfo> actSoundDtoList;
 
+  public static PlanDetailInfo.PlanActionInfo convert2PlanActionInfo(ActionDetailInfo from) {
+    PlanDetailInfo.PlanActionInfo to = new PlanDetailInfo.PlanActionInfo();
+    to.setActid(from.getId());
+    to.setActimg(from.getActimg());
+    to.setAcupointid(from.getAcupointid());
+    to.setActvediofile(from.getActvediofile());
+
+    return to;
+  }
+
   public String getId() {
     return id;
   }
@@ -106,11 +116,9 @@ public class ActionDetailInfo implements Serializable {
 
   public static class ActionSoundInfo implements Serializable {
 
-    private static final long serialVersionUID = -1602377887029351204L;
-
     public static final int PLAY_TYPE_VALUE_GUIDE = 1;
     public static final int PLAY_TYPE_VALUE_NORMAL = 0;
-
+    private static final long serialVersionUID = -1602377887029351204L;
     private int num;
     private int starttime;
     private int playtype;

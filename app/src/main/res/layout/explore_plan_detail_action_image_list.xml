@@ -2,9 +2,9 @@
 <com.heqi.kharazim.explore.view.ExploreActionImageList
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/horizontal_list_view"
+    style="@style/list_view"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="@color/explore_layout_bg_dark_gray"
-    style="@style/list_view">
+    android:background="@color/explore_layout_bg_dark_gray">
 
 </com.heqi.kharazim.explore.view.ExploreActionImageList>

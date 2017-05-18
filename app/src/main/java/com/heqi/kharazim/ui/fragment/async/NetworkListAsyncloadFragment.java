@@ -159,6 +159,10 @@ public abstract class NetworkListAsyncloadFragment<M>
     if (result.data.isEmpty()) { // No data
       if (start == 0) { // First page
         onNoFetchResult();
+        newData = result.data;
+        contentAdapter.setData(newData);
+        newData = null;
+        headerViewAdapter.notifyDataSetChanged();
       } else { // Non-first page
         if (hasFooterView()) {
           headerViewAdapter.addFooter(footerView);

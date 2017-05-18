@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by overspark on 2017/4/19.
  */
 
-public class PlanProgressReqeust extends AbstractKharazimArchivesHttpRequest<PlanProgressResult> {
+public class PlanProgressRequest extends AbstractKharazimArchivesHttpRequest<PlanProgressResult> {
 
   private static final String PLAN_PROGRESS_DIRECTORY = "usr/plan/myinfo";
   private static final String GET_PARAMS_KEY_USER_PLAN_ID = "userplanid";
@@ -18,7 +18,7 @@ public class PlanProgressReqeust extends AbstractKharazimArchivesHttpRequest<Pla
   private String userPlanId;
   private String planId;
 
-  public PlanProgressReqeust(Response.Listener<PlanProgressResult> listener,
+  public PlanProgressRequest(Response.Listener<PlanProgressResult> listener,
                              Response.ErrorListener errorListener, String accessToken) {
     super(PlanProgressResult.class, listener, errorListener, accessToken);
   }

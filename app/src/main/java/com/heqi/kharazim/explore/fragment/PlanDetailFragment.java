@@ -13,13 +13,14 @@ import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
 import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.http.request.PlanDetailInArchivesRequest;
-import com.heqi.kharazim.archives.http.request.PlanProgressReqeust;
+import com.heqi.kharazim.archives.http.request.PlanProgressRequest;
 import com.heqi.kharazim.archives.model.PlanProgressInfo;
 import com.heqi.kharazim.archives.model.PlanProgressResult;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.explore.http.request.PlanDetailRequest;
 import com.heqi.kharazim.explore.model.PlanDetailInfo;
 import com.heqi.kharazim.explore.model.PlanLiteInfo;
+import com.heqi.kharazim.explore.view.ExploreActionImageList;
 import com.heqi.kharazim.explore.view.ExplorePlanDetailCourseListView;
 import com.heqi.kharazim.explore.view.ExplorePlanDetailUserProgressView;
 import com.heqi.kharazim.explore.view.ExplorePlanLiteView;
@@ -27,6 +28,7 @@ import com.heqi.kharazim.ui.fragment.async.NetworkAsyncLoadFragment;
 import com.heqi.kharazim.utils.KharazimUtils;
 import com.heqi.rpc.RpcHelper;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -43,8 +45,18 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
   // view
   private ExplorePlanDetailCourseListView courseListView;
   private ExplorePlanDetailUserProgressView userProgressView;
+  private ExploreActionImageList actionListView;
   // status
   private PlanDetailFragmentListener listener;
+  private ExploreActionImageList.ExploreActionImageListListener actionImageListListener =
+      new ExploreActionImageList.ExploreActionImageListListener() {
+        @Override
+        public void onActionClicked(List<PlanDetailInfo.PlanActionInfo> actionList, int index) {
+          if (listener != null) {
+            listener.onShowInterpretation(actionList, index);
+          }
+        }
+      };
 
   public void setListener(PlanDetailFragmentListener listener) {
     this.listener = listener;
@@ -76,6 +88,20 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
         }
       });
     }
+
+    ImageView addBtn = (ImageView) contentView.findViewById(R.id.explore_header_right_button);
+    if (inArchives && addBtn != null) {
+      addBtn.setImageResource(R.drawable.icon_header_navigate_add);
+      addBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if (listener != null) {
+            listener.onExplore();
+          }
+        }
+      });
+    }
+
 
     LinearLayout planDetailContentLayout =
         (LinearLayout) contentView.findViewById(R.id.explore_plan_detail_content);
@@ -128,6 +154,10 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
       }
     }
 
+    actionListView = ExploreActionImageList.newInstance(planDetailContentLayout);
+    if (actionListView != null && planDetailContentLayout != null) {
+      planDetailContentLayout.addView(actionListView);
+    }
 
     courseListView = ExplorePlanDetailCourseListView.newInstance((ViewGroup) contentView);
     if (courseListView != null && planDetailContentLayout != null) {
@@ -135,6 +165,7 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     }
 
     if (courseListView != null) {
+      courseListView.setListener(actionImageListListener);
       if (inArchives) courseListView.enablePreview();
       else courseListView.enableExplain();
     }
@@ -152,8 +183,22 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     this.planDetailInfo = data;
     courseListView.setData(this.planDetailInfo, this.planLiteInfo, false);
 
+    if (!inArchives && this.actionListView != null) {
+      if (this.planDetailInfo.getData_info() != null && !this.planDetailInfo.getData_info().isEmpty()) {
+        this.actionListView.setData(
+            this.planDetailInfo.getData_info().get(0).getPlanDailyActDtoList());
+      } else {
+        this.actionListView.setVisibility(View.GONE);
+      }
+    }
     if (userProgressView != null && this.planProgressInfo != null) {
       userProgressView.setData(this.planProgressInfo, this.planDetailInfo, this.planLiteInfo);
+
+      if (userProgressView.getCurrent() != null) {
+        this.actionListView.setData(userProgressView.getCurrent().getPlanDailyActDtoList());
+      } else {
+        this.actionListView.setVisibility(View.GONE);
+      }
     }
   }
 
@@ -162,6 +207,12 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
     if (userProgressView != null && this.planDetailInfo != null) {
       userProgressView.setData(this.planProgressInfo, this.planDetailInfo, this.planLiteInfo);
+
+      if (userProgressView.getCurrent() != null) {
+        this.actionListView.setData(userProgressView.getCurrent().getPlanDailyActDtoList());
+      } else {
+        this.actionListView.setVisibility(View.GONE);
+      }
     }
   }
 
@@ -172,15 +223,15 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
     if (inArchives) {
       Response.Listener<PlanProgressResult> successListener =
           new Response.Listener<PlanProgressResult>() {
-        @Override
-        public void onResponse(PlanProgressResult response) {
-          if (response != null && response.getRet_data() != null) {
-            applyProgress(response.getRet_data());
-          }
-        }
-      };
+            @Override
+            public void onResponse(PlanProgressResult response) {
+              if (response != null && response.getRet_data() != null) {
+                applyProgress(response.getRet_data());
+              }
+            }
+          };
 
-      PlanProgressReqeust request = new PlanProgressReqeust(successListener, null,
+      PlanProgressRequest request = new PlanProgressRequest(successListener, null,
           KharazimApplication.getArchives().getCurrentAccessToken());
       request.setPlanId(planLiteInfo.getId());
       request.setUserPlanId(planLiteInfo.getUserplanid());
@@ -248,10 +299,14 @@ public class PlanDetailFragment extends NetworkAsyncLoadFragment<PlanDetailInfo>
 
   public interface PlanDetailFragmentListener {
 
+    void onExplore();
+
     void onAddPlan(PlanLiteInfo planLiteInfo);
 
     void onConsumePlan(String courseId, String userPlanId);
 
     void onBack();
+
+    void onShowInterpretation(List<PlanDetailInfo.PlanActionInfo> actionList, int index);
   }
 }

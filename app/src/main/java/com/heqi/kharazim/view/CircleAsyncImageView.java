@@ -301,6 +301,11 @@ public class CircleAsyncImageView extends AsyncImageView {
   }
 
   @Override
+  public ColorFilter getColorFilter() {
+    return mColorFilter;
+  }
+
+  @Override
   public void setColorFilter(ColorFilter cf) {
     if (cf == mColorFilter) {
       return;
@@ -309,11 +314,6 @@ public class CircleAsyncImageView extends AsyncImageView {
     mColorFilter = cf;
     applyColorFilter();
     invalidate();
-  }
-
-  @Override
-  public ColorFilter getColorFilter() {
-    return mColorFilter;
   }
 
   private void applyColorFilter() {

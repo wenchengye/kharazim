@@ -1,7 +1,5 @@
 package com.heqi.kharazim.third.modal;
 
-import com.heqi.kharazim.http.AbstractKharazimHttpRequest;
-
 import java.io.Serializable;
 
 /**

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="90dp">
-    
+
     <com.heqi.image.view.AsyncImageView
         android:id="@+id/action_image_view"
         android:layout_width="127dp"
@@ -16,28 +16,28 @@
         android:id="@+id/action_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
         android:layout_marginLeft="6dp"
         android:layout_marginStart="6dp"
-        android:paddingLeft="4dp"
-        android:paddingStart="4dp"
-        android:paddingRight="4dp"
-        android:paddingEnd="4dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textSize="@dimen/text_size_tiny"
-        android:textColor="@color/text_color_white"
+        android:layout_marginTop="7dp"
         android:background="@color/kharazim_design_color"
+        android:paddingBottom="2dp"
+        android:paddingEnd="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingStart="4dp"
+        android:paddingTop="2dp"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_tiny"
         />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/action_image_view"
         android:layout_toEndOf="@id/action_image_view"
+        android:layout_toRightOf="@id/action_image_view"
         android:padding="3dp"
         android:src="@drawable/icon_explore_action_image_next_indicator"/>
-
 
 
 </com.heqi.kharazim.explore.view.ExploreActionImageView>

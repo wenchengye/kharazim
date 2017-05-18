@@ -1,6 +1,7 @@
 package com.heqi.kharazim.consume.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -10,13 +11,17 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.android.volley.Response;
+import com.heqi.base.utils.SystemUtil;
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
+import com.heqi.kharazim.config.Const;
 import com.heqi.kharazim.config.Intents;
 import com.heqi.kharazim.consume.DefaultConsumerFactory;
 import com.heqi.kharazim.consume.core.api.ConsumerFactory;
@@ -34,7 +39,12 @@ import com.heqi.kharazim.explore.http.request.CourseDetailWithDailyIdRequest;
 import com.heqi.kharazim.explore.model.ActionDetailInfo;
 import com.heqi.kharazim.explore.model.CourseDetailInfo;
 import com.heqi.kharazim.explore.model.CourseQueryResult;
+import com.heqi.kharazim.explore.model.PlanDetailInfo;
+import com.heqi.kharazim.utils.ViewUtils;
 import com.heqi.rpc.RpcHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by overspark on 2017/2/11.
@@ -60,7 +70,88 @@ public class ConsumeActivity extends FragmentActivity {
   private String dailyId;
   private String userPlanId;
   private int orientation;
+  private ConsumerPauseView.ConsumerPauseViewListener pauseViewListener =
+      new ConsumerPauseView.ConsumerPauseViewListener() {
+        @Override
+        public void onPlayPressed() {
+          consumer.play();
+          hidePauseView();
+        }
 
+        @Override
+        public void onInterpretationPressed() {
+          showInterpretation(false);
+        }
+
+        @Override
+        public void onSetMusicVolume(float volume) {
+          consumer.setMusicVolume(volume);
+        }
+
+        @Override
+        public void onSetSoundVolume(float volume) {
+          consumer.setSoundVolume(volume);
+        }
+      };
+  private ConsumerGiveUpFragment.ConsumeGiveUpFragmentListener giveUpViewListener =
+      new ConsumerGiveUpFragment.ConsumeGiveUpFragmentListener() {
+        @Override
+        public void onConfirmPressed() {
+          exit();
+        }
+      };
+  private ConsumerView.ExploreConsumerViewListener consumerViewListener =
+      new ConsumerView.ExploreConsumerViewListener() {
+        @Override
+        public void onPreviousPressed() {
+          if (consumer != null) {
+            consumer.backward();
+          }
+        }
+
+        @Override
+        public void onNextPressed() {
+          if (consumer != null) {
+            consumer.forward();
+          }
+        }
+
+        @Override
+        public void onPlayPressed() {
+          if (consumer.getState() == State.PLAYING) {
+            consumer.pause();
+            showPauseView();
+          } else {
+            consumer.play();
+          }
+        }
+
+        @Override
+        public void onInterpretationPressed() {
+          consumer.pause();
+          showInterpretation(true);
+        }
+
+        @Override
+        public void onExitPressed() {
+          start2Exit();
+        }
+
+        @Override
+        public void onSkipGuidePressed() {
+          if (consumer != null) {
+            consumer.skipGuide();
+          }
+        }
+      };
+  private ConsumerFinishFragment.ConsumeFinishFragmentListener finishViewListener =
+      new ConsumerFinishFragment.ConsumeFinishFragmentListener() {
+        @Override
+        public void onConfirmPressed(int star) {
+          uploadStar(star);
+          exit();
+        }
+      };
   private ConsumerObserver consumerObserver = new ConsumerObserver() {
 
     private static final String KEY = "com.heqi.kharazim.ConsumerActivity";
@@ -207,101 +298,11 @@ public class ConsumeActivity extends FragmentActivity {
     }
   };
 
-  private ConsumerView.ExploreConsumerViewListener consumerViewListener =
-      new ConsumerView.ExploreConsumerViewListener() {
-        @Override
-        public void onPreviousPressed() {
-          if (consumer != null) {
-            consumer.backward();
-          }
-        }
-
-        @Override
-        public void onNextPressed() {
-          if (consumer != null) {
-            consumer.forward();
-          }
-        }
-
-        @Override
-        public void onPlayPressed() {
-          if (consumer.getState() == State.PLAYING) {
-            consumer.pause();
-            showPauseView();
-          } else {
-            consumer.play();
-          }
-        }
-
-        @Override
-        public void onInterpretationPressed() {
-          consumer.pause();
-          showInterpretation(true);
-        }
-
-        @Override
-        public void onExitPressed() {
-          start2Exit();
-        }
-
-        @Override
-        public void onSkipGuidePressed() {
-          if (consumer != null) {
-            consumer.skipGuide();
-          }
-        }
-      };
-
-  private ConsumerPauseView.ConsumerPauseViewListener pauseViewListener =
-      new ConsumerPauseView.ConsumerPauseViewListener() {
-    @Override
-    public void onPlayPressed() {
-      consumer.play();
-      hidePauseView();
-    }
-
-    @Override
-    public void onInterpretationPressed() {
-      showInterpretation(false);
-    }
-
-    @Override
-    public void onSetMusicVolume(float volume) {
-      consumer.setMusicVolume(volume);
-    }
-
-    @Override
-    public void onSetSoundVolume(float volume) {
-      consumer.setSoundVolume(volume);
-    }
-  };
-
-  private ConsumerGiveUpFragment.ConsumeGiveUpFragmentListener giveUpViewListener =
-      new  ConsumerGiveUpFragment.ConsumeGiveUpFragmentListener() {
-    @Override
-    public void onConfirmPressed() {
-      exit();
-    }
-  };
-
-  private ConsumerFinishFragment.ConsumeFinishFragmentListener finishViewListener =
-      new ConsumerFinishFragment.ConsumeFinishFragmentListener() {
-    @Override
-    public void onConfirmPressed(int star) {
-      uploadStar(star);
-      exit();
-    }
-  };
-
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     videoView = new VideoView(this);
-    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-        FrameLayout.LayoutParams.MATCH_PARENT,
-        FrameLayout.LayoutParams.MATCH_PARENT);
-    videoView.setLayoutParams(layoutParams);
 
     initConsumer();
 
@@ -380,9 +381,29 @@ public class ConsumeActivity extends FragmentActivity {
 
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
       setContentView(R.layout.consumer_activity_portrait_layout);
+
+      WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+      int windowWidth = SystemUtil.getScreentWidth(wm);
+
+      if (windowWidth > 0) {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+            windowWidth,
+            windowWidth * Const.VIDEO_HEIGHT / Const.VIDEO_WIDTH);
+        videoView.setLayoutParams(layoutParams);
+      } else {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT);
+        videoView.setLayoutParams(layoutParams);
+      }
+
     } else {
       setContentView(R.layout.consumer_activity_landscape_layout);
+
+      ViewUtils.setViewSize(videoView, ViewGroup.LayoutParams.MATCH_PARENT,
+          ViewGroup.LayoutParams.MATCH_PARENT);
     }
+
 
     viewViewHolder = (FrameLayout) findViewById(R.id.explore_consumer_video_view_holder);
     viewViewHolder.addView(this.videoView);
@@ -531,13 +552,19 @@ public class ConsumeActivity extends FragmentActivity {
     interpretationFragment = new ConsumerInterpretationFragment();
     interpretationFragment.setListener(
         new ConsumerInterpretationFragment.ConsumerInterpretationFragmentListener() {
-      @Override
-      public void onExitPressed() {
-        hideInterpretation();
-        if (causePause) consumer.play();
-      }
-    });
-    interpretationFragment.setData(consumer.getCourse().getActlist(), consumer.getActionIndex());
+          @Override
+          public void onExitPressed() {
+            hideInterpretation();
+            if (causePause) consumer.play();
+          }
+        });
+
+    List<PlanDetailInfo.PlanActionInfo> actionList = new ArrayList<>();
+    for (int i = 0; i < consumer.getCourse().getActlist().size(); ++i) {
+      actionList.add(ActionDetailInfo.convert2PlanActionInfo(
+          consumer.getCourse().getActlist().get(i)));
+    }
+    interpretationFragment.setData(actionList, consumer.getActionIndex());
 
     getSupportFragmentManager().beginTransaction()
         .replace(R.id.consumer_fragment_container, interpretationFragment)

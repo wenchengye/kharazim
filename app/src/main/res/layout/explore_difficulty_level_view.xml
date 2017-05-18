@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.heqi.kharazim.explore.view.ExploreDifficultyLevelView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:divider="@drawable/explore_difficulty_level_divider"
+    android:orientation="horizontal"
     android:showDividers="middle">
-    <View android:id="@+id/explore_difficulty_level_view_item_1"
+
+    <View
+        android:id="@+id/explore_difficulty_level_view_item_1"
         style="@style/explore_difficulty_level_item"/>
-    <View android:id="@+id/explore_difficulty_level_view_item_2"
-          style="@style/explore_difficulty_level_item"/>
-    <View android:id="@+id/explore_difficulty_level_view_item_3"
-          style="@style/explore_difficulty_level_item"/>
-    <View android:id="@+id/explore_difficulty_level_view_item_4"
-          style="@style/explore_difficulty_level_item"/>
-    <View android:id="@+id/explore_difficulty_level_view_item_5"
-          style="@style/explore_difficulty_level_item"/>
+
+    <View
+        android:id="@+id/explore_difficulty_level_view_item_2"
+        style="@style/explore_difficulty_level_item"/>
+
+    <View
+        android:id="@+id/explore_difficulty_level_view_item_3"
+        style="@style/explore_difficulty_level_item"/>
+
+    <View
+        android:id="@+id/explore_difficulty_level_view_item_4"
+        style="@style/explore_difficulty_level_item"/>
+
+    <View
+        android:id="@+id/explore_difficulty_level_view_item_5"
+        style="@style/explore_difficulty_level_item"/>
 </com.heqi.kharazim.explore.view.ExploreDifficultyLevelView>

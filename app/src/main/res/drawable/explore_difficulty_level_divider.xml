@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+       android:shape="rectangle">
 
-    <size android:height="@dimen/explore_difficulty_level_view_height"
-          android:width="@dimen/explore_difficulty_level_view_divider_width"/>
+    <size
+        android:width="@dimen/explore_difficulty_level_view_divider_width"
+        android:height="@dimen/explore_difficulty_level_view_height"/>
 
     <solid android:color="@color/transparent"/>
 

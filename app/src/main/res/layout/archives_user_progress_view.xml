@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="96dp"
+    android:background="@color/bg_color_white"
     android:orientation="horizontal"
     android:paddingEnd="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingStart="20dp"
-    android:background="@color/bg_color_white">
+    android:paddingStart="20dp">
 
     <com.heqi.kharazim.explore.view.ExploreCircleProgressView
         android:id="@+id/archives_user_progress_course_progress"
@@ -17,17 +17,17 @@
         android:layout_height="69dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        app:upperMinorText="@string/archives_user_progress_count_upper_text"
-        app:lowerMinorText="@string/archives_user_progress_count_lower_text"/>
+        app:lowerMinorText="@string/archives_user_progress_count_lower_text"
+        app:upperMinorText="@string/archives_user_progress_count_upper_text"/>
 
     <View
         android:layout_width="1dp"
         android:layout_height="14dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="0"/>
 
     <com.heqi.kharazim.explore.view.ExploreCircleProgressView
@@ -36,96 +36,100 @@
         android:layout_height="69dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"
-        app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"/>
+        app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"
+        app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"/>
 
     <View
         android:layout_width="1dp"
         android:layout_height="14dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="0"/>
-    
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_gravity="right|center_vertical"
         android:layout_weight="0">
-        
-        <TextView android:id="@+id/archives_user_progress_kharazim_point_label"
+
+        <TextView
+            android:id="@+id/archives_user_progress_kharazim_point_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="@string/archives_user_progress_kharazim_point_label_text"
             android:textColor="@color/text_color_black"
             android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_user_progress_kharazim_point_label_text"
             />
 
-        <TextView android:id="@+id/archives_user_progress_kharazim_point_progress_tv"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentTop="true"
-                  android:layout_toRightOf="@id/archives_user_progress_kharazim_point_label"
-                  android:layout_toEndOf="@id/archives_user_progress_kharazim_point_label"
-                  android:layout_marginLeft="9dp"
-                  android:layout_marginRight="9dp"
-                  android:textColor="@color/kharazim_design_color"
-                  android:textSize="@dimen/text_size_large"/>
+        <TextView
+            android:id="@+id/archives_user_progress_kharazim_point_progress_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_toEndOf="@id/archives_user_progress_kharazim_point_label"
+            android:layout_toRightOf="@id/archives_user_progress_kharazim_point_label"
+            android:textColor="@color/kharazim_design_color"
+            android:textSize="@dimen/text_size_large"/>
 
         <TextView
             android:id="@+id/archives_user_progress_kharazim_point_label_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/archives_user_progress_kharazim_point_progress_tv"
-            android:layout_toEndOf="@id/archives_user_progress_kharazim_point_progress_tv"
             android:layout_alignTop="@id/archives_user_progress_kharazim_point_label"
+            android:layout_toEndOf="@id/archives_user_progress_kharazim_point_progress_tv"
+            android:layout_toRightOf="@id/archives_user_progress_kharazim_point_progress_tv"
+            android:text="@string/archives_user_progress_kharazim_point_unit_text"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_xtiny"/>
+
+        <TextView
+            android:id="@+id/archives_user_progress_day_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/archives_user_progress_kharazim_point_label"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/archives_user_progress_kharazim_point_label"
+            android:layout_marginBottom="4dp"
+            android:text="@string/archives_user_progress_time_day_upper_text"
             android:textColor="@color/text_color_black"
             android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_user_progress_kharazim_point_unit_text"/>
-
-        <TextView android:id="@+id/archives_user_progress_day_label"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentBottom="true"
-                  android:layout_marginBottom="4dp"
-                  android:layout_alignLeft="@id/archives_user_progress_kharazim_point_label"
-                  android:layout_alignStart="@id/archives_user_progress_kharazim_point_label"
-                  android:textColor="@color/text_color_black"
-                  android:textSize="@dimen/text_size_xtiny"
-                  android:text="@string/archives_user_progress_time_day_upper_text"
             />
 
-        <TextView android:id="@+id/archives_user_progress_day_tv"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_alignParentBottom="true"
-                  android:layout_toRightOf="@id/archives_user_progress_day_label"
-                  android:layout_toEndOf="@id/archives_user_progress_day_label"
-                  android:layout_alignLeft="@id/archives_user_progress_kharazim_point_progress_tv"
-                  android:layout_alignStart="@id/archives_user_progress_kharazim_point_progress_tv"
-                  android:textColor="@color/kharazim_design_color"
-                  android:textSize="@dimen/text_size_large"/>
+        <TextView
+            android:id="@+id/archives_user_progress_day_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/archives_user_progress_kharazim_point_progress_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/archives_user_progress_kharazim_point_progress_tv"
+            android:layout_toEndOf="@id/archives_user_progress_day_label"
+            android:layout_toRightOf="@id/archives_user_progress_day_label"
+            android:textColor="@color/kharazim_design_color"
+            android:textSize="@dimen/text_size_large"/>
 
         <TextView
             android:id="@+id/archives_user_progress_day_label_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/archives_user_progress_day_tv"
-            android:layout_toEndOf="@id/archives_user_progress_day_tv"
-            android:layout_alignTop="@id/archives_user_progress_day_label"
             android:layout_alignLeft="@id/archives_user_progress_kharazim_point_label_2"
             android:layout_alignStart="@id/archives_user_progress_kharazim_point_label_2"
+            android:layout_alignTop="@id/archives_user_progress_day_label"
+            android:layout_toEndOf="@id/archives_user_progress_day_tv"
+            android:layout_toRightOf="@id/archives_user_progress_day_tv"
+            android:text="@string/archives_user_progress_time_day_lower_text"
             android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_size_xtiny"
-            android:text="@string/archives_user_progress_time_day_lower_text"/>
+            android:textSize="@dimen/text_size_xtiny"/>
 
 
     </RelativeLayout>

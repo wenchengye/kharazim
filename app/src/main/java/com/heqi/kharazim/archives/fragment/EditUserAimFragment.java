@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import com.heqi.kharazim.KharazimApplication;
 import com.heqi.kharazim.R;
-import com.heqi.kharazim.archives.ArchivesService;
 import com.heqi.kharazim.archives.SimpleArchivesObserver;
 import com.heqi.kharazim.archives.model.UserProfile;
 import com.heqi.kharazim.archives.view.ArchivesSettingDividerView;
@@ -123,6 +122,10 @@ public class EditUserAimFragment extends AsyncLoadFragment {
     KharazimApplication.getArchives().updateCurrentUserProfile(null);
   }
 
+  public interface EditUserAimFragmentListener {
+    void onUploadUserAim();
+  }
+
   private class EditUserAimArchivesObserver extends SimpleArchivesObserver {
     @Override
     public void onUserProfileUpdated(String userId, UserProfile userProfile) {
@@ -131,9 +134,5 @@ public class EditUserAimFragment extends AsyncLoadFragment {
         selectedAim(Const.Aim.fromValue(userProfile.getUseraim()));
       }
     }
-  }
-
-  public interface EditUserAimFragmentListener {
-    void onUploadUserAim();
   }
 }

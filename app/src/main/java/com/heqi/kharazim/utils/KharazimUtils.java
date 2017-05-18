@@ -1,9 +1,12 @@
 package com.heqi.kharazim.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.heqi.base.utils.HttpUtil;
@@ -33,17 +36,19 @@ import java.util.Locale;
 
 public class KharazimUtils {
 
+  private static final String KHARAZIM_ENCODE_FIX = "HEALwww.heal361.com";
+
   private KharazimUtils() {
   }
 
   // time
   public static String formatTime(long time) {
-    SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     return formatter.format(new Date(time));
   }
 
   public static String formatDate(Date date) {
-    SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.CHINA);
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
     return formatter.format(date);
   }
 
@@ -85,6 +90,15 @@ public class KharazimUtils {
   public static void showToast(int resId) {
     Toast.makeText(KharazimApplication.getAppContext(),
         KharazimApplication.getAppContext().getString(resId), Toast.LENGTH_LONG).show();
+  }
+
+  public static void hideSoftKeyBoard(IBinder token, Context context) {
+    if (token != null) {
+      InputMethodManager im = (InputMethodManager)
+          context.getSystemService(Context.INPUT_METHOD_SERVICE);
+      im.hideSoftInputFromWindow(token,
+          InputMethodManager.HIDE_NOT_ALWAYS);
+    }
   }
 
   // media
@@ -207,8 +221,6 @@ public class KharazimUtils {
   public static boolean kharazimInt2Bool(int value) {
     return !(value == 0);
   }
-
-  private static final String KHARAZIM_ENCODE_FIX = "HEALwww.heal361.com";
 
   public static String kharazimEncode(String content) {
     return HttpUtil.MD5(HttpUtil.MD5(KHARAZIM_ENCODE_FIX + content) + KHARAZIM_ENCODE_FIX);

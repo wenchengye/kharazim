@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/archives_account_management_header"
+        layout="@layout/explore_text_header_bg_view"/>
+
+    <TextView
+        android:id="@+id/archives_account_management_current_login_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/archives_account_management_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_size_tiny"/>
+
+    <FrameLayout
+        android:id="@+id/archives_account_management_phone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/archives_account_management_current_login_type_tv"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/archives_account_management_bind_phone_button"
+            style="@style/explore_large_btn"
+            android:layout_gravity="center"
+            android:text="@string/archives_account_manage_bind_phone_text"/>
+
+        <RelativeLayout
+            android:id="@+id/archives_account_management_binded_phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/archives_account_management_binded_phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_tiny"/>
+
+            <TextView
+                android:id="@+id/archives_account_management_reset_password_with_phone_button"
+                style="@style/explore_small_btn"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/archives_account_management_binded_phone_tv"
+                android:layout_toRightOf="@id/archives_account_management_binded_phone_tv"
+                android:text="@string/archives_account_manage_reset_password_text"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/archives_account_management_mail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/archives_account_management_phone_layout"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/archives_account_management_bind_mail_button"
+            style="@style/explore_large_btn"
+            android:layout_gravity="center"
+            android:text="@string/archives_account_manage_bind_mail_text"/>
+
+        <RelativeLayout
+            android:id="@+id/archives_account_management_binded_mail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/archives_account_management_binded_mail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_tiny"/>
+
+            <TextView
+                android:id="@+id/archives_account_management_reset_password_with_mail_button"
+                style="@style/explore_small_btn"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/archives_account_management_binded_mail_tv"
+                android:layout_toRightOf="@id/archives_account_management_binded_mail_tv"
+                android:text="@string/archives_account_manage_reset_password_text"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/archives_account_management_third_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/archives_account_management_mail_layout"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/archives_account_management_logout_button"
+        style="@style/explore_large_btn"
+        android:layout_below="@id/archives_account_management_third_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/archives_account_manage_logout_text"
+        />
+
+
+</RelativeLayout>

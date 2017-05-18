@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="82dp"
             android:background="@color/bg_color_white">
-            
+
             <com.heqi.kharazim.view.CircleAsyncImageView
                 android:id="@+id/archives_settings_user_head_iv"
                 android:layout_width="55dp"
@@ -23,26 +24,26 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:scaleType="centerCrop"/>
-            
+
             <View
                 android:id="@+id/archives_settings_user_profile_divider"
                 android:layout_width="1dp"
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/archives_settings_user_head_iv"
-                android:layout_toEndOf="@id/archives_settings_user_head_iv"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
+                android:layout_toEndOf="@id/archives_settings_user_head_iv"
+                android:layout_toRightOf="@id/archives_settings_user_head_iv"
                 android:background="@color/explore_gray_divider_color"/>
-            
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_toRightOf="@id/archives_settings_user_profile_divider"
-                android:layout_toEndOf="@id/archives_settings_user_profile_divider"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="13dp"
                 android:layout_marginStart="13dp"
-                android:layout_centerVertical="true">
+                android:layout_toEndOf="@id/archives_settings_user_profile_divider"
+                android:layout_toRightOf="@id/archives_settings_user_profile_divider">
 
                 <TextView
                     android:id="@+id/archives_settings_user_nickname_tv"
@@ -56,9 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:text="@string/archives_settings_user_state_holder_text"
                     android:textColor="@color/text_color_black"
-                    android:textSize="@dimen/text_size_xtiny"
-                    android:text="@string/archives_settings_user_state_holder_text"/>
+                    android:textSize="@dimen/text_size_xtiny"/>
 
             </RelativeLayout>
 
@@ -68,10 +69,13 @@
 
         <View style="@style/archives_settings_divider_style"/>
 
-        <RelativeLayout style="@style/archives_settings_item_style"
-                        android:id="@+id/archives_settings_account_tab">
-            <TextView style="@style/archives_settings_item_title_style"
-                      android:text="@string/archives_settings_account_tab_title"/>
+        <RelativeLayout
+            android:id="@+id/archives_settings_account_tab"
+            style="@style/archives_settings_item_style">
+
+            <TextView
+                style="@style/archives_settings_item_title_style"
+                android:text="@string/archives_settings_account_tab_title"/>
 
             <ImageView style="@style/archives_settings_item_arrow_style"/>
         </RelativeLayout>
@@ -79,30 +83,39 @@
         <View style="@style/archives_settings_divider_style"/>
 
 
-        <RelativeLayout style="@style/archives_settings_item_style"
-                        android:id="@+id/archives_settings_health_aim_tab">
-            <TextView style="@style/archives_settings_item_title_style"
-                      android:text="@string/archives_settings_health_aim_tab_title"/>
+        <RelativeLayout
+            android:id="@+id/archives_settings_health_aim_tab"
+            style="@style/archives_settings_item_style">
+
+            <TextView
+                style="@style/archives_settings_item_title_style"
+                android:text="@string/archives_settings_health_aim_tab_title"/>
 
             <ImageView style="@style/archives_settings_item_arrow_style"/>
         </RelativeLayout>
 
         <View style="@style/archives_settings_slash_style"/>
 
-        <RelativeLayout style="@style/archives_settings_item_style"
-                        android:id="@+id/archives_settings_cache_tab">
-            <TextView style="@style/archives_settings_item_title_style"
-                      android:text="@string/archives_settings_cache_tab_title"/>
+        <RelativeLayout
+            android:id="@+id/archives_settings_cache_tab"
+            style="@style/archives_settings_item_style">
+
+            <TextView
+                style="@style/archives_settings_item_title_style"
+                android:text="@string/archives_settings_cache_tab_title"/>
 
             <ImageView style="@style/archives_settings_item_arrow_style"/>
         </RelativeLayout>
 
         <View style="@style/archives_settings_divider_style"/>
 
-        <RelativeLayout style="@style/archives_settings_item_style"
-                        android:id="@+id/archives_settings_about_tab">
-            <TextView style="@style/archives_settings_item_title_style"
-                      android:text="@string/archives_settings_about_tab_title"/>
+        <RelativeLayout
+            android:id="@+id/archives_settings_about_tab"
+            style="@style/archives_settings_item_style">
+
+            <TextView
+                style="@style/archives_settings_item_title_style"
+                android:text="@string/archives_settings_about_tab_title"/>
 
             <ImageView style="@style/archives_settings_item_arrow_style"/>
         </RelativeLayout>

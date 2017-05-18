@@ -46,6 +46,10 @@ public class ArchivesUserAimView extends RelativeLayout {
     selectedIv = (ImageView) findViewById(R.id.aim_selected_iv);
   }
 
+  public Const.Aim getData() {
+    return aim;
+  }
+
   public void setData(Const.Aim aim) {
     this.aim = aim;
     if (this.aim != null) {
@@ -53,17 +57,13 @@ public class ArchivesUserAimView extends RelativeLayout {
     }
   }
 
-  public Const.Aim getData() {
-    return aim;
+  public boolean getSelected() {
+    return selected;
   }
 
   public void setSelected(boolean selected) {
     this.selected = selected;
     selectedIv.setImageResource(selected ? R.drawable.icon_explore_detail_course_finish :
         R.drawable.icon_explore_detail_course_not_finish);
-  }
-
-  public boolean getSelected() {
-    return selected;
   }
 }

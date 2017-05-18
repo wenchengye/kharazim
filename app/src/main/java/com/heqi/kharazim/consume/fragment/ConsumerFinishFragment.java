@@ -97,7 +97,8 @@ public class ConsumerFinishFragment extends AsyncLoadFragment {
 
     contentView.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {}
+      public void onClick(View v) {
+      }
     });
   }
 
@@ -128,6 +129,10 @@ public class ConsumerFinishFragment extends AsyncLoadFragment {
     this.orientation = orientation;
   }
 
+  public interface ConsumeFinishFragmentListener {
+    void onConfirmPressed(int star);
+  }
+
   private static class ConsumeActionListAdapter
       extends DataAdapter<ConsumeCourseRecord.ConsumeActionRecord> {
     @Override
@@ -142,9 +147,5 @@ public class ConsumerFinishFragment extends AsyncLoadFragment {
       view.setData(getItem(position));
       return view;
     }
-  }
-
-  public interface ConsumeFinishFragmentListener {
-    void onConfirmPressed(int star);
   }
 }

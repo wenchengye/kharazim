@@ -33,10 +33,6 @@ public interface Consumer {
 
   void setCourse(CourseDetailInfo course);
 
-  void setMusicVolume(float volume);
-
-  void setSoundVolume(float volume);
-
   ActionDetailInfo getAction();
 
   int getActionIndex();
@@ -51,7 +47,11 @@ public interface Consumer {
 
   float getMusicVolume();
 
+  void setMusicVolume(float volume);
+
   float getSoundVolume();
+
+  void setSoundVolume(float volume);
 
   boolean canForward();
 

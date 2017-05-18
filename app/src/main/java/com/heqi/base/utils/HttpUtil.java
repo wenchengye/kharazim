@@ -3,7 +3,6 @@ package com.heqi.base.utils;
 import android.net.Uri;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
