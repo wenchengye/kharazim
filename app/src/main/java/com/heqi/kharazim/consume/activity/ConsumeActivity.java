@@ -387,8 +387,8 @@ public class ConsumeActivity extends FragmentActivity {
 
       if (windowWidth > 0) {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-            windowWidth,
-            windowWidth * Const.VIDEO_HEIGHT / Const.VIDEO_WIDTH);
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            (windowWidth + 1) * Const.VIDEO_HEIGHT / Const.VIDEO_WIDTH);
         videoView.setLayoutParams(layoutParams);
       } else {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
@@ -400,8 +400,10 @@ public class ConsumeActivity extends FragmentActivity {
     } else {
       setContentView(R.layout.consumer_activity_landscape_layout);
 
-      ViewUtils.setViewSize(videoView, ViewGroup.LayoutParams.MATCH_PARENT,
-          ViewGroup.LayoutParams.MATCH_PARENT);
+      FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+          FrameLayout.LayoutParams.MATCH_PARENT,
+          FrameLayout.LayoutParams.MATCH_PARENT);
+      videoView.setLayoutParams(layoutParams);
     }
 
 
