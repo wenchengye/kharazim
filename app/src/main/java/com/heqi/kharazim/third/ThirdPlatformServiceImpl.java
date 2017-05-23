@@ -215,8 +215,8 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
         "kharazim_wechat_refresh_token";
 
 
-    public static final String WECHAT_APPID = "wx2b15c26fc7d771c4";
-    public static final String WECHAT_APP_SECRET = "9ad31fac163333ece88598fabde9c0ea";
+    public static final String WECHAT_APPID = "wx355f0dc00ce404b3";
+    public static final String WECHAT_APP_SECRET = "a42917255aa5c6d24944b9f0e0309ca9";
     public static final String WECHAT_SCOPE_BASE = "snsapi_base";
     public static final String WECHAT_SCOPE_USER_INFO = "snsapi_userinfo";
     public static final String WECHAT_SCOPE_SPLITOR = ",";

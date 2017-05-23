@@ -206,7 +206,7 @@ public class AccountManagementFragment extends AsyncLoadFragment {
 
 
     if (loginType.ordinal() == Const.LoginType.Wechat.ordinal()) {
-      KharazimApplication.getThirdPlatform().wechatLogin(
+      KharazimApplication.getThirdPlatform().wechatLogin(getActivity(),
           new ThirdPlatformService.ThirdPlatformTaskCallback() {
             @Override
             public void onTaskSuccess() {
