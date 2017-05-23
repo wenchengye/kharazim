@@ -25,8 +25,14 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.json.JSONObject;
+
+import java.util.Map;
 
 /**
  * Created by overspark on 2017/4/18.
@@ -48,6 +54,8 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
   private ThirdPlatformTaskCallback qqLoginCallback;
   private SsoHandler ssoHandler;
   private Oauth2AccessToken weiboAccessToken;
+  private String weiboOpenId;
+  private String weiboStringAccessToken;
   private ThirdPlatformTaskCallback weiboLoginCallback;
 
   @Override
@@ -62,13 +70,22 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
 
     tencent = Tencent.createInstance(Const.QQ_APPID, context);
 
+    PlatformConfig.setWeixin(Const.WECHAT_APPID, Const.WECHAT_APP_SECRET);
+    PlatformConfig.setQQZone(Const.QQ_APPID, Const.QQ_APPKEY);
+    PlatformConfig.setSinaWeibo(Const.WEIBO_APPID, Const.WEIBO_APP_SECRET,
+        Const.WEIBO_REDIRECT_URL);
+    UMShareAPI.get(this.context);
   }
 
   @Override
-  public void wechatLogin(final ThirdPlatformTaskCallback callback) {
+  public void wechatLogin(Activity activity, final ThirdPlatformTaskCallback callback) {
 
     wxLoginCallback = callback;
 
+    umengAuth(SHARE_MEDIA.WEIXIN, activity);
+  }
+
+  private void wechatAuth() {
     final SendAuth.Req req = new SendAuth.Req();
     req.scope = Const.WECHAT_SCOPE_USER_INFO;
     req.state = "none";
@@ -121,11 +138,13 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (ssoHandler != null) {
-      ssoHandler.authorizeCallBack(requestCode, resultCode, data);
-    }
+//    if (ssoHandler != null) {
+//      ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+//    }
+//
+//    Tencent.onActivityResultData(requestCode, resultCode, data, qqLoginListener);
 
-    Tencent.onActivityResultData(requestCode, resultCode, data, qqLoginListener);
+    UMShareAPI.get(this.context).onActivityResult(requestCode, resultCode, data);
   }
 
   @Override
@@ -142,6 +161,10 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
   public void qqLogin(Activity activity, ThirdPlatformTaskCallback callback) {
     qqLoginCallback = callback;
 
+    umengAuth(SHARE_MEDIA.QQ, activity);
+  }
+
+  private void qqAuth(Activity activity) {
     qqLoginListener = new QQLoginListener();
     tencent.login(activity, Const.QQ_SCOPE, qqLoginListener);
   }
@@ -161,6 +184,10 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
 
     weiboLoginCallback = callback;
 
+    umengAuth(SHARE_MEDIA.SINA, activity);
+  }
+
+  private void weiboAuth(Activity activity) {
     AuthInfo authInfo = new AuthInfo(activity, Const.WEIBO_APPID, Const.WEIBO_REDIRECT_URL,
         Const.WEIBO_SCOPE);
     ssoHandler = new SsoHandler(activity, authInfo);
@@ -169,12 +196,16 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
 
   @Override
   public String getWeiboAccessToken() {
-    return weiboAccessToken != null ? weiboAccessToken.getToken() : null;
+    return weiboAccessToken != null ? weiboAccessToken.getToken() : weiboStringAccessToken;
   }
 
   @Override
   public String getWeiboOpenId() {
-    return weiboAccessToken != null ? weiboAccessToken.getUid() : null;
+    return weiboAccessToken != null ? weiboAccessToken.getUid() : weiboOpenId;
+  }
+
+  private void umengAuth(SHARE_MEDIA media, Activity activity) {
+    UMShareAPI.get(this.context).doOauthVerify(activity, media, new UmengAuthListener());
   }
 
   private static class Const {
@@ -191,13 +222,21 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
     public static final String WECHAT_SCOPE_SPLITOR = ",";
 
     public static final String QQ_APPID = "1105927530";
+    public static final String QQ_APPKEY = "AeewrJHkscq4Nxq8";
     public static final String QQ_SCOPE = "get_user_info";
     public static final String QQ_JSON_KEY_OPEN_ID = "openid";
     public static final String QQ_JSON_KEY_ACCESS_TOKEN = "access_token";
 
     public static final String WEIBO_APPID = "4129381655";
+    public static final String WEIBO_APP_SECRET = "cf7043b5310e8112efacb013d94e68e7";
     public static final String WEIBO_REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
     public static final String WEIBO_SCOPE = "email,direct_messages_read,direct_messages_write";
+
+    public static final String UMENG_DATA_KEY_OPENID = "uid";
+    public static final String UMENG_DATA_KEY_ACCESS_TOKEN = "accessToken";
+    public static final String UMENG_DATA_KEY_REFRESH_TOKEN = "refreshtoken";
+    public static final String UMENG_DATA_KEY_ICON_URL = "iconurl";
+    public static final String UMENG_DATA_KEY_GENDER = "gender";
 
     private Const() {
     }
@@ -293,6 +332,62 @@ public class ThirdPlatformServiceImpl implements ThirdPlatformService {
     @Override
     public void onWeiboException(WeiboException e) {
       if (weiboLoginCallback != null) {
+        weiboLoginCallback.onTaskFailed();
+      }
+    }
+  }
+
+  private class UmengAuthListener implements UMAuthListener {
+    @Override
+    public void onStart(SHARE_MEDIA share_media) {
+
+    }
+
+    @Override
+    public void onComplete(SHARE_MEDIA share_media, int action, Map<String, String> map) {
+      if (share_media == SHARE_MEDIA.WEIXIN) {
+        wxOpenId = map.get(Const.UMENG_DATA_KEY_OPENID);
+        wxAccessToken = map.get(Const.UMENG_DATA_KEY_ACCESS_TOKEN);
+        wxRefreshToken = map.get(Const.PREFERENCE_KEY_WECHAT_REFRESH_TOKEN);
+
+        if (wxLoginCallback != null) {
+          wxLoginCallback.onTaskSuccess();
+        }
+      } else if (share_media == SHARE_MEDIA.QQ) {
+        qqOpenId = map.get(Const.UMENG_DATA_KEY_OPENID);
+        qqAccessToken = map.get(Const.UMENG_DATA_KEY_ACCESS_TOKEN);
+
+        if (qqLoginCallback != null) {
+          qqLoginCallback.onTaskSuccess();
+        }
+      } else if (share_media == SHARE_MEDIA.SINA) {
+        weiboOpenId = map.get(Const.UMENG_DATA_KEY_OPENID);
+        weiboStringAccessToken = map.get(Const.UMENG_DATA_KEY_ACCESS_TOKEN);
+
+        if (weiboLoginCallback != null) {
+          weiboLoginCallback.onTaskSuccess();
+        }
+      }
+    }
+
+    @Override
+    public void onError(SHARE_MEDIA share_media, int action, Throwable throwable) {
+      if (share_media == SHARE_MEDIA.WEIXIN && wxLoginCallback != null) {
+        wxLoginCallback.onTaskFailed();
+      } else if (share_media == SHARE_MEDIA.QQ && qqLoginCallback != null) {
+        qqLoginCallback.onTaskFailed();
+      } else if (share_media == SHARE_MEDIA.SINA && weiboLoginCallback != null) {
+        weiboLoginCallback.onTaskFailed();
+      }
+    }
+
+    @Override
+    public void onCancel(SHARE_MEDIA share_media, int action) {
+      if (share_media == SHARE_MEDIA.WEIXIN && wxLoginCallback != null) {
+        wxLoginCallback.onTaskFailed();
+      } else if (share_media == SHARE_MEDIA.QQ && qqLoginCallback != null) {
+        qqLoginCallback.onTaskFailed();
+      } else if (share_media == SHARE_MEDIA.SINA && weiboLoginCallback != null) {
         weiboLoginCallback.onTaskFailed();
       }
     }

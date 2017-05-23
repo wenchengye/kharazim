@@ -11,6 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,5 +34,4 @@ dependencies {
     compile 'com.sina.weibo.sdk:core:1.0.0:openDefaultRelease@aar'
     compile 'it.sephiroth.android.library.horizontallistview:hlistview:1.2.2'
     testCompile 'junit:junit:4.12'
-    compile files('libs/mta-sdk-1.6.2.jar')
 }

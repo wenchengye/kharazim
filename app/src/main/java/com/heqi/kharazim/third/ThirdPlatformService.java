@@ -14,7 +14,7 @@ public interface ThirdPlatformService {
 
   void init(Context context);
 
-  void wechatLogin(ThirdPlatformTaskCallback callback);
+  void wechatLogin(Activity activity, ThirdPlatformTaskCallback callback);
 
   void wechatRelogin(ThirdPlatformTaskCallback callback);
 

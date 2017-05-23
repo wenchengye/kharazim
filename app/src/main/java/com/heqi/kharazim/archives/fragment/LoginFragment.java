@@ -174,7 +174,7 @@ public class LoginFragment extends AsyncLoadFragment {
   }
 
   private void wechatLogin() {
-    KharazimApplication.getThirdPlatform().wechatLogin(
+    KharazimApplication.getThirdPlatform().wechatLogin(getActivity(),
         new ThirdPlatformService.ThirdPlatformTaskCallback() {
           @Override
           public void onTaskSuccess() {

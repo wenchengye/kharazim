@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -7,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="160dp"
+        android:background="@color/kharazim_design_color">
 
         <ImageView
             android:id="@+id/archives_about_us_logo_iv"
@@ -60,7 +62,7 @@
 
         <TextView
             style="@style/archives_settings_item_title_style"
-            android:text="@string/archives_privacy_contract_title"/>
+            android:text="@string/archives_official_mail_title"/>
 
         <TextView
             style="@style/simple_tv"
