@@ -18,7 +18,8 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
         app:lowerMinorText="@string/archives_user_progress_count_lower_text"
-        app:upperMinorText="@string/archives_user_progress_count_upper_text"/>
+        app:upperMinorText="@string/archives_user_progress_count_upper_text"
+        app:progressType="@integer/ExploreCircleProgressView_ProgressTypeTextOnly"/>
 
     <View
         android:layout_width="1dp"
@@ -37,7 +38,8 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
         app:lowerMinorText="@string/archives_user_progress_time_minute_lower_text"
-        app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"/>
+        app:upperMinorText="@string/archives_user_progress_time_minute_upper_text"
+        app:progressType="@integer/ExploreCircleProgressView_ProgressTypeTextOnly"/>
 
     <View
         android:layout_width="1dp"
